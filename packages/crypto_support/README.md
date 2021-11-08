@@ -20,6 +20,12 @@ know whether this package might be useful for them.
 sudo apt-get install libssl-dev
 ```
 
+### MacOS Setup
+
+```
+brew install openssh
+```
+
 ## Features
 
 TODO: List what your package can do. Maybe include images, gifs, or videos.

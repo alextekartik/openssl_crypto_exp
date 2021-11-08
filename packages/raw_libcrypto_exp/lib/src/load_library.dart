@@ -67,11 +67,20 @@ DynamicLibrary _defaultOpen() {
     // Check if the process includes sqlite3. If it doesn't, fallback to the
     // library from the system.
     if (!result.providesSymbol('MD5')) {
-      //No embed Sqlite3 library found with sqlite3_version function
-      //Load pre installed library on MacOS
-      result = DynamicLibrary.open('/usr/lib/libcrypto.dylib');
+      for (var lib in [
+        '/usr/lib/libcrypto.dylib',
+        '/usr/local/lib/libcrypto.dylib',
+        '/usr/local/opt/openssl/lib/libcrypto.dylib'
+        //'/usr/local/Cellar/openssl@1.1/1.1.1k/lib/libcrypto.dylib'
+      ]) {
+        // Load pre installed library on MacOS
+        if (File(lib).existsSync()) {
+          result = DynamicLibrary.open(lib);
+          return result;
+        }
+      }
     }
-    return result;
+    throw UnsupportedError('Missing openssh on ${Platform.operatingSystem}');
   }
   if (Platform.isWindows) {
     return DynamicLibrary.open('libcrypto.dll');

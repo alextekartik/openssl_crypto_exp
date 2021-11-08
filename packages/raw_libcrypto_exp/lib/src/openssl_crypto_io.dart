@@ -34,17 +34,27 @@ OpensslCrypto get opensslCrypto {
       _OpensslCrypto(OpensslCryptoBindings(open.openOpensslCrypto()));
 }
 
+var _warningDisplayedOnce = false;
+
 /// Check initialization on the VM
 bool opensslCryptoInitVm() {
   try {
     opensslCrypto;
     return true;
   } catch (e) {
+    if (_warningDisplayedOnce) {
+      return false;
+    }
+    _warningDisplayedOnce = true;
     stderr.writeln('failed loading crypto library $e');
     if (Platform.isLinux) {
-      stdout.writeln('On Linux you should install openssl-dev');
-      stdout.writeln('\$ sudo apt-get install openssl-dev');
-      stdout.writeln();
+      stderr.writeln('On Linux you should install openssl-dev');
+      stderr.writeln('\$ sudo apt-get install openssl-dev');
+      stderr.writeln();
+    } else if (Platform.isMacOS) {
+      stderr.writeln('On MacOS you should install openssl using brew');
+      stderr.writeln('\$ brew install openssl');
+      stderr.writeln();
     }
     return false;
   }
