@@ -5,7 +5,7 @@ import 'package:raw_libcrypto_exp/openssl_crypto.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('A group of tests', () {
+  group('OpensslCrypto', () {
     test('md5', () {
       var data = Uint8List.fromList([1, 2, 3]);
       expect(opensslCrypto.md5(data), crypto.md5.convert(data).bytes);

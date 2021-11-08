@@ -25,3 +25,4 @@ doc/api/
 *.js.deps
 *.js.map
 /.local/
+/packages/openssl_crypto_flutter_libs/example/android/app/src/main/jniLibs/

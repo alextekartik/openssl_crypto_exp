@@ -3,16 +3,11 @@ import 'dart:convert';
 import 'dart:ffi';
 import 'dart:typed_data';
 
-import 'package:crypto/crypto.dart';
 import 'package:ffi/ffi.dart' as ffi;
 import 'package:raw_libcrypto_exp/src/third_party/openssl/crypto_generated_bindings.dart';
 
 const allocate = ffi.malloc;
 late OpensslCryptoBindings opensslCrypto;
-
-String generateMd5(String input) {
-  return md5.convert(utf8.encode(input)).toString();
-}
 
 /// Checks if you are awesome. Spoiler: you are.
 class Awesome {
@@ -38,9 +33,4 @@ void oscMD5() {
 
   var bytes = result.asTypedList(MD5_DIGEST_LENGTH);
   print(bytes);
-}
-
-void coreMd5() {
-  var out = md5.convert(utf8.encode('test'));
-  print(out.bytes);
 }
