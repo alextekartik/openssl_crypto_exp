@@ -8,7 +8,7 @@ import 'package:ffi/ffi.dart' as ffi;
 import 'package:raw_libcrypto_exp/src/third_party/openssl/crypto_generated_bindings.dart';
 
 const allocate = ffi.malloc;
-late OpensslCrypto opensslCrypto;
+late OpensslCryptoBindings opensslCrypto;
 
 String generateMd5(String input) {
   return md5.convert(utf8.encode(input)).toString();

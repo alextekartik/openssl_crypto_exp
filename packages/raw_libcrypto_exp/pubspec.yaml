@@ -10,15 +10,17 @@ environment:
 dependencies:
   path: ^1.8.0
   ffi:
-  ffigen:
-  crypto:
 
 dev_dependencies:
   lints: ^1.0.0
   test: ^1.16.0
+  process_run:
+  dev_test:
+  ffigen:
+  crypto:
 
 ffigen:
-  name: OpensslCrypto
+  name: OpensslCryptoBindings
   description: 'Bindings to OpenSSL libcrypto.'
   output: 'lib/src/third_party/openssl/crypto_generated_bindings.dart'
   headers:

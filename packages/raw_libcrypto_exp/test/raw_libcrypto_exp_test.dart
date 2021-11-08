@@ -12,7 +12,7 @@ void main() {
     setUp(() {
       if (Platform.isLinux) {
         final dylib = ffi.DynamicLibrary.open('libcrypto.so');
-        opensslCrypto = OpensslCrypto(dylib);
+        opensslCrypto = OpensslCryptoBindings(dylib);
       }
       // Additional setup goes here.
     });

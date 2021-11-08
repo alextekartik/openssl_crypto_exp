@@ -1,7 +1,13 @@
 # openssl_crypto_exp
 OpenSSL crypto experiment
 
+## Linux setup
 
+Ubuntu setup
+
+```shell
+$ sudo apt-get install openssl-dev
+```
 # Setup
 
 https://wiki.openssl.org/index.php/Compilation_and_Installation#OS_X
