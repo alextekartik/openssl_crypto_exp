@@ -4,12 +4,11 @@ Open SSL
 
 ## Getting Started
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+This project exposes libcrypto for iOS and Android on flutter.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Projet created with
 
+```
+flutter create --platforms ios -i objc --org com.tekartik -t plugin .
+flutter create --platforms android -i java --org com.tekartik -t plugin .
+```
