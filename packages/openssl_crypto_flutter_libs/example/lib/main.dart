@@ -1,10 +1,10 @@
-import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:convert/convert.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:openssl_crypto_flutter_libs/openssl_crypto_flutter_libs.dart';
-import 'package:raw_libcrypto_exp/openssl_crypto.dart';
+import 'package:openssl_crypto_common_ffi/openssl_crypto.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,40 +18,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
-  @override
-  void initState() {
-    super.initState();
-    initPlatformState();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    String platformVersion;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    // We also handle the message potentially returning null.
-    try {
-      platformVersion = await OpensslCryptoFlutterLibs.platformVersion ??
-          'Unknown platform version';
-    } on PlatformException {
-      platformVersion = 'Failed to get platform version.';
-    }
-
-    await opensslCryptoInitFlutter();
-    var data = Uint8List.fromList([1, 2, 3]);
-    platformVersion = 'md5 = ${opensslCrypto.md5(data)}';
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _platformVersion = platformVersion;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -59,8 +25,47 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: ListView(
+          children: [
+            Row(
+              children: const [
+                Expanded(
+                    child: ListTile(
+                  title: Text('OpenSSL'),
+                )),
+                Expanded(
+                    child: ListTile(
+                  title: Text('Reference'),
+                ))
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: ListTile(
+                  title: const Text('md5("test")'),
+                  subtitle: FutureBuilder<String>(
+                    future: () async {
+                      return hex.encode(opensslCrypto
+                          .md5(Uint8List.fromList(utf8.encode('test'))));
+                    }(),
+                    builder: (_, snapshot) => Text(snapshot.data ?? ''),
+                  ),
+                )),
+                Expanded(
+                    child: ListTile(
+                  title: const Text('md5("test")'),
+                  subtitle: FutureBuilder(
+                    future: () async {
+                      return null;
+                    }(),
+                    builder: (_, snapshot) => Text(
+                        hex.encode(md5.convert(utf8.encode('test')).bytes)),
+                  ),
+                ))
+              ],
+            )
+          ],
         ),
       ),
     );

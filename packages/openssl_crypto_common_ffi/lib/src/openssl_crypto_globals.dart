@@ -4,16 +4,10 @@ import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart' as ffi;
-import 'package:raw_libcrypto_exp/src/third_party/openssl/crypto_generated_bindings.dart';
+import 'package:openssl_crypto_common_ffi/src/third_party/openssl/crypto_generated_bindings.dart';
 
 const allocate = ffi.malloc;
 late OpensslCryptoBindings opensslCrypto;
-
-/// Checks if you are awesome. Spoiler: you are.
-class Awesome {
-  bool get isAwesome => true;
-  // MD5();
-}
 
 Pointer<Uint8> uint8ListToPointer(Uint8List bytes) {
   final ptr = allocate.allocate<Uint8>(bytes.length);

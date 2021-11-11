@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart' as crypto;
-import 'package:raw_libcrypto_exp/openssl_crypto.dart';
+import 'package:openssl_crypto_common_ffi/openssl_crypto.dart';
 import 'package:test/test.dart';
 
 void main() {

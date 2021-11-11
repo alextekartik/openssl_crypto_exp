@@ -1,4 +1,4 @@
-import 'package:raw_libcrypto_exp/openssl_crypto.dart';
+import 'package:openssl_crypto_common_ffi/openssl_crypto.dart';
 
 /// Main crypto entry point.
 /// Not supported on the Web

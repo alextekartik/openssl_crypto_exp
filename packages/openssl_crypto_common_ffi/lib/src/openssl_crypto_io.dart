@@ -2,9 +2,9 @@ import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:raw_libcrypto_exp/openssl_crypto.dart';
-import 'package:raw_libcrypto_exp/src/raw_libcrypto_exp_base.dart';
-import 'package:raw_libcrypto_exp/src/third_party/openssl/crypto_generated_bindings.dart';
+import 'package:openssl_crypto_common_ffi/openssl_crypto.dart';
+import 'package:openssl_crypto_common_ffi/src/openssl_crypto_globals.dart';
+import 'package:openssl_crypto_common_ffi/src/third_party/openssl/crypto_generated_bindings.dart';
 
 import 'load_library.dart';
 

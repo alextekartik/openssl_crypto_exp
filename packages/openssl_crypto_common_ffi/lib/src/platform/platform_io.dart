@@ -1,5 +1,5 @@
-import 'package:raw_libcrypto_exp/openssl_crypto.dart';
-import 'package:raw_libcrypto_exp/src/openssl_crypto_io.dart' as io;
+import 'package:openssl_crypto_common_ffi/openssl_crypto.dart';
+import 'package:openssl_crypto_common_ffi/src/openssl_crypto_io.dart' as io;
 
 /// Io implementation
 OpensslCrypto get opensslCrypto => io.opensslCrypto;

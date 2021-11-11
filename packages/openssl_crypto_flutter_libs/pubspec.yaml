@@ -11,8 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  raw_libcrypto_exp:
-    path: ../raw_libcrypto_exp
+  openssl_crypto_common_ffi:
+    path: ../openssl_crypto_common_ffi
 
 dev_dependencies:
   flutter_test:
