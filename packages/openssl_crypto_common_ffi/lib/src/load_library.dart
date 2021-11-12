@@ -77,9 +77,7 @@ DynamicLibrary _defaultOpen() {
         }
       }
     }
-    stderr.writeln('For dartvm you could try on Mac:');
-    stderr.writeln('\$ brew install openssl');
-    throw UnsupportedError('Missing openssh on ${Platform.operatingSystem}');
+    throw UnsupportedError('Missing openssl on ${Platform.operatingSystem}');
   }
   if (Platform.isWindows) {
     return getWindowsLibrary();

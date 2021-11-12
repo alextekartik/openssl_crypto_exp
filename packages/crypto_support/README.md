@@ -23,7 +23,7 @@ sudo apt-get install libssl-dev
 ### MacOS Setup
 
 ```
-brew install openssh
+brew install openssl
 ```
 
 ## Features

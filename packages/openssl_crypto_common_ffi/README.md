@@ -14,6 +14,8 @@ dependencies:
   openssl_crypto_common_ffi:
     git: https://github.com/alextekartik.com/openssl_crypto_exp
     path: packages/openssl_crypto_common_ffi
+    ref: dart2_3
+  version: '>=0.1.0'
 ```
 
 
@@ -24,7 +26,7 @@ dependencies:
 Ubuntu setup: Install openssl for development. It should work on DartVM and flutter apps.
 
 ```shell
-$ sudo apt-get install openssl-dev
+$ sudo apt-get install libssl-dev
 ```
 
 ### Mac setup

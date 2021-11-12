@@ -48,8 +48,8 @@ bool opensslCryptoInitVm() {
     _warningDisplayedOnce = true;
     stderr.writeln('failed loading crypto library $e');
     if (Platform.isLinux) {
-      stderr.writeln('On Linux you should install openssl-dev');
-      stderr.writeln('\$ sudo apt-get install openssl-dev');
+      stderr.writeln('On Linux you should install libssl-dev');
+      stderr.writeln('\$ sudo apt-get install libssl-dev');
       stderr.writeln();
     } else if (Platform.isMacOS) {
       stderr.writeln('On MacOS you should install openssl using brew');
