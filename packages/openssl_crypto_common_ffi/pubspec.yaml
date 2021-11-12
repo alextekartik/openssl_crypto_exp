@@ -18,6 +18,7 @@ dev_dependencies:
   dev_test:
   ffigen:
   crypto:
+  convert:
 
 ffigen:
   name: OpensslCryptoBindings

@@ -15,12 +15,13 @@ class _OpensslCrypto implements OpensslCrypto {
 
   @override
   Uint8List md5(Uint8List bytes) {
+    // Input buffer
     var input = uint8ListToPointer(bytes);
-    //input.asTypedList(inBytes.length).
+    // Allocate output buffer
     var output = allocate.allocate<Uint8>(MD5_DIGEST_LENGTH);
-
+    // Call MD5 function
     var result = bindings.MD5(input, bytes.length, output);
-
+    // Resulting bytes conversion
     var resultBytes = result.asTypedList(MD5_DIGEST_LENGTH);
     return resultBytes;
   }
