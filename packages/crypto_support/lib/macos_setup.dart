@@ -11,17 +11,22 @@ Future main() async {
 Future macosSetup({bool force = false}) async {
   if (Platform.isMacOS) {
     if ((await which('brew')) != null) {
-      var shell = Shell(
-          verbose: false, commandVerbose: true); //, commandVerbose: true);
-      var lines = (await shell.run('brew list openssl')).outLines;
       var ok = false;
-      for (var line in lines) {
-        // print(line);
-        // at least a path found!
-        if (line.startsWith('/')) {
-          ok = true;
-          break;
+      try {
+        var shell = Shell(
+            verbose: false, commandVerbose: true); //, commandVerbose: true);
+        var lines = (await shell.run('brew list openssl')).outLines;
+
+        for (var line in lines) {
+          // print(line);
+          // at least a path found!
+          if (line.startsWith('/')) {
+            ok = true;
+            break;
+          }
         }
+      } catch (_) {
+        // Not installed!
       }
 
       if (!force) {
