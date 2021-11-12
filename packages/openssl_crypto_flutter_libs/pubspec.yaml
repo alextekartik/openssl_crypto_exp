@@ -1,6 +1,6 @@
 name: openssl_crypto_flutter_libs
 description: Open SSL
-version: 0.0.1
+version: 0.1.0
 homepage:
 publish_to: none
 
