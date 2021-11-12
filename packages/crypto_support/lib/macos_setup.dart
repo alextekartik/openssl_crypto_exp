@@ -10,14 +10,28 @@ Future main() async {
 
 Future macosSetup({bool force = false}) async {
   if (Platform.isMacOS) {
-    if (!force) {
-      force = (await which('openssl')) == null;
-    }
-    if (force) {
-      if ((await which('brew')) != null) {
-        // Use brew
-        await run('brew install openssl');
+    if ((await which('brew')) != null) {
+      var shell = Shell(
+          verbose: false, commandVerbose: true); //, commandVerbose: true);
+      var lines = (await shell.run('brew list openssl')).outLines;
+      var ok = false;
+      for (var line in lines) {
+        // print(line);
+        // at least a path found!
+        if (line.startsWith('/')) {
+          ok = true;
+          break;
+        }
       }
+
+      if (!force) {
+        force = !ok;
+      }
+      // print('ok: $ok, force: $force');
+    }
+
+    if (force) {
+      await run('brew install openssl');
     }
   }
 }
