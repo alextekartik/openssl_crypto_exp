@@ -12,10 +12,11 @@ In `pubspec.yaml`:
 ```yaml
 dependencies:
   openssl_crypto_common_ffi:
-    git: https://github.com/alextekartik.com/openssl_crypto_exp
-    path: packages/openssl_crypto_common_ffi
-    ref: dart2_3
-  version: '>=0.1.0'
+    git:
+      url: https://github.com/alextekartik/openssl_crypto_exp
+      path: packages/openssl_crypto_common_ffi
+      ref: dart2_3
+    version: '>=0.1.0'
 ```
 
 

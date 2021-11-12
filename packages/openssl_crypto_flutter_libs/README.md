@@ -1,6 +1,20 @@
 # openssl_crypto_flutter_libs
 
-Open SSL
+Open SSL flutter libs for Android and iOS
+
+## Setup
+
+In `pubspec.yaml`:
+
+```dart
+dependencies:
+  openssl_crypto_flutter_libs:
+    git:
+      url: https://github.com/alextekartik/openssl_crypto_exp
+      path: packages/openssl_crypto_flutter_libs
+      ref: dart2_3
+    version: '>=0.1.0'
+```
 
 ## Getting Started
 
