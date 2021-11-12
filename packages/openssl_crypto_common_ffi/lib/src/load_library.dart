@@ -65,6 +65,9 @@ DynamicLibrary _defaultOpen() {
     // library from the system.
     if (!result.providesSymbol('MD5')) {
       for (var lib in [
+        // For github actions and brew install, this looks like the best location
+        // however this is openssl 3
+        '/usr/local/opt/openssl@3/lib/libcrypto.dylib',
         '/usr/lib/libcrypto.dylib',
         '/usr/local/lib/libcrypto.dylib',
         '/usr/local/opt/openssl/lib/libcrypto.dylib'
