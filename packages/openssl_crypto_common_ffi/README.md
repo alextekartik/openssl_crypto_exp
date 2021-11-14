@@ -1,10 +1,16 @@
 OpenSSL libcrypto wrapper for dart (VM and flutter).
 
+**Experimentation - No Support**
+
 ## Features
 
 - Should allow dart & flutter tests on the desktop for easy development.
 - Some crypto algorithm:
   - MD5
+
+Some code were copied from webcryto:
+- impl_ffi_utils
+- test data
 
 ## Getting started
 
@@ -18,7 +24,6 @@ dependencies:
       ref: dart2_3
     version: '>=0.1.0'
 ```
-
 
 ## DartVM setup
 
@@ -54,13 +59,16 @@ import 'dart:typed_data';
 import 'package:convert/convert.dart';
 import 'package:openssl_crypto_common_ffi/openssl_crypto.dart';
 
+/// OpenSSL crypto implementation (DartVM/IO/Flutter non-web)
+var osc = opensslCrypto;
+
 void main() {
   var inputText = 'test';
   var data = Uint8List.fromList(utf8.encode(inputText));
 
   // MD5 encoding
-  var result = opensslCrypto.md5(data);
-  
+  var result = osc.md5(data);
+
   var hexResult = hex.encode(result);
   print('md5($inputText)');
   print(hexResult);

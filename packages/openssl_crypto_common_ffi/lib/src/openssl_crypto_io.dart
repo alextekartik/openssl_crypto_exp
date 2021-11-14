@@ -8,6 +8,9 @@ import 'package:openssl_crypto_common_ffi/src/third_party/openssl/crypto_generat
 
 import 'load_library.dart';
 
+/// Internal bindings
+OpensslCryptoBindings get opensslBindings => _opensslCrypto!.bindings;
+
 class _OpensslCrypto implements OpensslCrypto {
   final OpensslCryptoBindings bindings;
 
