@@ -1,6 +1,6 @@
 name: openssl_crypto_flutter_libs
 description: Open SSL
-version: 0.0.1
+version: 0.1.0
 homepage:
 publish_to: none
 
@@ -11,6 +11,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  openssl_crypto_common_ffi:
+    git:
+      url: https://github.com/alextekartik/openssl_crypto_exp
+      path: packages/openssl_crypto_common_ffi
+      ref: dart2_3
+    version: '>=0.1.0'
+
+dependency_overrides:
   openssl_crypto_common_ffi:
     path: ../openssl_crypto_common_ffi
 

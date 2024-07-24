@@ -65,6 +65,9 @@ DynamicLibrary _defaultOpen() {
     // library from the system.
     if (!result.providesSymbol('MD5')) {
       for (var lib in [
+        // For github actions and brew install, this looks like the best location
+        // however this is openssl 3
+        '/usr/local/opt/openssl@3/lib/libcrypto.dylib',
         '/usr/lib/libcrypto.dylib',
         '/usr/local/lib/libcrypto.dylib',
         '/usr/local/opt/openssl/lib/libcrypto.dylib'
@@ -77,9 +80,7 @@ DynamicLibrary _defaultOpen() {
         }
       }
     }
-    stderr.writeln('For dartvm you could try on Mac:');
-    stderr.writeln('\$ brew install openssl');
-    throw UnsupportedError('Missing openssh on ${Platform.operatingSystem}');
+    throw UnsupportedError('Missing openssl on ${Platform.operatingSystem}');
   }
   if (Platform.isWindows) {
     return getWindowsLibrary();

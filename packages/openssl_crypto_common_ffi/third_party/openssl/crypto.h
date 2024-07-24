@@ -9,6 +9,7 @@
  */
 // Added alex
 #include <openssl/md5.h>
+#include <openssl/evp.h>
 
 #ifndef HEADER_CRYPTO_H
 # define HEADER_CRYPTO_H

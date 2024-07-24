@@ -1,4 +1,4 @@
-Support
+OpenSSL libraries must be available for the implementation to work.
 
 ### Linux Setup
 

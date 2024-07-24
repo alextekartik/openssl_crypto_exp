@@ -11,10 +11,26 @@ String packageGetCryptoDllPath(String packagePath) {
   return path;
 }
 
-/// Find open my package
-String? findPackagePath(String currentPath, {bool? windows}) {
-  return packageFindPackagePath(currentPath, 'openssl_crypto_common_ffi',
-      windows: windows);
+/// Find openssl_crypto_common_ffi path
+String? findPackageLibPath(String path) {
+  var map = pathGetPackageConfigMap(path);
+
+  var packagePath = pathPackageConfigMapGetPackagePath(
+      path, map, 'openssl_crypto_common_ffi');
+  if (packagePath != null) {
+    return join(packagePath, 'lib');
+  }
+  return null;
+}
+
+/// Find windows dll path.
+String? findWindowsDllPath() {
+  var location = findPackageLibPath(Directory.current.path);
+  if (location != null) {
+    var path = packageGetCryptoDllPath(normalize(join(location)));
+    return path;
+  }
+  return null;
 }
 
 /// Windows specific sqflite3 initialization.
@@ -31,10 +47,8 @@ String? findPackagePath(String currentPath, {bool? windows}) {
 DynamicLibrary getWindowsLibrary() {
   // Look for the bundle libcrypto-1_1-x64.dll while in development
   // otherwise make sure to copy the dll along with the executable
-  var location = findPackagePath(Directory.current.path);
-  if (location != null) {
-    var path = packageGetCryptoDllPath(location);
-
+  var path = findWindowsDllPath();
+  if (path != null) {
     if (File(path).existsSync()) {
       return DynamicLibrary.open(path);
     }

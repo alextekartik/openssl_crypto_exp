@@ -8,6 +8,9 @@ import 'package:openssl_crypto_common_ffi/src/third_party/openssl/crypto_generat
 
 import 'load_library.dart';
 
+/// Internal bindings
+OpensslCryptoBindings get opensslBindings => _opensslCrypto!.bindings;
+
 class _OpensslCrypto implements OpensslCrypto {
   final OpensslCryptoBindings bindings;
 
@@ -15,12 +18,13 @@ class _OpensslCrypto implements OpensslCrypto {
 
   @override
   Uint8List md5(Uint8List bytes) {
+    // Input buffer
     var input = uint8ListToPointer(bytes);
-    //input.asTypedList(inBytes.length).
+    // Allocate output buffer
     var output = allocate.allocate<Uint8>(MD5_DIGEST_LENGTH);
-
+    // Call MD5 function
     var result = bindings.MD5(input, bytes.length, output);
-
+    // Resulting bytes conversion
     var resultBytes = result.asTypedList(MD5_DIGEST_LENGTH);
     return resultBytes;
   }
@@ -48,8 +52,8 @@ bool opensslCryptoInitVm() {
     _warningDisplayedOnce = true;
     stderr.writeln('failed loading crypto library $e');
     if (Platform.isLinux) {
-      stderr.writeln('On Linux you should install openssl-dev');
-      stderr.writeln('\$ sudo apt-get install openssl-dev');
+      stderr.writeln('On Linux you should install libssl-dev');
+      stderr.writeln('\$ sudo apt-get install libssl-dev');
       stderr.writeln();
     } else if (Platform.isMacOS) {
       stderr.writeln('On MacOS you should install openssl using brew');

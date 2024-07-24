@@ -111,6 +111,41 @@ class OpensslCryptoBindings {
   late final _MD5_Transform = _MD5_TransformPtr.asFunction<
       void Function(ffi.Pointer<MD5_CTX>, ffi.Pointer<ffi.Uint8>)>();
 
+  late final ffi.Pointer<ffi.Pointer<FILE>> _stdin =
+      _lookup<ffi.Pointer<FILE>>('stdin');
+
+  ffi.Pointer<FILE> get stdin => _stdin.value;
+
+  set stdin(ffi.Pointer<FILE> value) => _stdin.value = value;
+
+  late final ffi.Pointer<ffi.Pointer<FILE>> _stdout =
+      _lookup<ffi.Pointer<FILE>>('stdout');
+
+  ffi.Pointer<FILE> get stdout => _stdout.value;
+
+  set stdout(ffi.Pointer<FILE> value) => _stdout.value = value;
+
+  late final ffi.Pointer<ffi.Pointer<FILE>> _stderr =
+      _lookup<ffi.Pointer<FILE>>('stderr');
+
+  ffi.Pointer<FILE> get stderr => _stderr.value;
+
+  set stderr(ffi.Pointer<FILE> value) => _stderr.value = value;
+
+  late final ffi.Pointer<ffi.Int32> _sys_nerr = _lookup<ffi.Int32>('sys_nerr');
+
+  int get sys_nerr => _sys_nerr.value;
+
+  set sys_nerr(int value) => _sys_nerr.value = value;
+
+  late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Int8>>> _sys_errlist =
+      _lookup<ffi.Pointer<ffi.Pointer<ffi.Int8>>>('sys_errlist');
+
+  ffi.Pointer<ffi.Pointer<ffi.Int8>> get sys_errlist => _sys_errlist.value;
+
+  set sys_errlist(ffi.Pointer<ffi.Pointer<ffi.Int8>> value) =>
+      _sys_errlist.value = value;
+
   late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Int8>>> ___tzname =
       _lookup<ffi.Pointer<ffi.Pointer<ffi.Int8>>>('__tzname');
 
@@ -152,46 +187,6 @@ class OpensslCryptoBindings {
 
   set timezone(int value) => _timezone.value = value;
 
-  late final ffi.Pointer<ffi.Pointer<FILE>> _stdin =
-      _lookup<ffi.Pointer<FILE>>('stdin');
-
-  ffi.Pointer<FILE> get stdin => _stdin.value;
-
-  set stdin(ffi.Pointer<FILE> value) => _stdin.value = value;
-
-  late final ffi.Pointer<ffi.Pointer<FILE>> _stdout =
-      _lookup<ffi.Pointer<FILE>>('stdout');
-
-  ffi.Pointer<FILE> get stdout => _stdout.value;
-
-  set stdout(ffi.Pointer<FILE> value) => _stdout.value = value;
-
-  late final ffi.Pointer<ffi.Pointer<FILE>> _stderr =
-      _lookup<ffi.Pointer<FILE>>('stderr');
-
-  ffi.Pointer<FILE> get stderr => _stderr.value;
-
-  set stderr(ffi.Pointer<FILE> value) => _stderr.value = value;
-
-  late final ffi.Pointer<ffi.Int32> _sys_nerr = _lookup<ffi.Int32>('sys_nerr');
-
-  int get sys_nerr => _sys_nerr.value;
-
-  set sys_nerr(int value) => _sys_nerr.value = value;
-
-  late final ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Int8>>> _sys_errlist =
-      _lookup<ffi.Pointer<ffi.Pointer<ffi.Int8>>>('sys_errlist');
-
-  ffi.Pointer<ffi.Pointer<ffi.Int8>> get sys_errlist => _sys_errlist.value;
-
-  set sys_errlist(ffi.Pointer<ffi.Pointer<ffi.Int8>> value) =>
-      _sys_errlist.value = value;
-
-  /// CRYPTO_memcmp returns zero iff the |len| bytes at |a| and |b| are equal.
-  /// It takes an amount of time dependent on |len|, but independent of the
-  /// contents of |a| and |b|. Unlike memcmp, it cannot be used to put elements
-  /// into a defined order as the return value when a != b is undefined, other
-  /// than to be non-zero.
   int CRYPTO_memcmp(
     ffi.Pointer<ffi.Void> in_a,
     ffi.Pointer<ffi.Void> in_b,
@@ -210,6 +205,957 @@ class OpensslCryptoBindings {
               size_t)>>('CRYPTO_memcmp');
   late final _CRYPTO_memcmp = _CRYPTO_memcmpPtr.asFunction<
       int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
+
+  ffi.Pointer<BIGNUM> BN_value_one() {
+    return _BN_value_one();
+  }
+
+  late final _BN_value_onePtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<BIGNUM> Function()>>(
+          'BN_value_one');
+  late final _BN_value_one =
+      _BN_value_onePtr.asFunction<ffi.Pointer<BIGNUM> Function()>();
+
+  ffi.Pointer<BIGNUM> BN_new() {
+    return _BN_new();
+  }
+
+  late final _BN_newPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<BIGNUM> Function()>>('BN_new');
+  late final _BN_new = _BN_newPtr.asFunction<ffi.Pointer<BIGNUM> Function()>();
+
+  ffi.Pointer<BIGNUM> BN_bin2bn(
+    ffi.Pointer<ffi.Uint8> s,
+    int len,
+    ffi.Pointer<BIGNUM> ret,
+  ) {
+    return _BN_bin2bn(
+      s,
+      len,
+      ret,
+    );
+  }
+
+  late final _BN_bin2bnPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<BIGNUM> Function(ffi.Pointer<ffi.Uint8>, ffi.Int32,
+              ffi.Pointer<BIGNUM>)>>('BN_bin2bn');
+  late final _BN_bin2bn = _BN_bin2bnPtr.asFunction<
+      ffi.Pointer<BIGNUM> Function(
+          ffi.Pointer<ffi.Uint8>, int, ffi.Pointer<BIGNUM>)>();
+
+  int BN_sub(
+    ffi.Pointer<BIGNUM> r,
+    ffi.Pointer<BIGNUM> a,
+    ffi.Pointer<BIGNUM> b,
+  ) {
+    return _BN_sub(
+      r,
+      a,
+      b,
+    );
+  }
+
+  late final _BN_subPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>,
+              ffi.Pointer<BIGNUM>)>>('BN_sub');
+  late final _BN_sub = _BN_subPtr.asFunction<
+      int Function(
+          ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)>();
+
+  int BN_add(
+    ffi.Pointer<BIGNUM> r,
+    ffi.Pointer<BIGNUM> a,
+    ffi.Pointer<BIGNUM> b,
+  ) {
+    return _BN_add(
+      r,
+      a,
+      b,
+    );
+  }
+
+  late final _BN_addPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>,
+              ffi.Pointer<BIGNUM>)>>('BN_add');
+  late final _BN_add = _BN_addPtr.asFunction<
+      int Function(
+          ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)>();
+
+  int BN_set_word(
+    ffi.Pointer<BIGNUM> a,
+    int w,
+  ) {
+    return _BN_set_word(
+      a,
+      w,
+    );
+  }
+
+  late final _BN_set_wordPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<BIGNUM>, ffi.Uint64)>>('BN_set_word');
+  late final _BN_set_word =
+      _BN_set_wordPtr.asFunction<int Function(ffi.Pointer<BIGNUM>, int)>();
+
+  int BN_cmp(
+    ffi.Pointer<BIGNUM> a,
+    ffi.Pointer<BIGNUM> b,
+  ) {
+    return _BN_cmp(
+      a,
+      b,
+    );
+  }
+
+  late final _BN_cmpPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)>>('BN_cmp');
+  late final _BN_cmp = _BN_cmpPtr.asFunction<
+      int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)>();
+
+  void BN_free(
+    ffi.Pointer<BIGNUM> a,
+  ) {
+    return _BN_free(
+      a,
+    );
+  }
+
+  late final _BN_freePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<BIGNUM>)>>(
+          'BN_free');
+  late final _BN_free =
+      _BN_freePtr.asFunction<void Function(ffi.Pointer<BIGNUM>)>();
+
+  int BN_lshift(
+    ffi.Pointer<BIGNUM> r,
+    ffi.Pointer<BIGNUM> a,
+    int n,
+  ) {
+    return _BN_lshift(
+      r,
+      a,
+      n,
+    );
+  }
+
+  late final _BN_lshiftPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>,
+              ffi.Int32)>>('BN_lshift');
+  late final _BN_lshift = _BN_lshiftPtr.asFunction<
+      int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, int)>();
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_SEQUENCE_ANY_it =
+      _lookup<ASN1_ITEM>('ASN1_SEQUENCE_ANY_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_SEQUENCE_ANY_it => _ASN1_SEQUENCE_ANY_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_SET_ANY_it =
+      _lookup<ASN1_ITEM>('ASN1_SET_ANY_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_SET_ANY_it => _ASN1_SET_ANY_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_ANY_it =
+      _lookup<ASN1_ITEM>('ASN1_ANY_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_ANY_it => _ASN1_ANY_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_OBJECT_it =
+      _lookup<ASN1_ITEM>('ASN1_OBJECT_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_OBJECT_it => _ASN1_OBJECT_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_BIT_STRING_it =
+      _lookup<ASN1_ITEM>('ASN1_BIT_STRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_BIT_STRING_it => _ASN1_BIT_STRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_INTEGER_it =
+      _lookup<ASN1_ITEM>('ASN1_INTEGER_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_INTEGER_it => _ASN1_INTEGER_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_ENUMERATED_it =
+      _lookup<ASN1_ITEM>('ASN1_ENUMERATED_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_ENUMERATED_it => _ASN1_ENUMERATED_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_OCTET_STRING_it =
+      _lookup<ASN1_ITEM>('ASN1_OCTET_STRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_OCTET_STRING_it => _ASN1_OCTET_STRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_VISIBLESTRING_it =
+      _lookup<ASN1_ITEM>('ASN1_VISIBLESTRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_VISIBLESTRING_it => _ASN1_VISIBLESTRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_UNIVERSALSTRING_it =
+      _lookup<ASN1_ITEM>('ASN1_UNIVERSALSTRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_UNIVERSALSTRING_it =>
+      _ASN1_UNIVERSALSTRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_UTF8STRING_it =
+      _lookup<ASN1_ITEM>('ASN1_UTF8STRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_UTF8STRING_it => _ASN1_UTF8STRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_NULL_it =
+      _lookup<ASN1_ITEM>('ASN1_NULL_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_NULL_it => _ASN1_NULL_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_BMPSTRING_it =
+      _lookup<ASN1_ITEM>('ASN1_BMPSTRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_BMPSTRING_it => _ASN1_BMPSTRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_PRINTABLE_it =
+      _lookup<ASN1_ITEM>('ASN1_PRINTABLE_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_PRINTABLE_it => _ASN1_PRINTABLE_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _DIRECTORYSTRING_it =
+      _lookup<ASN1_ITEM>('DIRECTORYSTRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get DIRECTORYSTRING_it => _DIRECTORYSTRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _DISPLAYTEXT_it =
+      _lookup<ASN1_ITEM>('DISPLAYTEXT_it');
+
+  ffi.Pointer<ASN1_ITEM> get DISPLAYTEXT_it => _DISPLAYTEXT_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_PRINTABLESTRING_it =
+      _lookup<ASN1_ITEM>('ASN1_PRINTABLESTRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_PRINTABLESTRING_it =>
+      _ASN1_PRINTABLESTRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_T61STRING_it =
+      _lookup<ASN1_ITEM>('ASN1_T61STRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_T61STRING_it => _ASN1_T61STRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_IA5STRING_it =
+      _lookup<ASN1_ITEM>('ASN1_IA5STRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_IA5STRING_it => _ASN1_IA5STRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_GENERALSTRING_it =
+      _lookup<ASN1_ITEM>('ASN1_GENERALSTRING_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_GENERALSTRING_it => _ASN1_GENERALSTRING_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_UTCTIME_it =
+      _lookup<ASN1_ITEM>('ASN1_UTCTIME_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_UTCTIME_it => _ASN1_UTCTIME_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_GENERALIZEDTIME_it =
+      _lookup<ASN1_ITEM>('ASN1_GENERALIZEDTIME_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_GENERALIZEDTIME_it =>
+      _ASN1_GENERALIZEDTIME_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_TIME_it =
+      _lookup<ASN1_ITEM>('ASN1_TIME_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_TIME_it => _ASN1_TIME_it;
+
+  late final ffi.Pointer<ASN1_ITEM> _ASN1_OCTET_STRING_NDEF_it =
+      _lookup<ASN1_ITEM>('ASN1_OCTET_STRING_NDEF_it');
+
+  ffi.Pointer<ASN1_ITEM> get ASN1_OCTET_STRING_NDEF_it =>
+      _ASN1_OCTET_STRING_NDEF_it;
+
+  int EVP_MD_size(
+    ffi.Pointer<EVP_MD> md,
+  ) {
+    return _EVP_MD_size(
+      md,
+    );
+  }
+
+  late final _EVP_MD_sizePtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<EVP_MD>)>>(
+          'EVP_MD_size');
+  late final _EVP_MD_size =
+      _EVP_MD_sizePtr.asFunction<int Function(ffi.Pointer<EVP_MD>)>();
+
+  int EVP_CIPHER_block_size(
+    ffi.Pointer<EVP_CIPHER> cipher,
+  ) {
+    return _EVP_CIPHER_block_size(
+      cipher,
+    );
+  }
+
+  late final _EVP_CIPHER_block_sizePtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<EVP_CIPHER>)>>(
+          'EVP_CIPHER_block_size');
+  late final _EVP_CIPHER_block_size = _EVP_CIPHER_block_sizePtr.asFunction<
+      int Function(ffi.Pointer<EVP_CIPHER>)>();
+
+  int EVP_CIPHER_iv_length(
+    ffi.Pointer<EVP_CIPHER> cipher,
+  ) {
+    return _EVP_CIPHER_iv_length(
+      cipher,
+    );
+  }
+
+  late final _EVP_CIPHER_iv_lengthPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<EVP_CIPHER>)>>(
+          'EVP_CIPHER_iv_length');
+  late final _EVP_CIPHER_iv_length = _EVP_CIPHER_iv_lengthPtr.asFunction<
+      int Function(ffi.Pointer<EVP_CIPHER>)>();
+
+  ffi.Pointer<EVP_MD_CTX> EVP_MD_CTX_new() {
+    return _EVP_MD_CTX_new();
+  }
+
+  late final _EVP_MD_CTX_newPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_MD_CTX> Function()>>(
+          'EVP_MD_CTX_new');
+  late final _EVP_MD_CTX_new =
+      _EVP_MD_CTX_newPtr.asFunction<ffi.Pointer<EVP_MD_CTX> Function()>();
+
+  void EVP_MD_CTX_free(
+    ffi.Pointer<EVP_MD_CTX> ctx,
+  ) {
+    return _EVP_MD_CTX_free(
+      ctx,
+    );
+  }
+
+  late final _EVP_MD_CTX_freePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_MD_CTX>)>>(
+          'EVP_MD_CTX_free');
+  late final _EVP_MD_CTX_free =
+      _EVP_MD_CTX_freePtr.asFunction<void Function(ffi.Pointer<EVP_MD_CTX>)>();
+
+  int EVP_DigestUpdate(
+    ffi.Pointer<EVP_MD_CTX> ctx,
+    ffi.Pointer<ffi.Void> d,
+    int cnt,
+  ) {
+    return _EVP_DigestUpdate(
+      ctx,
+      d,
+      cnt,
+    );
+  }
+
+  late final _EVP_DigestUpdatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>,
+              size_t)>>('EVP_DigestUpdate');
+  late final _EVP_DigestUpdate = _EVP_DigestUpdatePtr.asFunction<
+      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>, int)>();
+
+  int EVP_DigestInit(
+    ffi.Pointer<EVP_MD_CTX> ctx,
+    ffi.Pointer<EVP_MD> type,
+  ) {
+    return _EVP_DigestInit(
+      ctx,
+      type,
+    );
+  }
+
+  late final _EVP_DigestInitPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<EVP_MD>)>>('EVP_DigestInit');
+  late final _EVP_DigestInit = _EVP_DigestInitPtr.asFunction<
+      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<EVP_MD>)>();
+
+  int EVP_DigestFinal(
+    ffi.Pointer<EVP_MD_CTX> ctx,
+    ffi.Pointer<ffi.Uint8> md,
+    ffi.Pointer<ffi.Uint32> s,
+  ) {
+    return _EVP_DigestFinal(
+      ctx,
+      md,
+      s,
+    );
+  }
+
+  late final _EVP_DigestFinalPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Uint32>)>>('EVP_DigestFinal');
+  late final _EVP_DigestFinal = _EVP_DigestFinalPtr.asFunction<
+      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<ffi.Uint32>)>();
+
+  int EVP_CipherInit_ex(
+    ffi.Pointer<EVP_CIPHER_CTX> ctx,
+    ffi.Pointer<EVP_CIPHER> cipher,
+    ffi.Pointer<ENGINE> impl,
+    ffi.Pointer<ffi.Uint8> key,
+    ffi.Pointer<ffi.Uint8> iv,
+    int enc,
+  ) {
+    return _EVP_CipherInit_ex(
+      ctx,
+      cipher,
+      impl,
+      key,
+      iv,
+      enc,
+    );
+  }
+
+  late final _EVP_CipherInit_exPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_CIPHER_CTX>,
+              ffi.Pointer<EVP_CIPHER>,
+              ffi.Pointer<ENGINE>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Int32)>>('EVP_CipherInit_ex');
+  late final _EVP_CipherInit_ex = _EVP_CipherInit_exPtr.asFunction<
+      int Function(
+          ffi.Pointer<EVP_CIPHER_CTX>,
+          ffi.Pointer<EVP_CIPHER>,
+          ffi.Pointer<ENGINE>,
+          ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<ffi.Uint8>,
+          int)>();
+
+  int EVP_CipherUpdate(
+    ffi.Pointer<EVP_CIPHER_CTX> ctx,
+    ffi.Pointer<ffi.Uint8> out,
+    ffi.Pointer<ffi.Int32> outl,
+    ffi.Pointer<ffi.Uint8> in1,
+    int inl,
+  ) {
+    return _EVP_CipherUpdate(
+      ctx,
+      out,
+      outl,
+      in1,
+      inl,
+    );
+  }
+
+  late final _EVP_CipherUpdatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_CIPHER_CTX>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Int32>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Int32)>>('EVP_CipherUpdate');
+  late final _EVP_CipherUpdate = _EVP_CipherUpdatePtr.asFunction<
+      int Function(ffi.Pointer<EVP_CIPHER_CTX>, ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<ffi.Int32>, ffi.Pointer<ffi.Uint8>, int)>();
+
+  int EVP_CipherFinal_ex(
+    ffi.Pointer<EVP_CIPHER_CTX> ctx,
+    ffi.Pointer<ffi.Uint8> outm,
+    ffi.Pointer<ffi.Int32> outl,
+  ) {
+    return _EVP_CipherFinal_ex(
+      ctx,
+      outm,
+      outl,
+    );
+  }
+
+  late final _EVP_CipherFinal_exPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_CIPHER_CTX>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<ffi.Int32>)>>('EVP_CipherFinal_ex');
+  late final _EVP_CipherFinal_ex = _EVP_CipherFinal_exPtr.asFunction<
+      int Function(ffi.Pointer<EVP_CIPHER_CTX>, ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<ffi.Int32>)>();
+
+  int EVP_DigestSignInit(
+    ffi.Pointer<EVP_MD_CTX> ctx,
+    ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>> pctx,
+    ffi.Pointer<EVP_MD> type,
+    ffi.Pointer<ENGINE> e,
+    ffi.Pointer<EVP_PKEY> pkey,
+  ) {
+    return _EVP_DigestSignInit(
+      ctx,
+      pctx,
+      type,
+      e,
+      pkey,
+    );
+  }
+
+  late final _EVP_DigestSignInitPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_MD_CTX>,
+              ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
+              ffi.Pointer<EVP_MD>,
+              ffi.Pointer<ENGINE>,
+              ffi.Pointer<EVP_PKEY>)>>('EVP_DigestSignInit');
+  late final _EVP_DigestSignInit = _EVP_DigestSignInitPtr.asFunction<
+      int Function(
+          ffi.Pointer<EVP_MD_CTX>,
+          ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
+          ffi.Pointer<EVP_MD>,
+          ffi.Pointer<ENGINE>,
+          ffi.Pointer<EVP_PKEY>)>();
+
+  int EVP_DigestSignFinal(
+    ffi.Pointer<EVP_MD_CTX> ctx,
+    ffi.Pointer<ffi.Uint8> sigret,
+    ffi.Pointer<size_t> siglen,
+  ) {
+    return _EVP_DigestSignFinal(
+      ctx,
+      sigret,
+      siglen,
+    );
+  }
+
+  late final _EVP_DigestSignFinalPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<size_t>)>>('EVP_DigestSignFinal');
+  late final _EVP_DigestSignFinal = _EVP_DigestSignFinalPtr.asFunction<
+      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<size_t>)>();
+
+  int EVP_DigestVerifyInit(
+    ffi.Pointer<EVP_MD_CTX> ctx,
+    ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>> pctx,
+    ffi.Pointer<EVP_MD> type,
+    ffi.Pointer<ENGINE> e,
+    ffi.Pointer<EVP_PKEY> pkey,
+  ) {
+    return _EVP_DigestVerifyInit(
+      ctx,
+      pctx,
+      type,
+      e,
+      pkey,
+    );
+  }
+
+  late final _EVP_DigestVerifyInitPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_MD_CTX>,
+              ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
+              ffi.Pointer<EVP_MD>,
+              ffi.Pointer<ENGINE>,
+              ffi.Pointer<EVP_PKEY>)>>('EVP_DigestVerifyInit');
+  late final _EVP_DigestVerifyInit = _EVP_DigestVerifyInitPtr.asFunction<
+      int Function(
+          ffi.Pointer<EVP_MD_CTX>,
+          ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
+          ffi.Pointer<EVP_MD>,
+          ffi.Pointer<ENGINE>,
+          ffi.Pointer<EVP_PKEY>)>();
+
+  int EVP_DigestVerifyFinal(
+    ffi.Pointer<EVP_MD_CTX> ctx,
+    ffi.Pointer<ffi.Uint8> sig,
+    int siglen,
+  ) {
+    return _EVP_DigestVerifyFinal(
+      ctx,
+      sig,
+      siglen,
+    );
+  }
+
+  late final _EVP_DigestVerifyFinalPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Uint8>,
+              size_t)>>('EVP_DigestVerifyFinal');
+  late final _EVP_DigestVerifyFinal = _EVP_DigestVerifyFinalPtr.asFunction<
+      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Uint8>, int)>();
+
+  ffi.Pointer<EVP_CIPHER_CTX> EVP_CIPHER_CTX_new() {
+    return _EVP_CIPHER_CTX_new();
+  }
+
+  late final _EVP_CIPHER_CTX_newPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER_CTX> Function()>>(
+          'EVP_CIPHER_CTX_new');
+  late final _EVP_CIPHER_CTX_new = _EVP_CIPHER_CTX_newPtr.asFunction<
+      ffi.Pointer<EVP_CIPHER_CTX> Function()>();
+
+  void EVP_CIPHER_CTX_free(
+    ffi.Pointer<EVP_CIPHER_CTX> c,
+  ) {
+    return _EVP_CIPHER_CTX_free(
+      c,
+    );
+  }
+
+  late final _EVP_CIPHER_CTX_freePtr = _lookup<
+          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_CIPHER_CTX>)>>(
+      'EVP_CIPHER_CTX_free');
+  late final _EVP_CIPHER_CTX_free = _EVP_CIPHER_CTX_freePtr.asFunction<
+      void Function(ffi.Pointer<EVP_CIPHER_CTX>)>();
+
+  ffi.Pointer<EVP_MD> EVP_sha1() {
+    return _EVP_sha1();
+  }
+
+  late final _EVP_sha1Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_MD> Function()>>('EVP_sha1');
+  late final _EVP_sha1 =
+      _EVP_sha1Ptr.asFunction<ffi.Pointer<EVP_MD> Function()>();
+
+  ffi.Pointer<EVP_MD> EVP_sha256() {
+    return _EVP_sha256();
+  }
+
+  late final _EVP_sha256Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_MD> Function()>>('EVP_sha256');
+  late final _EVP_sha256 =
+      _EVP_sha256Ptr.asFunction<ffi.Pointer<EVP_MD> Function()>();
+
+  ffi.Pointer<EVP_MD> EVP_sha384() {
+    return _EVP_sha384();
+  }
+
+  late final _EVP_sha384Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_MD> Function()>>('EVP_sha384');
+  late final _EVP_sha384 =
+      _EVP_sha384Ptr.asFunction<ffi.Pointer<EVP_MD> Function()>();
+
+  ffi.Pointer<EVP_MD> EVP_sha512() {
+    return _EVP_sha512();
+  }
+
+  late final _EVP_sha512Ptr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_MD> Function()>>('EVP_sha512');
+  late final _EVP_sha512 =
+      _EVP_sha512Ptr.asFunction<ffi.Pointer<EVP_MD> Function()>();
+
+  ffi.Pointer<EVP_CIPHER> EVP_aes_128_cbc() {
+    return _EVP_aes_128_cbc();
+  }
+
+  late final _EVP_aes_128_cbcPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER> Function()>>(
+          'EVP_aes_128_cbc');
+  late final _EVP_aes_128_cbc =
+      _EVP_aes_128_cbcPtr.asFunction<ffi.Pointer<EVP_CIPHER> Function()>();
+
+  ffi.Pointer<EVP_CIPHER> EVP_aes_128_ctr() {
+    return _EVP_aes_128_ctr();
+  }
+
+  late final _EVP_aes_128_ctrPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER> Function()>>(
+          'EVP_aes_128_ctr');
+  late final _EVP_aes_128_ctr =
+      _EVP_aes_128_ctrPtr.asFunction<ffi.Pointer<EVP_CIPHER> Function()>();
+
+  ffi.Pointer<EVP_CIPHER> EVP_aes_256_cbc() {
+    return _EVP_aes_256_cbc();
+  }
+
+  late final _EVP_aes_256_cbcPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER> Function()>>(
+          'EVP_aes_256_cbc');
+  late final _EVP_aes_256_cbc =
+      _EVP_aes_256_cbcPtr.asFunction<ffi.Pointer<EVP_CIPHER> Function()>();
+
+  ffi.Pointer<EVP_CIPHER> EVP_aes_256_ctr() {
+    return _EVP_aes_256_ctr();
+  }
+
+  late final _EVP_aes_256_ctrPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER> Function()>>(
+          'EVP_aes_256_ctr');
+  late final _EVP_aes_256_ctr =
+      _EVP_aes_256_ctrPtr.asFunction<ffi.Pointer<EVP_CIPHER> Function()>();
+
+  int EVP_PKEY_id(
+    ffi.Pointer<EVP_PKEY> pkey,
+  ) {
+    return _EVP_PKEY_id(
+      pkey,
+    );
+  }
+
+  late final _EVP_PKEY_idPtr =
+      _lookup<ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<EVP_PKEY>)>>(
+          'EVP_PKEY_id');
+  late final _EVP_PKEY_id =
+      _EVP_PKEY_idPtr.asFunction<int Function(ffi.Pointer<EVP_PKEY>)>();
+
+  int EVP_PKEY_set_type(
+    ffi.Pointer<EVP_PKEY> pkey,
+    int type,
+  ) {
+    return _EVP_PKEY_set_type(
+      pkey,
+      type,
+    );
+  }
+
+  late final _EVP_PKEY_set_typePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_PKEY>, ffi.Int32)>>('EVP_PKEY_set_type');
+  late final _EVP_PKEY_set_type = _EVP_PKEY_set_typePtr.asFunction<
+      int Function(ffi.Pointer<EVP_PKEY>, int)>();
+
+  int EVP_PKEY_set1_RSA(
+    ffi.Pointer<EVP_PKEY> pkey,
+    ffi.Pointer<rsa_st> key,
+  ) {
+    return _EVP_PKEY_set1_RSA(
+      pkey,
+      key,
+    );
+  }
+
+  late final _EVP_PKEY_set1_RSAPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<EVP_PKEY>,
+              ffi.Pointer<rsa_st>)>>('EVP_PKEY_set1_RSA');
+  late final _EVP_PKEY_set1_RSA = _EVP_PKEY_set1_RSAPtr.asFunction<
+      int Function(ffi.Pointer<EVP_PKEY>, ffi.Pointer<rsa_st>)>();
+
+  ffi.Pointer<rsa_st> EVP_PKEY_get1_RSA(
+    ffi.Pointer<EVP_PKEY> pkey,
+  ) {
+    return _EVP_PKEY_get1_RSA(
+      pkey,
+    );
+  }
+
+  late final _EVP_PKEY_get1_RSAPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<rsa_st> Function(
+              ffi.Pointer<EVP_PKEY>)>>('EVP_PKEY_get1_RSA');
+  late final _EVP_PKEY_get1_RSA = _EVP_PKEY_get1_RSAPtr.asFunction<
+      ffi.Pointer<rsa_st> Function(ffi.Pointer<EVP_PKEY>)>();
+
+  int EVP_PKEY_set1_EC_KEY(
+    ffi.Pointer<EVP_PKEY> pkey,
+    ffi.Pointer<ec_key_st> key,
+  ) {
+    return _EVP_PKEY_set1_EC_KEY(
+      pkey,
+      key,
+    );
+  }
+
+  late final _EVP_PKEY_set1_EC_KEYPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(ffi.Pointer<EVP_PKEY>,
+              ffi.Pointer<ec_key_st>)>>('EVP_PKEY_set1_EC_KEY');
+  late final _EVP_PKEY_set1_EC_KEY = _EVP_PKEY_set1_EC_KEYPtr.asFunction<
+      int Function(ffi.Pointer<EVP_PKEY>, ffi.Pointer<ec_key_st>)>();
+
+  ffi.Pointer<ec_key_st> EVP_PKEY_get1_EC_KEY(
+    ffi.Pointer<EVP_PKEY> pkey,
+  ) {
+    return _EVP_PKEY_get1_EC_KEY(
+      pkey,
+    );
+  }
+
+  late final _EVP_PKEY_get1_EC_KEYPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ec_key_st> Function(
+              ffi.Pointer<EVP_PKEY>)>>('EVP_PKEY_get1_EC_KEY');
+  late final _EVP_PKEY_get1_EC_KEY = _EVP_PKEY_get1_EC_KEYPtr.asFunction<
+      ffi.Pointer<ec_key_st> Function(ffi.Pointer<EVP_PKEY>)>();
+
+  ffi.Pointer<EVP_PKEY> EVP_PKEY_new() {
+    return _EVP_PKEY_new();
+  }
+
+  late final _EVP_PKEY_newPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<EVP_PKEY> Function()>>(
+          'EVP_PKEY_new');
+  late final _EVP_PKEY_new =
+      _EVP_PKEY_newPtr.asFunction<ffi.Pointer<EVP_PKEY> Function()>();
+
+  void EVP_PKEY_free(
+    ffi.Pointer<EVP_PKEY> pkey,
+  ) {
+    return _EVP_PKEY_free(
+      pkey,
+    );
+  }
+
+  late final _EVP_PKEY_freePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_PKEY>)>>(
+          'EVP_PKEY_free');
+  late final _EVP_PKEY_free =
+      _EVP_PKEY_freePtr.asFunction<void Function(ffi.Pointer<EVP_PKEY>)>();
+
+  int PKCS5_PBKDF2_HMAC(
+    ffi.Pointer<ffi.Int8> pass,
+    int passlen,
+    ffi.Pointer<ffi.Uint8> salt,
+    int saltlen,
+    int iter,
+    ffi.Pointer<EVP_MD> digest,
+    int keylen,
+    ffi.Pointer<ffi.Uint8> out,
+  ) {
+    return _PKCS5_PBKDF2_HMAC(
+      pass,
+      passlen,
+      salt,
+      saltlen,
+      iter,
+      digest,
+      keylen,
+      out,
+    );
+  }
+
+  late final _PKCS5_PBKDF2_HMACPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<ffi.Int8>,
+              ffi.Int32,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Int32,
+              ffi.Int32,
+              ffi.Pointer<EVP_MD>,
+              ffi.Int32,
+              ffi.Pointer<ffi.Uint8>)>>('PKCS5_PBKDF2_HMAC');
+  late final _PKCS5_PBKDF2_HMAC = _PKCS5_PBKDF2_HMACPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Int8>, int, ffi.Pointer<ffi.Uint8>, int, int,
+          ffi.Pointer<EVP_MD>, int, ffi.Pointer<ffi.Uint8>)>();
+
+  ffi.Pointer<EVP_PKEY_CTX> EVP_PKEY_CTX_new(
+    ffi.Pointer<EVP_PKEY> pkey,
+    ffi.Pointer<ENGINE> e,
+  ) {
+    return _EVP_PKEY_CTX_new(
+      pkey,
+      e,
+    );
+  }
+
+  late final _EVP_PKEY_CTX_newPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<EVP_PKEY_CTX> Function(
+              ffi.Pointer<EVP_PKEY>, ffi.Pointer<ENGINE>)>>('EVP_PKEY_CTX_new');
+  late final _EVP_PKEY_CTX_new = _EVP_PKEY_CTX_newPtr.asFunction<
+      ffi.Pointer<EVP_PKEY_CTX> Function(
+          ffi.Pointer<EVP_PKEY>, ffi.Pointer<ENGINE>)>();
+
+  void EVP_PKEY_CTX_free(
+    ffi.Pointer<EVP_PKEY_CTX> ctx,
+  ) {
+    return _EVP_PKEY_CTX_free(
+      ctx,
+    );
+  }
+
+  late final _EVP_PKEY_CTX_freePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_PKEY_CTX>)>>(
+          'EVP_PKEY_CTX_free');
+  late final _EVP_PKEY_CTX_free = _EVP_PKEY_CTX_freePtr.asFunction<
+      void Function(ffi.Pointer<EVP_PKEY_CTX>)>();
+
+  int EVP_PKEY_encrypt_init(
+    ffi.Pointer<EVP_PKEY_CTX> ctx,
+  ) {
+    return _EVP_PKEY_encrypt_init(
+      ctx,
+    );
+  }
+
+  late final _EVP_PKEY_encrypt_initPtr = _lookup<
+          ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<EVP_PKEY_CTX>)>>(
+      'EVP_PKEY_encrypt_init');
+  late final _EVP_PKEY_encrypt_init = _EVP_PKEY_encrypt_initPtr.asFunction<
+      int Function(ffi.Pointer<EVP_PKEY_CTX>)>();
+
+  int EVP_PKEY_encrypt(
+    ffi.Pointer<EVP_PKEY_CTX> ctx,
+    ffi.Pointer<ffi.Uint8> out,
+    ffi.Pointer<size_t> outlen,
+    ffi.Pointer<ffi.Uint8> in1,
+    int inlen,
+  ) {
+    return _EVP_PKEY_encrypt(
+      ctx,
+      out,
+      outlen,
+      in1,
+      inlen,
+    );
+  }
+
+  late final _EVP_PKEY_encryptPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_PKEY_CTX>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<size_t>,
+              ffi.Pointer<ffi.Uint8>,
+              size_t)>>('EVP_PKEY_encrypt');
+  late final _EVP_PKEY_encrypt = _EVP_PKEY_encryptPtr.asFunction<
+      int Function(ffi.Pointer<EVP_PKEY_CTX>, ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<size_t>, ffi.Pointer<ffi.Uint8>, int)>();
+
+  int EVP_PKEY_decrypt_init(
+    ffi.Pointer<EVP_PKEY_CTX> ctx,
+  ) {
+    return _EVP_PKEY_decrypt_init(
+      ctx,
+    );
+  }
+
+  late final _EVP_PKEY_decrypt_initPtr = _lookup<
+          ffi.NativeFunction<ffi.Int32 Function(ffi.Pointer<EVP_PKEY_CTX>)>>(
+      'EVP_PKEY_decrypt_init');
+  late final _EVP_PKEY_decrypt_init = _EVP_PKEY_decrypt_initPtr.asFunction<
+      int Function(ffi.Pointer<EVP_PKEY_CTX>)>();
+
+  int EVP_PKEY_decrypt(
+    ffi.Pointer<EVP_PKEY_CTX> ctx,
+    ffi.Pointer<ffi.Uint8> out,
+    ffi.Pointer<size_t> outlen,
+    ffi.Pointer<ffi.Uint8> in1,
+    int inlen,
+  ) {
+    return _EVP_PKEY_decrypt(
+      ctx,
+      out,
+      outlen,
+      in1,
+      inlen,
+    );
+  }
+
+  late final _EVP_PKEY_decryptPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int32 Function(
+              ffi.Pointer<EVP_PKEY_CTX>,
+              ffi.Pointer<ffi.Uint8>,
+              ffi.Pointer<size_t>,
+              ffi.Pointer<ffi.Uint8>,
+              size_t)>>('EVP_PKEY_decrypt');
+  late final _EVP_PKEY_decrypt = _EVP_PKEY_decryptPtr.asFunction<
+      int Function(ffi.Pointer<EVP_PKEY_CTX>, ffi.Pointer<ffi.Uint8>,
+          ffi.Pointer<size_t>, ffi.Pointer<ffi.Uint8>, int)>();
 }
 
 class __fsid_t extends ffi.Struct {
@@ -255,6 +1201,295 @@ class MD5state_st extends ffi.Struct {
 
 typedef MD5_CTX = MD5state_st;
 typedef size_t = ffi.Uint64;
+
+class asn1_string_st extends ffi.Struct {
+  @ffi.Int32()
+  external int length;
+
+  @ffi.Int32()
+  external int type;
+
+  external ffi.Pointer<ffi.Uint8> data;
+
+  @ffi.Int64()
+  external int flags;
+}
+
+class asn1_object_st extends ffi.Opaque {}
+
+class ASN1_ITEM_st extends ffi.Opaque {}
+
+class asn1_pctx_st extends ffi.Opaque {}
+
+class asn1_sctx_st extends ffi.Opaque {}
+
+class dane_st extends ffi.Opaque {}
+
+class bio_st extends ffi.Opaque {}
+
+class bignum_st extends ffi.Opaque {}
+
+class bignum_ctx extends ffi.Opaque {}
+
+class bn_blinding_st extends ffi.Opaque {}
+
+class bn_mont_ctx_st extends ffi.Opaque {}
+
+class bn_recp_ctx_st extends ffi.Opaque {}
+
+class bn_gencb_st extends ffi.Opaque {}
+
+class buf_mem_st extends ffi.Opaque {}
+
+class evp_cipher_st extends ffi.Opaque {}
+
+class evp_cipher_ctx_st extends ffi.Opaque {}
+
+class evp_md_st extends ffi.Opaque {}
+
+class evp_md_ctx_st extends ffi.Opaque {}
+
+class evp_pkey_st extends ffi.Opaque {}
+
+class evp_pkey_asn1_method_st extends ffi.Opaque {}
+
+class evp_pkey_method_st extends ffi.Opaque {}
+
+class evp_pkey_ctx_st extends ffi.Opaque {}
+
+class evp_Encode_Ctx_st extends ffi.Opaque {}
+
+class hmac_ctx_st extends ffi.Opaque {}
+
+class dh_st extends ffi.Opaque {}
+
+class dh_method extends ffi.Opaque {}
+
+class dsa_st extends ffi.Opaque {}
+
+class dsa_method extends ffi.Opaque {}
+
+class rsa_st extends ffi.Opaque {}
+
+class rsa_meth_st extends ffi.Opaque {}
+
+class rsa_pss_params_st extends ffi.Opaque {}
+
+class ec_key_st extends ffi.Opaque {}
+
+class ec_key_method_st extends ffi.Opaque {}
+
+class rand_meth_st extends ffi.Opaque {}
+
+class rand_drbg_st extends ffi.Opaque {}
+
+class ssl_dane_st extends ffi.Opaque {}
+
+class x509_st extends ffi.Opaque {}
+
+class X509_algor_st extends ffi.Opaque {}
+
+class X509_crl_st extends ffi.Opaque {}
+
+class x509_crl_method_st extends ffi.Opaque {}
+
+class x509_revoked_st extends ffi.Opaque {}
+
+class X509_name_st extends ffi.Opaque {}
+
+class X509_pubkey_st extends ffi.Opaque {}
+
+class x509_store_st extends ffi.Opaque {}
+
+class x509_store_ctx_st extends ffi.Opaque {}
+
+class x509_object_st extends ffi.Opaque {}
+
+class x509_lookup_st extends ffi.Opaque {}
+
+class x509_lookup_method_st extends ffi.Opaque {}
+
+class X509_VERIFY_PARAM_st extends ffi.Opaque {}
+
+class x509_sig_info_st extends ffi.Opaque {}
+
+class pkcs8_priv_key_info_st extends ffi.Opaque {}
+
+class v3_ext_ctx extends ffi.Opaque {}
+
+class conf_st extends ffi.Opaque {}
+
+class ossl_init_settings_st extends ffi.Opaque {}
+
+class ui_st extends ffi.Opaque {}
+
+class ui_method_st extends ffi.Opaque {}
+
+class engine_st extends ffi.Opaque {}
+
+class ssl_st extends ffi.Opaque {}
+
+class ssl_ctx_st extends ffi.Opaque {}
+
+class comp_ctx_st extends ffi.Opaque {}
+
+class comp_method_st extends ffi.Opaque {}
+
+class X509_POLICY_NODE_st extends ffi.Opaque {}
+
+class X509_POLICY_LEVEL_st extends ffi.Opaque {}
+
+class X509_POLICY_TREE_st extends ffi.Opaque {}
+
+class X509_POLICY_CACHE_st extends ffi.Opaque {}
+
+class AUTHORITY_KEYID_st extends ffi.Opaque {}
+
+class DIST_POINT_st extends ffi.Opaque {}
+
+class ISSUING_DIST_POINT_st extends ffi.Opaque {}
+
+class NAME_CONSTRAINTS_st extends ffi.Opaque {}
+
+class crypto_ex_data_st extends ffi.Struct {
+  external ffi.Pointer<stack_st_void> sk;
+}
+
+class stack_st_void extends ffi.Opaque {}
+
+class ocsp_req_ctx_st extends ffi.Opaque {}
+
+class ocsp_response_st extends ffi.Opaque {}
+
+class ocsp_responder_id_st extends ffi.Opaque {}
+
+class sct_st extends ffi.Opaque {}
+
+class sct_ctx_st extends ffi.Opaque {}
+
+class ctlog_st extends ffi.Opaque {}
+
+class ctlog_store_st extends ffi.Opaque {}
+
+class ct_policy_eval_ctx_st extends ffi.Opaque {}
+
+class ossl_store_info_st extends ffi.Opaque {}
+
+class ossl_store_search_st extends ffi.Opaque {}
+
+class __mbstate_t extends ffi.Struct {
+  @ffi.Int32()
+  external int __count;
+
+  external UnnamedUnion1 __value;
+}
+
+class UnnamedUnion1 extends ffi.Union {
+  @ffi.Uint32()
+  external int __wch;
+
+  @ffi.Array.multi([4])
+  external ffi.Array<ffi.Int8> __wchb;
+}
+
+class _G_fpos_t extends ffi.Struct {
+  @__off_t()
+  external int __pos;
+
+  external __mbstate_t __state;
+}
+
+typedef __off_t = ffi.Int64;
+
+class _G_fpos64_t extends ffi.Struct {
+  @__off64_t()
+  external int __pos;
+
+  external __mbstate_t __state;
+}
+
+typedef __off64_t = ffi.Int64;
+
+class _IO_FILE extends ffi.Struct {
+  @ffi.Int32()
+  external int _flags;
+
+  external ffi.Pointer<ffi.Int8> _IO_read_ptr;
+
+  external ffi.Pointer<ffi.Int8> _IO_read_end;
+
+  external ffi.Pointer<ffi.Int8> _IO_read_base;
+
+  external ffi.Pointer<ffi.Int8> _IO_write_base;
+
+  external ffi.Pointer<ffi.Int8> _IO_write_ptr;
+
+  external ffi.Pointer<ffi.Int8> _IO_write_end;
+
+  external ffi.Pointer<ffi.Int8> _IO_buf_base;
+
+  external ffi.Pointer<ffi.Int8> _IO_buf_end;
+
+  external ffi.Pointer<ffi.Int8> _IO_save_base;
+
+  external ffi.Pointer<ffi.Int8> _IO_backup_base;
+
+  external ffi.Pointer<ffi.Int8> _IO_save_end;
+
+  external ffi.Pointer<_IO_marker> _markers;
+
+  external ffi.Pointer<_IO_FILE> _chain;
+
+  @ffi.Int32()
+  external int _fileno;
+
+  @ffi.Int32()
+  external int _flags2;
+
+  @__off_t()
+  external int _old_offset;
+
+  @ffi.Uint16()
+  external int _cur_column;
+
+  @ffi.Int8()
+  external int _vtable_offset;
+
+  @ffi.Array.multi([1])
+  external ffi.Array<ffi.Int8> _shortbuf;
+
+  external ffi.Pointer<_IO_lock_t> _lock;
+
+  @__off64_t()
+  external int _offset;
+
+  external ffi.Pointer<_IO_codecvt> _codecvt;
+
+  external ffi.Pointer<_IO_wide_data> _wide_data;
+
+  external ffi.Pointer<_IO_FILE> _freeres_list;
+
+  external ffi.Pointer<ffi.Void> _freeres_buf;
+
+  @size_t()
+  external int __pad5;
+
+  @ffi.Int32()
+  external int _mode;
+
+  @ffi.Array.multi([20])
+  external ffi.Array<ffi.Int8> _unused2;
+}
+
+class _IO_marker extends ffi.Opaque {}
+
+typedef _IO_lock_t = ffi.Void;
+
+class _IO_codecvt extends ffi.Opaque {}
+
+class _IO_wide_data extends ffi.Opaque {}
+
+typedef FILE = _IO_FILE;
 
 abstract class idtype_t {
   static const int P_ALL = 0;
@@ -583,120 +1818,6 @@ class __locale_struct extends ffi.Struct {
 
 class __locale_data extends ffi.Opaque {}
 
-class __mbstate_t extends ffi.Struct {
-  @ffi.Int32()
-  external int __count;
-
-  external UnnamedUnion1 __value;
-}
-
-class UnnamedUnion1 extends ffi.Union {
-  @ffi.Uint32()
-  external int __wch;
-
-  @ffi.Array.multi([4])
-  external ffi.Array<ffi.Int8> __wchb;
-}
-
-class _G_fpos_t extends ffi.Struct {
-  @__off_t()
-  external int __pos;
-
-  external __mbstate_t __state;
-}
-
-typedef __off_t = ffi.Int64;
-
-class _G_fpos64_t extends ffi.Struct {
-  @__off64_t()
-  external int __pos;
-
-  external __mbstate_t __state;
-}
-
-typedef __off64_t = ffi.Int64;
-
-class _IO_FILE extends ffi.Struct {
-  @ffi.Int32()
-  external int _flags;
-
-  external ffi.Pointer<ffi.Int8> _IO_read_ptr;
-
-  external ffi.Pointer<ffi.Int8> _IO_read_end;
-
-  external ffi.Pointer<ffi.Int8> _IO_read_base;
-
-  external ffi.Pointer<ffi.Int8> _IO_write_base;
-
-  external ffi.Pointer<ffi.Int8> _IO_write_ptr;
-
-  external ffi.Pointer<ffi.Int8> _IO_write_end;
-
-  external ffi.Pointer<ffi.Int8> _IO_buf_base;
-
-  external ffi.Pointer<ffi.Int8> _IO_buf_end;
-
-  external ffi.Pointer<ffi.Int8> _IO_save_base;
-
-  external ffi.Pointer<ffi.Int8> _IO_backup_base;
-
-  external ffi.Pointer<ffi.Int8> _IO_save_end;
-
-  external ffi.Pointer<_IO_marker> _markers;
-
-  external ffi.Pointer<_IO_FILE> _chain;
-
-  @ffi.Int32()
-  external int _fileno;
-
-  @ffi.Int32()
-  external int _flags2;
-
-  @__off_t()
-  external int _old_offset;
-
-  @ffi.Uint16()
-  external int _cur_column;
-
-  @ffi.Int8()
-  external int _vtable_offset;
-
-  @ffi.Array.multi([1])
-  external ffi.Array<ffi.Int8> _shortbuf;
-
-  external ffi.Pointer<_IO_lock_t> _lock;
-
-  @__off64_t()
-  external int _offset;
-
-  external ffi.Pointer<_IO_codecvt> _codecvt;
-
-  external ffi.Pointer<_IO_wide_data> _wide_data;
-
-  external ffi.Pointer<_IO_FILE> _freeres_list;
-
-  external ffi.Pointer<ffi.Void> _freeres_buf;
-
-  @size_t()
-  external int __pad5;
-
-  @ffi.Int32()
-  external int _mode;
-
-  @ffi.Array.multi([20])
-  external ffi.Array<ffi.Int8> _unused2;
-}
-
-class _IO_marker extends ffi.Opaque {}
-
-typedef _IO_lock_t = ffi.Void;
-
-class _IO_codecvt extends ffi.Opaque {}
-
-class _IO_wide_data extends ffi.Opaque {}
-
-typedef FILE = _IO_FILE;
-
 class stack_st extends ffi.Opaque {}
 
 class stack_st_OPENSSL_STRING extends ffi.Opaque {}
@@ -705,178 +1826,11 @@ class stack_st_OPENSSL_CSTRING extends ffi.Opaque {}
 
 class stack_st_OPENSSL_BLOCK extends ffi.Opaque {}
 
-class asn1_string_st extends ffi.Opaque {}
-
-class asn1_object_st extends ffi.Opaque {}
-
-class ASN1_ITEM_st extends ffi.Opaque {}
-
-class asn1_pctx_st extends ffi.Opaque {}
-
-class asn1_sctx_st extends ffi.Opaque {}
-
-class dane_st extends ffi.Opaque {}
-
-class bio_st extends ffi.Opaque {}
-
-class bignum_st extends ffi.Opaque {}
-
-class bignum_ctx extends ffi.Opaque {}
-
-class bn_blinding_st extends ffi.Opaque {}
-
-class bn_mont_ctx_st extends ffi.Opaque {}
-
-class bn_recp_ctx_st extends ffi.Opaque {}
-
-class bn_gencb_st extends ffi.Opaque {}
-
-class buf_mem_st extends ffi.Opaque {}
-
-class evp_cipher_st extends ffi.Opaque {}
-
-class evp_cipher_ctx_st extends ffi.Opaque {}
-
-class evp_md_st extends ffi.Opaque {}
-
-class evp_md_ctx_st extends ffi.Opaque {}
-
-class evp_pkey_st extends ffi.Opaque {}
-
-class evp_pkey_asn1_method_st extends ffi.Opaque {}
-
-class evp_pkey_method_st extends ffi.Opaque {}
-
-class evp_pkey_ctx_st extends ffi.Opaque {}
-
-class evp_Encode_Ctx_st extends ffi.Opaque {}
-
-class hmac_ctx_st extends ffi.Opaque {}
-
-class dh_st extends ffi.Opaque {}
-
-class dh_method extends ffi.Opaque {}
-
-class dsa_st extends ffi.Opaque {}
-
-class dsa_method extends ffi.Opaque {}
-
-class rsa_st extends ffi.Opaque {}
-
-class rsa_meth_st extends ffi.Opaque {}
-
-class rsa_pss_params_st extends ffi.Opaque {}
-
-class ec_key_st extends ffi.Opaque {}
-
-class ec_key_method_st extends ffi.Opaque {}
-
-class rand_meth_st extends ffi.Opaque {}
-
-class rand_drbg_st extends ffi.Opaque {}
-
-class ssl_dane_st extends ffi.Opaque {}
-
-class x509_st extends ffi.Opaque {}
-
-class X509_algor_st extends ffi.Opaque {}
-
-class X509_crl_st extends ffi.Opaque {}
-
-class x509_crl_method_st extends ffi.Opaque {}
-
-class x509_revoked_st extends ffi.Opaque {}
-
-class X509_name_st extends ffi.Opaque {}
-
-class X509_pubkey_st extends ffi.Opaque {}
-
-class x509_store_st extends ffi.Opaque {}
-
-class x509_store_ctx_st extends ffi.Opaque {}
-
-class x509_object_st extends ffi.Opaque {}
-
-class x509_lookup_st extends ffi.Opaque {}
-
-class x509_lookup_method_st extends ffi.Opaque {}
-
-class X509_VERIFY_PARAM_st extends ffi.Opaque {}
-
-class x509_sig_info_st extends ffi.Opaque {}
-
-class pkcs8_priv_key_info_st extends ffi.Opaque {}
-
-class v3_ext_ctx extends ffi.Opaque {}
-
-class conf_st extends ffi.Opaque {}
-
-class ossl_init_settings_st extends ffi.Opaque {}
-
-class ui_st extends ffi.Opaque {}
-
-class ui_method_st extends ffi.Opaque {}
-
-class engine_st extends ffi.Opaque {}
-
-class ssl_st extends ffi.Opaque {}
-
-class ssl_ctx_st extends ffi.Opaque {}
-
-class comp_ctx_st extends ffi.Opaque {}
-
-class comp_method_st extends ffi.Opaque {}
-
-class X509_POLICY_NODE_st extends ffi.Opaque {}
-
-class X509_POLICY_LEVEL_st extends ffi.Opaque {}
-
-class X509_POLICY_TREE_st extends ffi.Opaque {}
-
-class X509_POLICY_CACHE_st extends ffi.Opaque {}
-
-class AUTHORITY_KEYID_st extends ffi.Opaque {}
-
-class DIST_POINT_st extends ffi.Opaque {}
-
-class ISSUING_DIST_POINT_st extends ffi.Opaque {}
-
-class NAME_CONSTRAINTS_st extends ffi.Opaque {}
-
-class crypto_ex_data_st extends ffi.Struct {
-  external ffi.Pointer<stack_st_void> sk;
-}
-
-class stack_st_void extends ffi.Opaque {}
-
-class ocsp_req_ctx_st extends ffi.Opaque {}
-
-class ocsp_response_st extends ffi.Opaque {}
-
-class ocsp_responder_id_st extends ffi.Opaque {}
-
-class sct_st extends ffi.Opaque {}
-
-class sct_ctx_st extends ffi.Opaque {}
-
-class ctlog_st extends ffi.Opaque {}
-
-class ctlog_store_st extends ffi.Opaque {}
-
-class ct_policy_eval_ctx_st extends ffi.Opaque {}
-
-class ossl_store_info_st extends ffi.Opaque {}
-
-class ossl_store_search_st extends ffi.Opaque {}
-
-/// Old type for allocating dynamic locks. No longer used. Use the new thread
-/// API instead.
 class CRYPTO_dynlock extends ffi.Struct {
   @ffi.Int32()
   external int dummy;
 }
 
-/// This structure is no longer used
 class crypto_threadid_st extends ffi.Struct {
   @ffi.Int32()
   external int dummy;
@@ -938,6 +1892,206 @@ class __pthread_cleanup_frame extends ffi.Struct {
 }
 
 class __jmp_buf_tag extends ffi.Opaque {}
+
+class bio_addr_st extends ffi.Opaque {}
+
+class bio_addrinfo_st extends ffi.Opaque {}
+
+class bio_method_st extends ffi.Opaque {}
+
+class stack_st_BIO extends ffi.Opaque {}
+
+abstract class BIO_hostserv_priorities {
+  static const int BIO_PARSE_PRIO_HOST = 0;
+  static const int BIO_PARSE_PRIO_SERV = 1;
+}
+
+abstract class BIO_lookup_type {
+  static const int BIO_LOOKUP_CLIENT = 0;
+  static const int BIO_LOOKUP_SERVER = 1;
+}
+
+class hostent extends ffi.Opaque {}
+
+class BIO_sock_info_u extends ffi.Union {
+  external ffi.Pointer<BIO_ADDR> addr;
+}
+
+typedef BIO_ADDR = bio_addr_st;
+
+abstract class BIO_sock_info_type {
+  static const int BIO_SOCK_INFO_ADDRESS = 0;
+}
+
+typedef BIGNUM = bignum_st;
+
+class stack_st_X509_ALGOR extends ffi.Opaque {}
+
+class ASN1_ENCODING_st extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> enc;
+
+  @ffi.Int64()
+  external int len;
+
+  @ffi.Int32()
+  external int modified;
+}
+
+class asn1_string_table_st extends ffi.Struct {
+  @ffi.Int32()
+  external int nid;
+
+  @ffi.Int64()
+  external int minsize;
+
+  @ffi.Int64()
+  external int maxsize;
+
+  @ffi.Uint64()
+  external int mask;
+
+  @ffi.Uint64()
+  external int flags;
+}
+
+class stack_st_ASN1_STRING_TABLE extends ffi.Opaque {}
+
+class ASN1_TEMPLATE_st extends ffi.Opaque {}
+
+class ASN1_TLC_st extends ffi.Opaque {}
+
+class ASN1_VALUE_st extends ffi.Opaque {}
+
+class stack_st_ASN1_INTEGER extends ffi.Opaque {}
+
+class stack_st_ASN1_GENERALSTRING extends ffi.Opaque {}
+
+class stack_st_ASN1_UTF8STRING extends ffi.Opaque {}
+
+class asn1_type_st extends ffi.Struct {
+  @ffi.Int32()
+  external int type;
+
+  external UnnamedUnion2 value;
+}
+
+class UnnamedUnion2 extends ffi.Union {
+  external ffi.Pointer<ffi.Int8> ptr;
+
+  @ASN1_BOOLEAN()
+  external int boolean;
+
+  external ffi.Pointer<ASN1_STRING> asn1_string;
+
+  external ffi.Pointer<ASN1_OBJECT> object;
+
+  external ffi.Pointer<ASN1_INTEGER> integer;
+
+  external ffi.Pointer<ASN1_ENUMERATED> enumerated;
+
+  external ffi.Pointer<ASN1_BIT_STRING> bit_string;
+
+  external ffi.Pointer<ASN1_OCTET_STRING> octet_string;
+
+  external ffi.Pointer<ASN1_PRINTABLESTRING> printablestring;
+
+  external ffi.Pointer<ASN1_T61STRING> t61string;
+
+  external ffi.Pointer<ASN1_IA5STRING> ia5string;
+
+  external ffi.Pointer<ASN1_GENERALSTRING> generalstring;
+
+  external ffi.Pointer<ASN1_BMPSTRING> bmpstring;
+
+  external ffi.Pointer<ASN1_UNIVERSALSTRING> universalstring;
+
+  external ffi.Pointer<ASN1_UTCTIME> utctime;
+
+  external ffi.Pointer<ASN1_GENERALIZEDTIME> generalizedtime;
+
+  external ffi.Pointer<ASN1_VISIBLESTRING> visiblestring;
+
+  external ffi.Pointer<ASN1_UTF8STRING> utf8string;
+
+  external ffi.Pointer<ASN1_STRING> set1;
+
+  external ffi.Pointer<ASN1_STRING> sequence;
+
+  external ffi.Pointer<ASN1_VALUE> asn1_value;
+}
+
+typedef ASN1_BOOLEAN = ffi.Int32;
+typedef ASN1_STRING = asn1_string_st;
+typedef ASN1_OBJECT = asn1_object_st;
+typedef ASN1_INTEGER = asn1_string_st;
+typedef ASN1_ENUMERATED = asn1_string_st;
+typedef ASN1_BIT_STRING = asn1_string_st;
+typedef ASN1_OCTET_STRING = asn1_string_st;
+typedef ASN1_PRINTABLESTRING = asn1_string_st;
+typedef ASN1_T61STRING = asn1_string_st;
+typedef ASN1_IA5STRING = asn1_string_st;
+typedef ASN1_GENERALSTRING = asn1_string_st;
+typedef ASN1_BMPSTRING = asn1_string_st;
+typedef ASN1_UNIVERSALSTRING = asn1_string_st;
+typedef ASN1_UTCTIME = asn1_string_st;
+typedef ASN1_GENERALIZEDTIME = asn1_string_st;
+typedef ASN1_VISIBLESTRING = asn1_string_st;
+typedef ASN1_UTF8STRING = asn1_string_st;
+typedef ASN1_VALUE = ASN1_VALUE_st;
+
+class stack_st_ASN1_TYPE extends ffi.Opaque {}
+
+typedef ASN1_ITEM = ASN1_ITEM_st;
+
+class BIT_STRING_BITNAME_st extends ffi.Struct {
+  @ffi.Int32()
+  external int bitnum;
+
+  external ffi.Pointer<ffi.Int8> lname;
+
+  external ffi.Pointer<ffi.Int8> sname;
+}
+
+class stack_st_ASN1_OBJECT extends ffi.Opaque {}
+
+class obj_name_st extends ffi.Struct {
+  @ffi.Int32()
+  external int type;
+
+  @ffi.Int32()
+  external int alias;
+
+  external ffi.Pointer<ffi.Int8> name;
+
+  external ffi.Pointer<ffi.Int8> data;
+}
+
+class EVP_CTRL_TLS1_1_MULTIBLOCK_PARAM extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> out;
+
+  external ffi.Pointer<ffi.Uint8> inp;
+
+  @size_t()
+  external int len;
+
+  @ffi.Uint32()
+  external int interleave;
+}
+
+class evp_cipher_info_st extends ffi.Struct {
+  external ffi.Pointer<EVP_CIPHER> cipher;
+
+  @ffi.Array.multi([16])
+  external ffi.Array<ffi.Uint8> iv;
+}
+
+typedef EVP_CIPHER = evp_cipher_st;
+typedef EVP_MD = evp_md_st;
+typedef EVP_MD_CTX = evp_md_ctx_st;
+typedef EVP_CIPHER_CTX = evp_cipher_ctx_st;
+typedef ENGINE = engine_st;
+typedef EVP_PKEY_CTX = evp_pkey_ctx_st;
+typedef EVP_PKEY = evp_pkey_st;
 
 const int PTHREAD_CREATE_JOINABLE = 0;
 
@@ -1239,6 +2393,246 @@ const int MD5_LBLOCK = 16;
 
 const int MD5_DIGEST_LENGTH = 16;
 
+const int _LIBC_LIMITS_H_ = 1;
+
+const int MB_LEN_MAX = 16;
+
+const int LLONG_MIN = -9223372036854775808;
+
+const int LLONG_MAX = 9223372036854775807;
+
+const int ULLONG_MAX = -1;
+
+const int _BITS_POSIX1_LIM_H = 1;
+
+const int _POSIX_AIO_LISTIO_MAX = 2;
+
+const int _POSIX_AIO_MAX = 1;
+
+const int _POSIX_ARG_MAX = 4096;
+
+const int _POSIX_CHILD_MAX = 25;
+
+const int _POSIX_DELAYTIMER_MAX = 32;
+
+const int _POSIX_HOST_NAME_MAX = 255;
+
+const int _POSIX_LINK_MAX = 8;
+
+const int _POSIX_LOGIN_NAME_MAX = 9;
+
+const int _POSIX_MAX_CANON = 255;
+
+const int _POSIX_MAX_INPUT = 255;
+
+const int _POSIX_MQ_OPEN_MAX = 8;
+
+const int _POSIX_MQ_PRIO_MAX = 32;
+
+const int _POSIX_NAME_MAX = 14;
+
+const int _POSIX_NGROUPS_MAX = 8;
+
+const int _POSIX_OPEN_MAX = 20;
+
+const int _POSIX_PATH_MAX = 256;
+
+const int _POSIX_PIPE_BUF = 512;
+
+const int _POSIX_RE_DUP_MAX = 255;
+
+const int _POSIX_RTSIG_MAX = 8;
+
+const int _POSIX_SEM_NSEMS_MAX = 256;
+
+const int _POSIX_SEM_VALUE_MAX = 32767;
+
+const int _POSIX_SIGQUEUE_MAX = 32;
+
+const int _POSIX_SSIZE_MAX = 32767;
+
+const int _POSIX_STREAM_MAX = 8;
+
+const int _POSIX_SYMLINK_MAX = 255;
+
+const int _POSIX_SYMLOOP_MAX = 8;
+
+const int _POSIX_TIMER_MAX = 32;
+
+const int _POSIX_TTY_NAME_MAX = 9;
+
+const int _POSIX_TZNAME_MAX = 6;
+
+const int _POSIX_CLOCKRES_MIN = 20000000;
+
+const int NGROUPS_MAX = 65536;
+
+const int MAX_CANON = 255;
+
+const int MAX_INPUT = 255;
+
+const int NAME_MAX = 255;
+
+const int PATH_MAX = 4096;
+
+const int PIPE_BUF = 4096;
+
+const int XATTR_NAME_MAX = 255;
+
+const int XATTR_SIZE_MAX = 65536;
+
+const int XATTR_LIST_MAX = 65536;
+
+const int RTSIG_MAX = 32;
+
+const int _POSIX_THREAD_KEYS_MAX = 128;
+
+const int PTHREAD_KEYS_MAX = 1024;
+
+const int _POSIX_THREAD_DESTRUCTOR_ITERATIONS = 4;
+
+const int PTHREAD_DESTRUCTOR_ITERATIONS = 4;
+
+const int _POSIX_THREAD_THREADS_MAX = 64;
+
+const int AIO_PRIO_DELTA_MAX = 20;
+
+const int PTHREAD_STACK_MIN = 16384;
+
+const int DELAYTIMER_MAX = 2147483647;
+
+const int TTY_NAME_MAX = 32;
+
+const int LOGIN_NAME_MAX = 256;
+
+const int HOST_NAME_MAX = 64;
+
+const int MQ_PRIO_MAX = 32768;
+
+const int SEM_VALUE_MAX = 2147483647;
+
+const int SSIZE_MAX = 9223372036854775807;
+
+const int _BITS_POSIX2_LIM_H = 1;
+
+const int _POSIX2_BC_BASE_MAX = 99;
+
+const int _POSIX2_BC_DIM_MAX = 2048;
+
+const int _POSIX2_BC_SCALE_MAX = 99;
+
+const int _POSIX2_BC_STRING_MAX = 1000;
+
+const int _POSIX2_COLL_WEIGHTS_MAX = 2;
+
+const int _POSIX2_EXPR_NEST_MAX = 32;
+
+const int _POSIX2_LINE_MAX = 2048;
+
+const int _POSIX2_RE_DUP_MAX = 255;
+
+const int _POSIX2_CHARCLASS_NAME_MAX = 14;
+
+const int BC_BASE_MAX = 99;
+
+const int BC_DIM_MAX = 2048;
+
+const int BC_SCALE_MAX = 99;
+
+const int BC_STRING_MAX = 1000;
+
+const int COLL_WEIGHTS_MAX = 255;
+
+const int EXPR_NEST_MAX = 32;
+
+const int LINE_MAX = 2048;
+
+const int CHARCLASS_NAME_MAX = 2048;
+
+const int RE_DUP_MAX = 32767;
+
+const int SCHAR_MAX = 127;
+
+const int SHRT_MAX = 32767;
+
+const int INT_MAX = 2147483647;
+
+const int LONG_MAX = 9223372036854775807;
+
+const int SCHAR_MIN = -128;
+
+const int SHRT_MIN = -32768;
+
+const int INT_MIN = -2147483648;
+
+const int LONG_MIN = -9223372036854775808;
+
+const int UCHAR_MAX = 255;
+
+const int USHRT_MAX = 65535;
+
+const int UINT_MAX = 4294967295;
+
+const int ULONG_MAX = -1;
+
+const int CHAR_BIT = 8;
+
+const int CHAR_MIN = -128;
+
+const int CHAR_MAX = 127;
+
+const int _STDIO_H = 1;
+
+const int __GNUC_VA_LIST = 1;
+
+const int _____fpos_t_defined = 1;
+
+const int ____mbstate_t_defined = 1;
+
+const int _____fpos64_t_defined = 1;
+
+const int ____FILE_defined = 1;
+
+const int __FILE_defined = 1;
+
+const int __struct_FILE_defined = 1;
+
+const int _IO_EOF_SEEN = 16;
+
+const int _IO_ERR_SEEN = 32;
+
+const int _IO_USER_LOCK = 32768;
+
+const int _IOFBF = 0;
+
+const int _IOLBF = 1;
+
+const int _IONBF = 2;
+
+const int BUFSIZ = 8192;
+
+const int EOF = -1;
+
+const int SEEK_SET = 0;
+
+const int SEEK_CUR = 1;
+
+const int SEEK_END = 2;
+
+const String P_tmpdir = '/tmp';
+
+const int _BITS_STDIO_LIM_H = 1;
+
+const int L_tmpnam = 20;
+
+const int TMP_MAX = 238328;
+
+const int FILENAME_MAX = 4096;
+
+const int L_ctermid = 9;
+
+const int FOPEN_MAX = 16;
+
 const int _STDLIB_H = 1;
 
 const int WNOHANG = 1;
@@ -1440,246 +2834,6 @@ const int _BITS_TYPES_LOCALE_T_H = 1;
 const int _BITS_TYPES___LOCALE_T_H = 1;
 
 const int TIME_UTC = 1;
-
-const int _STDIO_H = 1;
-
-const int __GNUC_VA_LIST = 1;
-
-const int _____fpos_t_defined = 1;
-
-const int ____mbstate_t_defined = 1;
-
-const int _____fpos64_t_defined = 1;
-
-const int ____FILE_defined = 1;
-
-const int __FILE_defined = 1;
-
-const int __struct_FILE_defined = 1;
-
-const int _IO_EOF_SEEN = 16;
-
-const int _IO_ERR_SEEN = 32;
-
-const int _IO_USER_LOCK = 32768;
-
-const int _IOFBF = 0;
-
-const int _IOLBF = 1;
-
-const int _IONBF = 2;
-
-const int BUFSIZ = 8192;
-
-const int EOF = -1;
-
-const int SEEK_SET = 0;
-
-const int SEEK_CUR = 1;
-
-const int SEEK_END = 2;
-
-const String P_tmpdir = '/tmp';
-
-const int _BITS_STDIO_LIM_H = 1;
-
-const int L_tmpnam = 20;
-
-const int TMP_MAX = 238328;
-
-const int FILENAME_MAX = 4096;
-
-const int L_ctermid = 9;
-
-const int FOPEN_MAX = 16;
-
-const int _LIBC_LIMITS_H_ = 1;
-
-const int MB_LEN_MAX = 16;
-
-const int LLONG_MIN = -9223372036854775808;
-
-const int LLONG_MAX = 9223372036854775807;
-
-const int ULLONG_MAX = -1;
-
-const int _BITS_POSIX1_LIM_H = 1;
-
-const int _POSIX_AIO_LISTIO_MAX = 2;
-
-const int _POSIX_AIO_MAX = 1;
-
-const int _POSIX_ARG_MAX = 4096;
-
-const int _POSIX_CHILD_MAX = 25;
-
-const int _POSIX_DELAYTIMER_MAX = 32;
-
-const int _POSIX_HOST_NAME_MAX = 255;
-
-const int _POSIX_LINK_MAX = 8;
-
-const int _POSIX_LOGIN_NAME_MAX = 9;
-
-const int _POSIX_MAX_CANON = 255;
-
-const int _POSIX_MAX_INPUT = 255;
-
-const int _POSIX_MQ_OPEN_MAX = 8;
-
-const int _POSIX_MQ_PRIO_MAX = 32;
-
-const int _POSIX_NAME_MAX = 14;
-
-const int _POSIX_NGROUPS_MAX = 8;
-
-const int _POSIX_OPEN_MAX = 20;
-
-const int _POSIX_PATH_MAX = 256;
-
-const int _POSIX_PIPE_BUF = 512;
-
-const int _POSIX_RE_DUP_MAX = 255;
-
-const int _POSIX_RTSIG_MAX = 8;
-
-const int _POSIX_SEM_NSEMS_MAX = 256;
-
-const int _POSIX_SEM_VALUE_MAX = 32767;
-
-const int _POSIX_SIGQUEUE_MAX = 32;
-
-const int _POSIX_SSIZE_MAX = 32767;
-
-const int _POSIX_STREAM_MAX = 8;
-
-const int _POSIX_SYMLINK_MAX = 255;
-
-const int _POSIX_SYMLOOP_MAX = 8;
-
-const int _POSIX_TIMER_MAX = 32;
-
-const int _POSIX_TTY_NAME_MAX = 9;
-
-const int _POSIX_TZNAME_MAX = 6;
-
-const int _POSIX_CLOCKRES_MIN = 20000000;
-
-const int NGROUPS_MAX = 65536;
-
-const int MAX_CANON = 255;
-
-const int MAX_INPUT = 255;
-
-const int NAME_MAX = 255;
-
-const int PATH_MAX = 4096;
-
-const int PIPE_BUF = 4096;
-
-const int XATTR_NAME_MAX = 255;
-
-const int XATTR_SIZE_MAX = 65536;
-
-const int XATTR_LIST_MAX = 65536;
-
-const int RTSIG_MAX = 32;
-
-const int _POSIX_THREAD_KEYS_MAX = 128;
-
-const int PTHREAD_KEYS_MAX = 1024;
-
-const int _POSIX_THREAD_DESTRUCTOR_ITERATIONS = 4;
-
-const int PTHREAD_DESTRUCTOR_ITERATIONS = 4;
-
-const int _POSIX_THREAD_THREADS_MAX = 64;
-
-const int AIO_PRIO_DELTA_MAX = 20;
-
-const int PTHREAD_STACK_MIN = 16384;
-
-const int DELAYTIMER_MAX = 2147483647;
-
-const int TTY_NAME_MAX = 32;
-
-const int LOGIN_NAME_MAX = 256;
-
-const int HOST_NAME_MAX = 64;
-
-const int MQ_PRIO_MAX = 32768;
-
-const int SEM_VALUE_MAX = 2147483647;
-
-const int SSIZE_MAX = 9223372036854775807;
-
-const int _BITS_POSIX2_LIM_H = 1;
-
-const int _POSIX2_BC_BASE_MAX = 99;
-
-const int _POSIX2_BC_DIM_MAX = 2048;
-
-const int _POSIX2_BC_SCALE_MAX = 99;
-
-const int _POSIX2_BC_STRING_MAX = 1000;
-
-const int _POSIX2_COLL_WEIGHTS_MAX = 2;
-
-const int _POSIX2_EXPR_NEST_MAX = 32;
-
-const int _POSIX2_LINE_MAX = 2048;
-
-const int _POSIX2_RE_DUP_MAX = 255;
-
-const int _POSIX2_CHARCLASS_NAME_MAX = 14;
-
-const int BC_BASE_MAX = 99;
-
-const int BC_DIM_MAX = 2048;
-
-const int BC_SCALE_MAX = 99;
-
-const int BC_STRING_MAX = 1000;
-
-const int COLL_WEIGHTS_MAX = 255;
-
-const int EXPR_NEST_MAX = 32;
-
-const int LINE_MAX = 2048;
-
-const int CHARCLASS_NAME_MAX = 2048;
-
-const int RE_DUP_MAX = 32767;
-
-const int SCHAR_MAX = 127;
-
-const int SHRT_MAX = 32767;
-
-const int INT_MAX = 2147483647;
-
-const int LONG_MAX = 9223372036854775807;
-
-const int SCHAR_MIN = -128;
-
-const int SHRT_MIN = -32768;
-
-const int INT_MIN = -2147483648;
-
-const int LONG_MIN = -9223372036854775808;
-
-const int UCHAR_MAX = 255;
-
-const int USHRT_MAX = 65535;
-
-const int UINT_MAX = 4294967295;
-
-const int ULONG_MAX = -1;
-
-const int CHAR_BIT = 8;
-
-const int CHAR_MIN = -128;
-
-const int CHAR_MAX = 127;
 
 const int CRYPTO_F_CMAC_CTX_NEW = 120;
 
@@ -1896,3 +3050,10196 @@ const int PTHREAD_ONCE_INIT = 0;
 const int PTHREAD_BARRIER_SERIAL_THREAD = -1;
 
 const int CRYPTO_ONCE_STATIC_INIT = 0;
+
+const int BIO_F_ACPT_STATE = 100;
+
+const int BIO_F_ADDRINFO_WRAP = 148;
+
+const int BIO_F_ADDR_STRINGS = 134;
+
+const int BIO_F_BIO_ACCEPT = 101;
+
+const int BIO_F_BIO_ACCEPT_EX = 137;
+
+const int BIO_F_BIO_ACCEPT_NEW = 152;
+
+const int BIO_F_BIO_ADDR_NEW = 144;
+
+const int BIO_F_BIO_BIND = 147;
+
+const int BIO_F_BIO_CALLBACK_CTRL = 131;
+
+const int BIO_F_BIO_CONNECT = 138;
+
+const int BIO_F_BIO_CONNECT_NEW = 153;
+
+const int BIO_F_BIO_CTRL = 103;
+
+const int BIO_F_BIO_GETS = 104;
+
+const int BIO_F_BIO_GET_HOST_IP = 106;
+
+const int BIO_F_BIO_GET_NEW_INDEX = 102;
+
+const int BIO_F_BIO_GET_PORT = 107;
+
+const int BIO_F_BIO_LISTEN = 139;
+
+const int BIO_F_BIO_LOOKUP = 135;
+
+const int BIO_F_BIO_LOOKUP_EX = 143;
+
+const int BIO_F_BIO_MAKE_PAIR = 121;
+
+const int BIO_F_BIO_METH_NEW = 146;
+
+const int BIO_F_BIO_NEW = 108;
+
+const int BIO_F_BIO_NEW_DGRAM_SCTP = 145;
+
+const int BIO_F_BIO_NEW_FILE = 109;
+
+const int BIO_F_BIO_NEW_MEM_BUF = 126;
+
+const int BIO_F_BIO_NREAD = 123;
+
+const int BIO_F_BIO_NREAD0 = 124;
+
+const int BIO_F_BIO_NWRITE = 125;
+
+const int BIO_F_BIO_NWRITE0 = 122;
+
+const int BIO_F_BIO_PARSE_HOSTSERV = 136;
+
+const int BIO_F_BIO_PUTS = 110;
+
+const int BIO_F_BIO_READ = 111;
+
+const int BIO_F_BIO_READ_EX = 105;
+
+const int BIO_F_BIO_READ_INTERN = 120;
+
+const int BIO_F_BIO_SOCKET = 140;
+
+const int BIO_F_BIO_SOCKET_NBIO = 142;
+
+const int BIO_F_BIO_SOCK_INFO = 141;
+
+const int BIO_F_BIO_SOCK_INIT = 112;
+
+const int BIO_F_BIO_WRITE = 113;
+
+const int BIO_F_BIO_WRITE_EX = 119;
+
+const int BIO_F_BIO_WRITE_INTERN = 128;
+
+const int BIO_F_BUFFER_CTRL = 114;
+
+const int BIO_F_CONN_CTRL = 127;
+
+const int BIO_F_CONN_STATE = 115;
+
+const int BIO_F_DGRAM_SCTP_NEW = 149;
+
+const int BIO_F_DGRAM_SCTP_READ = 132;
+
+const int BIO_F_DGRAM_SCTP_WRITE = 133;
+
+const int BIO_F_DOAPR_OUTCH = 150;
+
+const int BIO_F_FILE_CTRL = 116;
+
+const int BIO_F_FILE_READ = 130;
+
+const int BIO_F_LINEBUFFER_CTRL = 129;
+
+const int BIO_F_LINEBUFFER_NEW = 151;
+
+const int BIO_F_MEM_WRITE = 117;
+
+const int BIO_F_NBIOF_NEW = 154;
+
+const int BIO_F_SLG_WRITE = 155;
+
+const int BIO_F_SSL_NEW = 118;
+
+const int BIO_R_ACCEPT_ERROR = 100;
+
+const int BIO_R_ADDRINFO_ADDR_IS_NOT_AF_INET = 141;
+
+const int BIO_R_AMBIGUOUS_HOST_OR_SERVICE = 129;
+
+const int BIO_R_BAD_FOPEN_MODE = 101;
+
+const int BIO_R_BROKEN_PIPE = 124;
+
+const int BIO_R_CONNECT_ERROR = 103;
+
+const int BIO_R_GETHOSTBYNAME_ADDR_IS_NOT_AF_INET = 107;
+
+const int BIO_R_GETSOCKNAME_ERROR = 132;
+
+const int BIO_R_GETSOCKNAME_TRUNCATED_ADDRESS = 133;
+
+const int BIO_R_GETTING_SOCKTYPE = 134;
+
+const int BIO_R_INVALID_ARGUMENT = 125;
+
+const int BIO_R_INVALID_SOCKET = 135;
+
+const int BIO_R_IN_USE = 123;
+
+const int BIO_R_LENGTH_TOO_LONG = 102;
+
+const int BIO_R_LISTEN_V6_ONLY = 136;
+
+const int BIO_R_LOOKUP_RETURNED_NOTHING = 142;
+
+const int BIO_R_MALFORMED_HOST_OR_SERVICE = 130;
+
+const int BIO_R_NBIO_CONNECT_ERROR = 110;
+
+const int BIO_R_NO_ACCEPT_ADDR_OR_SERVICE_SPECIFIED = 143;
+
+const int BIO_R_NO_HOSTNAME_OR_SERVICE_SPECIFIED = 144;
+
+const int BIO_R_NO_PORT_DEFINED = 113;
+
+const int BIO_R_NO_SUCH_FILE = 128;
+
+const int BIO_R_NULL_PARAMETER = 115;
+
+const int BIO_R_UNABLE_TO_BIND_SOCKET = 117;
+
+const int BIO_R_UNABLE_TO_CREATE_SOCKET = 118;
+
+const int BIO_R_UNABLE_TO_KEEPALIVE = 137;
+
+const int BIO_R_UNABLE_TO_LISTEN_SOCKET = 119;
+
+const int BIO_R_UNABLE_TO_NODELAY = 138;
+
+const int BIO_R_UNABLE_TO_REUSEADDR = 139;
+
+const int BIO_R_UNAVAILABLE_IP_FAMILY = 145;
+
+const int BIO_R_UNINITIALIZED = 120;
+
+const int BIO_R_UNKNOWN_INFO_TYPE = 140;
+
+const int BIO_R_UNSUPPORTED_IP_FAMILY = 146;
+
+const int BIO_R_UNSUPPORTED_METHOD = 121;
+
+const int BIO_R_UNSUPPORTED_PROTOCOL_FAMILY = 131;
+
+const int BIO_R_WRITE_TO_READ_ONLY_BIO = 126;
+
+const int BIO_R_WSASTARTUP = 122;
+
+const int BIO_TYPE_DESCRIPTOR = 256;
+
+const int BIO_TYPE_FILTER = 512;
+
+const int BIO_TYPE_SOURCE_SINK = 1024;
+
+const int BIO_TYPE_NONE = 0;
+
+const int BIO_TYPE_MEM = 1025;
+
+const int BIO_TYPE_FILE = 1026;
+
+const int BIO_TYPE_FD = 1284;
+
+const int BIO_TYPE_SOCKET = 1285;
+
+const int BIO_TYPE_NULL = 1030;
+
+const int BIO_TYPE_SSL = 519;
+
+const int BIO_TYPE_MD = 520;
+
+const int BIO_TYPE_BUFFER = 521;
+
+const int BIO_TYPE_CIPHER = 522;
+
+const int BIO_TYPE_BASE64 = 523;
+
+const int BIO_TYPE_CONNECT = 1292;
+
+const int BIO_TYPE_ACCEPT = 1293;
+
+const int BIO_TYPE_NBIO_TEST = 528;
+
+const int BIO_TYPE_NULL_FILTER = 529;
+
+const int BIO_TYPE_BIO = 1043;
+
+const int BIO_TYPE_LINEBUFFER = 532;
+
+const int BIO_TYPE_DGRAM = 1301;
+
+const int BIO_TYPE_ASN1 = 534;
+
+const int BIO_TYPE_COMP = 535;
+
+const int BIO_TYPE_START = 128;
+
+const int BIO_NOCLOSE = 0;
+
+const int BIO_CLOSE = 1;
+
+const int BIO_CTRL_RESET = 1;
+
+const int BIO_CTRL_EOF = 2;
+
+const int BIO_CTRL_INFO = 3;
+
+const int BIO_CTRL_SET = 4;
+
+const int BIO_CTRL_GET = 5;
+
+const int BIO_CTRL_PUSH = 6;
+
+const int BIO_CTRL_POP = 7;
+
+const int BIO_CTRL_GET_CLOSE = 8;
+
+const int BIO_CTRL_SET_CLOSE = 9;
+
+const int BIO_CTRL_PENDING = 10;
+
+const int BIO_CTRL_FLUSH = 11;
+
+const int BIO_CTRL_DUP = 12;
+
+const int BIO_CTRL_WPENDING = 13;
+
+const int BIO_CTRL_SET_CALLBACK = 14;
+
+const int BIO_CTRL_GET_CALLBACK = 15;
+
+const int BIO_CTRL_PEEK = 29;
+
+const int BIO_CTRL_SET_FILENAME = 30;
+
+const int BIO_CTRL_DGRAM_CONNECT = 31;
+
+const int BIO_CTRL_DGRAM_SET_CONNECTED = 32;
+
+const int BIO_CTRL_DGRAM_SET_RECV_TIMEOUT = 33;
+
+const int BIO_CTRL_DGRAM_GET_RECV_TIMEOUT = 34;
+
+const int BIO_CTRL_DGRAM_SET_SEND_TIMEOUT = 35;
+
+const int BIO_CTRL_DGRAM_GET_SEND_TIMEOUT = 36;
+
+const int BIO_CTRL_DGRAM_GET_RECV_TIMER_EXP = 37;
+
+const int BIO_CTRL_DGRAM_GET_SEND_TIMER_EXP = 38;
+
+const int BIO_CTRL_DGRAM_MTU_DISCOVER = 39;
+
+const int BIO_CTRL_DGRAM_QUERY_MTU = 40;
+
+const int BIO_CTRL_DGRAM_GET_FALLBACK_MTU = 47;
+
+const int BIO_CTRL_DGRAM_GET_MTU = 41;
+
+const int BIO_CTRL_DGRAM_SET_MTU = 42;
+
+const int BIO_CTRL_DGRAM_MTU_EXCEEDED = 43;
+
+const int BIO_CTRL_DGRAM_GET_PEER = 46;
+
+const int BIO_CTRL_DGRAM_SET_PEER = 44;
+
+const int BIO_CTRL_DGRAM_SET_NEXT_TIMEOUT = 45;
+
+const int BIO_CTRL_DGRAM_SET_DONT_FRAG = 48;
+
+const int BIO_CTRL_DGRAM_GET_MTU_OVERHEAD = 49;
+
+const int BIO_CTRL_DGRAM_SCTP_SET_IN_HANDSHAKE = 50;
+
+const int BIO_CTRL_DGRAM_SET_PEEK_MODE = 71;
+
+const int BIO_FP_READ = 2;
+
+const int BIO_FP_WRITE = 4;
+
+const int BIO_FP_APPEND = 8;
+
+const int BIO_FP_TEXT = 16;
+
+const int BIO_FLAGS_READ = 1;
+
+const int BIO_FLAGS_WRITE = 2;
+
+const int BIO_FLAGS_IO_SPECIAL = 4;
+
+const int BIO_FLAGS_RWS = 7;
+
+const int BIO_FLAGS_SHOULD_RETRY = 8;
+
+const int BIO_FLAGS_UPLINK = 0;
+
+const int BIO_FLAGS_BASE64_NO_NL = 256;
+
+const int BIO_FLAGS_MEM_RDONLY = 512;
+
+const int BIO_FLAGS_NONCLEAR_RST = 1024;
+
+const int BIO_FLAGS_IN_EOF = 2048;
+
+const int BIO_RR_SSL_X509_LOOKUP = 1;
+
+const int BIO_RR_CONNECT = 2;
+
+const int BIO_RR_ACCEPT = 3;
+
+const int BIO_CB_FREE = 1;
+
+const int BIO_CB_READ = 2;
+
+const int BIO_CB_WRITE = 3;
+
+const int BIO_CB_PUTS = 4;
+
+const int BIO_CB_GETS = 5;
+
+const int BIO_CB_CTRL = 6;
+
+const int BIO_CB_RETURN = 128;
+
+const int BIO_C_SET_CONNECT = 100;
+
+const int BIO_C_DO_STATE_MACHINE = 101;
+
+const int BIO_C_SET_NBIO = 102;
+
+const int BIO_C_SET_FD = 104;
+
+const int BIO_C_GET_FD = 105;
+
+const int BIO_C_SET_FILE_PTR = 106;
+
+const int BIO_C_GET_FILE_PTR = 107;
+
+const int BIO_C_SET_FILENAME = 108;
+
+const int BIO_C_SET_SSL = 109;
+
+const int BIO_C_GET_SSL = 110;
+
+const int BIO_C_SET_MD = 111;
+
+const int BIO_C_GET_MD = 112;
+
+const int BIO_C_GET_CIPHER_STATUS = 113;
+
+const int BIO_C_SET_BUF_MEM = 114;
+
+const int BIO_C_GET_BUF_MEM_PTR = 115;
+
+const int BIO_C_GET_BUFF_NUM_LINES = 116;
+
+const int BIO_C_SET_BUFF_SIZE = 117;
+
+const int BIO_C_SET_ACCEPT = 118;
+
+const int BIO_C_SSL_MODE = 119;
+
+const int BIO_C_GET_MD_CTX = 120;
+
+const int BIO_C_SET_BUFF_READ_DATA = 122;
+
+const int BIO_C_GET_CONNECT = 123;
+
+const int BIO_C_GET_ACCEPT = 124;
+
+const int BIO_C_SET_SSL_RENEGOTIATE_BYTES = 125;
+
+const int BIO_C_GET_SSL_NUM_RENEGOTIATES = 126;
+
+const int BIO_C_SET_SSL_RENEGOTIATE_TIMEOUT = 127;
+
+const int BIO_C_FILE_SEEK = 128;
+
+const int BIO_C_GET_CIPHER_CTX = 129;
+
+const int BIO_C_SET_BUF_MEM_EOF_RETURN = 130;
+
+const int BIO_C_SET_BIND_MODE = 131;
+
+const int BIO_C_GET_BIND_MODE = 132;
+
+const int BIO_C_FILE_TELL = 133;
+
+const int BIO_C_GET_SOCKS = 134;
+
+const int BIO_C_SET_SOCKS = 135;
+
+const int BIO_C_SET_WRITE_BUF_SIZE = 136;
+
+const int BIO_C_GET_WRITE_BUF_SIZE = 137;
+
+const int BIO_C_MAKE_BIO_PAIR = 138;
+
+const int BIO_C_DESTROY_BIO_PAIR = 139;
+
+const int BIO_C_GET_WRITE_GUARANTEE = 140;
+
+const int BIO_C_GET_READ_REQUEST = 141;
+
+const int BIO_C_SHUTDOWN_WR = 142;
+
+const int BIO_C_NREAD0 = 143;
+
+const int BIO_C_NREAD = 144;
+
+const int BIO_C_NWRITE0 = 145;
+
+const int BIO_C_NWRITE = 146;
+
+const int BIO_C_RESET_READ_REQUEST = 147;
+
+const int BIO_C_SET_MD_CTX = 148;
+
+const int BIO_C_SET_PREFIX = 149;
+
+const int BIO_C_GET_PREFIX = 150;
+
+const int BIO_C_SET_SUFFIX = 151;
+
+const int BIO_C_GET_SUFFIX = 152;
+
+const int BIO_C_SET_EX_ARG = 153;
+
+const int BIO_C_GET_EX_ARG = 154;
+
+const int BIO_C_SET_CONNECT_MODE = 155;
+
+const int BIO_FAMILY_IPV4 = 4;
+
+const int BIO_FAMILY_IPV6 = 6;
+
+const int BIO_FAMILY_IPANY = 256;
+
+const int BIO_BIND_NORMAL = 0;
+
+const int BIO_BIND_REUSEADDR = 1;
+
+const int BIO_BIND_REUSEADDR_IF_UNUSED = 1;
+
+const int BIO_SOCK_REUSEADDR = 1;
+
+const int BIO_SOCK_V6_ONLY = 2;
+
+const int BIO_SOCK_KEEPALIVE = 4;
+
+const int BIO_SOCK_NONBLOCK = 8;
+
+const int BIO_SOCK_NODELAY = 16;
+
+const int EVP_F_AESNI_INIT_KEY = 165;
+
+const int EVP_F_AESNI_XTS_INIT_KEY = 207;
+
+const int EVP_F_AES_GCM_CTRL = 196;
+
+const int EVP_F_AES_INIT_KEY = 133;
+
+const int EVP_F_AES_OCB_CIPHER = 169;
+
+const int EVP_F_AES_T4_INIT_KEY = 178;
+
+const int EVP_F_AES_T4_XTS_INIT_KEY = 208;
+
+const int EVP_F_AES_WRAP_CIPHER = 170;
+
+const int EVP_F_AES_XTS_INIT_KEY = 209;
+
+const int EVP_F_ALG_MODULE_INIT = 177;
+
+const int EVP_F_ARIA_CCM_INIT_KEY = 175;
+
+const int EVP_F_ARIA_GCM_CTRL = 197;
+
+const int EVP_F_ARIA_GCM_INIT_KEY = 176;
+
+const int EVP_F_ARIA_INIT_KEY = 185;
+
+const int EVP_F_B64_NEW = 198;
+
+const int EVP_F_CAMELLIA_INIT_KEY = 159;
+
+const int EVP_F_CHACHA20_POLY1305_CTRL = 182;
+
+const int EVP_F_CMLL_T4_INIT_KEY = 179;
+
+const int EVP_F_DES_EDE3_WRAP_CIPHER = 171;
+
+const int EVP_F_DO_SIGVER_INIT = 161;
+
+const int EVP_F_ENC_NEW = 199;
+
+const int EVP_F_EVP_CIPHERINIT_EX = 123;
+
+const int EVP_F_EVP_CIPHER_ASN1_TO_PARAM = 204;
+
+const int EVP_F_EVP_CIPHER_CTX_COPY = 163;
+
+const int EVP_F_EVP_CIPHER_CTX_CTRL = 124;
+
+const int EVP_F_EVP_CIPHER_CTX_SET_KEY_LENGTH = 122;
+
+const int EVP_F_EVP_CIPHER_PARAM_TO_ASN1 = 205;
+
+const int EVP_F_EVP_DECRYPTFINAL_EX = 101;
+
+const int EVP_F_EVP_DECRYPTUPDATE = 166;
+
+const int EVP_F_EVP_DIGESTFINALXOF = 174;
+
+const int EVP_F_EVP_DIGESTINIT_EX = 128;
+
+const int EVP_F_EVP_ENCRYPTDECRYPTUPDATE = 219;
+
+const int EVP_F_EVP_ENCRYPTFINAL_EX = 127;
+
+const int EVP_F_EVP_ENCRYPTUPDATE = 167;
+
+const int EVP_F_EVP_MD_CTX_COPY_EX = 110;
+
+const int EVP_F_EVP_MD_SIZE = 162;
+
+const int EVP_F_EVP_OPENINIT = 102;
+
+const int EVP_F_EVP_PBE_ALG_ADD = 115;
+
+const int EVP_F_EVP_PBE_ALG_ADD_TYPE = 160;
+
+const int EVP_F_EVP_PBE_CIPHERINIT = 116;
+
+const int EVP_F_EVP_PBE_SCRYPT = 181;
+
+const int EVP_F_EVP_PKCS82PKEY = 111;
+
+const int EVP_F_EVP_PKEY2PKCS8 = 113;
+
+const int EVP_F_EVP_PKEY_ASN1_ADD0 = 188;
+
+const int EVP_F_EVP_PKEY_CHECK = 186;
+
+const int EVP_F_EVP_PKEY_COPY_PARAMETERS = 103;
+
+const int EVP_F_EVP_PKEY_CTX_CTRL = 137;
+
+const int EVP_F_EVP_PKEY_CTX_CTRL_STR = 150;
+
+const int EVP_F_EVP_PKEY_CTX_DUP = 156;
+
+const int EVP_F_EVP_PKEY_CTX_MD = 168;
+
+const int EVP_F_EVP_PKEY_DECRYPT = 104;
+
+const int EVP_F_EVP_PKEY_DECRYPT_INIT = 138;
+
+const int EVP_F_EVP_PKEY_DECRYPT_OLD = 151;
+
+const int EVP_F_EVP_PKEY_DERIVE = 153;
+
+const int EVP_F_EVP_PKEY_DERIVE_INIT = 154;
+
+const int EVP_F_EVP_PKEY_DERIVE_SET_PEER = 155;
+
+const int EVP_F_EVP_PKEY_ENCRYPT = 105;
+
+const int EVP_F_EVP_PKEY_ENCRYPT_INIT = 139;
+
+const int EVP_F_EVP_PKEY_ENCRYPT_OLD = 152;
+
+const int EVP_F_EVP_PKEY_GET0_DH = 119;
+
+const int EVP_F_EVP_PKEY_GET0_DSA = 120;
+
+const int EVP_F_EVP_PKEY_GET0_EC_KEY = 131;
+
+const int EVP_F_EVP_PKEY_GET0_HMAC = 183;
+
+const int EVP_F_EVP_PKEY_GET0_POLY1305 = 184;
+
+const int EVP_F_EVP_PKEY_GET0_RSA = 121;
+
+const int EVP_F_EVP_PKEY_GET0_SIPHASH = 172;
+
+const int EVP_F_EVP_PKEY_GET_RAW_PRIVATE_KEY = 202;
+
+const int EVP_F_EVP_PKEY_GET_RAW_PUBLIC_KEY = 203;
+
+const int EVP_F_EVP_PKEY_KEYGEN = 146;
+
+const int EVP_F_EVP_PKEY_KEYGEN_INIT = 147;
+
+const int EVP_F_EVP_PKEY_METH_ADD0 = 194;
+
+const int EVP_F_EVP_PKEY_METH_NEW = 195;
+
+const int EVP_F_EVP_PKEY_NEW = 106;
+
+const int EVP_F_EVP_PKEY_NEW_CMAC_KEY = 193;
+
+const int EVP_F_EVP_PKEY_NEW_RAW_PRIVATE_KEY = 191;
+
+const int EVP_F_EVP_PKEY_NEW_RAW_PUBLIC_KEY = 192;
+
+const int EVP_F_EVP_PKEY_PARAMGEN = 148;
+
+const int EVP_F_EVP_PKEY_PARAMGEN_INIT = 149;
+
+const int EVP_F_EVP_PKEY_PARAM_CHECK = 189;
+
+const int EVP_F_EVP_PKEY_PUBLIC_CHECK = 190;
+
+const int EVP_F_EVP_PKEY_SET1_ENGINE = 187;
+
+const int EVP_F_EVP_PKEY_SET_ALIAS_TYPE = 206;
+
+const int EVP_F_EVP_PKEY_SIGN = 140;
+
+const int EVP_F_EVP_PKEY_SIGN_INIT = 141;
+
+const int EVP_F_EVP_PKEY_VERIFY = 142;
+
+const int EVP_F_EVP_PKEY_VERIFY_INIT = 143;
+
+const int EVP_F_EVP_PKEY_VERIFY_RECOVER = 144;
+
+const int EVP_F_EVP_PKEY_VERIFY_RECOVER_INIT = 145;
+
+const int EVP_F_EVP_SIGNFINAL = 107;
+
+const int EVP_F_EVP_VERIFYFINAL = 108;
+
+const int EVP_F_INT_CTX_NEW = 157;
+
+const int EVP_F_OK_NEW = 200;
+
+const int EVP_F_PKCS5_PBE_KEYIVGEN = 117;
+
+const int EVP_F_PKCS5_V2_PBE_KEYIVGEN = 118;
+
+const int EVP_F_PKCS5_V2_PBKDF2_KEYIVGEN = 164;
+
+const int EVP_F_PKCS5_V2_SCRYPT_KEYIVGEN = 180;
+
+const int EVP_F_PKEY_SET_TYPE = 158;
+
+const int EVP_F_RC2_MAGIC_TO_METH = 109;
+
+const int EVP_F_RC5_CTRL = 125;
+
+const int EVP_F_R_32_12_16_INIT_KEY = 242;
+
+const int EVP_F_S390X_AES_GCM_CTRL = 201;
+
+const int EVP_F_UPDATE = 173;
+
+const int EVP_R_AES_KEY_SETUP_FAILED = 143;
+
+const int EVP_R_ARIA_KEY_SETUP_FAILED = 176;
+
+const int EVP_R_BAD_DECRYPT = 100;
+
+const int EVP_R_BAD_KEY_LENGTH = 195;
+
+const int EVP_R_BUFFER_TOO_SMALL = 155;
+
+const int EVP_R_CAMELLIA_KEY_SETUP_FAILED = 157;
+
+const int EVP_R_CIPHER_PARAMETER_ERROR = 122;
+
+const int EVP_R_COMMAND_NOT_SUPPORTED = 147;
+
+const int EVP_R_COPY_ERROR = 173;
+
+const int EVP_R_CTRL_NOT_IMPLEMENTED = 132;
+
+const int EVP_R_CTRL_OPERATION_NOT_IMPLEMENTED = 133;
+
+const int EVP_R_DATA_NOT_MULTIPLE_OF_BLOCK_LENGTH = 138;
+
+const int EVP_R_DECODE_ERROR = 114;
+
+const int EVP_R_DIFFERENT_KEY_TYPES = 101;
+
+const int EVP_R_DIFFERENT_PARAMETERS = 153;
+
+const int EVP_R_ERROR_LOADING_SECTION = 165;
+
+const int EVP_R_ERROR_SETTING_FIPS_MODE = 166;
+
+const int EVP_R_EXPECTING_AN_HMAC_KEY = 174;
+
+const int EVP_R_EXPECTING_AN_RSA_KEY = 127;
+
+const int EVP_R_EXPECTING_A_DH_KEY = 128;
+
+const int EVP_R_EXPECTING_A_DSA_KEY = 129;
+
+const int EVP_R_EXPECTING_A_EC_KEY = 142;
+
+const int EVP_R_EXPECTING_A_POLY1305_KEY = 164;
+
+const int EVP_R_EXPECTING_A_SIPHASH_KEY = 175;
+
+const int EVP_R_FIPS_MODE_NOT_SUPPORTED = 167;
+
+const int EVP_R_GET_RAW_KEY_FAILED = 182;
+
+const int EVP_R_ILLEGAL_SCRYPT_PARAMETERS = 171;
+
+const int EVP_R_INITIALIZATION_ERROR = 134;
+
+const int EVP_R_INPUT_NOT_INITIALIZED = 111;
+
+const int EVP_R_INVALID_DIGEST = 152;
+
+const int EVP_R_INVALID_FIPS_MODE = 168;
+
+const int EVP_R_INVALID_IV_LENGTH = 194;
+
+const int EVP_R_INVALID_KEY = 163;
+
+const int EVP_R_INVALID_KEY_LENGTH = 130;
+
+const int EVP_R_INVALID_OPERATION = 148;
+
+const int EVP_R_KEYGEN_FAILURE = 120;
+
+const int EVP_R_KEY_SETUP_FAILED = 180;
+
+const int EVP_R_MEMORY_LIMIT_EXCEEDED = 172;
+
+const int EVP_R_MESSAGE_DIGEST_IS_NULL = 159;
+
+const int EVP_R_METHOD_NOT_SUPPORTED = 144;
+
+const int EVP_R_MISSING_PARAMETERS = 103;
+
+const int EVP_R_NOT_XOF_OR_INVALID_LENGTH = 178;
+
+const int EVP_R_NO_CIPHER_SET = 131;
+
+const int EVP_R_NO_DEFAULT_DIGEST = 158;
+
+const int EVP_R_NO_DIGEST_SET = 139;
+
+const int EVP_R_NO_KEY_SET = 154;
+
+const int EVP_R_NO_OPERATION_SET = 149;
+
+const int EVP_R_ONLY_ONESHOT_SUPPORTED = 177;
+
+const int EVP_R_OPERATION_NOT_SUPPORTED_FOR_THIS_KEYTYPE = 150;
+
+const int EVP_R_OPERATON_NOT_INITIALIZED = 151;
+
+const int EVP_R_OUTPUT_WOULD_OVERFLOW = 184;
+
+const int EVP_R_PARTIALLY_OVERLAPPING = 162;
+
+const int EVP_R_PBKDF2_ERROR = 181;
+
+const int EVP_R_PKEY_APPLICATION_ASN1_METHOD_ALREADY_REGISTERED = 179;
+
+const int EVP_R_PRIVATE_KEY_DECODE_ERROR = 145;
+
+const int EVP_R_PRIVATE_KEY_ENCODE_ERROR = 146;
+
+const int EVP_R_PUBLIC_KEY_NOT_RSA = 106;
+
+const int EVP_R_UNKNOWN_CIPHER = 160;
+
+const int EVP_R_UNKNOWN_DIGEST = 161;
+
+const int EVP_R_UNKNOWN_OPTION = 169;
+
+const int EVP_R_UNKNOWN_PBE_ALGORITHM = 121;
+
+const int EVP_R_UNSUPPORTED_ALGORITHM = 156;
+
+const int EVP_R_UNSUPPORTED_CIPHER = 107;
+
+const int EVP_R_UNSUPPORTED_KEYLENGTH = 123;
+
+const int EVP_R_UNSUPPORTED_KEY_DERIVATION_FUNCTION = 124;
+
+const int EVP_R_UNSUPPORTED_KEY_SIZE = 108;
+
+const int EVP_R_UNSUPPORTED_NUMBER_OF_ROUNDS = 135;
+
+const int EVP_R_UNSUPPORTED_PRF = 125;
+
+const int EVP_R_UNSUPPORTED_PRIVATE_KEY_ALGORITHM = 118;
+
+const int EVP_R_UNSUPPORTED_SALT_TYPE = 126;
+
+const int EVP_R_WRAP_MODE_NOT_ALLOWED = 170;
+
+const int EVP_R_WRONG_FINAL_BLOCK_LENGTH = 109;
+
+const int EVP_R_XTS_DUPLICATED_KEYS = 183;
+
+const int EVP_MAX_MD_SIZE = 64;
+
+const int EVP_MAX_KEY_LENGTH = 64;
+
+const int EVP_MAX_IV_LENGTH = 16;
+
+const int EVP_MAX_BLOCK_LENGTH = 32;
+
+const int PKCS5_SALT_LEN = 8;
+
+const int PKCS5_DEFAULT_ITER = 2048;
+
+const String SN_undef = 'UNDEF';
+
+const String LN_undef = 'undefined';
+
+const int NID_undef = 0;
+
+const int OBJ_undef = 0;
+
+const String SN_itu_t = 'ITU-T';
+
+const String LN_itu_t = 'itu-t';
+
+const int NID_itu_t = 645;
+
+const int OBJ_itu_t = 0;
+
+const int NID_ccitt = 404;
+
+const int OBJ_ccitt = 0;
+
+const String SN_iso = 'ISO';
+
+const String LN_iso = 'iso';
+
+const int NID_iso = 181;
+
+const int OBJ_iso = 1;
+
+const String SN_joint_iso_itu_t = 'JOINT-ISO-ITU-T';
+
+const String LN_joint_iso_itu_t = 'joint-iso-itu-t';
+
+const int NID_joint_iso_itu_t = 646;
+
+const int OBJ_joint_iso_itu_t = 2;
+
+const int NID_joint_iso_ccitt = 393;
+
+const int OBJ_joint_iso_ccitt = 2;
+
+const String SN_member_body = 'member-body';
+
+const String LN_member_body = 'ISO Member Body';
+
+const int NID_member_body = 182;
+
+const int OBJ_member_body = 1;
+
+const String SN_identified_organization = 'identified-organization';
+
+const int NID_identified_organization = 676;
+
+const int OBJ_identified_organization = 1;
+
+const String SN_hmac_md5 = 'HMAC-MD5';
+
+const String LN_hmac_md5 = 'hmac-md5';
+
+const int NID_hmac_md5 = 780;
+
+const int OBJ_hmac_md5 = 1;
+
+const String SN_hmac_sha1 = 'HMAC-SHA1';
+
+const String LN_hmac_sha1 = 'hmac-sha1';
+
+const int NID_hmac_sha1 = 781;
+
+const int OBJ_hmac_sha1 = 1;
+
+const String SN_x509ExtAdmission = 'x509ExtAdmission';
+
+const String LN_x509ExtAdmission =
+    'Professional Information or basis for Admission';
+
+const int NID_x509ExtAdmission = 1093;
+
+const int OBJ_x509ExtAdmission = 1;
+
+const String SN_certicom_arc = 'certicom-arc';
+
+const int NID_certicom_arc = 677;
+
+const int OBJ_certicom_arc = 1;
+
+const String SN_ieee = 'ieee';
+
+const int NID_ieee = 1170;
+
+const int OBJ_ieee = 1;
+
+const String SN_ieee_siswg = 'ieee-siswg';
+
+const String LN_ieee_siswg = 'IEEE Security in Storage Working Group';
+
+const int NID_ieee_siswg = 1171;
+
+const int OBJ_ieee_siswg = 1;
+
+const String SN_international_organizations = 'international-organizations';
+
+const String LN_international_organizations = 'International Organizations';
+
+const int NID_international_organizations = 647;
+
+const int OBJ_international_organizations = 2;
+
+const String SN_wap = 'wap';
+
+const int NID_wap = 678;
+
+const int OBJ_wap = 2;
+
+const String SN_wap_wsg = 'wap-wsg';
+
+const int NID_wap_wsg = 679;
+
+const int OBJ_wap_wsg = 2;
+
+const String SN_selected_attribute_types = 'selected-attribute-types';
+
+const String LN_selected_attribute_types = 'Selected Attribute Types';
+
+const int NID_selected_attribute_types = 394;
+
+const int OBJ_selected_attribute_types = 2;
+
+const String SN_clearance = 'clearance';
+
+const int NID_clearance = 395;
+
+const int OBJ_clearance = 2;
+
+const String SN_ISO_US = 'ISO-US';
+
+const String LN_ISO_US = 'ISO US Member Body';
+
+const int NID_ISO_US = 183;
+
+const int OBJ_ISO_US = 1;
+
+const String SN_X9_57 = 'X9-57';
+
+const String LN_X9_57 = 'X9.57';
+
+const int NID_X9_57 = 184;
+
+const int OBJ_X9_57 = 1;
+
+const String SN_X9cm = 'X9cm';
+
+const String LN_X9cm = 'X9.57 CM ?';
+
+const int NID_X9cm = 185;
+
+const int OBJ_X9cm = 1;
+
+const String SN_ISO_CN = 'ISO-CN';
+
+const String LN_ISO_CN = 'ISO CN Member Body';
+
+const int NID_ISO_CN = 1140;
+
+const int OBJ_ISO_CN = 1;
+
+const String SN_oscca = 'oscca';
+
+const int NID_oscca = 1141;
+
+const int OBJ_oscca = 1;
+
+const String SN_sm_scheme = 'sm-scheme';
+
+const int NID_sm_scheme = 1142;
+
+const int OBJ_sm_scheme = 1;
+
+const String SN_dsa = 'DSA';
+
+const String LN_dsa = 'dsaEncryption';
+
+const int NID_dsa = 116;
+
+const int OBJ_dsa = 1;
+
+const String SN_dsaWithSHA1 = 'DSA-SHA1';
+
+const String LN_dsaWithSHA1 = 'dsaWithSHA1';
+
+const int NID_dsaWithSHA1 = 113;
+
+const int OBJ_dsaWithSHA1 = 1;
+
+const String SN_ansi_X9_62 = 'ansi-X9-62';
+
+const String LN_ansi_X9_62 = 'ANSI X9.62';
+
+const int NID_ansi_X9_62 = 405;
+
+const int OBJ_ansi_X9_62 = 1;
+
+const int OBJ_X9_62_id_fieldType = 1;
+
+const String SN_X9_62_prime_field = 'prime-field';
+
+const int NID_X9_62_prime_field = 406;
+
+const int OBJ_X9_62_prime_field = 1;
+
+const String SN_X9_62_characteristic_two_field = 'characteristic-two-field';
+
+const int NID_X9_62_characteristic_two_field = 407;
+
+const int OBJ_X9_62_characteristic_two_field = 1;
+
+const String SN_X9_62_id_characteristic_two_basis =
+    'id-characteristic-two-basis';
+
+const int NID_X9_62_id_characteristic_two_basis = 680;
+
+const int OBJ_X9_62_id_characteristic_two_basis = 1;
+
+const String SN_X9_62_onBasis = 'onBasis';
+
+const int NID_X9_62_onBasis = 681;
+
+const int OBJ_X9_62_onBasis = 1;
+
+const String SN_X9_62_tpBasis = 'tpBasis';
+
+const int NID_X9_62_tpBasis = 682;
+
+const int OBJ_X9_62_tpBasis = 1;
+
+const String SN_X9_62_ppBasis = 'ppBasis';
+
+const int NID_X9_62_ppBasis = 683;
+
+const int OBJ_X9_62_ppBasis = 1;
+
+const int OBJ_X9_62_id_publicKeyType = 1;
+
+const String SN_X9_62_id_ecPublicKey = 'id-ecPublicKey';
+
+const int NID_X9_62_id_ecPublicKey = 408;
+
+const int OBJ_X9_62_id_ecPublicKey = 1;
+
+const int OBJ_X9_62_ellipticCurve = 1;
+
+const int OBJ_X9_62_c_TwoCurve = 1;
+
+const String SN_X9_62_c2pnb163v1 = 'c2pnb163v1';
+
+const int NID_X9_62_c2pnb163v1 = 684;
+
+const int OBJ_X9_62_c2pnb163v1 = 1;
+
+const String SN_X9_62_c2pnb163v2 = 'c2pnb163v2';
+
+const int NID_X9_62_c2pnb163v2 = 685;
+
+const int OBJ_X9_62_c2pnb163v2 = 1;
+
+const String SN_X9_62_c2pnb163v3 = 'c2pnb163v3';
+
+const int NID_X9_62_c2pnb163v3 = 686;
+
+const int OBJ_X9_62_c2pnb163v3 = 1;
+
+const String SN_X9_62_c2pnb176v1 = 'c2pnb176v1';
+
+const int NID_X9_62_c2pnb176v1 = 687;
+
+const int OBJ_X9_62_c2pnb176v1 = 1;
+
+const String SN_X9_62_c2tnb191v1 = 'c2tnb191v1';
+
+const int NID_X9_62_c2tnb191v1 = 688;
+
+const int OBJ_X9_62_c2tnb191v1 = 1;
+
+const String SN_X9_62_c2tnb191v2 = 'c2tnb191v2';
+
+const int NID_X9_62_c2tnb191v2 = 689;
+
+const int OBJ_X9_62_c2tnb191v2 = 1;
+
+const String SN_X9_62_c2tnb191v3 = 'c2tnb191v3';
+
+const int NID_X9_62_c2tnb191v3 = 690;
+
+const int OBJ_X9_62_c2tnb191v3 = 1;
+
+const String SN_X9_62_c2onb191v4 = 'c2onb191v4';
+
+const int NID_X9_62_c2onb191v4 = 691;
+
+const int OBJ_X9_62_c2onb191v4 = 1;
+
+const String SN_X9_62_c2onb191v5 = 'c2onb191v5';
+
+const int NID_X9_62_c2onb191v5 = 692;
+
+const int OBJ_X9_62_c2onb191v5 = 1;
+
+const String SN_X9_62_c2pnb208w1 = 'c2pnb208w1';
+
+const int NID_X9_62_c2pnb208w1 = 693;
+
+const int OBJ_X9_62_c2pnb208w1 = 1;
+
+const String SN_X9_62_c2tnb239v1 = 'c2tnb239v1';
+
+const int NID_X9_62_c2tnb239v1 = 694;
+
+const int OBJ_X9_62_c2tnb239v1 = 1;
+
+const String SN_X9_62_c2tnb239v2 = 'c2tnb239v2';
+
+const int NID_X9_62_c2tnb239v2 = 695;
+
+const int OBJ_X9_62_c2tnb239v2 = 1;
+
+const String SN_X9_62_c2tnb239v3 = 'c2tnb239v3';
+
+const int NID_X9_62_c2tnb239v3 = 696;
+
+const int OBJ_X9_62_c2tnb239v3 = 1;
+
+const String SN_X9_62_c2onb239v4 = 'c2onb239v4';
+
+const int NID_X9_62_c2onb239v4 = 697;
+
+const int OBJ_X9_62_c2onb239v4 = 1;
+
+const String SN_X9_62_c2onb239v5 = 'c2onb239v5';
+
+const int NID_X9_62_c2onb239v5 = 698;
+
+const int OBJ_X9_62_c2onb239v5 = 1;
+
+const String SN_X9_62_c2pnb272w1 = 'c2pnb272w1';
+
+const int NID_X9_62_c2pnb272w1 = 699;
+
+const int OBJ_X9_62_c2pnb272w1 = 1;
+
+const String SN_X9_62_c2pnb304w1 = 'c2pnb304w1';
+
+const int NID_X9_62_c2pnb304w1 = 700;
+
+const int OBJ_X9_62_c2pnb304w1 = 1;
+
+const String SN_X9_62_c2tnb359v1 = 'c2tnb359v1';
+
+const int NID_X9_62_c2tnb359v1 = 701;
+
+const int OBJ_X9_62_c2tnb359v1 = 1;
+
+const String SN_X9_62_c2pnb368w1 = 'c2pnb368w1';
+
+const int NID_X9_62_c2pnb368w1 = 702;
+
+const int OBJ_X9_62_c2pnb368w1 = 1;
+
+const String SN_X9_62_c2tnb431r1 = 'c2tnb431r1';
+
+const int NID_X9_62_c2tnb431r1 = 703;
+
+const int OBJ_X9_62_c2tnb431r1 = 1;
+
+const int OBJ_X9_62_primeCurve = 1;
+
+const String SN_X9_62_prime192v1 = 'prime192v1';
+
+const int NID_X9_62_prime192v1 = 409;
+
+const int OBJ_X9_62_prime192v1 = 1;
+
+const String SN_X9_62_prime192v2 = 'prime192v2';
+
+const int NID_X9_62_prime192v2 = 410;
+
+const int OBJ_X9_62_prime192v2 = 1;
+
+const String SN_X9_62_prime192v3 = 'prime192v3';
+
+const int NID_X9_62_prime192v3 = 411;
+
+const int OBJ_X9_62_prime192v3 = 1;
+
+const String SN_X9_62_prime239v1 = 'prime239v1';
+
+const int NID_X9_62_prime239v1 = 412;
+
+const int OBJ_X9_62_prime239v1 = 1;
+
+const String SN_X9_62_prime239v2 = 'prime239v2';
+
+const int NID_X9_62_prime239v2 = 413;
+
+const int OBJ_X9_62_prime239v2 = 1;
+
+const String SN_X9_62_prime239v3 = 'prime239v3';
+
+const int NID_X9_62_prime239v3 = 414;
+
+const int OBJ_X9_62_prime239v3 = 1;
+
+const String SN_X9_62_prime256v1 = 'prime256v1';
+
+const int NID_X9_62_prime256v1 = 415;
+
+const int OBJ_X9_62_prime256v1 = 1;
+
+const int OBJ_X9_62_id_ecSigType = 1;
+
+const String SN_ecdsa_with_SHA1 = 'ecdsa-with-SHA1';
+
+const int NID_ecdsa_with_SHA1 = 416;
+
+const int OBJ_ecdsa_with_SHA1 = 1;
+
+const String SN_ecdsa_with_Recommended = 'ecdsa-with-Recommended';
+
+const int NID_ecdsa_with_Recommended = 791;
+
+const int OBJ_ecdsa_with_Recommended = 1;
+
+const String SN_ecdsa_with_Specified = 'ecdsa-with-Specified';
+
+const int NID_ecdsa_with_Specified = 792;
+
+const int OBJ_ecdsa_with_Specified = 1;
+
+const String SN_ecdsa_with_SHA224 = 'ecdsa-with-SHA224';
+
+const int NID_ecdsa_with_SHA224 = 793;
+
+const int OBJ_ecdsa_with_SHA224 = 1;
+
+const String SN_ecdsa_with_SHA256 = 'ecdsa-with-SHA256';
+
+const int NID_ecdsa_with_SHA256 = 794;
+
+const int OBJ_ecdsa_with_SHA256 = 1;
+
+const String SN_ecdsa_with_SHA384 = 'ecdsa-with-SHA384';
+
+const int NID_ecdsa_with_SHA384 = 795;
+
+const int OBJ_ecdsa_with_SHA384 = 1;
+
+const String SN_ecdsa_with_SHA512 = 'ecdsa-with-SHA512';
+
+const int NID_ecdsa_with_SHA512 = 796;
+
+const int OBJ_ecdsa_with_SHA512 = 1;
+
+const int OBJ_secg_ellipticCurve = 1;
+
+const String SN_secp112r1 = 'secp112r1';
+
+const int NID_secp112r1 = 704;
+
+const int OBJ_secp112r1 = 1;
+
+const String SN_secp112r2 = 'secp112r2';
+
+const int NID_secp112r2 = 705;
+
+const int OBJ_secp112r2 = 1;
+
+const String SN_secp128r1 = 'secp128r1';
+
+const int NID_secp128r1 = 706;
+
+const int OBJ_secp128r1 = 1;
+
+const String SN_secp128r2 = 'secp128r2';
+
+const int NID_secp128r2 = 707;
+
+const int OBJ_secp128r2 = 1;
+
+const String SN_secp160k1 = 'secp160k1';
+
+const int NID_secp160k1 = 708;
+
+const int OBJ_secp160k1 = 1;
+
+const String SN_secp160r1 = 'secp160r1';
+
+const int NID_secp160r1 = 709;
+
+const int OBJ_secp160r1 = 1;
+
+const String SN_secp160r2 = 'secp160r2';
+
+const int NID_secp160r2 = 710;
+
+const int OBJ_secp160r2 = 1;
+
+const String SN_secp192k1 = 'secp192k1';
+
+const int NID_secp192k1 = 711;
+
+const int OBJ_secp192k1 = 1;
+
+const String SN_secp224k1 = 'secp224k1';
+
+const int NID_secp224k1 = 712;
+
+const int OBJ_secp224k1 = 1;
+
+const String SN_secp224r1 = 'secp224r1';
+
+const int NID_secp224r1 = 713;
+
+const int OBJ_secp224r1 = 1;
+
+const String SN_secp256k1 = 'secp256k1';
+
+const int NID_secp256k1 = 714;
+
+const int OBJ_secp256k1 = 1;
+
+const String SN_secp384r1 = 'secp384r1';
+
+const int NID_secp384r1 = 715;
+
+const int OBJ_secp384r1 = 1;
+
+const String SN_secp521r1 = 'secp521r1';
+
+const int NID_secp521r1 = 716;
+
+const int OBJ_secp521r1 = 1;
+
+const String SN_sect113r1 = 'sect113r1';
+
+const int NID_sect113r1 = 717;
+
+const int OBJ_sect113r1 = 1;
+
+const String SN_sect113r2 = 'sect113r2';
+
+const int NID_sect113r2 = 718;
+
+const int OBJ_sect113r2 = 1;
+
+const String SN_sect131r1 = 'sect131r1';
+
+const int NID_sect131r1 = 719;
+
+const int OBJ_sect131r1 = 1;
+
+const String SN_sect131r2 = 'sect131r2';
+
+const int NID_sect131r2 = 720;
+
+const int OBJ_sect131r2 = 1;
+
+const String SN_sect163k1 = 'sect163k1';
+
+const int NID_sect163k1 = 721;
+
+const int OBJ_sect163k1 = 1;
+
+const String SN_sect163r1 = 'sect163r1';
+
+const int NID_sect163r1 = 722;
+
+const int OBJ_sect163r1 = 1;
+
+const String SN_sect163r2 = 'sect163r2';
+
+const int NID_sect163r2 = 723;
+
+const int OBJ_sect163r2 = 1;
+
+const String SN_sect193r1 = 'sect193r1';
+
+const int NID_sect193r1 = 724;
+
+const int OBJ_sect193r1 = 1;
+
+const String SN_sect193r2 = 'sect193r2';
+
+const int NID_sect193r2 = 725;
+
+const int OBJ_sect193r2 = 1;
+
+const String SN_sect233k1 = 'sect233k1';
+
+const int NID_sect233k1 = 726;
+
+const int OBJ_sect233k1 = 1;
+
+const String SN_sect233r1 = 'sect233r1';
+
+const int NID_sect233r1 = 727;
+
+const int OBJ_sect233r1 = 1;
+
+const String SN_sect239k1 = 'sect239k1';
+
+const int NID_sect239k1 = 728;
+
+const int OBJ_sect239k1 = 1;
+
+const String SN_sect283k1 = 'sect283k1';
+
+const int NID_sect283k1 = 729;
+
+const int OBJ_sect283k1 = 1;
+
+const String SN_sect283r1 = 'sect283r1';
+
+const int NID_sect283r1 = 730;
+
+const int OBJ_sect283r1 = 1;
+
+const String SN_sect409k1 = 'sect409k1';
+
+const int NID_sect409k1 = 731;
+
+const int OBJ_sect409k1 = 1;
+
+const String SN_sect409r1 = 'sect409r1';
+
+const int NID_sect409r1 = 732;
+
+const int OBJ_sect409r1 = 1;
+
+const String SN_sect571k1 = 'sect571k1';
+
+const int NID_sect571k1 = 733;
+
+const int OBJ_sect571k1 = 1;
+
+const String SN_sect571r1 = 'sect571r1';
+
+const int NID_sect571r1 = 734;
+
+const int OBJ_sect571r1 = 1;
+
+const int OBJ_wap_wsg_idm_ecid = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls1 = 'wap-wsg-idm-ecid-wtls1';
+
+const int NID_wap_wsg_idm_ecid_wtls1 = 735;
+
+const int OBJ_wap_wsg_idm_ecid_wtls1 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls3 = 'wap-wsg-idm-ecid-wtls3';
+
+const int NID_wap_wsg_idm_ecid_wtls3 = 736;
+
+const int OBJ_wap_wsg_idm_ecid_wtls3 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls4 = 'wap-wsg-idm-ecid-wtls4';
+
+const int NID_wap_wsg_idm_ecid_wtls4 = 737;
+
+const int OBJ_wap_wsg_idm_ecid_wtls4 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls5 = 'wap-wsg-idm-ecid-wtls5';
+
+const int NID_wap_wsg_idm_ecid_wtls5 = 738;
+
+const int OBJ_wap_wsg_idm_ecid_wtls5 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls6 = 'wap-wsg-idm-ecid-wtls6';
+
+const int NID_wap_wsg_idm_ecid_wtls6 = 739;
+
+const int OBJ_wap_wsg_idm_ecid_wtls6 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls7 = 'wap-wsg-idm-ecid-wtls7';
+
+const int NID_wap_wsg_idm_ecid_wtls7 = 740;
+
+const int OBJ_wap_wsg_idm_ecid_wtls7 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls8 = 'wap-wsg-idm-ecid-wtls8';
+
+const int NID_wap_wsg_idm_ecid_wtls8 = 741;
+
+const int OBJ_wap_wsg_idm_ecid_wtls8 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls9 = 'wap-wsg-idm-ecid-wtls9';
+
+const int NID_wap_wsg_idm_ecid_wtls9 = 742;
+
+const int OBJ_wap_wsg_idm_ecid_wtls9 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls10 = 'wap-wsg-idm-ecid-wtls10';
+
+const int NID_wap_wsg_idm_ecid_wtls10 = 743;
+
+const int OBJ_wap_wsg_idm_ecid_wtls10 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls11 = 'wap-wsg-idm-ecid-wtls11';
+
+const int NID_wap_wsg_idm_ecid_wtls11 = 744;
+
+const int OBJ_wap_wsg_idm_ecid_wtls11 = 2;
+
+const String SN_wap_wsg_idm_ecid_wtls12 = 'wap-wsg-idm-ecid-wtls12';
+
+const int NID_wap_wsg_idm_ecid_wtls12 = 745;
+
+const int OBJ_wap_wsg_idm_ecid_wtls12 = 2;
+
+const String SN_cast5_cbc = 'CAST5-CBC';
+
+const String LN_cast5_cbc = 'cast5-cbc';
+
+const int NID_cast5_cbc = 108;
+
+const int OBJ_cast5_cbc = 1;
+
+const String SN_cast5_ecb = 'CAST5-ECB';
+
+const String LN_cast5_ecb = 'cast5-ecb';
+
+const int NID_cast5_ecb = 109;
+
+const String SN_cast5_cfb64 = 'CAST5-CFB';
+
+const String LN_cast5_cfb64 = 'cast5-cfb';
+
+const int NID_cast5_cfb64 = 110;
+
+const String SN_cast5_ofb64 = 'CAST5-OFB';
+
+const String LN_cast5_ofb64 = 'cast5-ofb';
+
+const int NID_cast5_ofb64 = 111;
+
+const String LN_pbeWithMD5AndCast5_CBC = 'pbeWithMD5AndCast5CBC';
+
+const int NID_pbeWithMD5AndCast5_CBC = 112;
+
+const int OBJ_pbeWithMD5AndCast5_CBC = 1;
+
+const String SN_id_PasswordBasedMAC = 'id-PasswordBasedMAC';
+
+const String LN_id_PasswordBasedMAC = 'password based MAC';
+
+const int NID_id_PasswordBasedMAC = 782;
+
+const int OBJ_id_PasswordBasedMAC = 1;
+
+const String SN_id_DHBasedMac = 'id-DHBasedMac';
+
+const String LN_id_DHBasedMac = 'Diffie-Hellman based MAC';
+
+const int NID_id_DHBasedMac = 783;
+
+const int OBJ_id_DHBasedMac = 1;
+
+const String SN_rsadsi = 'rsadsi';
+
+const String LN_rsadsi = 'RSA Data Security, Inc.';
+
+const int NID_rsadsi = 1;
+
+const int OBJ_rsadsi = 1;
+
+const String SN_pkcs = 'pkcs';
+
+const String LN_pkcs = 'RSA Data Security, Inc. PKCS';
+
+const int NID_pkcs = 2;
+
+const int OBJ_pkcs = 1;
+
+const String SN_pkcs1 = 'pkcs1';
+
+const int NID_pkcs1 = 186;
+
+const int OBJ_pkcs1 = 1;
+
+const String LN_rsaEncryption = 'rsaEncryption';
+
+const int NID_rsaEncryption = 6;
+
+const int OBJ_rsaEncryption = 1;
+
+const String SN_md2WithRSAEncryption = 'RSA-MD2';
+
+const String LN_md2WithRSAEncryption = 'md2WithRSAEncryption';
+
+const int NID_md2WithRSAEncryption = 7;
+
+const int OBJ_md2WithRSAEncryption = 1;
+
+const String SN_md4WithRSAEncryption = 'RSA-MD4';
+
+const String LN_md4WithRSAEncryption = 'md4WithRSAEncryption';
+
+const int NID_md4WithRSAEncryption = 396;
+
+const int OBJ_md4WithRSAEncryption = 1;
+
+const String SN_md5WithRSAEncryption = 'RSA-MD5';
+
+const String LN_md5WithRSAEncryption = 'md5WithRSAEncryption';
+
+const int NID_md5WithRSAEncryption = 8;
+
+const int OBJ_md5WithRSAEncryption = 1;
+
+const String SN_sha1WithRSAEncryption = 'RSA-SHA1';
+
+const String LN_sha1WithRSAEncryption = 'sha1WithRSAEncryption';
+
+const int NID_sha1WithRSAEncryption = 65;
+
+const int OBJ_sha1WithRSAEncryption = 1;
+
+const String SN_rsaesOaep = 'RSAES-OAEP';
+
+const String LN_rsaesOaep = 'rsaesOaep';
+
+const int NID_rsaesOaep = 919;
+
+const int OBJ_rsaesOaep = 1;
+
+const String SN_mgf1 = 'MGF1';
+
+const String LN_mgf1 = 'mgf1';
+
+const int NID_mgf1 = 911;
+
+const int OBJ_mgf1 = 1;
+
+const String SN_pSpecified = 'PSPECIFIED';
+
+const String LN_pSpecified = 'pSpecified';
+
+const int NID_pSpecified = 935;
+
+const int OBJ_pSpecified = 1;
+
+const String SN_rsassaPss = 'RSASSA-PSS';
+
+const String LN_rsassaPss = 'rsassaPss';
+
+const int NID_rsassaPss = 912;
+
+const int OBJ_rsassaPss = 1;
+
+const String SN_sha256WithRSAEncryption = 'RSA-SHA256';
+
+const String LN_sha256WithRSAEncryption = 'sha256WithRSAEncryption';
+
+const int NID_sha256WithRSAEncryption = 668;
+
+const int OBJ_sha256WithRSAEncryption = 1;
+
+const String SN_sha384WithRSAEncryption = 'RSA-SHA384';
+
+const String LN_sha384WithRSAEncryption = 'sha384WithRSAEncryption';
+
+const int NID_sha384WithRSAEncryption = 669;
+
+const int OBJ_sha384WithRSAEncryption = 1;
+
+const String SN_sha512WithRSAEncryption = 'RSA-SHA512';
+
+const String LN_sha512WithRSAEncryption = 'sha512WithRSAEncryption';
+
+const int NID_sha512WithRSAEncryption = 670;
+
+const int OBJ_sha512WithRSAEncryption = 1;
+
+const String SN_sha224WithRSAEncryption = 'RSA-SHA224';
+
+const String LN_sha224WithRSAEncryption = 'sha224WithRSAEncryption';
+
+const int NID_sha224WithRSAEncryption = 671;
+
+const int OBJ_sha224WithRSAEncryption = 1;
+
+const String SN_sha512_224WithRSAEncryption = 'RSA-SHA512/224';
+
+const String LN_sha512_224WithRSAEncryption = 'sha512-224WithRSAEncryption';
+
+const int NID_sha512_224WithRSAEncryption = 1145;
+
+const int OBJ_sha512_224WithRSAEncryption = 1;
+
+const String SN_sha512_256WithRSAEncryption = 'RSA-SHA512/256';
+
+const String LN_sha512_256WithRSAEncryption = 'sha512-256WithRSAEncryption';
+
+const int NID_sha512_256WithRSAEncryption = 1146;
+
+const int OBJ_sha512_256WithRSAEncryption = 1;
+
+const String SN_pkcs3 = 'pkcs3';
+
+const int NID_pkcs3 = 27;
+
+const int OBJ_pkcs3 = 1;
+
+const String LN_dhKeyAgreement = 'dhKeyAgreement';
+
+const int NID_dhKeyAgreement = 28;
+
+const int OBJ_dhKeyAgreement = 1;
+
+const String SN_pkcs5 = 'pkcs5';
+
+const int NID_pkcs5 = 187;
+
+const int OBJ_pkcs5 = 1;
+
+const String SN_pbeWithMD2AndDES_CBC = 'PBE-MD2-DES';
+
+const String LN_pbeWithMD2AndDES_CBC = 'pbeWithMD2AndDES-CBC';
+
+const int NID_pbeWithMD2AndDES_CBC = 9;
+
+const int OBJ_pbeWithMD2AndDES_CBC = 1;
+
+const String SN_pbeWithMD5AndDES_CBC = 'PBE-MD5-DES';
+
+const String LN_pbeWithMD5AndDES_CBC = 'pbeWithMD5AndDES-CBC';
+
+const int NID_pbeWithMD5AndDES_CBC = 10;
+
+const int OBJ_pbeWithMD5AndDES_CBC = 1;
+
+const String SN_pbeWithMD2AndRC2_CBC = 'PBE-MD2-RC2-64';
+
+const String LN_pbeWithMD2AndRC2_CBC = 'pbeWithMD2AndRC2-CBC';
+
+const int NID_pbeWithMD2AndRC2_CBC = 168;
+
+const int OBJ_pbeWithMD2AndRC2_CBC = 1;
+
+const String SN_pbeWithMD5AndRC2_CBC = 'PBE-MD5-RC2-64';
+
+const String LN_pbeWithMD5AndRC2_CBC = 'pbeWithMD5AndRC2-CBC';
+
+const int NID_pbeWithMD5AndRC2_CBC = 169;
+
+const int OBJ_pbeWithMD5AndRC2_CBC = 1;
+
+const String SN_pbeWithSHA1AndDES_CBC = 'PBE-SHA1-DES';
+
+const String LN_pbeWithSHA1AndDES_CBC = 'pbeWithSHA1AndDES-CBC';
+
+const int NID_pbeWithSHA1AndDES_CBC = 170;
+
+const int OBJ_pbeWithSHA1AndDES_CBC = 1;
+
+const String SN_pbeWithSHA1AndRC2_CBC = 'PBE-SHA1-RC2-64';
+
+const String LN_pbeWithSHA1AndRC2_CBC = 'pbeWithSHA1AndRC2-CBC';
+
+const int NID_pbeWithSHA1AndRC2_CBC = 68;
+
+const int OBJ_pbeWithSHA1AndRC2_CBC = 1;
+
+const String LN_id_pbkdf2 = 'PBKDF2';
+
+const int NID_id_pbkdf2 = 69;
+
+const int OBJ_id_pbkdf2 = 1;
+
+const String LN_pbes2 = 'PBES2';
+
+const int NID_pbes2 = 161;
+
+const int OBJ_pbes2 = 1;
+
+const String LN_pbmac1 = 'PBMAC1';
+
+const int NID_pbmac1 = 162;
+
+const int OBJ_pbmac1 = 1;
+
+const String SN_pkcs7 = 'pkcs7';
+
+const int NID_pkcs7 = 20;
+
+const int OBJ_pkcs7 = 1;
+
+const String LN_pkcs7_data = 'pkcs7-data';
+
+const int NID_pkcs7_data = 21;
+
+const int OBJ_pkcs7_data = 1;
+
+const String LN_pkcs7_signed = 'pkcs7-signedData';
+
+const int NID_pkcs7_signed = 22;
+
+const int OBJ_pkcs7_signed = 1;
+
+const String LN_pkcs7_enveloped = 'pkcs7-envelopedData';
+
+const int NID_pkcs7_enveloped = 23;
+
+const int OBJ_pkcs7_enveloped = 1;
+
+const String LN_pkcs7_signedAndEnveloped = 'pkcs7-signedAndEnvelopedData';
+
+const int NID_pkcs7_signedAndEnveloped = 24;
+
+const int OBJ_pkcs7_signedAndEnveloped = 1;
+
+const String LN_pkcs7_digest = 'pkcs7-digestData';
+
+const int NID_pkcs7_digest = 25;
+
+const int OBJ_pkcs7_digest = 1;
+
+const String LN_pkcs7_encrypted = 'pkcs7-encryptedData';
+
+const int NID_pkcs7_encrypted = 26;
+
+const int OBJ_pkcs7_encrypted = 1;
+
+const String SN_pkcs9 = 'pkcs9';
+
+const int NID_pkcs9 = 47;
+
+const int OBJ_pkcs9 = 1;
+
+const String LN_pkcs9_emailAddress = 'emailAddress';
+
+const int NID_pkcs9_emailAddress = 48;
+
+const int OBJ_pkcs9_emailAddress = 1;
+
+const String LN_pkcs9_unstructuredName = 'unstructuredName';
+
+const int NID_pkcs9_unstructuredName = 49;
+
+const int OBJ_pkcs9_unstructuredName = 1;
+
+const String LN_pkcs9_contentType = 'contentType';
+
+const int NID_pkcs9_contentType = 50;
+
+const int OBJ_pkcs9_contentType = 1;
+
+const String LN_pkcs9_messageDigest = 'messageDigest';
+
+const int NID_pkcs9_messageDigest = 51;
+
+const int OBJ_pkcs9_messageDigest = 1;
+
+const String LN_pkcs9_signingTime = 'signingTime';
+
+const int NID_pkcs9_signingTime = 52;
+
+const int OBJ_pkcs9_signingTime = 1;
+
+const String LN_pkcs9_countersignature = 'countersignature';
+
+const int NID_pkcs9_countersignature = 53;
+
+const int OBJ_pkcs9_countersignature = 1;
+
+const String LN_pkcs9_challengePassword = 'challengePassword';
+
+const int NID_pkcs9_challengePassword = 54;
+
+const int OBJ_pkcs9_challengePassword = 1;
+
+const String LN_pkcs9_unstructuredAddress = 'unstructuredAddress';
+
+const int NID_pkcs9_unstructuredAddress = 55;
+
+const int OBJ_pkcs9_unstructuredAddress = 1;
+
+const String LN_pkcs9_extCertAttributes = 'extendedCertificateAttributes';
+
+const int NID_pkcs9_extCertAttributes = 56;
+
+const int OBJ_pkcs9_extCertAttributes = 1;
+
+const String SN_ext_req = 'extReq';
+
+const String LN_ext_req = 'Extension Request';
+
+const int NID_ext_req = 172;
+
+const int OBJ_ext_req = 1;
+
+const String SN_SMIMECapabilities = 'SMIME-CAPS';
+
+const String LN_SMIMECapabilities = 'S/MIME Capabilities';
+
+const int NID_SMIMECapabilities = 167;
+
+const int OBJ_SMIMECapabilities = 1;
+
+const String SN_SMIME = 'SMIME';
+
+const String LN_SMIME = 'S/MIME';
+
+const int NID_SMIME = 188;
+
+const int OBJ_SMIME = 1;
+
+const String SN_id_smime_mod = 'id-smime-mod';
+
+const int NID_id_smime_mod = 189;
+
+const int OBJ_id_smime_mod = 1;
+
+const String SN_id_smime_ct = 'id-smime-ct';
+
+const int NID_id_smime_ct = 190;
+
+const int OBJ_id_smime_ct = 1;
+
+const String SN_id_smime_aa = 'id-smime-aa';
+
+const int NID_id_smime_aa = 191;
+
+const int OBJ_id_smime_aa = 1;
+
+const String SN_id_smime_alg = 'id-smime-alg';
+
+const int NID_id_smime_alg = 192;
+
+const int OBJ_id_smime_alg = 1;
+
+const String SN_id_smime_cd = 'id-smime-cd';
+
+const int NID_id_smime_cd = 193;
+
+const int OBJ_id_smime_cd = 1;
+
+const String SN_id_smime_spq = 'id-smime-spq';
+
+const int NID_id_smime_spq = 194;
+
+const int OBJ_id_smime_spq = 1;
+
+const String SN_id_smime_cti = 'id-smime-cti';
+
+const int NID_id_smime_cti = 195;
+
+const int OBJ_id_smime_cti = 1;
+
+const String SN_id_smime_mod_cms = 'id-smime-mod-cms';
+
+const int NID_id_smime_mod_cms = 196;
+
+const int OBJ_id_smime_mod_cms = 1;
+
+const String SN_id_smime_mod_ess = 'id-smime-mod-ess';
+
+const int NID_id_smime_mod_ess = 197;
+
+const int OBJ_id_smime_mod_ess = 1;
+
+const String SN_id_smime_mod_oid = 'id-smime-mod-oid';
+
+const int NID_id_smime_mod_oid = 198;
+
+const int OBJ_id_smime_mod_oid = 1;
+
+const String SN_id_smime_mod_msg_v3 = 'id-smime-mod-msg-v3';
+
+const int NID_id_smime_mod_msg_v3 = 199;
+
+const int OBJ_id_smime_mod_msg_v3 = 1;
+
+const String SN_id_smime_mod_ets_eSignature_88 =
+    'id-smime-mod-ets-eSignature-88';
+
+const int NID_id_smime_mod_ets_eSignature_88 = 200;
+
+const int OBJ_id_smime_mod_ets_eSignature_88 = 1;
+
+const String SN_id_smime_mod_ets_eSignature_97 =
+    'id-smime-mod-ets-eSignature-97';
+
+const int NID_id_smime_mod_ets_eSignature_97 = 201;
+
+const int OBJ_id_smime_mod_ets_eSignature_97 = 1;
+
+const String SN_id_smime_mod_ets_eSigPolicy_88 =
+    'id-smime-mod-ets-eSigPolicy-88';
+
+const int NID_id_smime_mod_ets_eSigPolicy_88 = 202;
+
+const int OBJ_id_smime_mod_ets_eSigPolicy_88 = 1;
+
+const String SN_id_smime_mod_ets_eSigPolicy_97 =
+    'id-smime-mod-ets-eSigPolicy-97';
+
+const int NID_id_smime_mod_ets_eSigPolicy_97 = 203;
+
+const int OBJ_id_smime_mod_ets_eSigPolicy_97 = 1;
+
+const String SN_id_smime_ct_receipt = 'id-smime-ct-receipt';
+
+const int NID_id_smime_ct_receipt = 204;
+
+const int OBJ_id_smime_ct_receipt = 1;
+
+const String SN_id_smime_ct_authData = 'id-smime-ct-authData';
+
+const int NID_id_smime_ct_authData = 205;
+
+const int OBJ_id_smime_ct_authData = 1;
+
+const String SN_id_smime_ct_publishCert = 'id-smime-ct-publishCert';
+
+const int NID_id_smime_ct_publishCert = 206;
+
+const int OBJ_id_smime_ct_publishCert = 1;
+
+const String SN_id_smime_ct_TSTInfo = 'id-smime-ct-TSTInfo';
+
+const int NID_id_smime_ct_TSTInfo = 207;
+
+const int OBJ_id_smime_ct_TSTInfo = 1;
+
+const String SN_id_smime_ct_TDTInfo = 'id-smime-ct-TDTInfo';
+
+const int NID_id_smime_ct_TDTInfo = 208;
+
+const int OBJ_id_smime_ct_TDTInfo = 1;
+
+const String SN_id_smime_ct_contentInfo = 'id-smime-ct-contentInfo';
+
+const int NID_id_smime_ct_contentInfo = 209;
+
+const int OBJ_id_smime_ct_contentInfo = 1;
+
+const String SN_id_smime_ct_DVCSRequestData = 'id-smime-ct-DVCSRequestData';
+
+const int NID_id_smime_ct_DVCSRequestData = 210;
+
+const int OBJ_id_smime_ct_DVCSRequestData = 1;
+
+const String SN_id_smime_ct_DVCSResponseData = 'id-smime-ct-DVCSResponseData';
+
+const int NID_id_smime_ct_DVCSResponseData = 211;
+
+const int OBJ_id_smime_ct_DVCSResponseData = 1;
+
+const String SN_id_smime_ct_compressedData = 'id-smime-ct-compressedData';
+
+const int NID_id_smime_ct_compressedData = 786;
+
+const int OBJ_id_smime_ct_compressedData = 1;
+
+const String SN_id_smime_ct_contentCollection = 'id-smime-ct-contentCollection';
+
+const int NID_id_smime_ct_contentCollection = 1058;
+
+const int OBJ_id_smime_ct_contentCollection = 1;
+
+const String SN_id_smime_ct_authEnvelopedData = 'id-smime-ct-authEnvelopedData';
+
+const int NID_id_smime_ct_authEnvelopedData = 1059;
+
+const int OBJ_id_smime_ct_authEnvelopedData = 1;
+
+const String SN_id_ct_asciiTextWithCRLF = 'id-ct-asciiTextWithCRLF';
+
+const int NID_id_ct_asciiTextWithCRLF = 787;
+
+const int OBJ_id_ct_asciiTextWithCRLF = 1;
+
+const String SN_id_ct_xml = 'id-ct-xml';
+
+const int NID_id_ct_xml = 1060;
+
+const int OBJ_id_ct_xml = 1;
+
+const String SN_id_smime_aa_receiptRequest = 'id-smime-aa-receiptRequest';
+
+const int NID_id_smime_aa_receiptRequest = 212;
+
+const int OBJ_id_smime_aa_receiptRequest = 1;
+
+const String SN_id_smime_aa_securityLabel = 'id-smime-aa-securityLabel';
+
+const int NID_id_smime_aa_securityLabel = 213;
+
+const int OBJ_id_smime_aa_securityLabel = 1;
+
+const String SN_id_smime_aa_mlExpandHistory = 'id-smime-aa-mlExpandHistory';
+
+const int NID_id_smime_aa_mlExpandHistory = 214;
+
+const int OBJ_id_smime_aa_mlExpandHistory = 1;
+
+const String SN_id_smime_aa_contentHint = 'id-smime-aa-contentHint';
+
+const int NID_id_smime_aa_contentHint = 215;
+
+const int OBJ_id_smime_aa_contentHint = 1;
+
+const String SN_id_smime_aa_msgSigDigest = 'id-smime-aa-msgSigDigest';
+
+const int NID_id_smime_aa_msgSigDigest = 216;
+
+const int OBJ_id_smime_aa_msgSigDigest = 1;
+
+const String SN_id_smime_aa_encapContentType = 'id-smime-aa-encapContentType';
+
+const int NID_id_smime_aa_encapContentType = 217;
+
+const int OBJ_id_smime_aa_encapContentType = 1;
+
+const String SN_id_smime_aa_contentIdentifier = 'id-smime-aa-contentIdentifier';
+
+const int NID_id_smime_aa_contentIdentifier = 218;
+
+const int OBJ_id_smime_aa_contentIdentifier = 1;
+
+const String SN_id_smime_aa_macValue = 'id-smime-aa-macValue';
+
+const int NID_id_smime_aa_macValue = 219;
+
+const int OBJ_id_smime_aa_macValue = 1;
+
+const String SN_id_smime_aa_equivalentLabels = 'id-smime-aa-equivalentLabels';
+
+const int NID_id_smime_aa_equivalentLabels = 220;
+
+const int OBJ_id_smime_aa_equivalentLabels = 1;
+
+const String SN_id_smime_aa_contentReference = 'id-smime-aa-contentReference';
+
+const int NID_id_smime_aa_contentReference = 221;
+
+const int OBJ_id_smime_aa_contentReference = 1;
+
+const String SN_id_smime_aa_encrypKeyPref = 'id-smime-aa-encrypKeyPref';
+
+const int NID_id_smime_aa_encrypKeyPref = 222;
+
+const int OBJ_id_smime_aa_encrypKeyPref = 1;
+
+const String SN_id_smime_aa_signingCertificate =
+    'id-smime-aa-signingCertificate';
+
+const int NID_id_smime_aa_signingCertificate = 223;
+
+const int OBJ_id_smime_aa_signingCertificate = 1;
+
+const String SN_id_smime_aa_smimeEncryptCerts = 'id-smime-aa-smimeEncryptCerts';
+
+const int NID_id_smime_aa_smimeEncryptCerts = 224;
+
+const int OBJ_id_smime_aa_smimeEncryptCerts = 1;
+
+const String SN_id_smime_aa_timeStampToken = 'id-smime-aa-timeStampToken';
+
+const int NID_id_smime_aa_timeStampToken = 225;
+
+const int OBJ_id_smime_aa_timeStampToken = 1;
+
+const String SN_id_smime_aa_ets_sigPolicyId = 'id-smime-aa-ets-sigPolicyId';
+
+const int NID_id_smime_aa_ets_sigPolicyId = 226;
+
+const int OBJ_id_smime_aa_ets_sigPolicyId = 1;
+
+const String SN_id_smime_aa_ets_commitmentType =
+    'id-smime-aa-ets-commitmentType';
+
+const int NID_id_smime_aa_ets_commitmentType = 227;
+
+const int OBJ_id_smime_aa_ets_commitmentType = 1;
+
+const String SN_id_smime_aa_ets_signerLocation =
+    'id-smime-aa-ets-signerLocation';
+
+const int NID_id_smime_aa_ets_signerLocation = 228;
+
+const int OBJ_id_smime_aa_ets_signerLocation = 1;
+
+const String SN_id_smime_aa_ets_signerAttr = 'id-smime-aa-ets-signerAttr';
+
+const int NID_id_smime_aa_ets_signerAttr = 229;
+
+const int OBJ_id_smime_aa_ets_signerAttr = 1;
+
+const String SN_id_smime_aa_ets_otherSigCert = 'id-smime-aa-ets-otherSigCert';
+
+const int NID_id_smime_aa_ets_otherSigCert = 230;
+
+const int OBJ_id_smime_aa_ets_otherSigCert = 1;
+
+const String SN_id_smime_aa_ets_contentTimestamp =
+    'id-smime-aa-ets-contentTimestamp';
+
+const int NID_id_smime_aa_ets_contentTimestamp = 231;
+
+const int OBJ_id_smime_aa_ets_contentTimestamp = 1;
+
+const String SN_id_smime_aa_ets_CertificateRefs =
+    'id-smime-aa-ets-CertificateRefs';
+
+const int NID_id_smime_aa_ets_CertificateRefs = 232;
+
+const int OBJ_id_smime_aa_ets_CertificateRefs = 1;
+
+const String SN_id_smime_aa_ets_RevocationRefs =
+    'id-smime-aa-ets-RevocationRefs';
+
+const int NID_id_smime_aa_ets_RevocationRefs = 233;
+
+const int OBJ_id_smime_aa_ets_RevocationRefs = 1;
+
+const String SN_id_smime_aa_ets_certValues = 'id-smime-aa-ets-certValues';
+
+const int NID_id_smime_aa_ets_certValues = 234;
+
+const int OBJ_id_smime_aa_ets_certValues = 1;
+
+const String SN_id_smime_aa_ets_revocationValues =
+    'id-smime-aa-ets-revocationValues';
+
+const int NID_id_smime_aa_ets_revocationValues = 235;
+
+const int OBJ_id_smime_aa_ets_revocationValues = 1;
+
+const String SN_id_smime_aa_ets_escTimeStamp = 'id-smime-aa-ets-escTimeStamp';
+
+const int NID_id_smime_aa_ets_escTimeStamp = 236;
+
+const int OBJ_id_smime_aa_ets_escTimeStamp = 1;
+
+const String SN_id_smime_aa_ets_certCRLTimestamp =
+    'id-smime-aa-ets-certCRLTimestamp';
+
+const int NID_id_smime_aa_ets_certCRLTimestamp = 237;
+
+const int OBJ_id_smime_aa_ets_certCRLTimestamp = 1;
+
+const String SN_id_smime_aa_ets_archiveTimeStamp =
+    'id-smime-aa-ets-archiveTimeStamp';
+
+const int NID_id_smime_aa_ets_archiveTimeStamp = 238;
+
+const int OBJ_id_smime_aa_ets_archiveTimeStamp = 1;
+
+const String SN_id_smime_aa_signatureType = 'id-smime-aa-signatureType';
+
+const int NID_id_smime_aa_signatureType = 239;
+
+const int OBJ_id_smime_aa_signatureType = 1;
+
+const String SN_id_smime_aa_dvcs_dvc = 'id-smime-aa-dvcs-dvc';
+
+const int NID_id_smime_aa_dvcs_dvc = 240;
+
+const int OBJ_id_smime_aa_dvcs_dvc = 1;
+
+const String SN_id_smime_aa_signingCertificateV2 =
+    'id-smime-aa-signingCertificateV2';
+
+const int NID_id_smime_aa_signingCertificateV2 = 1086;
+
+const int OBJ_id_smime_aa_signingCertificateV2 = 1;
+
+const String SN_id_smime_alg_ESDHwith3DES = 'id-smime-alg-ESDHwith3DES';
+
+const int NID_id_smime_alg_ESDHwith3DES = 241;
+
+const int OBJ_id_smime_alg_ESDHwith3DES = 1;
+
+const String SN_id_smime_alg_ESDHwithRC2 = 'id-smime-alg-ESDHwithRC2';
+
+const int NID_id_smime_alg_ESDHwithRC2 = 242;
+
+const int OBJ_id_smime_alg_ESDHwithRC2 = 1;
+
+const String SN_id_smime_alg_3DESwrap = 'id-smime-alg-3DESwrap';
+
+const int NID_id_smime_alg_3DESwrap = 243;
+
+const int OBJ_id_smime_alg_3DESwrap = 1;
+
+const String SN_id_smime_alg_RC2wrap = 'id-smime-alg-RC2wrap';
+
+const int NID_id_smime_alg_RC2wrap = 244;
+
+const int OBJ_id_smime_alg_RC2wrap = 1;
+
+const String SN_id_smime_alg_ESDH = 'id-smime-alg-ESDH';
+
+const int NID_id_smime_alg_ESDH = 245;
+
+const int OBJ_id_smime_alg_ESDH = 1;
+
+const String SN_id_smime_alg_CMS3DESwrap = 'id-smime-alg-CMS3DESwrap';
+
+const int NID_id_smime_alg_CMS3DESwrap = 246;
+
+const int OBJ_id_smime_alg_CMS3DESwrap = 1;
+
+const String SN_id_smime_alg_CMSRC2wrap = 'id-smime-alg-CMSRC2wrap';
+
+const int NID_id_smime_alg_CMSRC2wrap = 247;
+
+const int OBJ_id_smime_alg_CMSRC2wrap = 1;
+
+const String SN_id_alg_PWRI_KEK = 'id-alg-PWRI-KEK';
+
+const int NID_id_alg_PWRI_KEK = 893;
+
+const int OBJ_id_alg_PWRI_KEK = 1;
+
+const String SN_id_smime_cd_ldap = 'id-smime-cd-ldap';
+
+const int NID_id_smime_cd_ldap = 248;
+
+const int OBJ_id_smime_cd_ldap = 1;
+
+const String SN_id_smime_spq_ets_sqt_uri = 'id-smime-spq-ets-sqt-uri';
+
+const int NID_id_smime_spq_ets_sqt_uri = 249;
+
+const int OBJ_id_smime_spq_ets_sqt_uri = 1;
+
+const String SN_id_smime_spq_ets_sqt_unotice = 'id-smime-spq-ets-sqt-unotice';
+
+const int NID_id_smime_spq_ets_sqt_unotice = 250;
+
+const int OBJ_id_smime_spq_ets_sqt_unotice = 1;
+
+const String SN_id_smime_cti_ets_proofOfOrigin =
+    'id-smime-cti-ets-proofOfOrigin';
+
+const int NID_id_smime_cti_ets_proofOfOrigin = 251;
+
+const int OBJ_id_smime_cti_ets_proofOfOrigin = 1;
+
+const String SN_id_smime_cti_ets_proofOfReceipt =
+    'id-smime-cti-ets-proofOfReceipt';
+
+const int NID_id_smime_cti_ets_proofOfReceipt = 252;
+
+const int OBJ_id_smime_cti_ets_proofOfReceipt = 1;
+
+const String SN_id_smime_cti_ets_proofOfDelivery =
+    'id-smime-cti-ets-proofOfDelivery';
+
+const int NID_id_smime_cti_ets_proofOfDelivery = 253;
+
+const int OBJ_id_smime_cti_ets_proofOfDelivery = 1;
+
+const String SN_id_smime_cti_ets_proofOfSender =
+    'id-smime-cti-ets-proofOfSender';
+
+const int NID_id_smime_cti_ets_proofOfSender = 254;
+
+const int OBJ_id_smime_cti_ets_proofOfSender = 1;
+
+const String SN_id_smime_cti_ets_proofOfApproval =
+    'id-smime-cti-ets-proofOfApproval';
+
+const int NID_id_smime_cti_ets_proofOfApproval = 255;
+
+const int OBJ_id_smime_cti_ets_proofOfApproval = 1;
+
+const String SN_id_smime_cti_ets_proofOfCreation =
+    'id-smime-cti-ets-proofOfCreation';
+
+const int NID_id_smime_cti_ets_proofOfCreation = 256;
+
+const int OBJ_id_smime_cti_ets_proofOfCreation = 1;
+
+const String LN_friendlyName = 'friendlyName';
+
+const int NID_friendlyName = 156;
+
+const int OBJ_friendlyName = 1;
+
+const String LN_localKeyID = 'localKeyID';
+
+const int NID_localKeyID = 157;
+
+const int OBJ_localKeyID = 1;
+
+const String SN_ms_csp_name = 'CSPName';
+
+const String LN_ms_csp_name = 'Microsoft CSP Name';
+
+const int NID_ms_csp_name = 417;
+
+const int OBJ_ms_csp_name = 1;
+
+const String SN_LocalKeySet = 'LocalKeySet';
+
+const String LN_LocalKeySet = 'Microsoft Local Key set';
+
+const int NID_LocalKeySet = 856;
+
+const int OBJ_LocalKeySet = 1;
+
+const int OBJ_certTypes = 1;
+
+const String LN_x509Certificate = 'x509Certificate';
+
+const int NID_x509Certificate = 158;
+
+const int OBJ_x509Certificate = 1;
+
+const String LN_sdsiCertificate = 'sdsiCertificate';
+
+const int NID_sdsiCertificate = 159;
+
+const int OBJ_sdsiCertificate = 1;
+
+const int OBJ_crlTypes = 1;
+
+const String LN_x509Crl = 'x509Crl';
+
+const int NID_x509Crl = 160;
+
+const int OBJ_x509Crl = 1;
+
+const int OBJ_pkcs12 = 1;
+
+const int OBJ_pkcs12_pbeids = 1;
+
+const String SN_pbe_WithSHA1And128BitRC4 = 'PBE-SHA1-RC4-128';
+
+const String LN_pbe_WithSHA1And128BitRC4 = 'pbeWithSHA1And128BitRC4';
+
+const int NID_pbe_WithSHA1And128BitRC4 = 144;
+
+const int OBJ_pbe_WithSHA1And128BitRC4 = 1;
+
+const String SN_pbe_WithSHA1And40BitRC4 = 'PBE-SHA1-RC4-40';
+
+const String LN_pbe_WithSHA1And40BitRC4 = 'pbeWithSHA1And40BitRC4';
+
+const int NID_pbe_WithSHA1And40BitRC4 = 145;
+
+const int OBJ_pbe_WithSHA1And40BitRC4 = 1;
+
+const String SN_pbe_WithSHA1And3_Key_TripleDES_CBC = 'PBE-SHA1-3DES';
+
+const String LN_pbe_WithSHA1And3_Key_TripleDES_CBC =
+    'pbeWithSHA1And3-KeyTripleDES-CBC';
+
+const int NID_pbe_WithSHA1And3_Key_TripleDES_CBC = 146;
+
+const int OBJ_pbe_WithSHA1And3_Key_TripleDES_CBC = 1;
+
+const String SN_pbe_WithSHA1And2_Key_TripleDES_CBC = 'PBE-SHA1-2DES';
+
+const String LN_pbe_WithSHA1And2_Key_TripleDES_CBC =
+    'pbeWithSHA1And2-KeyTripleDES-CBC';
+
+const int NID_pbe_WithSHA1And2_Key_TripleDES_CBC = 147;
+
+const int OBJ_pbe_WithSHA1And2_Key_TripleDES_CBC = 1;
+
+const String SN_pbe_WithSHA1And128BitRC2_CBC = 'PBE-SHA1-RC2-128';
+
+const String LN_pbe_WithSHA1And128BitRC2_CBC = 'pbeWithSHA1And128BitRC2-CBC';
+
+const int NID_pbe_WithSHA1And128BitRC2_CBC = 148;
+
+const int OBJ_pbe_WithSHA1And128BitRC2_CBC = 1;
+
+const String SN_pbe_WithSHA1And40BitRC2_CBC = 'PBE-SHA1-RC2-40';
+
+const String LN_pbe_WithSHA1And40BitRC2_CBC = 'pbeWithSHA1And40BitRC2-CBC';
+
+const int NID_pbe_WithSHA1And40BitRC2_CBC = 149;
+
+const int OBJ_pbe_WithSHA1And40BitRC2_CBC = 1;
+
+const int OBJ_pkcs12_Version1 = 1;
+
+const int OBJ_pkcs12_BagIds = 1;
+
+const String LN_keyBag = 'keyBag';
+
+const int NID_keyBag = 150;
+
+const int OBJ_keyBag = 1;
+
+const String LN_pkcs8ShroudedKeyBag = 'pkcs8ShroudedKeyBag';
+
+const int NID_pkcs8ShroudedKeyBag = 151;
+
+const int OBJ_pkcs8ShroudedKeyBag = 1;
+
+const String LN_certBag = 'certBag';
+
+const int NID_certBag = 152;
+
+const int OBJ_certBag = 1;
+
+const String LN_crlBag = 'crlBag';
+
+const int NID_crlBag = 153;
+
+const int OBJ_crlBag = 1;
+
+const String LN_secretBag = 'secretBag';
+
+const int NID_secretBag = 154;
+
+const int OBJ_secretBag = 1;
+
+const String LN_safeContentsBag = 'safeContentsBag';
+
+const int NID_safeContentsBag = 155;
+
+const int OBJ_safeContentsBag = 1;
+
+const String SN_md2 = 'MD2';
+
+const String LN_md2 = 'md2';
+
+const int NID_md2 = 3;
+
+const int OBJ_md2 = 1;
+
+const String SN_md4 = 'MD4';
+
+const String LN_md4 = 'md4';
+
+const int NID_md4 = 257;
+
+const int OBJ_md4 = 1;
+
+const String SN_md5 = 'MD5';
+
+const String LN_md5 = 'md5';
+
+const int NID_md5 = 4;
+
+const int OBJ_md5 = 1;
+
+const String SN_md5_sha1 = 'MD5-SHA1';
+
+const String LN_md5_sha1 = 'md5-sha1';
+
+const int NID_md5_sha1 = 114;
+
+const String LN_hmacWithMD5 = 'hmacWithMD5';
+
+const int NID_hmacWithMD5 = 797;
+
+const int OBJ_hmacWithMD5 = 1;
+
+const String LN_hmacWithSHA1 = 'hmacWithSHA1';
+
+const int NID_hmacWithSHA1 = 163;
+
+const int OBJ_hmacWithSHA1 = 1;
+
+const String SN_sm2 = 'SM2';
+
+const String LN_sm2 = 'sm2';
+
+const int NID_sm2 = 1172;
+
+const int OBJ_sm2 = 1;
+
+const String SN_sm3 = 'SM3';
+
+const String LN_sm3 = 'sm3';
+
+const int NID_sm3 = 1143;
+
+const int OBJ_sm3 = 1;
+
+const String SN_sm3WithRSAEncryption = 'RSA-SM3';
+
+const String LN_sm3WithRSAEncryption = 'sm3WithRSAEncryption';
+
+const int NID_sm3WithRSAEncryption = 1144;
+
+const int OBJ_sm3WithRSAEncryption = 1;
+
+const String LN_hmacWithSHA224 = 'hmacWithSHA224';
+
+const int NID_hmacWithSHA224 = 798;
+
+const int OBJ_hmacWithSHA224 = 1;
+
+const String LN_hmacWithSHA256 = 'hmacWithSHA256';
+
+const int NID_hmacWithSHA256 = 799;
+
+const int OBJ_hmacWithSHA256 = 1;
+
+const String LN_hmacWithSHA384 = 'hmacWithSHA384';
+
+const int NID_hmacWithSHA384 = 800;
+
+const int OBJ_hmacWithSHA384 = 1;
+
+const String LN_hmacWithSHA512 = 'hmacWithSHA512';
+
+const int NID_hmacWithSHA512 = 801;
+
+const int OBJ_hmacWithSHA512 = 1;
+
+const String LN_hmacWithSHA512_224 = 'hmacWithSHA512-224';
+
+const int NID_hmacWithSHA512_224 = 1193;
+
+const int OBJ_hmacWithSHA512_224 = 1;
+
+const String LN_hmacWithSHA512_256 = 'hmacWithSHA512-256';
+
+const int NID_hmacWithSHA512_256 = 1194;
+
+const int OBJ_hmacWithSHA512_256 = 1;
+
+const String SN_rc2_cbc = 'RC2-CBC';
+
+const String LN_rc2_cbc = 'rc2-cbc';
+
+const int NID_rc2_cbc = 37;
+
+const int OBJ_rc2_cbc = 1;
+
+const String SN_rc2_ecb = 'RC2-ECB';
+
+const String LN_rc2_ecb = 'rc2-ecb';
+
+const int NID_rc2_ecb = 38;
+
+const String SN_rc2_cfb64 = 'RC2-CFB';
+
+const String LN_rc2_cfb64 = 'rc2-cfb';
+
+const int NID_rc2_cfb64 = 39;
+
+const String SN_rc2_ofb64 = 'RC2-OFB';
+
+const String LN_rc2_ofb64 = 'rc2-ofb';
+
+const int NID_rc2_ofb64 = 40;
+
+const String SN_rc2_40_cbc = 'RC2-40-CBC';
+
+const String LN_rc2_40_cbc = 'rc2-40-cbc';
+
+const int NID_rc2_40_cbc = 98;
+
+const String SN_rc2_64_cbc = 'RC2-64-CBC';
+
+const String LN_rc2_64_cbc = 'rc2-64-cbc';
+
+const int NID_rc2_64_cbc = 166;
+
+const String SN_rc4 = 'RC4';
+
+const String LN_rc4 = 'rc4';
+
+const int NID_rc4 = 5;
+
+const int OBJ_rc4 = 1;
+
+const String SN_rc4_40 = 'RC4-40';
+
+const String LN_rc4_40 = 'rc4-40';
+
+const int NID_rc4_40 = 97;
+
+const String SN_des_ede3_cbc = 'DES-EDE3-CBC';
+
+const String LN_des_ede3_cbc = 'des-ede3-cbc';
+
+const int NID_des_ede3_cbc = 44;
+
+const int OBJ_des_ede3_cbc = 1;
+
+const String SN_rc5_cbc = 'RC5-CBC';
+
+const String LN_rc5_cbc = 'rc5-cbc';
+
+const int NID_rc5_cbc = 120;
+
+const int OBJ_rc5_cbc = 1;
+
+const String SN_rc5_ecb = 'RC5-ECB';
+
+const String LN_rc5_ecb = 'rc5-ecb';
+
+const int NID_rc5_ecb = 121;
+
+const String SN_rc5_cfb64 = 'RC5-CFB';
+
+const String LN_rc5_cfb64 = 'rc5-cfb';
+
+const int NID_rc5_cfb64 = 122;
+
+const String SN_rc5_ofb64 = 'RC5-OFB';
+
+const String LN_rc5_ofb64 = 'rc5-ofb';
+
+const int NID_rc5_ofb64 = 123;
+
+const String SN_ms_ext_req = 'msExtReq';
+
+const String LN_ms_ext_req = 'Microsoft Extension Request';
+
+const int NID_ms_ext_req = 171;
+
+const int OBJ_ms_ext_req = 1;
+
+const String SN_ms_code_ind = 'msCodeInd';
+
+const String LN_ms_code_ind = 'Microsoft Individual Code Signing';
+
+const int NID_ms_code_ind = 134;
+
+const int OBJ_ms_code_ind = 1;
+
+const String SN_ms_code_com = 'msCodeCom';
+
+const String LN_ms_code_com = 'Microsoft Commercial Code Signing';
+
+const int NID_ms_code_com = 135;
+
+const int OBJ_ms_code_com = 1;
+
+const String SN_ms_ctl_sign = 'msCTLSign';
+
+const String LN_ms_ctl_sign = 'Microsoft Trust List Signing';
+
+const int NID_ms_ctl_sign = 136;
+
+const int OBJ_ms_ctl_sign = 1;
+
+const String SN_ms_sgc = 'msSGC';
+
+const String LN_ms_sgc = 'Microsoft Server Gated Crypto';
+
+const int NID_ms_sgc = 137;
+
+const int OBJ_ms_sgc = 1;
+
+const String SN_ms_efs = 'msEFS';
+
+const String LN_ms_efs = 'Microsoft Encrypted File System';
+
+const int NID_ms_efs = 138;
+
+const int OBJ_ms_efs = 1;
+
+const String SN_ms_smartcard_login = 'msSmartcardLogin';
+
+const String LN_ms_smartcard_login = 'Microsoft Smartcard Login';
+
+const int NID_ms_smartcard_login = 648;
+
+const int OBJ_ms_smartcard_login = 1;
+
+const String SN_ms_upn = 'msUPN';
+
+const String LN_ms_upn = 'Microsoft User Principal Name';
+
+const int NID_ms_upn = 649;
+
+const int OBJ_ms_upn = 1;
+
+const String SN_idea_cbc = 'IDEA-CBC';
+
+const String LN_idea_cbc = 'idea-cbc';
+
+const int NID_idea_cbc = 34;
+
+const int OBJ_idea_cbc = 1;
+
+const String SN_idea_ecb = 'IDEA-ECB';
+
+const String LN_idea_ecb = 'idea-ecb';
+
+const int NID_idea_ecb = 36;
+
+const String SN_idea_cfb64 = 'IDEA-CFB';
+
+const String LN_idea_cfb64 = 'idea-cfb';
+
+const int NID_idea_cfb64 = 35;
+
+const String SN_idea_ofb64 = 'IDEA-OFB';
+
+const String LN_idea_ofb64 = 'idea-ofb';
+
+const int NID_idea_ofb64 = 46;
+
+const String SN_bf_cbc = 'BF-CBC';
+
+const String LN_bf_cbc = 'bf-cbc';
+
+const int NID_bf_cbc = 91;
+
+const int OBJ_bf_cbc = 1;
+
+const String SN_bf_ecb = 'BF-ECB';
+
+const String LN_bf_ecb = 'bf-ecb';
+
+const int NID_bf_ecb = 92;
+
+const String SN_bf_cfb64 = 'BF-CFB';
+
+const String LN_bf_cfb64 = 'bf-cfb';
+
+const int NID_bf_cfb64 = 93;
+
+const String SN_bf_ofb64 = 'BF-OFB';
+
+const String LN_bf_ofb64 = 'bf-ofb';
+
+const int NID_bf_ofb64 = 94;
+
+const String SN_id_pkix = 'PKIX';
+
+const int NID_id_pkix = 127;
+
+const int OBJ_id_pkix = 1;
+
+const String SN_id_pkix_mod = 'id-pkix-mod';
+
+const int NID_id_pkix_mod = 258;
+
+const int OBJ_id_pkix_mod = 1;
+
+const String SN_id_pe = 'id-pe';
+
+const int NID_id_pe = 175;
+
+const int OBJ_id_pe = 1;
+
+const String SN_id_qt = 'id-qt';
+
+const int NID_id_qt = 259;
+
+const int OBJ_id_qt = 1;
+
+const String SN_id_kp = 'id-kp';
+
+const int NID_id_kp = 128;
+
+const int OBJ_id_kp = 1;
+
+const String SN_id_it = 'id-it';
+
+const int NID_id_it = 260;
+
+const int OBJ_id_it = 1;
+
+const String SN_id_pkip = 'id-pkip';
+
+const int NID_id_pkip = 261;
+
+const int OBJ_id_pkip = 1;
+
+const String SN_id_alg = 'id-alg';
+
+const int NID_id_alg = 262;
+
+const int OBJ_id_alg = 1;
+
+const String SN_id_cmc = 'id-cmc';
+
+const int NID_id_cmc = 263;
+
+const int OBJ_id_cmc = 1;
+
+const String SN_id_on = 'id-on';
+
+const int NID_id_on = 264;
+
+const int OBJ_id_on = 1;
+
+const String SN_id_pda = 'id-pda';
+
+const int NID_id_pda = 265;
+
+const int OBJ_id_pda = 1;
+
+const String SN_id_aca = 'id-aca';
+
+const int NID_id_aca = 266;
+
+const int OBJ_id_aca = 1;
+
+const String SN_id_qcs = 'id-qcs';
+
+const int NID_id_qcs = 267;
+
+const int OBJ_id_qcs = 1;
+
+const String SN_id_cct = 'id-cct';
+
+const int NID_id_cct = 268;
+
+const int OBJ_id_cct = 1;
+
+const String SN_id_ppl = 'id-ppl';
+
+const int NID_id_ppl = 662;
+
+const int OBJ_id_ppl = 1;
+
+const String SN_id_ad = 'id-ad';
+
+const int NID_id_ad = 176;
+
+const int OBJ_id_ad = 1;
+
+const String SN_id_pkix1_explicit_88 = 'id-pkix1-explicit-88';
+
+const int NID_id_pkix1_explicit_88 = 269;
+
+const int OBJ_id_pkix1_explicit_88 = 1;
+
+const String SN_id_pkix1_implicit_88 = 'id-pkix1-implicit-88';
+
+const int NID_id_pkix1_implicit_88 = 270;
+
+const int OBJ_id_pkix1_implicit_88 = 1;
+
+const String SN_id_pkix1_explicit_93 = 'id-pkix1-explicit-93';
+
+const int NID_id_pkix1_explicit_93 = 271;
+
+const int OBJ_id_pkix1_explicit_93 = 1;
+
+const String SN_id_pkix1_implicit_93 = 'id-pkix1-implicit-93';
+
+const int NID_id_pkix1_implicit_93 = 272;
+
+const int OBJ_id_pkix1_implicit_93 = 1;
+
+const String SN_id_mod_crmf = 'id-mod-crmf';
+
+const int NID_id_mod_crmf = 273;
+
+const int OBJ_id_mod_crmf = 1;
+
+const String SN_id_mod_cmc = 'id-mod-cmc';
+
+const int NID_id_mod_cmc = 274;
+
+const int OBJ_id_mod_cmc = 1;
+
+const String SN_id_mod_kea_profile_88 = 'id-mod-kea-profile-88';
+
+const int NID_id_mod_kea_profile_88 = 275;
+
+const int OBJ_id_mod_kea_profile_88 = 1;
+
+const String SN_id_mod_kea_profile_93 = 'id-mod-kea-profile-93';
+
+const int NID_id_mod_kea_profile_93 = 276;
+
+const int OBJ_id_mod_kea_profile_93 = 1;
+
+const String SN_id_mod_cmp = 'id-mod-cmp';
+
+const int NID_id_mod_cmp = 277;
+
+const int OBJ_id_mod_cmp = 1;
+
+const String SN_id_mod_qualified_cert_88 = 'id-mod-qualified-cert-88';
+
+const int NID_id_mod_qualified_cert_88 = 278;
+
+const int OBJ_id_mod_qualified_cert_88 = 1;
+
+const String SN_id_mod_qualified_cert_93 = 'id-mod-qualified-cert-93';
+
+const int NID_id_mod_qualified_cert_93 = 279;
+
+const int OBJ_id_mod_qualified_cert_93 = 1;
+
+const String SN_id_mod_attribute_cert = 'id-mod-attribute-cert';
+
+const int NID_id_mod_attribute_cert = 280;
+
+const int OBJ_id_mod_attribute_cert = 1;
+
+const String SN_id_mod_timestamp_protocol = 'id-mod-timestamp-protocol';
+
+const int NID_id_mod_timestamp_protocol = 281;
+
+const int OBJ_id_mod_timestamp_protocol = 1;
+
+const String SN_id_mod_ocsp = 'id-mod-ocsp';
+
+const int NID_id_mod_ocsp = 282;
+
+const int OBJ_id_mod_ocsp = 1;
+
+const String SN_id_mod_dvcs = 'id-mod-dvcs';
+
+const int NID_id_mod_dvcs = 283;
+
+const int OBJ_id_mod_dvcs = 1;
+
+const String SN_id_mod_cmp2000 = 'id-mod-cmp2000';
+
+const int NID_id_mod_cmp2000 = 284;
+
+const int OBJ_id_mod_cmp2000 = 1;
+
+const String SN_info_access = 'authorityInfoAccess';
+
+const String LN_info_access = 'Authority Information Access';
+
+const int NID_info_access = 177;
+
+const int OBJ_info_access = 1;
+
+const String SN_biometricInfo = 'biometricInfo';
+
+const String LN_biometricInfo = 'Biometric Info';
+
+const int NID_biometricInfo = 285;
+
+const int OBJ_biometricInfo = 1;
+
+const String SN_qcStatements = 'qcStatements';
+
+const int NID_qcStatements = 286;
+
+const int OBJ_qcStatements = 1;
+
+const String SN_ac_auditEntity = 'ac-auditEntity';
+
+const int NID_ac_auditEntity = 287;
+
+const int OBJ_ac_auditEntity = 1;
+
+const String SN_ac_targeting = 'ac-targeting';
+
+const int NID_ac_targeting = 288;
+
+const int OBJ_ac_targeting = 1;
+
+const String SN_aaControls = 'aaControls';
+
+const int NID_aaControls = 289;
+
+const int OBJ_aaControls = 1;
+
+const String SN_sbgp_ipAddrBlock = 'sbgp-ipAddrBlock';
+
+const int NID_sbgp_ipAddrBlock = 290;
+
+const int OBJ_sbgp_ipAddrBlock = 1;
+
+const String SN_sbgp_autonomousSysNum = 'sbgp-autonomousSysNum';
+
+const int NID_sbgp_autonomousSysNum = 291;
+
+const int OBJ_sbgp_autonomousSysNum = 1;
+
+const String SN_sbgp_routerIdentifier = 'sbgp-routerIdentifier';
+
+const int NID_sbgp_routerIdentifier = 292;
+
+const int OBJ_sbgp_routerIdentifier = 1;
+
+const String SN_ac_proxying = 'ac-proxying';
+
+const int NID_ac_proxying = 397;
+
+const int OBJ_ac_proxying = 1;
+
+const String SN_sinfo_access = 'subjectInfoAccess';
+
+const String LN_sinfo_access = 'Subject Information Access';
+
+const int NID_sinfo_access = 398;
+
+const int OBJ_sinfo_access = 1;
+
+const String SN_proxyCertInfo = 'proxyCertInfo';
+
+const String LN_proxyCertInfo = 'Proxy Certificate Information';
+
+const int NID_proxyCertInfo = 663;
+
+const int OBJ_proxyCertInfo = 1;
+
+const String SN_tlsfeature = 'tlsfeature';
+
+const String LN_tlsfeature = 'TLS Feature';
+
+const int NID_tlsfeature = 1020;
+
+const int OBJ_tlsfeature = 1;
+
+const String SN_id_qt_cps = 'id-qt-cps';
+
+const String LN_id_qt_cps = 'Policy Qualifier CPS';
+
+const int NID_id_qt_cps = 164;
+
+const int OBJ_id_qt_cps = 1;
+
+const String SN_id_qt_unotice = 'id-qt-unotice';
+
+const String LN_id_qt_unotice = 'Policy Qualifier User Notice';
+
+const int NID_id_qt_unotice = 165;
+
+const int OBJ_id_qt_unotice = 1;
+
+const String SN_textNotice = 'textNotice';
+
+const int NID_textNotice = 293;
+
+const int OBJ_textNotice = 1;
+
+const String SN_server_auth = 'serverAuth';
+
+const String LN_server_auth = 'TLS Web Server Authentication';
+
+const int NID_server_auth = 129;
+
+const int OBJ_server_auth = 1;
+
+const String SN_client_auth = 'clientAuth';
+
+const String LN_client_auth = 'TLS Web Client Authentication';
+
+const int NID_client_auth = 130;
+
+const int OBJ_client_auth = 1;
+
+const String SN_code_sign = 'codeSigning';
+
+const String LN_code_sign = 'Code Signing';
+
+const int NID_code_sign = 131;
+
+const int OBJ_code_sign = 1;
+
+const String SN_email_protect = 'emailProtection';
+
+const String LN_email_protect = 'E-mail Protection';
+
+const int NID_email_protect = 132;
+
+const int OBJ_email_protect = 1;
+
+const String SN_ipsecEndSystem = 'ipsecEndSystem';
+
+const String LN_ipsecEndSystem = 'IPSec End System';
+
+const int NID_ipsecEndSystem = 294;
+
+const int OBJ_ipsecEndSystem = 1;
+
+const String SN_ipsecTunnel = 'ipsecTunnel';
+
+const String LN_ipsecTunnel = 'IPSec Tunnel';
+
+const int NID_ipsecTunnel = 295;
+
+const int OBJ_ipsecTunnel = 1;
+
+const String SN_ipsecUser = 'ipsecUser';
+
+const String LN_ipsecUser = 'IPSec User';
+
+const int NID_ipsecUser = 296;
+
+const int OBJ_ipsecUser = 1;
+
+const String SN_time_stamp = 'timeStamping';
+
+const String LN_time_stamp = 'Time Stamping';
+
+const int NID_time_stamp = 133;
+
+const int OBJ_time_stamp = 1;
+
+const String SN_OCSP_sign = 'OCSPSigning';
+
+const String LN_OCSP_sign = 'OCSP Signing';
+
+const int NID_OCSP_sign = 180;
+
+const int OBJ_OCSP_sign = 1;
+
+const String SN_dvcs = 'DVCS';
+
+const String LN_dvcs = 'dvcs';
+
+const int NID_dvcs = 297;
+
+const int OBJ_dvcs = 1;
+
+const String SN_ipsec_IKE = 'ipsecIKE';
+
+const String LN_ipsec_IKE = 'ipsec Internet Key Exchange';
+
+const int NID_ipsec_IKE = 1022;
+
+const int OBJ_ipsec_IKE = 1;
+
+const String SN_capwapAC = 'capwapAC';
+
+const String LN_capwapAC = 'Ctrl/provision WAP Access';
+
+const int NID_capwapAC = 1023;
+
+const int OBJ_capwapAC = 1;
+
+const String SN_capwapWTP = 'capwapWTP';
+
+const String LN_capwapWTP = 'Ctrl/Provision WAP Termination';
+
+const int NID_capwapWTP = 1024;
+
+const int OBJ_capwapWTP = 1;
+
+const String SN_sshClient = 'secureShellClient';
+
+const String LN_sshClient = 'SSH Client';
+
+const int NID_sshClient = 1025;
+
+const int OBJ_sshClient = 1;
+
+const String SN_sshServer = 'secureShellServer';
+
+const String LN_sshServer = 'SSH Server';
+
+const int NID_sshServer = 1026;
+
+const int OBJ_sshServer = 1;
+
+const String SN_sendRouter = 'sendRouter';
+
+const String LN_sendRouter = 'Send Router';
+
+const int NID_sendRouter = 1027;
+
+const int OBJ_sendRouter = 1;
+
+const String SN_sendProxiedRouter = 'sendProxiedRouter';
+
+const String LN_sendProxiedRouter = 'Send Proxied Router';
+
+const int NID_sendProxiedRouter = 1028;
+
+const int OBJ_sendProxiedRouter = 1;
+
+const String SN_sendOwner = 'sendOwner';
+
+const String LN_sendOwner = 'Send Owner';
+
+const int NID_sendOwner = 1029;
+
+const int OBJ_sendOwner = 1;
+
+const String SN_sendProxiedOwner = 'sendProxiedOwner';
+
+const String LN_sendProxiedOwner = 'Send Proxied Owner';
+
+const int NID_sendProxiedOwner = 1030;
+
+const int OBJ_sendProxiedOwner = 1;
+
+const String SN_cmcCA = 'cmcCA';
+
+const String LN_cmcCA = 'CMC Certificate Authority';
+
+const int NID_cmcCA = 1131;
+
+const int OBJ_cmcCA = 1;
+
+const String SN_cmcRA = 'cmcRA';
+
+const String LN_cmcRA = 'CMC Registration Authority';
+
+const int NID_cmcRA = 1132;
+
+const int OBJ_cmcRA = 1;
+
+const String SN_id_it_caProtEncCert = 'id-it-caProtEncCert';
+
+const int NID_id_it_caProtEncCert = 298;
+
+const int OBJ_id_it_caProtEncCert = 1;
+
+const String SN_id_it_signKeyPairTypes = 'id-it-signKeyPairTypes';
+
+const int NID_id_it_signKeyPairTypes = 299;
+
+const int OBJ_id_it_signKeyPairTypes = 1;
+
+const String SN_id_it_encKeyPairTypes = 'id-it-encKeyPairTypes';
+
+const int NID_id_it_encKeyPairTypes = 300;
+
+const int OBJ_id_it_encKeyPairTypes = 1;
+
+const String SN_id_it_preferredSymmAlg = 'id-it-preferredSymmAlg';
+
+const int NID_id_it_preferredSymmAlg = 301;
+
+const int OBJ_id_it_preferredSymmAlg = 1;
+
+const String SN_id_it_caKeyUpdateInfo = 'id-it-caKeyUpdateInfo';
+
+const int NID_id_it_caKeyUpdateInfo = 302;
+
+const int OBJ_id_it_caKeyUpdateInfo = 1;
+
+const String SN_id_it_currentCRL = 'id-it-currentCRL';
+
+const int NID_id_it_currentCRL = 303;
+
+const int OBJ_id_it_currentCRL = 1;
+
+const String SN_id_it_unsupportedOIDs = 'id-it-unsupportedOIDs';
+
+const int NID_id_it_unsupportedOIDs = 304;
+
+const int OBJ_id_it_unsupportedOIDs = 1;
+
+const String SN_id_it_subscriptionRequest = 'id-it-subscriptionRequest';
+
+const int NID_id_it_subscriptionRequest = 305;
+
+const int OBJ_id_it_subscriptionRequest = 1;
+
+const String SN_id_it_subscriptionResponse = 'id-it-subscriptionResponse';
+
+const int NID_id_it_subscriptionResponse = 306;
+
+const int OBJ_id_it_subscriptionResponse = 1;
+
+const String SN_id_it_keyPairParamReq = 'id-it-keyPairParamReq';
+
+const int NID_id_it_keyPairParamReq = 307;
+
+const int OBJ_id_it_keyPairParamReq = 1;
+
+const String SN_id_it_keyPairParamRep = 'id-it-keyPairParamRep';
+
+const int NID_id_it_keyPairParamRep = 308;
+
+const int OBJ_id_it_keyPairParamRep = 1;
+
+const String SN_id_it_revPassphrase = 'id-it-revPassphrase';
+
+const int NID_id_it_revPassphrase = 309;
+
+const int OBJ_id_it_revPassphrase = 1;
+
+const String SN_id_it_implicitConfirm = 'id-it-implicitConfirm';
+
+const int NID_id_it_implicitConfirm = 310;
+
+const int OBJ_id_it_implicitConfirm = 1;
+
+const String SN_id_it_confirmWaitTime = 'id-it-confirmWaitTime';
+
+const int NID_id_it_confirmWaitTime = 311;
+
+const int OBJ_id_it_confirmWaitTime = 1;
+
+const String SN_id_it_origPKIMessage = 'id-it-origPKIMessage';
+
+const int NID_id_it_origPKIMessage = 312;
+
+const int OBJ_id_it_origPKIMessage = 1;
+
+const String SN_id_it_suppLangTags = 'id-it-suppLangTags';
+
+const int NID_id_it_suppLangTags = 784;
+
+const int OBJ_id_it_suppLangTags = 1;
+
+const String SN_id_regCtrl = 'id-regCtrl';
+
+const int NID_id_regCtrl = 313;
+
+const int OBJ_id_regCtrl = 1;
+
+const String SN_id_regInfo = 'id-regInfo';
+
+const int NID_id_regInfo = 314;
+
+const int OBJ_id_regInfo = 1;
+
+const String SN_id_regCtrl_regToken = 'id-regCtrl-regToken';
+
+const int NID_id_regCtrl_regToken = 315;
+
+const int OBJ_id_regCtrl_regToken = 1;
+
+const String SN_id_regCtrl_authenticator = 'id-regCtrl-authenticator';
+
+const int NID_id_regCtrl_authenticator = 316;
+
+const int OBJ_id_regCtrl_authenticator = 1;
+
+const String SN_id_regCtrl_pkiPublicationInfo = 'id-regCtrl-pkiPublicationInfo';
+
+const int NID_id_regCtrl_pkiPublicationInfo = 317;
+
+const int OBJ_id_regCtrl_pkiPublicationInfo = 1;
+
+const String SN_id_regCtrl_pkiArchiveOptions = 'id-regCtrl-pkiArchiveOptions';
+
+const int NID_id_regCtrl_pkiArchiveOptions = 318;
+
+const int OBJ_id_regCtrl_pkiArchiveOptions = 1;
+
+const String SN_id_regCtrl_oldCertID = 'id-regCtrl-oldCertID';
+
+const int NID_id_regCtrl_oldCertID = 319;
+
+const int OBJ_id_regCtrl_oldCertID = 1;
+
+const String SN_id_regCtrl_protocolEncrKey = 'id-regCtrl-protocolEncrKey';
+
+const int NID_id_regCtrl_protocolEncrKey = 320;
+
+const int OBJ_id_regCtrl_protocolEncrKey = 1;
+
+const String SN_id_regInfo_utf8Pairs = 'id-regInfo-utf8Pairs';
+
+const int NID_id_regInfo_utf8Pairs = 321;
+
+const int OBJ_id_regInfo_utf8Pairs = 1;
+
+const String SN_id_regInfo_certReq = 'id-regInfo-certReq';
+
+const int NID_id_regInfo_certReq = 322;
+
+const int OBJ_id_regInfo_certReq = 1;
+
+const String SN_id_alg_des40 = 'id-alg-des40';
+
+const int NID_id_alg_des40 = 323;
+
+const int OBJ_id_alg_des40 = 1;
+
+const String SN_id_alg_noSignature = 'id-alg-noSignature';
+
+const int NID_id_alg_noSignature = 324;
+
+const int OBJ_id_alg_noSignature = 1;
+
+const String SN_id_alg_dh_sig_hmac_sha1 = 'id-alg-dh-sig-hmac-sha1';
+
+const int NID_id_alg_dh_sig_hmac_sha1 = 325;
+
+const int OBJ_id_alg_dh_sig_hmac_sha1 = 1;
+
+const String SN_id_alg_dh_pop = 'id-alg-dh-pop';
+
+const int NID_id_alg_dh_pop = 326;
+
+const int OBJ_id_alg_dh_pop = 1;
+
+const String SN_id_cmc_statusInfo = 'id-cmc-statusInfo';
+
+const int NID_id_cmc_statusInfo = 327;
+
+const int OBJ_id_cmc_statusInfo = 1;
+
+const String SN_id_cmc_identification = 'id-cmc-identification';
+
+const int NID_id_cmc_identification = 328;
+
+const int OBJ_id_cmc_identification = 1;
+
+const String SN_id_cmc_identityProof = 'id-cmc-identityProof';
+
+const int NID_id_cmc_identityProof = 329;
+
+const int OBJ_id_cmc_identityProof = 1;
+
+const String SN_id_cmc_dataReturn = 'id-cmc-dataReturn';
+
+const int NID_id_cmc_dataReturn = 330;
+
+const int OBJ_id_cmc_dataReturn = 1;
+
+const String SN_id_cmc_transactionId = 'id-cmc-transactionId';
+
+const int NID_id_cmc_transactionId = 331;
+
+const int OBJ_id_cmc_transactionId = 1;
+
+const String SN_id_cmc_senderNonce = 'id-cmc-senderNonce';
+
+const int NID_id_cmc_senderNonce = 332;
+
+const int OBJ_id_cmc_senderNonce = 1;
+
+const String SN_id_cmc_recipientNonce = 'id-cmc-recipientNonce';
+
+const int NID_id_cmc_recipientNonce = 333;
+
+const int OBJ_id_cmc_recipientNonce = 1;
+
+const String SN_id_cmc_addExtensions = 'id-cmc-addExtensions';
+
+const int NID_id_cmc_addExtensions = 334;
+
+const int OBJ_id_cmc_addExtensions = 1;
+
+const String SN_id_cmc_encryptedPOP = 'id-cmc-encryptedPOP';
+
+const int NID_id_cmc_encryptedPOP = 335;
+
+const int OBJ_id_cmc_encryptedPOP = 1;
+
+const String SN_id_cmc_decryptedPOP = 'id-cmc-decryptedPOP';
+
+const int NID_id_cmc_decryptedPOP = 336;
+
+const int OBJ_id_cmc_decryptedPOP = 1;
+
+const String SN_id_cmc_lraPOPWitness = 'id-cmc-lraPOPWitness';
+
+const int NID_id_cmc_lraPOPWitness = 337;
+
+const int OBJ_id_cmc_lraPOPWitness = 1;
+
+const String SN_id_cmc_getCert = 'id-cmc-getCert';
+
+const int NID_id_cmc_getCert = 338;
+
+const int OBJ_id_cmc_getCert = 1;
+
+const String SN_id_cmc_getCRL = 'id-cmc-getCRL';
+
+const int NID_id_cmc_getCRL = 339;
+
+const int OBJ_id_cmc_getCRL = 1;
+
+const String SN_id_cmc_revokeRequest = 'id-cmc-revokeRequest';
+
+const int NID_id_cmc_revokeRequest = 340;
+
+const int OBJ_id_cmc_revokeRequest = 1;
+
+const String SN_id_cmc_regInfo = 'id-cmc-regInfo';
+
+const int NID_id_cmc_regInfo = 341;
+
+const int OBJ_id_cmc_regInfo = 1;
+
+const String SN_id_cmc_responseInfo = 'id-cmc-responseInfo';
+
+const int NID_id_cmc_responseInfo = 342;
+
+const int OBJ_id_cmc_responseInfo = 1;
+
+const String SN_id_cmc_queryPending = 'id-cmc-queryPending';
+
+const int NID_id_cmc_queryPending = 343;
+
+const int OBJ_id_cmc_queryPending = 1;
+
+const String SN_id_cmc_popLinkRandom = 'id-cmc-popLinkRandom';
+
+const int NID_id_cmc_popLinkRandom = 344;
+
+const int OBJ_id_cmc_popLinkRandom = 1;
+
+const String SN_id_cmc_popLinkWitness = 'id-cmc-popLinkWitness';
+
+const int NID_id_cmc_popLinkWitness = 345;
+
+const int OBJ_id_cmc_popLinkWitness = 1;
+
+const String SN_id_cmc_confirmCertAcceptance = 'id-cmc-confirmCertAcceptance';
+
+const int NID_id_cmc_confirmCertAcceptance = 346;
+
+const int OBJ_id_cmc_confirmCertAcceptance = 1;
+
+const String SN_id_on_personalData = 'id-on-personalData';
+
+const int NID_id_on_personalData = 347;
+
+const int OBJ_id_on_personalData = 1;
+
+const String SN_id_on_permanentIdentifier = 'id-on-permanentIdentifier';
+
+const String LN_id_on_permanentIdentifier = 'Permanent Identifier';
+
+const int NID_id_on_permanentIdentifier = 858;
+
+const int OBJ_id_on_permanentIdentifier = 1;
+
+const String SN_id_pda_dateOfBirth = 'id-pda-dateOfBirth';
+
+const int NID_id_pda_dateOfBirth = 348;
+
+const int OBJ_id_pda_dateOfBirth = 1;
+
+const String SN_id_pda_placeOfBirth = 'id-pda-placeOfBirth';
+
+const int NID_id_pda_placeOfBirth = 349;
+
+const int OBJ_id_pda_placeOfBirth = 1;
+
+const String SN_id_pda_gender = 'id-pda-gender';
+
+const int NID_id_pda_gender = 351;
+
+const int OBJ_id_pda_gender = 1;
+
+const String SN_id_pda_countryOfCitizenship = 'id-pda-countryOfCitizenship';
+
+const int NID_id_pda_countryOfCitizenship = 352;
+
+const int OBJ_id_pda_countryOfCitizenship = 1;
+
+const String SN_id_pda_countryOfResidence = 'id-pda-countryOfResidence';
+
+const int NID_id_pda_countryOfResidence = 353;
+
+const int OBJ_id_pda_countryOfResidence = 1;
+
+const String SN_id_aca_authenticationInfo = 'id-aca-authenticationInfo';
+
+const int NID_id_aca_authenticationInfo = 354;
+
+const int OBJ_id_aca_authenticationInfo = 1;
+
+const String SN_id_aca_accessIdentity = 'id-aca-accessIdentity';
+
+const int NID_id_aca_accessIdentity = 355;
+
+const int OBJ_id_aca_accessIdentity = 1;
+
+const String SN_id_aca_chargingIdentity = 'id-aca-chargingIdentity';
+
+const int NID_id_aca_chargingIdentity = 356;
+
+const int OBJ_id_aca_chargingIdentity = 1;
+
+const String SN_id_aca_group = 'id-aca-group';
+
+const int NID_id_aca_group = 357;
+
+const int OBJ_id_aca_group = 1;
+
+const String SN_id_aca_role = 'id-aca-role';
+
+const int NID_id_aca_role = 358;
+
+const int OBJ_id_aca_role = 1;
+
+const String SN_id_aca_encAttrs = 'id-aca-encAttrs';
+
+const int NID_id_aca_encAttrs = 399;
+
+const int OBJ_id_aca_encAttrs = 1;
+
+const String SN_id_qcs_pkixQCSyntax_v1 = 'id-qcs-pkixQCSyntax-v1';
+
+const int NID_id_qcs_pkixQCSyntax_v1 = 359;
+
+const int OBJ_id_qcs_pkixQCSyntax_v1 = 1;
+
+const String SN_id_cct_crs = 'id-cct-crs';
+
+const int NID_id_cct_crs = 360;
+
+const int OBJ_id_cct_crs = 1;
+
+const String SN_id_cct_PKIData = 'id-cct-PKIData';
+
+const int NID_id_cct_PKIData = 361;
+
+const int OBJ_id_cct_PKIData = 1;
+
+const String SN_id_cct_PKIResponse = 'id-cct-PKIResponse';
+
+const int NID_id_cct_PKIResponse = 362;
+
+const int OBJ_id_cct_PKIResponse = 1;
+
+const String SN_id_ppl_anyLanguage = 'id-ppl-anyLanguage';
+
+const String LN_id_ppl_anyLanguage = 'Any language';
+
+const int NID_id_ppl_anyLanguage = 664;
+
+const int OBJ_id_ppl_anyLanguage = 1;
+
+const String SN_id_ppl_inheritAll = 'id-ppl-inheritAll';
+
+const String LN_id_ppl_inheritAll = 'Inherit all';
+
+const int NID_id_ppl_inheritAll = 665;
+
+const int OBJ_id_ppl_inheritAll = 1;
+
+const String SN_Independent = 'id-ppl-independent';
+
+const String LN_Independent = 'Independent';
+
+const int NID_Independent = 667;
+
+const int OBJ_Independent = 1;
+
+const String SN_ad_OCSP = 'OCSP';
+
+const String LN_ad_OCSP = 'OCSP';
+
+const int NID_ad_OCSP = 178;
+
+const int OBJ_ad_OCSP = 1;
+
+const String SN_ad_ca_issuers = 'caIssuers';
+
+const String LN_ad_ca_issuers = 'CA Issuers';
+
+const int NID_ad_ca_issuers = 179;
+
+const int OBJ_ad_ca_issuers = 1;
+
+const String SN_ad_timeStamping = 'ad_timestamping';
+
+const String LN_ad_timeStamping = 'AD Time Stamping';
+
+const int NID_ad_timeStamping = 363;
+
+const int OBJ_ad_timeStamping = 1;
+
+const String SN_ad_dvcs = 'AD_DVCS';
+
+const String LN_ad_dvcs = 'ad dvcs';
+
+const int NID_ad_dvcs = 364;
+
+const int OBJ_ad_dvcs = 1;
+
+const String SN_caRepository = 'caRepository';
+
+const String LN_caRepository = 'CA Repository';
+
+const int NID_caRepository = 785;
+
+const int OBJ_caRepository = 1;
+
+const int OBJ_id_pkix_OCSP = 1;
+
+const String SN_id_pkix_OCSP_basic = 'basicOCSPResponse';
+
+const String LN_id_pkix_OCSP_basic = 'Basic OCSP Response';
+
+const int NID_id_pkix_OCSP_basic = 365;
+
+const int OBJ_id_pkix_OCSP_basic = 1;
+
+const String SN_id_pkix_OCSP_Nonce = 'Nonce';
+
+const String LN_id_pkix_OCSP_Nonce = 'OCSP Nonce';
+
+const int NID_id_pkix_OCSP_Nonce = 366;
+
+const int OBJ_id_pkix_OCSP_Nonce = 1;
+
+const String SN_id_pkix_OCSP_CrlID = 'CrlID';
+
+const String LN_id_pkix_OCSP_CrlID = 'OCSP CRL ID';
+
+const int NID_id_pkix_OCSP_CrlID = 367;
+
+const int OBJ_id_pkix_OCSP_CrlID = 1;
+
+const String SN_id_pkix_OCSP_acceptableResponses = 'acceptableResponses';
+
+const String LN_id_pkix_OCSP_acceptableResponses = 'Acceptable OCSP Responses';
+
+const int NID_id_pkix_OCSP_acceptableResponses = 368;
+
+const int OBJ_id_pkix_OCSP_acceptableResponses = 1;
+
+const String SN_id_pkix_OCSP_noCheck = 'noCheck';
+
+const String LN_id_pkix_OCSP_noCheck = 'OCSP No Check';
+
+const int NID_id_pkix_OCSP_noCheck = 369;
+
+const int OBJ_id_pkix_OCSP_noCheck = 1;
+
+const String SN_id_pkix_OCSP_archiveCutoff = 'archiveCutoff';
+
+const String LN_id_pkix_OCSP_archiveCutoff = 'OCSP Archive Cutoff';
+
+const int NID_id_pkix_OCSP_archiveCutoff = 370;
+
+const int OBJ_id_pkix_OCSP_archiveCutoff = 1;
+
+const String SN_id_pkix_OCSP_serviceLocator = 'serviceLocator';
+
+const String LN_id_pkix_OCSP_serviceLocator = 'OCSP Service Locator';
+
+const int NID_id_pkix_OCSP_serviceLocator = 371;
+
+const int OBJ_id_pkix_OCSP_serviceLocator = 1;
+
+const String SN_id_pkix_OCSP_extendedStatus = 'extendedStatus';
+
+const String LN_id_pkix_OCSP_extendedStatus = 'Extended OCSP Status';
+
+const int NID_id_pkix_OCSP_extendedStatus = 372;
+
+const int OBJ_id_pkix_OCSP_extendedStatus = 1;
+
+const String SN_id_pkix_OCSP_valid = 'valid';
+
+const int NID_id_pkix_OCSP_valid = 373;
+
+const int OBJ_id_pkix_OCSP_valid = 1;
+
+const String SN_id_pkix_OCSP_path = 'path';
+
+const int NID_id_pkix_OCSP_path = 374;
+
+const int OBJ_id_pkix_OCSP_path = 1;
+
+const String SN_id_pkix_OCSP_trustRoot = 'trustRoot';
+
+const String LN_id_pkix_OCSP_trustRoot = 'Trust Root';
+
+const int NID_id_pkix_OCSP_trustRoot = 375;
+
+const int OBJ_id_pkix_OCSP_trustRoot = 1;
+
+const String SN_algorithm = 'algorithm';
+
+const String LN_algorithm = 'algorithm';
+
+const int NID_algorithm = 376;
+
+const int OBJ_algorithm = 1;
+
+const String SN_md5WithRSA = 'RSA-NP-MD5';
+
+const String LN_md5WithRSA = 'md5WithRSA';
+
+const int NID_md5WithRSA = 104;
+
+const int OBJ_md5WithRSA = 1;
+
+const String SN_des_ecb = 'DES-ECB';
+
+const String LN_des_ecb = 'des-ecb';
+
+const int NID_des_ecb = 29;
+
+const int OBJ_des_ecb = 1;
+
+const String SN_des_cbc = 'DES-CBC';
+
+const String LN_des_cbc = 'des-cbc';
+
+const int NID_des_cbc = 31;
+
+const int OBJ_des_cbc = 1;
+
+const String SN_des_ofb64 = 'DES-OFB';
+
+const String LN_des_ofb64 = 'des-ofb';
+
+const int NID_des_ofb64 = 45;
+
+const int OBJ_des_ofb64 = 1;
+
+const String SN_des_cfb64 = 'DES-CFB';
+
+const String LN_des_cfb64 = 'des-cfb';
+
+const int NID_des_cfb64 = 30;
+
+const int OBJ_des_cfb64 = 1;
+
+const String SN_rsaSignature = 'rsaSignature';
+
+const int NID_rsaSignature = 377;
+
+const int OBJ_rsaSignature = 1;
+
+const String SN_dsa_2 = 'DSA-old';
+
+const String LN_dsa_2 = 'dsaEncryption-old';
+
+const int NID_dsa_2 = 67;
+
+const int OBJ_dsa_2 = 1;
+
+const String SN_dsaWithSHA = 'DSA-SHA';
+
+const String LN_dsaWithSHA = 'dsaWithSHA';
+
+const int NID_dsaWithSHA = 66;
+
+const int OBJ_dsaWithSHA = 1;
+
+const String SN_shaWithRSAEncryption = 'RSA-SHA';
+
+const String LN_shaWithRSAEncryption = 'shaWithRSAEncryption';
+
+const int NID_shaWithRSAEncryption = 42;
+
+const int OBJ_shaWithRSAEncryption = 1;
+
+const String SN_des_ede_ecb = 'DES-EDE';
+
+const String LN_des_ede_ecb = 'des-ede';
+
+const int NID_des_ede_ecb = 32;
+
+const int OBJ_des_ede_ecb = 1;
+
+const String SN_des_ede3_ecb = 'DES-EDE3';
+
+const String LN_des_ede3_ecb = 'des-ede3';
+
+const int NID_des_ede3_ecb = 33;
+
+const String SN_des_ede_cbc = 'DES-EDE-CBC';
+
+const String LN_des_ede_cbc = 'des-ede-cbc';
+
+const int NID_des_ede_cbc = 43;
+
+const String SN_des_ede_cfb64 = 'DES-EDE-CFB';
+
+const String LN_des_ede_cfb64 = 'des-ede-cfb';
+
+const int NID_des_ede_cfb64 = 60;
+
+const String SN_des_ede3_cfb64 = 'DES-EDE3-CFB';
+
+const String LN_des_ede3_cfb64 = 'des-ede3-cfb';
+
+const int NID_des_ede3_cfb64 = 61;
+
+const String SN_des_ede_ofb64 = 'DES-EDE-OFB';
+
+const String LN_des_ede_ofb64 = 'des-ede-ofb';
+
+const int NID_des_ede_ofb64 = 62;
+
+const String SN_des_ede3_ofb64 = 'DES-EDE3-OFB';
+
+const String LN_des_ede3_ofb64 = 'des-ede3-ofb';
+
+const int NID_des_ede3_ofb64 = 63;
+
+const String SN_desx_cbc = 'DESX-CBC';
+
+const String LN_desx_cbc = 'desx-cbc';
+
+const int NID_desx_cbc = 80;
+
+const String SN_sha = 'SHA';
+
+const String LN_sha = 'sha';
+
+const int NID_sha = 41;
+
+const int OBJ_sha = 1;
+
+const String SN_sha1 = 'SHA1';
+
+const String LN_sha1 = 'sha1';
+
+const int NID_sha1 = 64;
+
+const int OBJ_sha1 = 1;
+
+const String SN_dsaWithSHA1_2 = 'DSA-SHA1-old';
+
+const String LN_dsaWithSHA1_2 = 'dsaWithSHA1-old';
+
+const int NID_dsaWithSHA1_2 = 70;
+
+const int OBJ_dsaWithSHA1_2 = 1;
+
+const String SN_sha1WithRSA = 'RSA-SHA1-2';
+
+const String LN_sha1WithRSA = 'sha1WithRSA';
+
+const int NID_sha1WithRSA = 115;
+
+const int OBJ_sha1WithRSA = 1;
+
+const String SN_ripemd160 = 'RIPEMD160';
+
+const String LN_ripemd160 = 'ripemd160';
+
+const int NID_ripemd160 = 117;
+
+const int OBJ_ripemd160 = 1;
+
+const String SN_ripemd160WithRSA = 'RSA-RIPEMD160';
+
+const String LN_ripemd160WithRSA = 'ripemd160WithRSA';
+
+const int NID_ripemd160WithRSA = 119;
+
+const int OBJ_ripemd160WithRSA = 1;
+
+const String SN_blake2b512 = 'BLAKE2b512';
+
+const String LN_blake2b512 = 'blake2b512';
+
+const int NID_blake2b512 = 1056;
+
+const int OBJ_blake2b512 = 1;
+
+const String SN_blake2s256 = 'BLAKE2s256';
+
+const String LN_blake2s256 = 'blake2s256';
+
+const int NID_blake2s256 = 1057;
+
+const int OBJ_blake2s256 = 1;
+
+const String SN_sxnet = 'SXNetID';
+
+const String LN_sxnet = 'Strong Extranet ID';
+
+const int NID_sxnet = 143;
+
+const int OBJ_sxnet = 1;
+
+const String SN_X500 = 'X500';
+
+const String LN_X500 = 'directory services (X.500)';
+
+const int NID_X500 = 11;
+
+const int OBJ_X500 = 2;
+
+const String SN_X509 = 'X509';
+
+const int NID_X509 = 12;
+
+const int OBJ_X509 = 2;
+
+const String SN_commonName = 'CN';
+
+const String LN_commonName = 'commonName';
+
+const int NID_commonName = 13;
+
+const int OBJ_commonName = 2;
+
+const String SN_surname = 'SN';
+
+const String LN_surname = 'surname';
+
+const int NID_surname = 100;
+
+const int OBJ_surname = 2;
+
+const String LN_serialNumber = 'serialNumber';
+
+const int NID_serialNumber = 105;
+
+const int OBJ_serialNumber = 2;
+
+const String SN_countryName = 'C';
+
+const String LN_countryName = 'countryName';
+
+const int NID_countryName = 14;
+
+const int OBJ_countryName = 2;
+
+const String SN_localityName = 'L';
+
+const String LN_localityName = 'localityName';
+
+const int NID_localityName = 15;
+
+const int OBJ_localityName = 2;
+
+const String SN_stateOrProvinceName = 'ST';
+
+const String LN_stateOrProvinceName = 'stateOrProvinceName';
+
+const int NID_stateOrProvinceName = 16;
+
+const int OBJ_stateOrProvinceName = 2;
+
+const String SN_streetAddress = 'street';
+
+const String LN_streetAddress = 'streetAddress';
+
+const int NID_streetAddress = 660;
+
+const int OBJ_streetAddress = 2;
+
+const String SN_organizationName = 'O';
+
+const String LN_organizationName = 'organizationName';
+
+const int NID_organizationName = 17;
+
+const int OBJ_organizationName = 2;
+
+const String SN_organizationalUnitName = 'OU';
+
+const String LN_organizationalUnitName = 'organizationalUnitName';
+
+const int NID_organizationalUnitName = 18;
+
+const int OBJ_organizationalUnitName = 2;
+
+const String SN_title = 'title';
+
+const String LN_title = 'title';
+
+const int NID_title = 106;
+
+const int OBJ_title = 2;
+
+const String LN_description = 'description';
+
+const int NID_description = 107;
+
+const int OBJ_description = 2;
+
+const String LN_searchGuide = 'searchGuide';
+
+const int NID_searchGuide = 859;
+
+const int OBJ_searchGuide = 2;
+
+const String LN_businessCategory = 'businessCategory';
+
+const int NID_businessCategory = 860;
+
+const int OBJ_businessCategory = 2;
+
+const String LN_postalAddress = 'postalAddress';
+
+const int NID_postalAddress = 861;
+
+const int OBJ_postalAddress = 2;
+
+const String LN_postalCode = 'postalCode';
+
+const int NID_postalCode = 661;
+
+const int OBJ_postalCode = 2;
+
+const String LN_postOfficeBox = 'postOfficeBox';
+
+const int NID_postOfficeBox = 862;
+
+const int OBJ_postOfficeBox = 2;
+
+const String LN_physicalDeliveryOfficeName = 'physicalDeliveryOfficeName';
+
+const int NID_physicalDeliveryOfficeName = 863;
+
+const int OBJ_physicalDeliveryOfficeName = 2;
+
+const String LN_telephoneNumber = 'telephoneNumber';
+
+const int NID_telephoneNumber = 864;
+
+const int OBJ_telephoneNumber = 2;
+
+const String LN_telexNumber = 'telexNumber';
+
+const int NID_telexNumber = 865;
+
+const int OBJ_telexNumber = 2;
+
+const String LN_teletexTerminalIdentifier = 'teletexTerminalIdentifier';
+
+const int NID_teletexTerminalIdentifier = 866;
+
+const int OBJ_teletexTerminalIdentifier = 2;
+
+const String LN_facsimileTelephoneNumber = 'facsimileTelephoneNumber';
+
+const int NID_facsimileTelephoneNumber = 867;
+
+const int OBJ_facsimileTelephoneNumber = 2;
+
+const String LN_x121Address = 'x121Address';
+
+const int NID_x121Address = 868;
+
+const int OBJ_x121Address = 2;
+
+const String LN_internationaliSDNNumber = 'internationaliSDNNumber';
+
+const int NID_internationaliSDNNumber = 869;
+
+const int OBJ_internationaliSDNNumber = 2;
+
+const String LN_registeredAddress = 'registeredAddress';
+
+const int NID_registeredAddress = 870;
+
+const int OBJ_registeredAddress = 2;
+
+const String LN_destinationIndicator = 'destinationIndicator';
+
+const int NID_destinationIndicator = 871;
+
+const int OBJ_destinationIndicator = 2;
+
+const String LN_preferredDeliveryMethod = 'preferredDeliveryMethod';
+
+const int NID_preferredDeliveryMethod = 872;
+
+const int OBJ_preferredDeliveryMethod = 2;
+
+const String LN_presentationAddress = 'presentationAddress';
+
+const int NID_presentationAddress = 873;
+
+const int OBJ_presentationAddress = 2;
+
+const String LN_supportedApplicationContext = 'supportedApplicationContext';
+
+const int NID_supportedApplicationContext = 874;
+
+const int OBJ_supportedApplicationContext = 2;
+
+const String SN_member = 'member';
+
+const int NID_member = 875;
+
+const int OBJ_member = 2;
+
+const String SN_owner = 'owner';
+
+const int NID_owner = 876;
+
+const int OBJ_owner = 2;
+
+const String LN_roleOccupant = 'roleOccupant';
+
+const int NID_roleOccupant = 877;
+
+const int OBJ_roleOccupant = 2;
+
+const String SN_seeAlso = 'seeAlso';
+
+const int NID_seeAlso = 878;
+
+const int OBJ_seeAlso = 2;
+
+const String LN_userPassword = 'userPassword';
+
+const int NID_userPassword = 879;
+
+const int OBJ_userPassword = 2;
+
+const String LN_userCertificate = 'userCertificate';
+
+const int NID_userCertificate = 880;
+
+const int OBJ_userCertificate = 2;
+
+const String LN_cACertificate = 'cACertificate';
+
+const int NID_cACertificate = 881;
+
+const int OBJ_cACertificate = 2;
+
+const String LN_authorityRevocationList = 'authorityRevocationList';
+
+const int NID_authorityRevocationList = 882;
+
+const int OBJ_authorityRevocationList = 2;
+
+const String LN_certificateRevocationList = 'certificateRevocationList';
+
+const int NID_certificateRevocationList = 883;
+
+const int OBJ_certificateRevocationList = 2;
+
+const String LN_crossCertificatePair = 'crossCertificatePair';
+
+const int NID_crossCertificatePair = 884;
+
+const int OBJ_crossCertificatePair = 2;
+
+const String SN_name = 'name';
+
+const String LN_name = 'name';
+
+const int NID_name = 173;
+
+const int OBJ_name = 2;
+
+const String SN_givenName = 'GN';
+
+const String LN_givenName = 'givenName';
+
+const int NID_givenName = 99;
+
+const int OBJ_givenName = 2;
+
+const String SN_initials = 'initials';
+
+const String LN_initials = 'initials';
+
+const int NID_initials = 101;
+
+const int OBJ_initials = 2;
+
+const String LN_generationQualifier = 'generationQualifier';
+
+const int NID_generationQualifier = 509;
+
+const int OBJ_generationQualifier = 2;
+
+const String LN_x500UniqueIdentifier = 'x500UniqueIdentifier';
+
+const int NID_x500UniqueIdentifier = 503;
+
+const int OBJ_x500UniqueIdentifier = 2;
+
+const String SN_dnQualifier = 'dnQualifier';
+
+const String LN_dnQualifier = 'dnQualifier';
+
+const int NID_dnQualifier = 174;
+
+const int OBJ_dnQualifier = 2;
+
+const String LN_enhancedSearchGuide = 'enhancedSearchGuide';
+
+const int NID_enhancedSearchGuide = 885;
+
+const int OBJ_enhancedSearchGuide = 2;
+
+const String LN_protocolInformation = 'protocolInformation';
+
+const int NID_protocolInformation = 886;
+
+const int OBJ_protocolInformation = 2;
+
+const String LN_distinguishedName = 'distinguishedName';
+
+const int NID_distinguishedName = 887;
+
+const int OBJ_distinguishedName = 2;
+
+const String LN_uniqueMember = 'uniqueMember';
+
+const int NID_uniqueMember = 888;
+
+const int OBJ_uniqueMember = 2;
+
+const String LN_houseIdentifier = 'houseIdentifier';
+
+const int NID_houseIdentifier = 889;
+
+const int OBJ_houseIdentifier = 2;
+
+const String LN_supportedAlgorithms = 'supportedAlgorithms';
+
+const int NID_supportedAlgorithms = 890;
+
+const int OBJ_supportedAlgorithms = 2;
+
+const String LN_deltaRevocationList = 'deltaRevocationList';
+
+const int NID_deltaRevocationList = 891;
+
+const int OBJ_deltaRevocationList = 2;
+
+const String SN_dmdName = 'dmdName';
+
+const int NID_dmdName = 892;
+
+const int OBJ_dmdName = 2;
+
+const String LN_pseudonym = 'pseudonym';
+
+const int NID_pseudonym = 510;
+
+const int OBJ_pseudonym = 2;
+
+const String SN_role = 'role';
+
+const String LN_role = 'role';
+
+const int NID_role = 400;
+
+const int OBJ_role = 2;
+
+const String LN_organizationIdentifier = 'organizationIdentifier';
+
+const int NID_organizationIdentifier = 1089;
+
+const int OBJ_organizationIdentifier = 2;
+
+const String SN_countryCode3c = 'c3';
+
+const String LN_countryCode3c = 'countryCode3c';
+
+const int NID_countryCode3c = 1090;
+
+const int OBJ_countryCode3c = 2;
+
+const String SN_countryCode3n = 'n3';
+
+const String LN_countryCode3n = 'countryCode3n';
+
+const int NID_countryCode3n = 1091;
+
+const int OBJ_countryCode3n = 2;
+
+const String LN_dnsName = 'dnsName';
+
+const int NID_dnsName = 1092;
+
+const int OBJ_dnsName = 2;
+
+const String SN_X500algorithms = 'X500algorithms';
+
+const String LN_X500algorithms = 'directory services - algorithms';
+
+const int NID_X500algorithms = 378;
+
+const int OBJ_X500algorithms = 2;
+
+const String SN_rsa = 'RSA';
+
+const String LN_rsa = 'rsa';
+
+const int NID_rsa = 19;
+
+const int OBJ_rsa = 2;
+
+const String SN_mdc2WithRSA = 'RSA-MDC2';
+
+const String LN_mdc2WithRSA = 'mdc2WithRSA';
+
+const int NID_mdc2WithRSA = 96;
+
+const int OBJ_mdc2WithRSA = 2;
+
+const String SN_mdc2 = 'MDC2';
+
+const String LN_mdc2 = 'mdc2';
+
+const int NID_mdc2 = 95;
+
+const int OBJ_mdc2 = 2;
+
+const String SN_id_ce = 'id-ce';
+
+const int NID_id_ce = 81;
+
+const int OBJ_id_ce = 2;
+
+const String SN_subject_directory_attributes = 'subjectDirectoryAttributes';
+
+const String LN_subject_directory_attributes =
+    'X509v3 Subject Directory Attributes';
+
+const int NID_subject_directory_attributes = 769;
+
+const int OBJ_subject_directory_attributes = 2;
+
+const String SN_subject_key_identifier = 'subjectKeyIdentifier';
+
+const String LN_subject_key_identifier = 'X509v3 Subject Key Identifier';
+
+const int NID_subject_key_identifier = 82;
+
+const int OBJ_subject_key_identifier = 2;
+
+const String SN_key_usage = 'keyUsage';
+
+const String LN_key_usage = 'X509v3 Key Usage';
+
+const int NID_key_usage = 83;
+
+const int OBJ_key_usage = 2;
+
+const String SN_private_key_usage_period = 'privateKeyUsagePeriod';
+
+const String LN_private_key_usage_period = 'X509v3 Private Key Usage Period';
+
+const int NID_private_key_usage_period = 84;
+
+const int OBJ_private_key_usage_period = 2;
+
+const String SN_subject_alt_name = 'subjectAltName';
+
+const String LN_subject_alt_name = 'X509v3 Subject Alternative Name';
+
+const int NID_subject_alt_name = 85;
+
+const int OBJ_subject_alt_name = 2;
+
+const String SN_issuer_alt_name = 'issuerAltName';
+
+const String LN_issuer_alt_name = 'X509v3 Issuer Alternative Name';
+
+const int NID_issuer_alt_name = 86;
+
+const int OBJ_issuer_alt_name = 2;
+
+const String SN_basic_constraints = 'basicConstraints';
+
+const String LN_basic_constraints = 'X509v3 Basic Constraints';
+
+const int NID_basic_constraints = 87;
+
+const int OBJ_basic_constraints = 2;
+
+const String SN_crl_number = 'crlNumber';
+
+const String LN_crl_number = 'X509v3 CRL Number';
+
+const int NID_crl_number = 88;
+
+const int OBJ_crl_number = 2;
+
+const String SN_crl_reason = 'CRLReason';
+
+const String LN_crl_reason = 'X509v3 CRL Reason Code';
+
+const int NID_crl_reason = 141;
+
+const int OBJ_crl_reason = 2;
+
+const String SN_invalidity_date = 'invalidityDate';
+
+const String LN_invalidity_date = 'Invalidity Date';
+
+const int NID_invalidity_date = 142;
+
+const int OBJ_invalidity_date = 2;
+
+const String SN_delta_crl = 'deltaCRL';
+
+const String LN_delta_crl = 'X509v3 Delta CRL Indicator';
+
+const int NID_delta_crl = 140;
+
+const int OBJ_delta_crl = 2;
+
+const String SN_issuing_distribution_point = 'issuingDistributionPoint';
+
+const String LN_issuing_distribution_point =
+    'X509v3 Issuing Distribution Point';
+
+const int NID_issuing_distribution_point = 770;
+
+const int OBJ_issuing_distribution_point = 2;
+
+const String SN_certificate_issuer = 'certificateIssuer';
+
+const String LN_certificate_issuer = 'X509v3 Certificate Issuer';
+
+const int NID_certificate_issuer = 771;
+
+const int OBJ_certificate_issuer = 2;
+
+const String SN_name_constraints = 'nameConstraints';
+
+const String LN_name_constraints = 'X509v3 Name Constraints';
+
+const int NID_name_constraints = 666;
+
+const int OBJ_name_constraints = 2;
+
+const String SN_crl_distribution_points = 'crlDistributionPoints';
+
+const String LN_crl_distribution_points = 'X509v3 CRL Distribution Points';
+
+const int NID_crl_distribution_points = 103;
+
+const int OBJ_crl_distribution_points = 2;
+
+const String SN_certificate_policies = 'certificatePolicies';
+
+const String LN_certificate_policies = 'X509v3 Certificate Policies';
+
+const int NID_certificate_policies = 89;
+
+const int OBJ_certificate_policies = 2;
+
+const String SN_any_policy = 'anyPolicy';
+
+const String LN_any_policy = 'X509v3 Any Policy';
+
+const int NID_any_policy = 746;
+
+const int OBJ_any_policy = 2;
+
+const String SN_policy_mappings = 'policyMappings';
+
+const String LN_policy_mappings = 'X509v3 Policy Mappings';
+
+const int NID_policy_mappings = 747;
+
+const int OBJ_policy_mappings = 2;
+
+const String SN_authority_key_identifier = 'authorityKeyIdentifier';
+
+const String LN_authority_key_identifier = 'X509v3 Authority Key Identifier';
+
+const int NID_authority_key_identifier = 90;
+
+const int OBJ_authority_key_identifier = 2;
+
+const String SN_policy_constraints = 'policyConstraints';
+
+const String LN_policy_constraints = 'X509v3 Policy Constraints';
+
+const int NID_policy_constraints = 401;
+
+const int OBJ_policy_constraints = 2;
+
+const String SN_ext_key_usage = 'extendedKeyUsage';
+
+const String LN_ext_key_usage = 'X509v3 Extended Key Usage';
+
+const int NID_ext_key_usage = 126;
+
+const int OBJ_ext_key_usage = 2;
+
+const String SN_freshest_crl = 'freshestCRL';
+
+const String LN_freshest_crl = 'X509v3 Freshest CRL';
+
+const int NID_freshest_crl = 857;
+
+const int OBJ_freshest_crl = 2;
+
+const String SN_inhibit_any_policy = 'inhibitAnyPolicy';
+
+const String LN_inhibit_any_policy = 'X509v3 Inhibit Any Policy';
+
+const int NID_inhibit_any_policy = 748;
+
+const int OBJ_inhibit_any_policy = 2;
+
+const String SN_target_information = 'targetInformation';
+
+const String LN_target_information = 'X509v3 AC Targeting';
+
+const int NID_target_information = 402;
+
+const int OBJ_target_information = 2;
+
+const String SN_no_rev_avail = 'noRevAvail';
+
+const String LN_no_rev_avail = 'X509v3 No Revocation Available';
+
+const int NID_no_rev_avail = 403;
+
+const int OBJ_no_rev_avail = 2;
+
+const String SN_anyExtendedKeyUsage = 'anyExtendedKeyUsage';
+
+const String LN_anyExtendedKeyUsage = 'Any Extended Key Usage';
+
+const int NID_anyExtendedKeyUsage = 910;
+
+const int OBJ_anyExtendedKeyUsage = 2;
+
+const String SN_netscape = 'Netscape';
+
+const String LN_netscape = 'Netscape Communications Corp.';
+
+const int NID_netscape = 57;
+
+const int OBJ_netscape = 2;
+
+const String SN_netscape_cert_extension = 'nsCertExt';
+
+const String LN_netscape_cert_extension = 'Netscape Certificate Extension';
+
+const int NID_netscape_cert_extension = 58;
+
+const int OBJ_netscape_cert_extension = 2;
+
+const String SN_netscape_data_type = 'nsDataType';
+
+const String LN_netscape_data_type = 'Netscape Data Type';
+
+const int NID_netscape_data_type = 59;
+
+const int OBJ_netscape_data_type = 2;
+
+const String SN_netscape_cert_type = 'nsCertType';
+
+const String LN_netscape_cert_type = 'Netscape Cert Type';
+
+const int NID_netscape_cert_type = 71;
+
+const int OBJ_netscape_cert_type = 2;
+
+const String SN_netscape_base_url = 'nsBaseUrl';
+
+const String LN_netscape_base_url = 'Netscape Base Url';
+
+const int NID_netscape_base_url = 72;
+
+const int OBJ_netscape_base_url = 2;
+
+const String SN_netscape_revocation_url = 'nsRevocationUrl';
+
+const String LN_netscape_revocation_url = 'Netscape Revocation Url';
+
+const int NID_netscape_revocation_url = 73;
+
+const int OBJ_netscape_revocation_url = 2;
+
+const String SN_netscape_ca_revocation_url = 'nsCaRevocationUrl';
+
+const String LN_netscape_ca_revocation_url = 'Netscape CA Revocation Url';
+
+const int NID_netscape_ca_revocation_url = 74;
+
+const int OBJ_netscape_ca_revocation_url = 2;
+
+const String SN_netscape_renewal_url = 'nsRenewalUrl';
+
+const String LN_netscape_renewal_url = 'Netscape Renewal Url';
+
+const int NID_netscape_renewal_url = 75;
+
+const int OBJ_netscape_renewal_url = 2;
+
+const String SN_netscape_ca_policy_url = 'nsCaPolicyUrl';
+
+const String LN_netscape_ca_policy_url = 'Netscape CA Policy Url';
+
+const int NID_netscape_ca_policy_url = 76;
+
+const int OBJ_netscape_ca_policy_url = 2;
+
+const String SN_netscape_ssl_server_name = 'nsSslServerName';
+
+const String LN_netscape_ssl_server_name = 'Netscape SSL Server Name';
+
+const int NID_netscape_ssl_server_name = 77;
+
+const int OBJ_netscape_ssl_server_name = 2;
+
+const String SN_netscape_comment = 'nsComment';
+
+const String LN_netscape_comment = 'Netscape Comment';
+
+const int NID_netscape_comment = 78;
+
+const int OBJ_netscape_comment = 2;
+
+const String SN_netscape_cert_sequence = 'nsCertSequence';
+
+const String LN_netscape_cert_sequence = 'Netscape Certificate Sequence';
+
+const int NID_netscape_cert_sequence = 79;
+
+const int OBJ_netscape_cert_sequence = 2;
+
+const String SN_ns_sgc = 'nsSGC';
+
+const String LN_ns_sgc = 'Netscape Server Gated Crypto';
+
+const int NID_ns_sgc = 139;
+
+const int OBJ_ns_sgc = 2;
+
+const String SN_org = 'ORG';
+
+const String LN_org = 'org';
+
+const int NID_org = 379;
+
+const int OBJ_org = 1;
+
+const String SN_dod = 'DOD';
+
+const String LN_dod = 'dod';
+
+const int NID_dod = 380;
+
+const int OBJ_dod = 1;
+
+const String SN_iana = 'IANA';
+
+const String LN_iana = 'iana';
+
+const int NID_iana = 381;
+
+const int OBJ_iana = 1;
+
+const int OBJ_internet = 1;
+
+const String SN_Directory = 'directory';
+
+const String LN_Directory = 'Directory';
+
+const int NID_Directory = 382;
+
+const int OBJ_Directory = 1;
+
+const String SN_Management = 'mgmt';
+
+const String LN_Management = 'Management';
+
+const int NID_Management = 383;
+
+const int OBJ_Management = 1;
+
+const String SN_Experimental = 'experimental';
+
+const String LN_Experimental = 'Experimental';
+
+const int NID_Experimental = 384;
+
+const int OBJ_Experimental = 1;
+
+const String SN_Private = 'private';
+
+const String LN_Private = 'Private';
+
+const int NID_Private = 385;
+
+const int OBJ_Private = 1;
+
+const String SN_Security = 'security';
+
+const String LN_Security = 'Security';
+
+const int NID_Security = 386;
+
+const int OBJ_Security = 1;
+
+const String SN_SNMPv2 = 'snmpv2';
+
+const String LN_SNMPv2 = 'SNMPv2';
+
+const int NID_SNMPv2 = 387;
+
+const int OBJ_SNMPv2 = 1;
+
+const String LN_Mail = 'Mail';
+
+const int NID_Mail = 388;
+
+const int OBJ_Mail = 1;
+
+const String SN_Enterprises = 'enterprises';
+
+const String LN_Enterprises = 'Enterprises';
+
+const int NID_Enterprises = 389;
+
+const int OBJ_Enterprises = 1;
+
+const String SN_dcObject = 'dcobject';
+
+const String LN_dcObject = 'dcObject';
+
+const int NID_dcObject = 390;
+
+const int OBJ_dcObject = 1;
+
+const String SN_mime_mhs = 'mime-mhs';
+
+const String LN_mime_mhs = 'MIME MHS';
+
+const int NID_mime_mhs = 504;
+
+const int OBJ_mime_mhs = 1;
+
+const String SN_mime_mhs_headings = 'mime-mhs-headings';
+
+const String LN_mime_mhs_headings = 'mime-mhs-headings';
+
+const int NID_mime_mhs_headings = 505;
+
+const int OBJ_mime_mhs_headings = 1;
+
+const String SN_mime_mhs_bodies = 'mime-mhs-bodies';
+
+const String LN_mime_mhs_bodies = 'mime-mhs-bodies';
+
+const int NID_mime_mhs_bodies = 506;
+
+const int OBJ_mime_mhs_bodies = 1;
+
+const String SN_id_hex_partial_message = 'id-hex-partial-message';
+
+const String LN_id_hex_partial_message = 'id-hex-partial-message';
+
+const int NID_id_hex_partial_message = 507;
+
+const int OBJ_id_hex_partial_message = 1;
+
+const String SN_id_hex_multipart_message = 'id-hex-multipart-message';
+
+const String LN_id_hex_multipart_message = 'id-hex-multipart-message';
+
+const int NID_id_hex_multipart_message = 508;
+
+const int OBJ_id_hex_multipart_message = 1;
+
+const String SN_zlib_compression = 'ZLIB';
+
+const String LN_zlib_compression = 'zlib compression';
+
+const int NID_zlib_compression = 125;
+
+const int OBJ_zlib_compression = 1;
+
+const int OBJ_csor = 2;
+
+const int OBJ_nistAlgorithms = 2;
+
+const int OBJ_aes = 2;
+
+const String SN_aes_128_ecb = 'AES-128-ECB';
+
+const String LN_aes_128_ecb = 'aes-128-ecb';
+
+const int NID_aes_128_ecb = 418;
+
+const int OBJ_aes_128_ecb = 2;
+
+const String SN_aes_128_cbc = 'AES-128-CBC';
+
+const String LN_aes_128_cbc = 'aes-128-cbc';
+
+const int NID_aes_128_cbc = 419;
+
+const int OBJ_aes_128_cbc = 2;
+
+const String SN_aes_128_ofb128 = 'AES-128-OFB';
+
+const String LN_aes_128_ofb128 = 'aes-128-ofb';
+
+const int NID_aes_128_ofb128 = 420;
+
+const int OBJ_aes_128_ofb128 = 2;
+
+const String SN_aes_128_cfb128 = 'AES-128-CFB';
+
+const String LN_aes_128_cfb128 = 'aes-128-cfb';
+
+const int NID_aes_128_cfb128 = 421;
+
+const int OBJ_aes_128_cfb128 = 2;
+
+const String SN_id_aes128_wrap = 'id-aes128-wrap';
+
+const int NID_id_aes128_wrap = 788;
+
+const int OBJ_id_aes128_wrap = 2;
+
+const String SN_aes_128_gcm = 'id-aes128-GCM';
+
+const String LN_aes_128_gcm = 'aes-128-gcm';
+
+const int NID_aes_128_gcm = 895;
+
+const int OBJ_aes_128_gcm = 2;
+
+const String SN_aes_128_ccm = 'id-aes128-CCM';
+
+const String LN_aes_128_ccm = 'aes-128-ccm';
+
+const int NID_aes_128_ccm = 896;
+
+const int OBJ_aes_128_ccm = 2;
+
+const String SN_id_aes128_wrap_pad = 'id-aes128-wrap-pad';
+
+const int NID_id_aes128_wrap_pad = 897;
+
+const int OBJ_id_aes128_wrap_pad = 2;
+
+const String SN_aes_192_ecb = 'AES-192-ECB';
+
+const String LN_aes_192_ecb = 'aes-192-ecb';
+
+const int NID_aes_192_ecb = 422;
+
+const int OBJ_aes_192_ecb = 2;
+
+const String SN_aes_192_cbc = 'AES-192-CBC';
+
+const String LN_aes_192_cbc = 'aes-192-cbc';
+
+const int NID_aes_192_cbc = 423;
+
+const int OBJ_aes_192_cbc = 2;
+
+const String SN_aes_192_ofb128 = 'AES-192-OFB';
+
+const String LN_aes_192_ofb128 = 'aes-192-ofb';
+
+const int NID_aes_192_ofb128 = 424;
+
+const int OBJ_aes_192_ofb128 = 2;
+
+const String SN_aes_192_cfb128 = 'AES-192-CFB';
+
+const String LN_aes_192_cfb128 = 'aes-192-cfb';
+
+const int NID_aes_192_cfb128 = 425;
+
+const int OBJ_aes_192_cfb128 = 2;
+
+const String SN_id_aes192_wrap = 'id-aes192-wrap';
+
+const int NID_id_aes192_wrap = 789;
+
+const int OBJ_id_aes192_wrap = 2;
+
+const String SN_aes_192_gcm = 'id-aes192-GCM';
+
+const String LN_aes_192_gcm = 'aes-192-gcm';
+
+const int NID_aes_192_gcm = 898;
+
+const int OBJ_aes_192_gcm = 2;
+
+const String SN_aes_192_ccm = 'id-aes192-CCM';
+
+const String LN_aes_192_ccm = 'aes-192-ccm';
+
+const int NID_aes_192_ccm = 899;
+
+const int OBJ_aes_192_ccm = 2;
+
+const String SN_id_aes192_wrap_pad = 'id-aes192-wrap-pad';
+
+const int NID_id_aes192_wrap_pad = 900;
+
+const int OBJ_id_aes192_wrap_pad = 2;
+
+const String SN_aes_256_ecb = 'AES-256-ECB';
+
+const String LN_aes_256_ecb = 'aes-256-ecb';
+
+const int NID_aes_256_ecb = 426;
+
+const int OBJ_aes_256_ecb = 2;
+
+const String SN_aes_256_cbc = 'AES-256-CBC';
+
+const String LN_aes_256_cbc = 'aes-256-cbc';
+
+const int NID_aes_256_cbc = 427;
+
+const int OBJ_aes_256_cbc = 2;
+
+const String SN_aes_256_ofb128 = 'AES-256-OFB';
+
+const String LN_aes_256_ofb128 = 'aes-256-ofb';
+
+const int NID_aes_256_ofb128 = 428;
+
+const int OBJ_aes_256_ofb128 = 2;
+
+const String SN_aes_256_cfb128 = 'AES-256-CFB';
+
+const String LN_aes_256_cfb128 = 'aes-256-cfb';
+
+const int NID_aes_256_cfb128 = 429;
+
+const int OBJ_aes_256_cfb128 = 2;
+
+const String SN_id_aes256_wrap = 'id-aes256-wrap';
+
+const int NID_id_aes256_wrap = 790;
+
+const int OBJ_id_aes256_wrap = 2;
+
+const String SN_aes_256_gcm = 'id-aes256-GCM';
+
+const String LN_aes_256_gcm = 'aes-256-gcm';
+
+const int NID_aes_256_gcm = 901;
+
+const int OBJ_aes_256_gcm = 2;
+
+const String SN_aes_256_ccm = 'id-aes256-CCM';
+
+const String LN_aes_256_ccm = 'aes-256-ccm';
+
+const int NID_aes_256_ccm = 902;
+
+const int OBJ_aes_256_ccm = 2;
+
+const String SN_id_aes256_wrap_pad = 'id-aes256-wrap-pad';
+
+const int NID_id_aes256_wrap_pad = 903;
+
+const int OBJ_id_aes256_wrap_pad = 2;
+
+const String SN_aes_128_xts = 'AES-128-XTS';
+
+const String LN_aes_128_xts = 'aes-128-xts';
+
+const int NID_aes_128_xts = 913;
+
+const int OBJ_aes_128_xts = 1;
+
+const String SN_aes_256_xts = 'AES-256-XTS';
+
+const String LN_aes_256_xts = 'aes-256-xts';
+
+const int NID_aes_256_xts = 914;
+
+const int OBJ_aes_256_xts = 1;
+
+const String SN_aes_128_cfb1 = 'AES-128-CFB1';
+
+const String LN_aes_128_cfb1 = 'aes-128-cfb1';
+
+const int NID_aes_128_cfb1 = 650;
+
+const String SN_aes_192_cfb1 = 'AES-192-CFB1';
+
+const String LN_aes_192_cfb1 = 'aes-192-cfb1';
+
+const int NID_aes_192_cfb1 = 651;
+
+const String SN_aes_256_cfb1 = 'AES-256-CFB1';
+
+const String LN_aes_256_cfb1 = 'aes-256-cfb1';
+
+const int NID_aes_256_cfb1 = 652;
+
+const String SN_aes_128_cfb8 = 'AES-128-CFB8';
+
+const String LN_aes_128_cfb8 = 'aes-128-cfb8';
+
+const int NID_aes_128_cfb8 = 653;
+
+const String SN_aes_192_cfb8 = 'AES-192-CFB8';
+
+const String LN_aes_192_cfb8 = 'aes-192-cfb8';
+
+const int NID_aes_192_cfb8 = 654;
+
+const String SN_aes_256_cfb8 = 'AES-256-CFB8';
+
+const String LN_aes_256_cfb8 = 'aes-256-cfb8';
+
+const int NID_aes_256_cfb8 = 655;
+
+const String SN_aes_128_ctr = 'AES-128-CTR';
+
+const String LN_aes_128_ctr = 'aes-128-ctr';
+
+const int NID_aes_128_ctr = 904;
+
+const String SN_aes_192_ctr = 'AES-192-CTR';
+
+const String LN_aes_192_ctr = 'aes-192-ctr';
+
+const int NID_aes_192_ctr = 905;
+
+const String SN_aes_256_ctr = 'AES-256-CTR';
+
+const String LN_aes_256_ctr = 'aes-256-ctr';
+
+const int NID_aes_256_ctr = 906;
+
+const String SN_aes_128_ocb = 'AES-128-OCB';
+
+const String LN_aes_128_ocb = 'aes-128-ocb';
+
+const int NID_aes_128_ocb = 958;
+
+const String SN_aes_192_ocb = 'AES-192-OCB';
+
+const String LN_aes_192_ocb = 'aes-192-ocb';
+
+const int NID_aes_192_ocb = 959;
+
+const String SN_aes_256_ocb = 'AES-256-OCB';
+
+const String LN_aes_256_ocb = 'aes-256-ocb';
+
+const int NID_aes_256_ocb = 960;
+
+const String SN_des_cfb1 = 'DES-CFB1';
+
+const String LN_des_cfb1 = 'des-cfb1';
+
+const int NID_des_cfb1 = 656;
+
+const String SN_des_cfb8 = 'DES-CFB8';
+
+const String LN_des_cfb8 = 'des-cfb8';
+
+const int NID_des_cfb8 = 657;
+
+const String SN_des_ede3_cfb1 = 'DES-EDE3-CFB1';
+
+const String LN_des_ede3_cfb1 = 'des-ede3-cfb1';
+
+const int NID_des_ede3_cfb1 = 658;
+
+const String SN_des_ede3_cfb8 = 'DES-EDE3-CFB8';
+
+const String LN_des_ede3_cfb8 = 'des-ede3-cfb8';
+
+const int NID_des_ede3_cfb8 = 659;
+
+const int OBJ_nist_hashalgs = 2;
+
+const String SN_sha256 = 'SHA256';
+
+const String LN_sha256 = 'sha256';
+
+const int NID_sha256 = 672;
+
+const int OBJ_sha256 = 2;
+
+const String SN_sha384 = 'SHA384';
+
+const String LN_sha384 = 'sha384';
+
+const int NID_sha384 = 673;
+
+const int OBJ_sha384 = 2;
+
+const String SN_sha512 = 'SHA512';
+
+const String LN_sha512 = 'sha512';
+
+const int NID_sha512 = 674;
+
+const int OBJ_sha512 = 2;
+
+const String SN_sha224 = 'SHA224';
+
+const String LN_sha224 = 'sha224';
+
+const int NID_sha224 = 675;
+
+const int OBJ_sha224 = 2;
+
+const String SN_sha512_224 = 'SHA512-224';
+
+const String LN_sha512_224 = 'sha512-224';
+
+const int NID_sha512_224 = 1094;
+
+const int OBJ_sha512_224 = 2;
+
+const String SN_sha512_256 = 'SHA512-256';
+
+const String LN_sha512_256 = 'sha512-256';
+
+const int NID_sha512_256 = 1095;
+
+const int OBJ_sha512_256 = 2;
+
+const String SN_sha3_224 = 'SHA3-224';
+
+const String LN_sha3_224 = 'sha3-224';
+
+const int NID_sha3_224 = 1096;
+
+const int OBJ_sha3_224 = 2;
+
+const String SN_sha3_256 = 'SHA3-256';
+
+const String LN_sha3_256 = 'sha3-256';
+
+const int NID_sha3_256 = 1097;
+
+const int OBJ_sha3_256 = 2;
+
+const String SN_sha3_384 = 'SHA3-384';
+
+const String LN_sha3_384 = 'sha3-384';
+
+const int NID_sha3_384 = 1098;
+
+const int OBJ_sha3_384 = 2;
+
+const String SN_sha3_512 = 'SHA3-512';
+
+const String LN_sha3_512 = 'sha3-512';
+
+const int NID_sha3_512 = 1099;
+
+const int OBJ_sha3_512 = 2;
+
+const String SN_shake128 = 'SHAKE128';
+
+const String LN_shake128 = 'shake128';
+
+const int NID_shake128 = 1100;
+
+const int OBJ_shake128 = 2;
+
+const String SN_shake256 = 'SHAKE256';
+
+const String LN_shake256 = 'shake256';
+
+const int NID_shake256 = 1101;
+
+const int OBJ_shake256 = 2;
+
+const String SN_hmac_sha3_224 = 'id-hmacWithSHA3-224';
+
+const String LN_hmac_sha3_224 = 'hmac-sha3-224';
+
+const int NID_hmac_sha3_224 = 1102;
+
+const int OBJ_hmac_sha3_224 = 2;
+
+const String SN_hmac_sha3_256 = 'id-hmacWithSHA3-256';
+
+const String LN_hmac_sha3_256 = 'hmac-sha3-256';
+
+const int NID_hmac_sha3_256 = 1103;
+
+const int OBJ_hmac_sha3_256 = 2;
+
+const String SN_hmac_sha3_384 = 'id-hmacWithSHA3-384';
+
+const String LN_hmac_sha3_384 = 'hmac-sha3-384';
+
+const int NID_hmac_sha3_384 = 1104;
+
+const int OBJ_hmac_sha3_384 = 2;
+
+const String SN_hmac_sha3_512 = 'id-hmacWithSHA3-512';
+
+const String LN_hmac_sha3_512 = 'hmac-sha3-512';
+
+const int NID_hmac_sha3_512 = 1105;
+
+const int OBJ_hmac_sha3_512 = 2;
+
+const int OBJ_dsa_with_sha2 = 2;
+
+const String SN_dsa_with_SHA224 = 'dsa_with_SHA224';
+
+const int NID_dsa_with_SHA224 = 802;
+
+const int OBJ_dsa_with_SHA224 = 2;
+
+const String SN_dsa_with_SHA256 = 'dsa_with_SHA256';
+
+const int NID_dsa_with_SHA256 = 803;
+
+const int OBJ_dsa_with_SHA256 = 2;
+
+const int OBJ_sigAlgs = 2;
+
+const String SN_dsa_with_SHA384 = 'id-dsa-with-sha384';
+
+const String LN_dsa_with_SHA384 = 'dsa_with_SHA384';
+
+const int NID_dsa_with_SHA384 = 1106;
+
+const int OBJ_dsa_with_SHA384 = 2;
+
+const String SN_dsa_with_SHA512 = 'id-dsa-with-sha512';
+
+const String LN_dsa_with_SHA512 = 'dsa_with_SHA512';
+
+const int NID_dsa_with_SHA512 = 1107;
+
+const int OBJ_dsa_with_SHA512 = 2;
+
+const String SN_dsa_with_SHA3_224 = 'id-dsa-with-sha3-224';
+
+const String LN_dsa_with_SHA3_224 = 'dsa_with_SHA3-224';
+
+const int NID_dsa_with_SHA3_224 = 1108;
+
+const int OBJ_dsa_with_SHA3_224 = 2;
+
+const String SN_dsa_with_SHA3_256 = 'id-dsa-with-sha3-256';
+
+const String LN_dsa_with_SHA3_256 = 'dsa_with_SHA3-256';
+
+const int NID_dsa_with_SHA3_256 = 1109;
+
+const int OBJ_dsa_with_SHA3_256 = 2;
+
+const String SN_dsa_with_SHA3_384 = 'id-dsa-with-sha3-384';
+
+const String LN_dsa_with_SHA3_384 = 'dsa_with_SHA3-384';
+
+const int NID_dsa_with_SHA3_384 = 1110;
+
+const int OBJ_dsa_with_SHA3_384 = 2;
+
+const String SN_dsa_with_SHA3_512 = 'id-dsa-with-sha3-512';
+
+const String LN_dsa_with_SHA3_512 = 'dsa_with_SHA3-512';
+
+const int NID_dsa_with_SHA3_512 = 1111;
+
+const int OBJ_dsa_with_SHA3_512 = 2;
+
+const String SN_ecdsa_with_SHA3_224 = 'id-ecdsa-with-sha3-224';
+
+const String LN_ecdsa_with_SHA3_224 = 'ecdsa_with_SHA3-224';
+
+const int NID_ecdsa_with_SHA3_224 = 1112;
+
+const int OBJ_ecdsa_with_SHA3_224 = 2;
+
+const String SN_ecdsa_with_SHA3_256 = 'id-ecdsa-with-sha3-256';
+
+const String LN_ecdsa_with_SHA3_256 = 'ecdsa_with_SHA3-256';
+
+const int NID_ecdsa_with_SHA3_256 = 1113;
+
+const int OBJ_ecdsa_with_SHA3_256 = 2;
+
+const String SN_ecdsa_with_SHA3_384 = 'id-ecdsa-with-sha3-384';
+
+const String LN_ecdsa_with_SHA3_384 = 'ecdsa_with_SHA3-384';
+
+const int NID_ecdsa_with_SHA3_384 = 1114;
+
+const int OBJ_ecdsa_with_SHA3_384 = 2;
+
+const String SN_ecdsa_with_SHA3_512 = 'id-ecdsa-with-sha3-512';
+
+const String LN_ecdsa_with_SHA3_512 = 'ecdsa_with_SHA3-512';
+
+const int NID_ecdsa_with_SHA3_512 = 1115;
+
+const int OBJ_ecdsa_with_SHA3_512 = 2;
+
+const String SN_RSA_SHA3_224 = 'id-rsassa-pkcs1-v1_5-with-sha3-224';
+
+const String LN_RSA_SHA3_224 = 'RSA-SHA3-224';
+
+const int NID_RSA_SHA3_224 = 1116;
+
+const int OBJ_RSA_SHA3_224 = 2;
+
+const String SN_RSA_SHA3_256 = 'id-rsassa-pkcs1-v1_5-with-sha3-256';
+
+const String LN_RSA_SHA3_256 = 'RSA-SHA3-256';
+
+const int NID_RSA_SHA3_256 = 1117;
+
+const int OBJ_RSA_SHA3_256 = 2;
+
+const String SN_RSA_SHA3_384 = 'id-rsassa-pkcs1-v1_5-with-sha3-384';
+
+const String LN_RSA_SHA3_384 = 'RSA-SHA3-384';
+
+const int NID_RSA_SHA3_384 = 1118;
+
+const int OBJ_RSA_SHA3_384 = 2;
+
+const String SN_RSA_SHA3_512 = 'id-rsassa-pkcs1-v1_5-with-sha3-512';
+
+const String LN_RSA_SHA3_512 = 'RSA-SHA3-512';
+
+const int NID_RSA_SHA3_512 = 1119;
+
+const int OBJ_RSA_SHA3_512 = 2;
+
+const String SN_hold_instruction_code = 'holdInstructionCode';
+
+const String LN_hold_instruction_code = 'Hold Instruction Code';
+
+const int NID_hold_instruction_code = 430;
+
+const int OBJ_hold_instruction_code = 2;
+
+const int OBJ_holdInstruction = 1;
+
+const String SN_hold_instruction_none = 'holdInstructionNone';
+
+const String LN_hold_instruction_none = 'Hold Instruction None';
+
+const int NID_hold_instruction_none = 431;
+
+const int OBJ_hold_instruction_none = 1;
+
+const String SN_hold_instruction_call_issuer = 'holdInstructionCallIssuer';
+
+const String LN_hold_instruction_call_issuer = 'Hold Instruction Call Issuer';
+
+const int NID_hold_instruction_call_issuer = 432;
+
+const int OBJ_hold_instruction_call_issuer = 1;
+
+const String SN_hold_instruction_reject = 'holdInstructionReject';
+
+const String LN_hold_instruction_reject = 'Hold Instruction Reject';
+
+const int NID_hold_instruction_reject = 433;
+
+const int OBJ_hold_instruction_reject = 1;
+
+const String SN_data = 'data';
+
+const int NID_data = 434;
+
+const int OBJ_data = 0;
+
+const String SN_pss = 'pss';
+
+const int NID_pss = 435;
+
+const int OBJ_pss = 0;
+
+const String SN_ucl = 'ucl';
+
+const int NID_ucl = 436;
+
+const int OBJ_ucl = 0;
+
+const String SN_pilot = 'pilot';
+
+const int NID_pilot = 437;
+
+const int OBJ_pilot = 0;
+
+const String LN_pilotAttributeType = 'pilotAttributeType';
+
+const int NID_pilotAttributeType = 438;
+
+const int OBJ_pilotAttributeType = 0;
+
+const String LN_pilotAttributeSyntax = 'pilotAttributeSyntax';
+
+const int NID_pilotAttributeSyntax = 439;
+
+const int OBJ_pilotAttributeSyntax = 0;
+
+const String LN_pilotObjectClass = 'pilotObjectClass';
+
+const int NID_pilotObjectClass = 440;
+
+const int OBJ_pilotObjectClass = 0;
+
+const String LN_pilotGroups = 'pilotGroups';
+
+const int NID_pilotGroups = 441;
+
+const int OBJ_pilotGroups = 0;
+
+const String LN_iA5StringSyntax = 'iA5StringSyntax';
+
+const int NID_iA5StringSyntax = 442;
+
+const int OBJ_iA5StringSyntax = 0;
+
+const String LN_caseIgnoreIA5StringSyntax = 'caseIgnoreIA5StringSyntax';
+
+const int NID_caseIgnoreIA5StringSyntax = 443;
+
+const int OBJ_caseIgnoreIA5StringSyntax = 0;
+
+const String LN_pilotObject = 'pilotObject';
+
+const int NID_pilotObject = 444;
+
+const int OBJ_pilotObject = 0;
+
+const String LN_pilotPerson = 'pilotPerson';
+
+const int NID_pilotPerson = 445;
+
+const int OBJ_pilotPerson = 0;
+
+const String SN_account = 'account';
+
+const int NID_account = 446;
+
+const int OBJ_account = 0;
+
+const String SN_document = 'document';
+
+const int NID_document = 447;
+
+const int OBJ_document = 0;
+
+const String SN_room = 'room';
+
+const int NID_room = 448;
+
+const int OBJ_room = 0;
+
+const String LN_documentSeries = 'documentSeries';
+
+const int NID_documentSeries = 449;
+
+const int OBJ_documentSeries = 0;
+
+const String SN_Domain = 'domain';
+
+const String LN_Domain = 'Domain';
+
+const int NID_Domain = 392;
+
+const int OBJ_Domain = 0;
+
+const String LN_rFC822localPart = 'rFC822localPart';
+
+const int NID_rFC822localPart = 450;
+
+const int OBJ_rFC822localPart = 0;
+
+const String LN_dNSDomain = 'dNSDomain';
+
+const int NID_dNSDomain = 451;
+
+const int OBJ_dNSDomain = 0;
+
+const String LN_domainRelatedObject = 'domainRelatedObject';
+
+const int NID_domainRelatedObject = 452;
+
+const int OBJ_domainRelatedObject = 0;
+
+const String LN_friendlyCountry = 'friendlyCountry';
+
+const int NID_friendlyCountry = 453;
+
+const int OBJ_friendlyCountry = 0;
+
+const String LN_simpleSecurityObject = 'simpleSecurityObject';
+
+const int NID_simpleSecurityObject = 454;
+
+const int OBJ_simpleSecurityObject = 0;
+
+const String LN_pilotOrganization = 'pilotOrganization';
+
+const int NID_pilotOrganization = 455;
+
+const int OBJ_pilotOrganization = 0;
+
+const String LN_pilotDSA = 'pilotDSA';
+
+const int NID_pilotDSA = 456;
+
+const int OBJ_pilotDSA = 0;
+
+const String LN_qualityLabelledData = 'qualityLabelledData';
+
+const int NID_qualityLabelledData = 457;
+
+const int OBJ_qualityLabelledData = 0;
+
+const String SN_userId = 'UID';
+
+const String LN_userId = 'userId';
+
+const int NID_userId = 458;
+
+const int OBJ_userId = 0;
+
+const String LN_textEncodedORAddress = 'textEncodedORAddress';
+
+const int NID_textEncodedORAddress = 459;
+
+const int OBJ_textEncodedORAddress = 0;
+
+const String SN_rfc822Mailbox = 'mail';
+
+const String LN_rfc822Mailbox = 'rfc822Mailbox';
+
+const int NID_rfc822Mailbox = 460;
+
+const int OBJ_rfc822Mailbox = 0;
+
+const String SN_info = 'info';
+
+const int NID_info = 461;
+
+const int OBJ_info = 0;
+
+const String LN_favouriteDrink = 'favouriteDrink';
+
+const int NID_favouriteDrink = 462;
+
+const int OBJ_favouriteDrink = 0;
+
+const String LN_roomNumber = 'roomNumber';
+
+const int NID_roomNumber = 463;
+
+const int OBJ_roomNumber = 0;
+
+const String SN_photo = 'photo';
+
+const int NID_photo = 464;
+
+const int OBJ_photo = 0;
+
+const String LN_userClass = 'userClass';
+
+const int NID_userClass = 465;
+
+const int OBJ_userClass = 0;
+
+const String SN_host = 'host';
+
+const int NID_host = 466;
+
+const int OBJ_host = 0;
+
+const String SN_manager = 'manager';
+
+const int NID_manager = 467;
+
+const int OBJ_manager = 0;
+
+const String LN_documentIdentifier = 'documentIdentifier';
+
+const int NID_documentIdentifier = 468;
+
+const int OBJ_documentIdentifier = 0;
+
+const String LN_documentTitle = 'documentTitle';
+
+const int NID_documentTitle = 469;
+
+const int OBJ_documentTitle = 0;
+
+const String LN_documentVersion = 'documentVersion';
+
+const int NID_documentVersion = 470;
+
+const int OBJ_documentVersion = 0;
+
+const String LN_documentAuthor = 'documentAuthor';
+
+const int NID_documentAuthor = 471;
+
+const int OBJ_documentAuthor = 0;
+
+const String LN_documentLocation = 'documentLocation';
+
+const int NID_documentLocation = 472;
+
+const int OBJ_documentLocation = 0;
+
+const String LN_homeTelephoneNumber = 'homeTelephoneNumber';
+
+const int NID_homeTelephoneNumber = 473;
+
+const int OBJ_homeTelephoneNumber = 0;
+
+const String SN_secretary = 'secretary';
+
+const int NID_secretary = 474;
+
+const int OBJ_secretary = 0;
+
+const String LN_otherMailbox = 'otherMailbox';
+
+const int NID_otherMailbox = 475;
+
+const int OBJ_otherMailbox = 0;
+
+const String LN_lastModifiedTime = 'lastModifiedTime';
+
+const int NID_lastModifiedTime = 476;
+
+const int OBJ_lastModifiedTime = 0;
+
+const String LN_lastModifiedBy = 'lastModifiedBy';
+
+const int NID_lastModifiedBy = 477;
+
+const int OBJ_lastModifiedBy = 0;
+
+const String SN_domainComponent = 'DC';
+
+const String LN_domainComponent = 'domainComponent';
+
+const int NID_domainComponent = 391;
+
+const int OBJ_domainComponent = 0;
+
+const String LN_aRecord = 'aRecord';
+
+const int NID_aRecord = 478;
+
+const int OBJ_aRecord = 0;
+
+const String LN_pilotAttributeType27 = 'pilotAttributeType27';
+
+const int NID_pilotAttributeType27 = 479;
+
+const int OBJ_pilotAttributeType27 = 0;
+
+const String LN_mXRecord = 'mXRecord';
+
+const int NID_mXRecord = 480;
+
+const int OBJ_mXRecord = 0;
+
+const String LN_nSRecord = 'nSRecord';
+
+const int NID_nSRecord = 481;
+
+const int OBJ_nSRecord = 0;
+
+const String LN_sOARecord = 'sOARecord';
+
+const int NID_sOARecord = 482;
+
+const int OBJ_sOARecord = 0;
+
+const String LN_cNAMERecord = 'cNAMERecord';
+
+const int NID_cNAMERecord = 483;
+
+const int OBJ_cNAMERecord = 0;
+
+const String LN_associatedDomain = 'associatedDomain';
+
+const int NID_associatedDomain = 484;
+
+const int OBJ_associatedDomain = 0;
+
+const String LN_associatedName = 'associatedName';
+
+const int NID_associatedName = 485;
+
+const int OBJ_associatedName = 0;
+
+const String LN_homePostalAddress = 'homePostalAddress';
+
+const int NID_homePostalAddress = 486;
+
+const int OBJ_homePostalAddress = 0;
+
+const String LN_personalTitle = 'personalTitle';
+
+const int NID_personalTitle = 487;
+
+const int OBJ_personalTitle = 0;
+
+const String LN_mobileTelephoneNumber = 'mobileTelephoneNumber';
+
+const int NID_mobileTelephoneNumber = 488;
+
+const int OBJ_mobileTelephoneNumber = 0;
+
+const String LN_pagerTelephoneNumber = 'pagerTelephoneNumber';
+
+const int NID_pagerTelephoneNumber = 489;
+
+const int OBJ_pagerTelephoneNumber = 0;
+
+const String LN_friendlyCountryName = 'friendlyCountryName';
+
+const int NID_friendlyCountryName = 490;
+
+const int OBJ_friendlyCountryName = 0;
+
+const String SN_uniqueIdentifier = 'uid';
+
+const String LN_uniqueIdentifier = 'uniqueIdentifier';
+
+const int NID_uniqueIdentifier = 102;
+
+const int OBJ_uniqueIdentifier = 0;
+
+const String LN_organizationalStatus = 'organizationalStatus';
+
+const int NID_organizationalStatus = 491;
+
+const int OBJ_organizationalStatus = 0;
+
+const String LN_janetMailbox = 'janetMailbox';
+
+const int NID_janetMailbox = 492;
+
+const int OBJ_janetMailbox = 0;
+
+const String LN_mailPreferenceOption = 'mailPreferenceOption';
+
+const int NID_mailPreferenceOption = 493;
+
+const int OBJ_mailPreferenceOption = 0;
+
+const String LN_buildingName = 'buildingName';
+
+const int NID_buildingName = 494;
+
+const int OBJ_buildingName = 0;
+
+const String LN_dSAQuality = 'dSAQuality';
+
+const int NID_dSAQuality = 495;
+
+const int OBJ_dSAQuality = 0;
+
+const String LN_singleLevelQuality = 'singleLevelQuality';
+
+const int NID_singleLevelQuality = 496;
+
+const int OBJ_singleLevelQuality = 0;
+
+const String LN_subtreeMinimumQuality = 'subtreeMinimumQuality';
+
+const int NID_subtreeMinimumQuality = 497;
+
+const int OBJ_subtreeMinimumQuality = 0;
+
+const String LN_subtreeMaximumQuality = 'subtreeMaximumQuality';
+
+const int NID_subtreeMaximumQuality = 498;
+
+const int OBJ_subtreeMaximumQuality = 0;
+
+const String LN_personalSignature = 'personalSignature';
+
+const int NID_personalSignature = 499;
+
+const int OBJ_personalSignature = 0;
+
+const String LN_dITRedirect = 'dITRedirect';
+
+const int NID_dITRedirect = 500;
+
+const int OBJ_dITRedirect = 0;
+
+const String SN_audio = 'audio';
+
+const int NID_audio = 501;
+
+const int OBJ_audio = 0;
+
+const String LN_documentPublisher = 'documentPublisher';
+
+const int NID_documentPublisher = 502;
+
+const int OBJ_documentPublisher = 0;
+
+const String SN_id_set = 'id-set';
+
+const String LN_id_set = 'Secure Electronic Transactions';
+
+const int NID_id_set = 512;
+
+const int OBJ_id_set = 2;
+
+const String SN_set_ctype = 'set-ctype';
+
+const String LN_set_ctype = 'content types';
+
+const int NID_set_ctype = 513;
+
+const int OBJ_set_ctype = 2;
+
+const String SN_set_msgExt = 'set-msgExt';
+
+const String LN_set_msgExt = 'message extensions';
+
+const int NID_set_msgExt = 514;
+
+const int OBJ_set_msgExt = 2;
+
+const String SN_set_attr = 'set-attr';
+
+const int NID_set_attr = 515;
+
+const int OBJ_set_attr = 2;
+
+const String SN_set_policy = 'set-policy';
+
+const int NID_set_policy = 516;
+
+const int OBJ_set_policy = 2;
+
+const String SN_set_certExt = 'set-certExt';
+
+const String LN_set_certExt = 'certificate extensions';
+
+const int NID_set_certExt = 517;
+
+const int OBJ_set_certExt = 2;
+
+const String SN_set_brand = 'set-brand';
+
+const int NID_set_brand = 518;
+
+const int OBJ_set_brand = 2;
+
+const String SN_setct_PANData = 'setct-PANData';
+
+const int NID_setct_PANData = 519;
+
+const int OBJ_setct_PANData = 2;
+
+const String SN_setct_PANToken = 'setct-PANToken';
+
+const int NID_setct_PANToken = 520;
+
+const int OBJ_setct_PANToken = 2;
+
+const String SN_setct_PANOnly = 'setct-PANOnly';
+
+const int NID_setct_PANOnly = 521;
+
+const int OBJ_setct_PANOnly = 2;
+
+const String SN_setct_OIData = 'setct-OIData';
+
+const int NID_setct_OIData = 522;
+
+const int OBJ_setct_OIData = 2;
+
+const String SN_setct_PI = 'setct-PI';
+
+const int NID_setct_PI = 523;
+
+const int OBJ_setct_PI = 2;
+
+const String SN_setct_PIData = 'setct-PIData';
+
+const int NID_setct_PIData = 524;
+
+const int OBJ_setct_PIData = 2;
+
+const String SN_setct_PIDataUnsigned = 'setct-PIDataUnsigned';
+
+const int NID_setct_PIDataUnsigned = 525;
+
+const int OBJ_setct_PIDataUnsigned = 2;
+
+const String SN_setct_HODInput = 'setct-HODInput';
+
+const int NID_setct_HODInput = 526;
+
+const int OBJ_setct_HODInput = 2;
+
+const String SN_setct_AuthResBaggage = 'setct-AuthResBaggage';
+
+const int NID_setct_AuthResBaggage = 527;
+
+const int OBJ_setct_AuthResBaggage = 2;
+
+const String SN_setct_AuthRevReqBaggage = 'setct-AuthRevReqBaggage';
+
+const int NID_setct_AuthRevReqBaggage = 528;
+
+const int OBJ_setct_AuthRevReqBaggage = 2;
+
+const String SN_setct_AuthRevResBaggage = 'setct-AuthRevResBaggage';
+
+const int NID_setct_AuthRevResBaggage = 529;
+
+const int OBJ_setct_AuthRevResBaggage = 2;
+
+const String SN_setct_CapTokenSeq = 'setct-CapTokenSeq';
+
+const int NID_setct_CapTokenSeq = 530;
+
+const int OBJ_setct_CapTokenSeq = 2;
+
+const String SN_setct_PInitResData = 'setct-PInitResData';
+
+const int NID_setct_PInitResData = 531;
+
+const int OBJ_setct_PInitResData = 2;
+
+const String SN_setct_PI_TBS = 'setct-PI-TBS';
+
+const int NID_setct_PI_TBS = 532;
+
+const int OBJ_setct_PI_TBS = 2;
+
+const String SN_setct_PResData = 'setct-PResData';
+
+const int NID_setct_PResData = 533;
+
+const int OBJ_setct_PResData = 2;
+
+const String SN_setct_AuthReqTBS = 'setct-AuthReqTBS';
+
+const int NID_setct_AuthReqTBS = 534;
+
+const int OBJ_setct_AuthReqTBS = 2;
+
+const String SN_setct_AuthResTBS = 'setct-AuthResTBS';
+
+const int NID_setct_AuthResTBS = 535;
+
+const int OBJ_setct_AuthResTBS = 2;
+
+const String SN_setct_AuthResTBSX = 'setct-AuthResTBSX';
+
+const int NID_setct_AuthResTBSX = 536;
+
+const int OBJ_setct_AuthResTBSX = 2;
+
+const String SN_setct_AuthTokenTBS = 'setct-AuthTokenTBS';
+
+const int NID_setct_AuthTokenTBS = 537;
+
+const int OBJ_setct_AuthTokenTBS = 2;
+
+const String SN_setct_CapTokenData = 'setct-CapTokenData';
+
+const int NID_setct_CapTokenData = 538;
+
+const int OBJ_setct_CapTokenData = 2;
+
+const String SN_setct_CapTokenTBS = 'setct-CapTokenTBS';
+
+const int NID_setct_CapTokenTBS = 539;
+
+const int OBJ_setct_CapTokenTBS = 2;
+
+const String SN_setct_AcqCardCodeMsg = 'setct-AcqCardCodeMsg';
+
+const int NID_setct_AcqCardCodeMsg = 540;
+
+const int OBJ_setct_AcqCardCodeMsg = 2;
+
+const String SN_setct_AuthRevReqTBS = 'setct-AuthRevReqTBS';
+
+const int NID_setct_AuthRevReqTBS = 541;
+
+const int OBJ_setct_AuthRevReqTBS = 2;
+
+const String SN_setct_AuthRevResData = 'setct-AuthRevResData';
+
+const int NID_setct_AuthRevResData = 542;
+
+const int OBJ_setct_AuthRevResData = 2;
+
+const String SN_setct_AuthRevResTBS = 'setct-AuthRevResTBS';
+
+const int NID_setct_AuthRevResTBS = 543;
+
+const int OBJ_setct_AuthRevResTBS = 2;
+
+const String SN_setct_CapReqTBS = 'setct-CapReqTBS';
+
+const int NID_setct_CapReqTBS = 544;
+
+const int OBJ_setct_CapReqTBS = 2;
+
+const String SN_setct_CapReqTBSX = 'setct-CapReqTBSX';
+
+const int NID_setct_CapReqTBSX = 545;
+
+const int OBJ_setct_CapReqTBSX = 2;
+
+const String SN_setct_CapResData = 'setct-CapResData';
+
+const int NID_setct_CapResData = 546;
+
+const int OBJ_setct_CapResData = 2;
+
+const String SN_setct_CapRevReqTBS = 'setct-CapRevReqTBS';
+
+const int NID_setct_CapRevReqTBS = 547;
+
+const int OBJ_setct_CapRevReqTBS = 2;
+
+const String SN_setct_CapRevReqTBSX = 'setct-CapRevReqTBSX';
+
+const int NID_setct_CapRevReqTBSX = 548;
+
+const int OBJ_setct_CapRevReqTBSX = 2;
+
+const String SN_setct_CapRevResData = 'setct-CapRevResData';
+
+const int NID_setct_CapRevResData = 549;
+
+const int OBJ_setct_CapRevResData = 2;
+
+const String SN_setct_CredReqTBS = 'setct-CredReqTBS';
+
+const int NID_setct_CredReqTBS = 550;
+
+const int OBJ_setct_CredReqTBS = 2;
+
+const String SN_setct_CredReqTBSX = 'setct-CredReqTBSX';
+
+const int NID_setct_CredReqTBSX = 551;
+
+const int OBJ_setct_CredReqTBSX = 2;
+
+const String SN_setct_CredResData = 'setct-CredResData';
+
+const int NID_setct_CredResData = 552;
+
+const int OBJ_setct_CredResData = 2;
+
+const String SN_setct_CredRevReqTBS = 'setct-CredRevReqTBS';
+
+const int NID_setct_CredRevReqTBS = 553;
+
+const int OBJ_setct_CredRevReqTBS = 2;
+
+const String SN_setct_CredRevReqTBSX = 'setct-CredRevReqTBSX';
+
+const int NID_setct_CredRevReqTBSX = 554;
+
+const int OBJ_setct_CredRevReqTBSX = 2;
+
+const String SN_setct_CredRevResData = 'setct-CredRevResData';
+
+const int NID_setct_CredRevResData = 555;
+
+const int OBJ_setct_CredRevResData = 2;
+
+const String SN_setct_PCertReqData = 'setct-PCertReqData';
+
+const int NID_setct_PCertReqData = 556;
+
+const int OBJ_setct_PCertReqData = 2;
+
+const String SN_setct_PCertResTBS = 'setct-PCertResTBS';
+
+const int NID_setct_PCertResTBS = 557;
+
+const int OBJ_setct_PCertResTBS = 2;
+
+const String SN_setct_BatchAdminReqData = 'setct-BatchAdminReqData';
+
+const int NID_setct_BatchAdminReqData = 558;
+
+const int OBJ_setct_BatchAdminReqData = 2;
+
+const String SN_setct_BatchAdminResData = 'setct-BatchAdminResData';
+
+const int NID_setct_BatchAdminResData = 559;
+
+const int OBJ_setct_BatchAdminResData = 2;
+
+const String SN_setct_CardCInitResTBS = 'setct-CardCInitResTBS';
+
+const int NID_setct_CardCInitResTBS = 560;
+
+const int OBJ_setct_CardCInitResTBS = 2;
+
+const String SN_setct_MeAqCInitResTBS = 'setct-MeAqCInitResTBS';
+
+const int NID_setct_MeAqCInitResTBS = 561;
+
+const int OBJ_setct_MeAqCInitResTBS = 2;
+
+const String SN_setct_RegFormResTBS = 'setct-RegFormResTBS';
+
+const int NID_setct_RegFormResTBS = 562;
+
+const int OBJ_setct_RegFormResTBS = 2;
+
+const String SN_setct_CertReqData = 'setct-CertReqData';
+
+const int NID_setct_CertReqData = 563;
+
+const int OBJ_setct_CertReqData = 2;
+
+const String SN_setct_CertReqTBS = 'setct-CertReqTBS';
+
+const int NID_setct_CertReqTBS = 564;
+
+const int OBJ_setct_CertReqTBS = 2;
+
+const String SN_setct_CertResData = 'setct-CertResData';
+
+const int NID_setct_CertResData = 565;
+
+const int OBJ_setct_CertResData = 2;
+
+const String SN_setct_CertInqReqTBS = 'setct-CertInqReqTBS';
+
+const int NID_setct_CertInqReqTBS = 566;
+
+const int OBJ_setct_CertInqReqTBS = 2;
+
+const String SN_setct_ErrorTBS = 'setct-ErrorTBS';
+
+const int NID_setct_ErrorTBS = 567;
+
+const int OBJ_setct_ErrorTBS = 2;
+
+const String SN_setct_PIDualSignedTBE = 'setct-PIDualSignedTBE';
+
+const int NID_setct_PIDualSignedTBE = 568;
+
+const int OBJ_setct_PIDualSignedTBE = 2;
+
+const String SN_setct_PIUnsignedTBE = 'setct-PIUnsignedTBE';
+
+const int NID_setct_PIUnsignedTBE = 569;
+
+const int OBJ_setct_PIUnsignedTBE = 2;
+
+const String SN_setct_AuthReqTBE = 'setct-AuthReqTBE';
+
+const int NID_setct_AuthReqTBE = 570;
+
+const int OBJ_setct_AuthReqTBE = 2;
+
+const String SN_setct_AuthResTBE = 'setct-AuthResTBE';
+
+const int NID_setct_AuthResTBE = 571;
+
+const int OBJ_setct_AuthResTBE = 2;
+
+const String SN_setct_AuthResTBEX = 'setct-AuthResTBEX';
+
+const int NID_setct_AuthResTBEX = 572;
+
+const int OBJ_setct_AuthResTBEX = 2;
+
+const String SN_setct_AuthTokenTBE = 'setct-AuthTokenTBE';
+
+const int NID_setct_AuthTokenTBE = 573;
+
+const int OBJ_setct_AuthTokenTBE = 2;
+
+const String SN_setct_CapTokenTBE = 'setct-CapTokenTBE';
+
+const int NID_setct_CapTokenTBE = 574;
+
+const int OBJ_setct_CapTokenTBE = 2;
+
+const String SN_setct_CapTokenTBEX = 'setct-CapTokenTBEX';
+
+const int NID_setct_CapTokenTBEX = 575;
+
+const int OBJ_setct_CapTokenTBEX = 2;
+
+const String SN_setct_AcqCardCodeMsgTBE = 'setct-AcqCardCodeMsgTBE';
+
+const int NID_setct_AcqCardCodeMsgTBE = 576;
+
+const int OBJ_setct_AcqCardCodeMsgTBE = 2;
+
+const String SN_setct_AuthRevReqTBE = 'setct-AuthRevReqTBE';
+
+const int NID_setct_AuthRevReqTBE = 577;
+
+const int OBJ_setct_AuthRevReqTBE = 2;
+
+const String SN_setct_AuthRevResTBE = 'setct-AuthRevResTBE';
+
+const int NID_setct_AuthRevResTBE = 578;
+
+const int OBJ_setct_AuthRevResTBE = 2;
+
+const String SN_setct_AuthRevResTBEB = 'setct-AuthRevResTBEB';
+
+const int NID_setct_AuthRevResTBEB = 579;
+
+const int OBJ_setct_AuthRevResTBEB = 2;
+
+const String SN_setct_CapReqTBE = 'setct-CapReqTBE';
+
+const int NID_setct_CapReqTBE = 580;
+
+const int OBJ_setct_CapReqTBE = 2;
+
+const String SN_setct_CapReqTBEX = 'setct-CapReqTBEX';
+
+const int NID_setct_CapReqTBEX = 581;
+
+const int OBJ_setct_CapReqTBEX = 2;
+
+const String SN_setct_CapResTBE = 'setct-CapResTBE';
+
+const int NID_setct_CapResTBE = 582;
+
+const int OBJ_setct_CapResTBE = 2;
+
+const String SN_setct_CapRevReqTBE = 'setct-CapRevReqTBE';
+
+const int NID_setct_CapRevReqTBE = 583;
+
+const int OBJ_setct_CapRevReqTBE = 2;
+
+const String SN_setct_CapRevReqTBEX = 'setct-CapRevReqTBEX';
+
+const int NID_setct_CapRevReqTBEX = 584;
+
+const int OBJ_setct_CapRevReqTBEX = 2;
+
+const String SN_setct_CapRevResTBE = 'setct-CapRevResTBE';
+
+const int NID_setct_CapRevResTBE = 585;
+
+const int OBJ_setct_CapRevResTBE = 2;
+
+const String SN_setct_CredReqTBE = 'setct-CredReqTBE';
+
+const int NID_setct_CredReqTBE = 586;
+
+const int OBJ_setct_CredReqTBE = 2;
+
+const String SN_setct_CredReqTBEX = 'setct-CredReqTBEX';
+
+const int NID_setct_CredReqTBEX = 587;
+
+const int OBJ_setct_CredReqTBEX = 2;
+
+const String SN_setct_CredResTBE = 'setct-CredResTBE';
+
+const int NID_setct_CredResTBE = 588;
+
+const int OBJ_setct_CredResTBE = 2;
+
+const String SN_setct_CredRevReqTBE = 'setct-CredRevReqTBE';
+
+const int NID_setct_CredRevReqTBE = 589;
+
+const int OBJ_setct_CredRevReqTBE = 2;
+
+const String SN_setct_CredRevReqTBEX = 'setct-CredRevReqTBEX';
+
+const int NID_setct_CredRevReqTBEX = 590;
+
+const int OBJ_setct_CredRevReqTBEX = 2;
+
+const String SN_setct_CredRevResTBE = 'setct-CredRevResTBE';
+
+const int NID_setct_CredRevResTBE = 591;
+
+const int OBJ_setct_CredRevResTBE = 2;
+
+const String SN_setct_BatchAdminReqTBE = 'setct-BatchAdminReqTBE';
+
+const int NID_setct_BatchAdminReqTBE = 592;
+
+const int OBJ_setct_BatchAdminReqTBE = 2;
+
+const String SN_setct_BatchAdminResTBE = 'setct-BatchAdminResTBE';
+
+const int NID_setct_BatchAdminResTBE = 593;
+
+const int OBJ_setct_BatchAdminResTBE = 2;
+
+const String SN_setct_RegFormReqTBE = 'setct-RegFormReqTBE';
+
+const int NID_setct_RegFormReqTBE = 594;
+
+const int OBJ_setct_RegFormReqTBE = 2;
+
+const String SN_setct_CertReqTBE = 'setct-CertReqTBE';
+
+const int NID_setct_CertReqTBE = 595;
+
+const int OBJ_setct_CertReqTBE = 2;
+
+const String SN_setct_CertReqTBEX = 'setct-CertReqTBEX';
+
+const int NID_setct_CertReqTBEX = 596;
+
+const int OBJ_setct_CertReqTBEX = 2;
+
+const String SN_setct_CertResTBE = 'setct-CertResTBE';
+
+const int NID_setct_CertResTBE = 597;
+
+const int OBJ_setct_CertResTBE = 2;
+
+const String SN_setct_CRLNotificationTBS = 'setct-CRLNotificationTBS';
+
+const int NID_setct_CRLNotificationTBS = 598;
+
+const int OBJ_setct_CRLNotificationTBS = 2;
+
+const String SN_setct_CRLNotificationResTBS = 'setct-CRLNotificationResTBS';
+
+const int NID_setct_CRLNotificationResTBS = 599;
+
+const int OBJ_setct_CRLNotificationResTBS = 2;
+
+const String SN_setct_BCIDistributionTBS = 'setct-BCIDistributionTBS';
+
+const int NID_setct_BCIDistributionTBS = 600;
+
+const int OBJ_setct_BCIDistributionTBS = 2;
+
+const String SN_setext_genCrypt = 'setext-genCrypt';
+
+const String LN_setext_genCrypt = 'generic cryptogram';
+
+const int NID_setext_genCrypt = 601;
+
+const int OBJ_setext_genCrypt = 2;
+
+const String SN_setext_miAuth = 'setext-miAuth';
+
+const String LN_setext_miAuth = 'merchant initiated auth';
+
+const int NID_setext_miAuth = 602;
+
+const int OBJ_setext_miAuth = 2;
+
+const String SN_setext_pinSecure = 'setext-pinSecure';
+
+const int NID_setext_pinSecure = 603;
+
+const int OBJ_setext_pinSecure = 2;
+
+const String SN_setext_pinAny = 'setext-pinAny';
+
+const int NID_setext_pinAny = 604;
+
+const int OBJ_setext_pinAny = 2;
+
+const String SN_setext_track2 = 'setext-track2';
+
+const int NID_setext_track2 = 605;
+
+const int OBJ_setext_track2 = 2;
+
+const String SN_setext_cv = 'setext-cv';
+
+const String LN_setext_cv = 'additional verification';
+
+const int NID_setext_cv = 606;
+
+const int OBJ_setext_cv = 2;
+
+const String SN_set_policy_root = 'set-policy-root';
+
+const int NID_set_policy_root = 607;
+
+const int OBJ_set_policy_root = 2;
+
+const String SN_setCext_hashedRoot = 'setCext-hashedRoot';
+
+const int NID_setCext_hashedRoot = 608;
+
+const int OBJ_setCext_hashedRoot = 2;
+
+const String SN_setCext_certType = 'setCext-certType';
+
+const int NID_setCext_certType = 609;
+
+const int OBJ_setCext_certType = 2;
+
+const String SN_setCext_merchData = 'setCext-merchData';
+
+const int NID_setCext_merchData = 610;
+
+const int OBJ_setCext_merchData = 2;
+
+const String SN_setCext_cCertRequired = 'setCext-cCertRequired';
+
+const int NID_setCext_cCertRequired = 611;
+
+const int OBJ_setCext_cCertRequired = 2;
+
+const String SN_setCext_tunneling = 'setCext-tunneling';
+
+const int NID_setCext_tunneling = 612;
+
+const int OBJ_setCext_tunneling = 2;
+
+const String SN_setCext_setExt = 'setCext-setExt';
+
+const int NID_setCext_setExt = 613;
+
+const int OBJ_setCext_setExt = 2;
+
+const String SN_setCext_setQualf = 'setCext-setQualf';
+
+const int NID_setCext_setQualf = 614;
+
+const int OBJ_setCext_setQualf = 2;
+
+const String SN_setCext_PGWYcapabilities = 'setCext-PGWYcapabilities';
+
+const int NID_setCext_PGWYcapabilities = 615;
+
+const int OBJ_setCext_PGWYcapabilities = 2;
+
+const String SN_setCext_TokenIdentifier = 'setCext-TokenIdentifier';
+
+const int NID_setCext_TokenIdentifier = 616;
+
+const int OBJ_setCext_TokenIdentifier = 2;
+
+const String SN_setCext_Track2Data = 'setCext-Track2Data';
+
+const int NID_setCext_Track2Data = 617;
+
+const int OBJ_setCext_Track2Data = 2;
+
+const String SN_setCext_TokenType = 'setCext-TokenType';
+
+const int NID_setCext_TokenType = 618;
+
+const int OBJ_setCext_TokenType = 2;
+
+const String SN_setCext_IssuerCapabilities = 'setCext-IssuerCapabilities';
+
+const int NID_setCext_IssuerCapabilities = 619;
+
+const int OBJ_setCext_IssuerCapabilities = 2;
+
+const String SN_setAttr_Cert = 'setAttr-Cert';
+
+const int NID_setAttr_Cert = 620;
+
+const int OBJ_setAttr_Cert = 2;
+
+const String SN_setAttr_PGWYcap = 'setAttr-PGWYcap';
+
+const String LN_setAttr_PGWYcap = 'payment gateway capabilities';
+
+const int NID_setAttr_PGWYcap = 621;
+
+const int OBJ_setAttr_PGWYcap = 2;
+
+const String SN_setAttr_TokenType = 'setAttr-TokenType';
+
+const int NID_setAttr_TokenType = 622;
+
+const int OBJ_setAttr_TokenType = 2;
+
+const String SN_setAttr_IssCap = 'setAttr-IssCap';
+
+const String LN_setAttr_IssCap = 'issuer capabilities';
+
+const int NID_setAttr_IssCap = 623;
+
+const int OBJ_setAttr_IssCap = 2;
+
+const String SN_set_rootKeyThumb = 'set-rootKeyThumb';
+
+const int NID_set_rootKeyThumb = 624;
+
+const int OBJ_set_rootKeyThumb = 2;
+
+const String SN_set_addPolicy = 'set-addPolicy';
+
+const int NID_set_addPolicy = 625;
+
+const int OBJ_set_addPolicy = 2;
+
+const String SN_setAttr_Token_EMV = 'setAttr-Token-EMV';
+
+const int NID_setAttr_Token_EMV = 626;
+
+const int OBJ_setAttr_Token_EMV = 2;
+
+const String SN_setAttr_Token_B0Prime = 'setAttr-Token-B0Prime';
+
+const int NID_setAttr_Token_B0Prime = 627;
+
+const int OBJ_setAttr_Token_B0Prime = 2;
+
+const String SN_setAttr_IssCap_CVM = 'setAttr-IssCap-CVM';
+
+const int NID_setAttr_IssCap_CVM = 628;
+
+const int OBJ_setAttr_IssCap_CVM = 2;
+
+const String SN_setAttr_IssCap_T2 = 'setAttr-IssCap-T2';
+
+const int NID_setAttr_IssCap_T2 = 629;
+
+const int OBJ_setAttr_IssCap_T2 = 2;
+
+const String SN_setAttr_IssCap_Sig = 'setAttr-IssCap-Sig';
+
+const int NID_setAttr_IssCap_Sig = 630;
+
+const int OBJ_setAttr_IssCap_Sig = 2;
+
+const String SN_setAttr_GenCryptgrm = 'setAttr-GenCryptgrm';
+
+const String LN_setAttr_GenCryptgrm = 'generate cryptogram';
+
+const int NID_setAttr_GenCryptgrm = 631;
+
+const int OBJ_setAttr_GenCryptgrm = 2;
+
+const String SN_setAttr_T2Enc = 'setAttr-T2Enc';
+
+const String LN_setAttr_T2Enc = 'encrypted track 2';
+
+const int NID_setAttr_T2Enc = 632;
+
+const int OBJ_setAttr_T2Enc = 2;
+
+const String SN_setAttr_T2cleartxt = 'setAttr-T2cleartxt';
+
+const String LN_setAttr_T2cleartxt = 'cleartext track 2';
+
+const int NID_setAttr_T2cleartxt = 633;
+
+const int OBJ_setAttr_T2cleartxt = 2;
+
+const String SN_setAttr_TokICCsig = 'setAttr-TokICCsig';
+
+const String LN_setAttr_TokICCsig = 'ICC or token signature';
+
+const int NID_setAttr_TokICCsig = 634;
+
+const int OBJ_setAttr_TokICCsig = 2;
+
+const String SN_setAttr_SecDevSig = 'setAttr-SecDevSig';
+
+const String LN_setAttr_SecDevSig = 'secure device signature';
+
+const int NID_setAttr_SecDevSig = 635;
+
+const int OBJ_setAttr_SecDevSig = 2;
+
+const String SN_set_brand_IATA_ATA = 'set-brand-IATA-ATA';
+
+const int NID_set_brand_IATA_ATA = 636;
+
+const int OBJ_set_brand_IATA_ATA = 2;
+
+const String SN_set_brand_Diners = 'set-brand-Diners';
+
+const int NID_set_brand_Diners = 637;
+
+const int OBJ_set_brand_Diners = 2;
+
+const String SN_set_brand_AmericanExpress = 'set-brand-AmericanExpress';
+
+const int NID_set_brand_AmericanExpress = 638;
+
+const int OBJ_set_brand_AmericanExpress = 2;
+
+const String SN_set_brand_JCB = 'set-brand-JCB';
+
+const int NID_set_brand_JCB = 639;
+
+const int OBJ_set_brand_JCB = 2;
+
+const String SN_set_brand_Visa = 'set-brand-Visa';
+
+const int NID_set_brand_Visa = 640;
+
+const int OBJ_set_brand_Visa = 2;
+
+const String SN_set_brand_MasterCard = 'set-brand-MasterCard';
+
+const int NID_set_brand_MasterCard = 641;
+
+const int OBJ_set_brand_MasterCard = 2;
+
+const String SN_set_brand_Novus = 'set-brand-Novus';
+
+const int NID_set_brand_Novus = 642;
+
+const int OBJ_set_brand_Novus = 2;
+
+const String SN_des_cdmf = 'DES-CDMF';
+
+const String LN_des_cdmf = 'des-cdmf';
+
+const int NID_des_cdmf = 643;
+
+const int OBJ_des_cdmf = 1;
+
+const String SN_rsaOAEPEncryptionSET = 'rsaOAEPEncryptionSET';
+
+const int NID_rsaOAEPEncryptionSET = 644;
+
+const int OBJ_rsaOAEPEncryptionSET = 1;
+
+const String SN_ipsec3 = 'Oakley-EC2N-3';
+
+const String LN_ipsec3 = 'ipsec3';
+
+const int NID_ipsec3 = 749;
+
+const String SN_ipsec4 = 'Oakley-EC2N-4';
+
+const String LN_ipsec4 = 'ipsec4';
+
+const int NID_ipsec4 = 750;
+
+const String SN_whirlpool = 'whirlpool';
+
+const int NID_whirlpool = 804;
+
+const int OBJ_whirlpool = 1;
+
+const String SN_cryptopro = 'cryptopro';
+
+const int NID_cryptopro = 805;
+
+const int OBJ_cryptopro = 1;
+
+const String SN_cryptocom = 'cryptocom';
+
+const int NID_cryptocom = 806;
+
+const int OBJ_cryptocom = 1;
+
+const String SN_id_tc26 = 'id-tc26';
+
+const int NID_id_tc26 = 974;
+
+const int OBJ_id_tc26 = 1;
+
+const String SN_id_GostR3411_94_with_GostR3410_2001 =
+    'id-GostR3411-94-with-GostR3410-2001';
+
+const String LN_id_GostR3411_94_with_GostR3410_2001 =
+    'GOST R 34.11-94 with GOST R 34.10-2001';
+
+const int NID_id_GostR3411_94_with_GostR3410_2001 = 807;
+
+const int OBJ_id_GostR3411_94_with_GostR3410_2001 = 1;
+
+const String SN_id_GostR3411_94_with_GostR3410_94 =
+    'id-GostR3411-94-with-GostR3410-94';
+
+const String LN_id_GostR3411_94_with_GostR3410_94 =
+    'GOST R 34.11-94 with GOST R 34.10-94';
+
+const int NID_id_GostR3411_94_with_GostR3410_94 = 808;
+
+const int OBJ_id_GostR3411_94_with_GostR3410_94 = 1;
+
+const String SN_id_GostR3411_94 = 'md_gost94';
+
+const String LN_id_GostR3411_94 = 'GOST R 34.11-94';
+
+const int NID_id_GostR3411_94 = 809;
+
+const int OBJ_id_GostR3411_94 = 1;
+
+const String SN_id_HMACGostR3411_94 = 'id-HMACGostR3411-94';
+
+const String LN_id_HMACGostR3411_94 = 'HMAC GOST 34.11-94';
+
+const int NID_id_HMACGostR3411_94 = 810;
+
+const int OBJ_id_HMACGostR3411_94 = 1;
+
+const String SN_id_GostR3410_2001 = 'gost2001';
+
+const String LN_id_GostR3410_2001 = 'GOST R 34.10-2001';
+
+const int NID_id_GostR3410_2001 = 811;
+
+const int OBJ_id_GostR3410_2001 = 1;
+
+const String SN_id_GostR3410_94 = 'gost94';
+
+const String LN_id_GostR3410_94 = 'GOST R 34.10-94';
+
+const int NID_id_GostR3410_94 = 812;
+
+const int OBJ_id_GostR3410_94 = 1;
+
+const String SN_id_Gost28147_89 = 'gost89';
+
+const String LN_id_Gost28147_89 = 'GOST 28147-89';
+
+const int NID_id_Gost28147_89 = 813;
+
+const int OBJ_id_Gost28147_89 = 1;
+
+const String SN_gost89_cnt = 'gost89-cnt';
+
+const int NID_gost89_cnt = 814;
+
+const String SN_gost89_cnt_12 = 'gost89-cnt-12';
+
+const int NID_gost89_cnt_12 = 975;
+
+const String SN_gost89_cbc = 'gost89-cbc';
+
+const int NID_gost89_cbc = 1009;
+
+const String SN_gost89_ecb = 'gost89-ecb';
+
+const int NID_gost89_ecb = 1010;
+
+const String SN_gost89_ctr = 'gost89-ctr';
+
+const int NID_gost89_ctr = 1011;
+
+const String SN_id_Gost28147_89_MAC = 'gost-mac';
+
+const String LN_id_Gost28147_89_MAC = 'GOST 28147-89 MAC';
+
+const int NID_id_Gost28147_89_MAC = 815;
+
+const int OBJ_id_Gost28147_89_MAC = 1;
+
+const String SN_gost_mac_12 = 'gost-mac-12';
+
+const int NID_gost_mac_12 = 976;
+
+const String SN_id_GostR3411_94_prf = 'prf-gostr3411-94';
+
+const String LN_id_GostR3411_94_prf = 'GOST R 34.11-94 PRF';
+
+const int NID_id_GostR3411_94_prf = 816;
+
+const int OBJ_id_GostR3411_94_prf = 1;
+
+const String SN_id_GostR3410_2001DH = 'id-GostR3410-2001DH';
+
+const String LN_id_GostR3410_2001DH = 'GOST R 34.10-2001 DH';
+
+const int NID_id_GostR3410_2001DH = 817;
+
+const int OBJ_id_GostR3410_2001DH = 1;
+
+const String SN_id_GostR3410_94DH = 'id-GostR3410-94DH';
+
+const String LN_id_GostR3410_94DH = 'GOST R 34.10-94 DH';
+
+const int NID_id_GostR3410_94DH = 818;
+
+const int OBJ_id_GostR3410_94DH = 1;
+
+const String SN_id_Gost28147_89_CryptoPro_KeyMeshing =
+    'id-Gost28147-89-CryptoPro-KeyMeshing';
+
+const int NID_id_Gost28147_89_CryptoPro_KeyMeshing = 819;
+
+const int OBJ_id_Gost28147_89_CryptoPro_KeyMeshing = 1;
+
+const String SN_id_Gost28147_89_None_KeyMeshing =
+    'id-Gost28147-89-None-KeyMeshing';
+
+const int NID_id_Gost28147_89_None_KeyMeshing = 820;
+
+const int OBJ_id_Gost28147_89_None_KeyMeshing = 1;
+
+const String SN_id_GostR3411_94_TestParamSet = 'id-GostR3411-94-TestParamSet';
+
+const int NID_id_GostR3411_94_TestParamSet = 821;
+
+const int OBJ_id_GostR3411_94_TestParamSet = 1;
+
+const String SN_id_GostR3411_94_CryptoProParamSet =
+    'id-GostR3411-94-CryptoProParamSet';
+
+const int NID_id_GostR3411_94_CryptoProParamSet = 822;
+
+const int OBJ_id_GostR3411_94_CryptoProParamSet = 1;
+
+const String SN_id_Gost28147_89_TestParamSet = 'id-Gost28147-89-TestParamSet';
+
+const int NID_id_Gost28147_89_TestParamSet = 823;
+
+const int OBJ_id_Gost28147_89_TestParamSet = 1;
+
+const String SN_id_Gost28147_89_CryptoPro_A_ParamSet =
+    'id-Gost28147-89-CryptoPro-A-ParamSet';
+
+const int NID_id_Gost28147_89_CryptoPro_A_ParamSet = 824;
+
+const int OBJ_id_Gost28147_89_CryptoPro_A_ParamSet = 1;
+
+const String SN_id_Gost28147_89_CryptoPro_B_ParamSet =
+    'id-Gost28147-89-CryptoPro-B-ParamSet';
+
+const int NID_id_Gost28147_89_CryptoPro_B_ParamSet = 825;
+
+const int OBJ_id_Gost28147_89_CryptoPro_B_ParamSet = 1;
+
+const String SN_id_Gost28147_89_CryptoPro_C_ParamSet =
+    'id-Gost28147-89-CryptoPro-C-ParamSet';
+
+const int NID_id_Gost28147_89_CryptoPro_C_ParamSet = 826;
+
+const int OBJ_id_Gost28147_89_CryptoPro_C_ParamSet = 1;
+
+const String SN_id_Gost28147_89_CryptoPro_D_ParamSet =
+    'id-Gost28147-89-CryptoPro-D-ParamSet';
+
+const int NID_id_Gost28147_89_CryptoPro_D_ParamSet = 827;
+
+const int OBJ_id_Gost28147_89_CryptoPro_D_ParamSet = 1;
+
+const String SN_id_Gost28147_89_CryptoPro_Oscar_1_1_ParamSet =
+    'id-Gost28147-89-CryptoPro-Oscar-1-1-ParamSet';
+
+const int NID_id_Gost28147_89_CryptoPro_Oscar_1_1_ParamSet = 828;
+
+const int OBJ_id_Gost28147_89_CryptoPro_Oscar_1_1_ParamSet = 1;
+
+const String SN_id_Gost28147_89_CryptoPro_Oscar_1_0_ParamSet =
+    'id-Gost28147-89-CryptoPro-Oscar-1-0-ParamSet';
+
+const int NID_id_Gost28147_89_CryptoPro_Oscar_1_0_ParamSet = 829;
+
+const int OBJ_id_Gost28147_89_CryptoPro_Oscar_1_0_ParamSet = 1;
+
+const String SN_id_Gost28147_89_CryptoPro_RIC_1_ParamSet =
+    'id-Gost28147-89-CryptoPro-RIC-1-ParamSet';
+
+const int NID_id_Gost28147_89_CryptoPro_RIC_1_ParamSet = 830;
+
+const int OBJ_id_Gost28147_89_CryptoPro_RIC_1_ParamSet = 1;
+
+const String SN_id_GostR3410_94_TestParamSet = 'id-GostR3410-94-TestParamSet';
+
+const int NID_id_GostR3410_94_TestParamSet = 831;
+
+const int OBJ_id_GostR3410_94_TestParamSet = 1;
+
+const String SN_id_GostR3410_94_CryptoPro_A_ParamSet =
+    'id-GostR3410-94-CryptoPro-A-ParamSet';
+
+const int NID_id_GostR3410_94_CryptoPro_A_ParamSet = 832;
+
+const int OBJ_id_GostR3410_94_CryptoPro_A_ParamSet = 1;
+
+const String SN_id_GostR3410_94_CryptoPro_B_ParamSet =
+    'id-GostR3410-94-CryptoPro-B-ParamSet';
+
+const int NID_id_GostR3410_94_CryptoPro_B_ParamSet = 833;
+
+const int OBJ_id_GostR3410_94_CryptoPro_B_ParamSet = 1;
+
+const String SN_id_GostR3410_94_CryptoPro_C_ParamSet =
+    'id-GostR3410-94-CryptoPro-C-ParamSet';
+
+const int NID_id_GostR3410_94_CryptoPro_C_ParamSet = 834;
+
+const int OBJ_id_GostR3410_94_CryptoPro_C_ParamSet = 1;
+
+const String SN_id_GostR3410_94_CryptoPro_D_ParamSet =
+    'id-GostR3410-94-CryptoPro-D-ParamSet';
+
+const int NID_id_GostR3410_94_CryptoPro_D_ParamSet = 835;
+
+const int OBJ_id_GostR3410_94_CryptoPro_D_ParamSet = 1;
+
+const String SN_id_GostR3410_94_CryptoPro_XchA_ParamSet =
+    'id-GostR3410-94-CryptoPro-XchA-ParamSet';
+
+const int NID_id_GostR3410_94_CryptoPro_XchA_ParamSet = 836;
+
+const int OBJ_id_GostR3410_94_CryptoPro_XchA_ParamSet = 1;
+
+const String SN_id_GostR3410_94_CryptoPro_XchB_ParamSet =
+    'id-GostR3410-94-CryptoPro-XchB-ParamSet';
+
+const int NID_id_GostR3410_94_CryptoPro_XchB_ParamSet = 837;
+
+const int OBJ_id_GostR3410_94_CryptoPro_XchB_ParamSet = 1;
+
+const String SN_id_GostR3410_94_CryptoPro_XchC_ParamSet =
+    'id-GostR3410-94-CryptoPro-XchC-ParamSet';
+
+const int NID_id_GostR3410_94_CryptoPro_XchC_ParamSet = 838;
+
+const int OBJ_id_GostR3410_94_CryptoPro_XchC_ParamSet = 1;
+
+const String SN_id_GostR3410_2001_TestParamSet =
+    'id-GostR3410-2001-TestParamSet';
+
+const int NID_id_GostR3410_2001_TestParamSet = 839;
+
+const int OBJ_id_GostR3410_2001_TestParamSet = 1;
+
+const String SN_id_GostR3410_2001_CryptoPro_A_ParamSet =
+    'id-GostR3410-2001-CryptoPro-A-ParamSet';
+
+const int NID_id_GostR3410_2001_CryptoPro_A_ParamSet = 840;
+
+const int OBJ_id_GostR3410_2001_CryptoPro_A_ParamSet = 1;
+
+const String SN_id_GostR3410_2001_CryptoPro_B_ParamSet =
+    'id-GostR3410-2001-CryptoPro-B-ParamSet';
+
+const int NID_id_GostR3410_2001_CryptoPro_B_ParamSet = 841;
+
+const int OBJ_id_GostR3410_2001_CryptoPro_B_ParamSet = 1;
+
+const String SN_id_GostR3410_2001_CryptoPro_C_ParamSet =
+    'id-GostR3410-2001-CryptoPro-C-ParamSet';
+
+const int NID_id_GostR3410_2001_CryptoPro_C_ParamSet = 842;
+
+const int OBJ_id_GostR3410_2001_CryptoPro_C_ParamSet = 1;
+
+const String SN_id_GostR3410_2001_CryptoPro_XchA_ParamSet =
+    'id-GostR3410-2001-CryptoPro-XchA-ParamSet';
+
+const int NID_id_GostR3410_2001_CryptoPro_XchA_ParamSet = 843;
+
+const int OBJ_id_GostR3410_2001_CryptoPro_XchA_ParamSet = 1;
+
+const String SN_id_GostR3410_2001_CryptoPro_XchB_ParamSet =
+    'id-GostR3410-2001-CryptoPro-XchB-ParamSet';
+
+const int NID_id_GostR3410_2001_CryptoPro_XchB_ParamSet = 844;
+
+const int OBJ_id_GostR3410_2001_CryptoPro_XchB_ParamSet = 1;
+
+const String SN_id_GostR3410_94_a = 'id-GostR3410-94-a';
+
+const int NID_id_GostR3410_94_a = 845;
+
+const int OBJ_id_GostR3410_94_a = 1;
+
+const String SN_id_GostR3410_94_aBis = 'id-GostR3410-94-aBis';
+
+const int NID_id_GostR3410_94_aBis = 846;
+
+const int OBJ_id_GostR3410_94_aBis = 1;
+
+const String SN_id_GostR3410_94_b = 'id-GostR3410-94-b';
+
+const int NID_id_GostR3410_94_b = 847;
+
+const int OBJ_id_GostR3410_94_b = 1;
+
+const String SN_id_GostR3410_94_bBis = 'id-GostR3410-94-bBis';
+
+const int NID_id_GostR3410_94_bBis = 848;
+
+const int OBJ_id_GostR3410_94_bBis = 1;
+
+const String SN_id_Gost28147_89_cc = 'id-Gost28147-89-cc';
+
+const String LN_id_Gost28147_89_cc = 'GOST 28147-89 Cryptocom ParamSet';
+
+const int NID_id_Gost28147_89_cc = 849;
+
+const int OBJ_id_Gost28147_89_cc = 1;
+
+const String SN_id_GostR3410_94_cc = 'gost94cc';
+
+const String LN_id_GostR3410_94_cc = 'GOST 34.10-94 Cryptocom';
+
+const int NID_id_GostR3410_94_cc = 850;
+
+const int OBJ_id_GostR3410_94_cc = 1;
+
+const String SN_id_GostR3410_2001_cc = 'gost2001cc';
+
+const String LN_id_GostR3410_2001_cc = 'GOST 34.10-2001 Cryptocom';
+
+const int NID_id_GostR3410_2001_cc = 851;
+
+const int OBJ_id_GostR3410_2001_cc = 1;
+
+const String SN_id_GostR3411_94_with_GostR3410_94_cc =
+    'id-GostR3411-94-with-GostR3410-94-cc';
+
+const String LN_id_GostR3411_94_with_GostR3410_94_cc =
+    'GOST R 34.11-94 with GOST R 34.10-94 Cryptocom';
+
+const int NID_id_GostR3411_94_with_GostR3410_94_cc = 852;
+
+const int OBJ_id_GostR3411_94_with_GostR3410_94_cc = 1;
+
+const String SN_id_GostR3411_94_with_GostR3410_2001_cc =
+    'id-GostR3411-94-with-GostR3410-2001-cc';
+
+const String LN_id_GostR3411_94_with_GostR3410_2001_cc =
+    'GOST R 34.11-94 with GOST R 34.10-2001 Cryptocom';
+
+const int NID_id_GostR3411_94_with_GostR3410_2001_cc = 853;
+
+const int OBJ_id_GostR3411_94_with_GostR3410_2001_cc = 1;
+
+const String SN_id_GostR3410_2001_ParamSet_cc = 'id-GostR3410-2001-ParamSet-cc';
+
+const String LN_id_GostR3410_2001_ParamSet_cc =
+    'GOST R 3410-2001 Parameter Set Cryptocom';
+
+const int NID_id_GostR3410_2001_ParamSet_cc = 854;
+
+const int OBJ_id_GostR3410_2001_ParamSet_cc = 1;
+
+const String SN_id_tc26_algorithms = 'id-tc26-algorithms';
+
+const int NID_id_tc26_algorithms = 977;
+
+const int OBJ_id_tc26_algorithms = 1;
+
+const String SN_id_tc26_sign = 'id-tc26-sign';
+
+const int NID_id_tc26_sign = 978;
+
+const int OBJ_id_tc26_sign = 1;
+
+const String SN_id_GostR3410_2012_256 = 'gost2012_256';
+
+const String LN_id_GostR3410_2012_256 =
+    'GOST R 34.10-2012 with 256 bit modulus';
+
+const int NID_id_GostR3410_2012_256 = 979;
+
+const int OBJ_id_GostR3410_2012_256 = 1;
+
+const String SN_id_GostR3410_2012_512 = 'gost2012_512';
+
+const String LN_id_GostR3410_2012_512 =
+    'GOST R 34.10-2012 with 512 bit modulus';
+
+const int NID_id_GostR3410_2012_512 = 980;
+
+const int OBJ_id_GostR3410_2012_512 = 1;
+
+const String SN_id_tc26_digest = 'id-tc26-digest';
+
+const int NID_id_tc26_digest = 981;
+
+const int OBJ_id_tc26_digest = 1;
+
+const String SN_id_GostR3411_2012_256 = 'md_gost12_256';
+
+const String LN_id_GostR3411_2012_256 = 'GOST R 34.11-2012 with 256 bit hash';
+
+const int NID_id_GostR3411_2012_256 = 982;
+
+const int OBJ_id_GostR3411_2012_256 = 1;
+
+const String SN_id_GostR3411_2012_512 = 'md_gost12_512';
+
+const String LN_id_GostR3411_2012_512 = 'GOST R 34.11-2012 with 512 bit hash';
+
+const int NID_id_GostR3411_2012_512 = 983;
+
+const int OBJ_id_GostR3411_2012_512 = 1;
+
+const String SN_id_tc26_signwithdigest = 'id-tc26-signwithdigest';
+
+const int NID_id_tc26_signwithdigest = 984;
+
+const int OBJ_id_tc26_signwithdigest = 1;
+
+const String SN_id_tc26_signwithdigest_gost3410_2012_256 =
+    'id-tc26-signwithdigest-gost3410-2012-256';
+
+const String LN_id_tc26_signwithdigest_gost3410_2012_256 =
+    'GOST R 34.10-2012 with GOST R 34.11-2012 (256 bit)';
+
+const int NID_id_tc26_signwithdigest_gost3410_2012_256 = 985;
+
+const int OBJ_id_tc26_signwithdigest_gost3410_2012_256 = 1;
+
+const String SN_id_tc26_signwithdigest_gost3410_2012_512 =
+    'id-tc26-signwithdigest-gost3410-2012-512';
+
+const String LN_id_tc26_signwithdigest_gost3410_2012_512 =
+    'GOST R 34.10-2012 with GOST R 34.11-2012 (512 bit)';
+
+const int NID_id_tc26_signwithdigest_gost3410_2012_512 = 986;
+
+const int OBJ_id_tc26_signwithdigest_gost3410_2012_512 = 1;
+
+const String SN_id_tc26_mac = 'id-tc26-mac';
+
+const int NID_id_tc26_mac = 987;
+
+const int OBJ_id_tc26_mac = 1;
+
+const String SN_id_tc26_hmac_gost_3411_2012_256 =
+    'id-tc26-hmac-gost-3411-2012-256';
+
+const String LN_id_tc26_hmac_gost_3411_2012_256 =
+    'HMAC GOST 34.11-2012 256 bit';
+
+const int NID_id_tc26_hmac_gost_3411_2012_256 = 988;
+
+const int OBJ_id_tc26_hmac_gost_3411_2012_256 = 1;
+
+const String SN_id_tc26_hmac_gost_3411_2012_512 =
+    'id-tc26-hmac-gost-3411-2012-512';
+
+const String LN_id_tc26_hmac_gost_3411_2012_512 =
+    'HMAC GOST 34.11-2012 512 bit';
+
+const int NID_id_tc26_hmac_gost_3411_2012_512 = 989;
+
+const int OBJ_id_tc26_hmac_gost_3411_2012_512 = 1;
+
+const String SN_id_tc26_cipher = 'id-tc26-cipher';
+
+const int NID_id_tc26_cipher = 990;
+
+const int OBJ_id_tc26_cipher = 1;
+
+const String SN_id_tc26_cipher_gostr3412_2015_magma =
+    'id-tc26-cipher-gostr3412-2015-magma';
+
+const int NID_id_tc26_cipher_gostr3412_2015_magma = 1173;
+
+const int OBJ_id_tc26_cipher_gostr3412_2015_magma = 1;
+
+const String SN_id_tc26_cipher_gostr3412_2015_magma_ctracpkm =
+    'id-tc26-cipher-gostr3412-2015-magma-ctracpkm';
+
+const int NID_id_tc26_cipher_gostr3412_2015_magma_ctracpkm = 1174;
+
+const int OBJ_id_tc26_cipher_gostr3412_2015_magma_ctracpkm = 1;
+
+const String SN_id_tc26_cipher_gostr3412_2015_magma_ctracpkm_omac =
+    'id-tc26-cipher-gostr3412-2015-magma-ctracpkm-omac';
+
+const int NID_id_tc26_cipher_gostr3412_2015_magma_ctracpkm_omac = 1175;
+
+const int OBJ_id_tc26_cipher_gostr3412_2015_magma_ctracpkm_omac = 1;
+
+const String SN_id_tc26_cipher_gostr3412_2015_kuznyechik =
+    'id-tc26-cipher-gostr3412-2015-kuznyechik';
+
+const int NID_id_tc26_cipher_gostr3412_2015_kuznyechik = 1176;
+
+const int OBJ_id_tc26_cipher_gostr3412_2015_kuznyechik = 1;
+
+const String SN_id_tc26_cipher_gostr3412_2015_kuznyechik_ctracpkm =
+    'id-tc26-cipher-gostr3412-2015-kuznyechik-ctracpkm';
+
+const int NID_id_tc26_cipher_gostr3412_2015_kuznyechik_ctracpkm = 1177;
+
+const int OBJ_id_tc26_cipher_gostr3412_2015_kuznyechik_ctracpkm = 1;
+
+const String SN_id_tc26_cipher_gostr3412_2015_kuznyechik_ctracpkm_omac =
+    'id-tc26-cipher-gostr3412-2015-kuznyechik-ctracpkm-omac';
+
+const int NID_id_tc26_cipher_gostr3412_2015_kuznyechik_ctracpkm_omac = 1178;
+
+const int OBJ_id_tc26_cipher_gostr3412_2015_kuznyechik_ctracpkm_omac = 1;
+
+const String SN_id_tc26_agreement = 'id-tc26-agreement';
+
+const int NID_id_tc26_agreement = 991;
+
+const int OBJ_id_tc26_agreement = 1;
+
+const String SN_id_tc26_agreement_gost_3410_2012_256 =
+    'id-tc26-agreement-gost-3410-2012-256';
+
+const int NID_id_tc26_agreement_gost_3410_2012_256 = 992;
+
+const int OBJ_id_tc26_agreement_gost_3410_2012_256 = 1;
+
+const String SN_id_tc26_agreement_gost_3410_2012_512 =
+    'id-tc26-agreement-gost-3410-2012-512';
+
+const int NID_id_tc26_agreement_gost_3410_2012_512 = 993;
+
+const int OBJ_id_tc26_agreement_gost_3410_2012_512 = 1;
+
+const String SN_id_tc26_wrap = 'id-tc26-wrap';
+
+const int NID_id_tc26_wrap = 1179;
+
+const int OBJ_id_tc26_wrap = 1;
+
+const String SN_id_tc26_wrap_gostr3412_2015_magma =
+    'id-tc26-wrap-gostr3412-2015-magma';
+
+const int NID_id_tc26_wrap_gostr3412_2015_magma = 1180;
+
+const int OBJ_id_tc26_wrap_gostr3412_2015_magma = 1;
+
+const String SN_id_tc26_wrap_gostr3412_2015_magma_kexp15 =
+    'id-tc26-wrap-gostr3412-2015-magma-kexp15';
+
+const int NID_id_tc26_wrap_gostr3412_2015_magma_kexp15 = 1181;
+
+const int OBJ_id_tc26_wrap_gostr3412_2015_magma_kexp15 = 1;
+
+const String SN_id_tc26_wrap_gostr3412_2015_kuznyechik =
+    'id-tc26-wrap-gostr3412-2015-kuznyechik';
+
+const int NID_id_tc26_wrap_gostr3412_2015_kuznyechik = 1182;
+
+const int OBJ_id_tc26_wrap_gostr3412_2015_kuznyechik = 1;
+
+const String SN_id_tc26_wrap_gostr3412_2015_kuznyechik_kexp15 =
+    'id-tc26-wrap-gostr3412-2015-kuznyechik-kexp15';
+
+const int NID_id_tc26_wrap_gostr3412_2015_kuznyechik_kexp15 = 1183;
+
+const int OBJ_id_tc26_wrap_gostr3412_2015_kuznyechik_kexp15 = 1;
+
+const String SN_id_tc26_constants = 'id-tc26-constants';
+
+const int NID_id_tc26_constants = 994;
+
+const int OBJ_id_tc26_constants = 1;
+
+const String SN_id_tc26_sign_constants = 'id-tc26-sign-constants';
+
+const int NID_id_tc26_sign_constants = 995;
+
+const int OBJ_id_tc26_sign_constants = 1;
+
+const String SN_id_tc26_gost_3410_2012_256_constants =
+    'id-tc26-gost-3410-2012-256-constants';
+
+const int NID_id_tc26_gost_3410_2012_256_constants = 1147;
+
+const int OBJ_id_tc26_gost_3410_2012_256_constants = 1;
+
+const String SN_id_tc26_gost_3410_2012_256_paramSetA =
+    'id-tc26-gost-3410-2012-256-paramSetA';
+
+const String LN_id_tc26_gost_3410_2012_256_paramSetA =
+    'GOST R 34.10-2012 (256 bit) ParamSet A';
+
+const int NID_id_tc26_gost_3410_2012_256_paramSetA = 1148;
+
+const int OBJ_id_tc26_gost_3410_2012_256_paramSetA = 1;
+
+const String SN_id_tc26_gost_3410_2012_256_paramSetB =
+    'id-tc26-gost-3410-2012-256-paramSetB';
+
+const String LN_id_tc26_gost_3410_2012_256_paramSetB =
+    'GOST R 34.10-2012 (256 bit) ParamSet B';
+
+const int NID_id_tc26_gost_3410_2012_256_paramSetB = 1184;
+
+const int OBJ_id_tc26_gost_3410_2012_256_paramSetB = 1;
+
+const String SN_id_tc26_gost_3410_2012_256_paramSetC =
+    'id-tc26-gost-3410-2012-256-paramSetC';
+
+const String LN_id_tc26_gost_3410_2012_256_paramSetC =
+    'GOST R 34.10-2012 (256 bit) ParamSet C';
+
+const int NID_id_tc26_gost_3410_2012_256_paramSetC = 1185;
+
+const int OBJ_id_tc26_gost_3410_2012_256_paramSetC = 1;
+
+const String SN_id_tc26_gost_3410_2012_256_paramSetD =
+    'id-tc26-gost-3410-2012-256-paramSetD';
+
+const String LN_id_tc26_gost_3410_2012_256_paramSetD =
+    'GOST R 34.10-2012 (256 bit) ParamSet D';
+
+const int NID_id_tc26_gost_3410_2012_256_paramSetD = 1186;
+
+const int OBJ_id_tc26_gost_3410_2012_256_paramSetD = 1;
+
+const String SN_id_tc26_gost_3410_2012_512_constants =
+    'id-tc26-gost-3410-2012-512-constants';
+
+const int NID_id_tc26_gost_3410_2012_512_constants = 996;
+
+const int OBJ_id_tc26_gost_3410_2012_512_constants = 1;
+
+const String SN_id_tc26_gost_3410_2012_512_paramSetTest =
+    'id-tc26-gost-3410-2012-512-paramSetTest';
+
+const String LN_id_tc26_gost_3410_2012_512_paramSetTest =
+    'GOST R 34.10-2012 (512 bit) testing parameter set';
+
+const int NID_id_tc26_gost_3410_2012_512_paramSetTest = 997;
+
+const int OBJ_id_tc26_gost_3410_2012_512_paramSetTest = 1;
+
+const String SN_id_tc26_gost_3410_2012_512_paramSetA =
+    'id-tc26-gost-3410-2012-512-paramSetA';
+
+const String LN_id_tc26_gost_3410_2012_512_paramSetA =
+    'GOST R 34.10-2012 (512 bit) ParamSet A';
+
+const int NID_id_tc26_gost_3410_2012_512_paramSetA = 998;
+
+const int OBJ_id_tc26_gost_3410_2012_512_paramSetA = 1;
+
+const String SN_id_tc26_gost_3410_2012_512_paramSetB =
+    'id-tc26-gost-3410-2012-512-paramSetB';
+
+const String LN_id_tc26_gost_3410_2012_512_paramSetB =
+    'GOST R 34.10-2012 (512 bit) ParamSet B';
+
+const int NID_id_tc26_gost_3410_2012_512_paramSetB = 999;
+
+const int OBJ_id_tc26_gost_3410_2012_512_paramSetB = 1;
+
+const String SN_id_tc26_gost_3410_2012_512_paramSetC =
+    'id-tc26-gost-3410-2012-512-paramSetC';
+
+const String LN_id_tc26_gost_3410_2012_512_paramSetC =
+    'GOST R 34.10-2012 (512 bit) ParamSet C';
+
+const int NID_id_tc26_gost_3410_2012_512_paramSetC = 1149;
+
+const int OBJ_id_tc26_gost_3410_2012_512_paramSetC = 1;
+
+const String SN_id_tc26_digest_constants = 'id-tc26-digest-constants';
+
+const int NID_id_tc26_digest_constants = 1000;
+
+const int OBJ_id_tc26_digest_constants = 1;
+
+const String SN_id_tc26_cipher_constants = 'id-tc26-cipher-constants';
+
+const int NID_id_tc26_cipher_constants = 1001;
+
+const int OBJ_id_tc26_cipher_constants = 1;
+
+const String SN_id_tc26_gost_28147_constants = 'id-tc26-gost-28147-constants';
+
+const int NID_id_tc26_gost_28147_constants = 1002;
+
+const int OBJ_id_tc26_gost_28147_constants = 1;
+
+const String SN_id_tc26_gost_28147_param_Z = 'id-tc26-gost-28147-param-Z';
+
+const String LN_id_tc26_gost_28147_param_Z = 'GOST 28147-89 TC26 parameter set';
+
+const int NID_id_tc26_gost_28147_param_Z = 1003;
+
+const int OBJ_id_tc26_gost_28147_param_Z = 1;
+
+const String SN_INN = 'INN';
+
+const String LN_INN = 'INN';
+
+const int NID_INN = 1004;
+
+const int OBJ_INN = 1;
+
+const String SN_OGRN = 'OGRN';
+
+const String LN_OGRN = 'OGRN';
+
+const int NID_OGRN = 1005;
+
+const int OBJ_OGRN = 1;
+
+const String SN_SNILS = 'SNILS';
+
+const String LN_SNILS = 'SNILS';
+
+const int NID_SNILS = 1006;
+
+const int OBJ_SNILS = 1;
+
+const String SN_subjectSignTool = 'subjectSignTool';
+
+const String LN_subjectSignTool = 'Signing Tool of Subject';
+
+const int NID_subjectSignTool = 1007;
+
+const int OBJ_subjectSignTool = 1;
+
+const String SN_issuerSignTool = 'issuerSignTool';
+
+const String LN_issuerSignTool = 'Signing Tool of Issuer';
+
+const int NID_issuerSignTool = 1008;
+
+const int OBJ_issuerSignTool = 1;
+
+const String SN_grasshopper_ecb = 'grasshopper-ecb';
+
+const int NID_grasshopper_ecb = 1012;
+
+const String SN_grasshopper_ctr = 'grasshopper-ctr';
+
+const int NID_grasshopper_ctr = 1013;
+
+const String SN_grasshopper_ofb = 'grasshopper-ofb';
+
+const int NID_grasshopper_ofb = 1014;
+
+const String SN_grasshopper_cbc = 'grasshopper-cbc';
+
+const int NID_grasshopper_cbc = 1015;
+
+const String SN_grasshopper_cfb = 'grasshopper-cfb';
+
+const int NID_grasshopper_cfb = 1016;
+
+const String SN_grasshopper_mac = 'grasshopper-mac';
+
+const int NID_grasshopper_mac = 1017;
+
+const String SN_magma_ecb = 'magma-ecb';
+
+const int NID_magma_ecb = 1187;
+
+const String SN_magma_ctr = 'magma-ctr';
+
+const int NID_magma_ctr = 1188;
+
+const String SN_magma_ofb = 'magma-ofb';
+
+const int NID_magma_ofb = 1189;
+
+const String SN_magma_cbc = 'magma-cbc';
+
+const int NID_magma_cbc = 1190;
+
+const String SN_magma_cfb = 'magma-cfb';
+
+const int NID_magma_cfb = 1191;
+
+const String SN_magma_mac = 'magma-mac';
+
+const int NID_magma_mac = 1192;
+
+const String SN_camellia_128_cbc = 'CAMELLIA-128-CBC';
+
+const String LN_camellia_128_cbc = 'camellia-128-cbc';
+
+const int NID_camellia_128_cbc = 751;
+
+const int OBJ_camellia_128_cbc = 1;
+
+const String SN_camellia_192_cbc = 'CAMELLIA-192-CBC';
+
+const String LN_camellia_192_cbc = 'camellia-192-cbc';
+
+const int NID_camellia_192_cbc = 752;
+
+const int OBJ_camellia_192_cbc = 1;
+
+const String SN_camellia_256_cbc = 'CAMELLIA-256-CBC';
+
+const String LN_camellia_256_cbc = 'camellia-256-cbc';
+
+const int NID_camellia_256_cbc = 753;
+
+const int OBJ_camellia_256_cbc = 1;
+
+const String SN_id_camellia128_wrap = 'id-camellia128-wrap';
+
+const int NID_id_camellia128_wrap = 907;
+
+const int OBJ_id_camellia128_wrap = 1;
+
+const String SN_id_camellia192_wrap = 'id-camellia192-wrap';
+
+const int NID_id_camellia192_wrap = 908;
+
+const int OBJ_id_camellia192_wrap = 1;
+
+const String SN_id_camellia256_wrap = 'id-camellia256-wrap';
+
+const int NID_id_camellia256_wrap = 909;
+
+const int OBJ_id_camellia256_wrap = 1;
+
+const int OBJ_ntt_ds = 0;
+
+const int OBJ_camellia = 0;
+
+const String SN_camellia_128_ecb = 'CAMELLIA-128-ECB';
+
+const String LN_camellia_128_ecb = 'camellia-128-ecb';
+
+const int NID_camellia_128_ecb = 754;
+
+const int OBJ_camellia_128_ecb = 0;
+
+const String SN_camellia_128_ofb128 = 'CAMELLIA-128-OFB';
+
+const String LN_camellia_128_ofb128 = 'camellia-128-ofb';
+
+const int NID_camellia_128_ofb128 = 766;
+
+const int OBJ_camellia_128_ofb128 = 0;
+
+const String SN_camellia_128_cfb128 = 'CAMELLIA-128-CFB';
+
+const String LN_camellia_128_cfb128 = 'camellia-128-cfb';
+
+const int NID_camellia_128_cfb128 = 757;
+
+const int OBJ_camellia_128_cfb128 = 0;
+
+const String SN_camellia_128_gcm = 'CAMELLIA-128-GCM';
+
+const String LN_camellia_128_gcm = 'camellia-128-gcm';
+
+const int NID_camellia_128_gcm = 961;
+
+const int OBJ_camellia_128_gcm = 0;
+
+const String SN_camellia_128_ccm = 'CAMELLIA-128-CCM';
+
+const String LN_camellia_128_ccm = 'camellia-128-ccm';
+
+const int NID_camellia_128_ccm = 962;
+
+const int OBJ_camellia_128_ccm = 0;
+
+const String SN_camellia_128_ctr = 'CAMELLIA-128-CTR';
+
+const String LN_camellia_128_ctr = 'camellia-128-ctr';
+
+const int NID_camellia_128_ctr = 963;
+
+const int OBJ_camellia_128_ctr = 0;
+
+const String SN_camellia_128_cmac = 'CAMELLIA-128-CMAC';
+
+const String LN_camellia_128_cmac = 'camellia-128-cmac';
+
+const int NID_camellia_128_cmac = 964;
+
+const int OBJ_camellia_128_cmac = 0;
+
+const String SN_camellia_192_ecb = 'CAMELLIA-192-ECB';
+
+const String LN_camellia_192_ecb = 'camellia-192-ecb';
+
+const int NID_camellia_192_ecb = 755;
+
+const int OBJ_camellia_192_ecb = 0;
+
+const String SN_camellia_192_ofb128 = 'CAMELLIA-192-OFB';
+
+const String LN_camellia_192_ofb128 = 'camellia-192-ofb';
+
+const int NID_camellia_192_ofb128 = 767;
+
+const int OBJ_camellia_192_ofb128 = 0;
+
+const String SN_camellia_192_cfb128 = 'CAMELLIA-192-CFB';
+
+const String LN_camellia_192_cfb128 = 'camellia-192-cfb';
+
+const int NID_camellia_192_cfb128 = 758;
+
+const int OBJ_camellia_192_cfb128 = 0;
+
+const String SN_camellia_192_gcm = 'CAMELLIA-192-GCM';
+
+const String LN_camellia_192_gcm = 'camellia-192-gcm';
+
+const int NID_camellia_192_gcm = 965;
+
+const int OBJ_camellia_192_gcm = 0;
+
+const String SN_camellia_192_ccm = 'CAMELLIA-192-CCM';
+
+const String LN_camellia_192_ccm = 'camellia-192-ccm';
+
+const int NID_camellia_192_ccm = 966;
+
+const int OBJ_camellia_192_ccm = 0;
+
+const String SN_camellia_192_ctr = 'CAMELLIA-192-CTR';
+
+const String LN_camellia_192_ctr = 'camellia-192-ctr';
+
+const int NID_camellia_192_ctr = 967;
+
+const int OBJ_camellia_192_ctr = 0;
+
+const String SN_camellia_192_cmac = 'CAMELLIA-192-CMAC';
+
+const String LN_camellia_192_cmac = 'camellia-192-cmac';
+
+const int NID_camellia_192_cmac = 968;
+
+const int OBJ_camellia_192_cmac = 0;
+
+const String SN_camellia_256_ecb = 'CAMELLIA-256-ECB';
+
+const String LN_camellia_256_ecb = 'camellia-256-ecb';
+
+const int NID_camellia_256_ecb = 756;
+
+const int OBJ_camellia_256_ecb = 0;
+
+const String SN_camellia_256_ofb128 = 'CAMELLIA-256-OFB';
+
+const String LN_camellia_256_ofb128 = 'camellia-256-ofb';
+
+const int NID_camellia_256_ofb128 = 768;
+
+const int OBJ_camellia_256_ofb128 = 0;
+
+const String SN_camellia_256_cfb128 = 'CAMELLIA-256-CFB';
+
+const String LN_camellia_256_cfb128 = 'camellia-256-cfb';
+
+const int NID_camellia_256_cfb128 = 759;
+
+const int OBJ_camellia_256_cfb128 = 0;
+
+const String SN_camellia_256_gcm = 'CAMELLIA-256-GCM';
+
+const String LN_camellia_256_gcm = 'camellia-256-gcm';
+
+const int NID_camellia_256_gcm = 969;
+
+const int OBJ_camellia_256_gcm = 0;
+
+const String SN_camellia_256_ccm = 'CAMELLIA-256-CCM';
+
+const String LN_camellia_256_ccm = 'camellia-256-ccm';
+
+const int NID_camellia_256_ccm = 970;
+
+const int OBJ_camellia_256_ccm = 0;
+
+const String SN_camellia_256_ctr = 'CAMELLIA-256-CTR';
+
+const String LN_camellia_256_ctr = 'camellia-256-ctr';
+
+const int NID_camellia_256_ctr = 971;
+
+const int OBJ_camellia_256_ctr = 0;
+
+const String SN_camellia_256_cmac = 'CAMELLIA-256-CMAC';
+
+const String LN_camellia_256_cmac = 'camellia-256-cmac';
+
+const int NID_camellia_256_cmac = 972;
+
+const int OBJ_camellia_256_cmac = 0;
+
+const String SN_camellia_128_cfb1 = 'CAMELLIA-128-CFB1';
+
+const String LN_camellia_128_cfb1 = 'camellia-128-cfb1';
+
+const int NID_camellia_128_cfb1 = 760;
+
+const String SN_camellia_192_cfb1 = 'CAMELLIA-192-CFB1';
+
+const String LN_camellia_192_cfb1 = 'camellia-192-cfb1';
+
+const int NID_camellia_192_cfb1 = 761;
+
+const String SN_camellia_256_cfb1 = 'CAMELLIA-256-CFB1';
+
+const String LN_camellia_256_cfb1 = 'camellia-256-cfb1';
+
+const int NID_camellia_256_cfb1 = 762;
+
+const String SN_camellia_128_cfb8 = 'CAMELLIA-128-CFB8';
+
+const String LN_camellia_128_cfb8 = 'camellia-128-cfb8';
+
+const int NID_camellia_128_cfb8 = 763;
+
+const String SN_camellia_192_cfb8 = 'CAMELLIA-192-CFB8';
+
+const String LN_camellia_192_cfb8 = 'camellia-192-cfb8';
+
+const int NID_camellia_192_cfb8 = 764;
+
+const String SN_camellia_256_cfb8 = 'CAMELLIA-256-CFB8';
+
+const String LN_camellia_256_cfb8 = 'camellia-256-cfb8';
+
+const int NID_camellia_256_cfb8 = 765;
+
+const int OBJ_aria = 1;
+
+const String SN_aria_128_ecb = 'ARIA-128-ECB';
+
+const String LN_aria_128_ecb = 'aria-128-ecb';
+
+const int NID_aria_128_ecb = 1065;
+
+const int OBJ_aria_128_ecb = 1;
+
+const String SN_aria_128_cbc = 'ARIA-128-CBC';
+
+const String LN_aria_128_cbc = 'aria-128-cbc';
+
+const int NID_aria_128_cbc = 1066;
+
+const int OBJ_aria_128_cbc = 1;
+
+const String SN_aria_128_cfb128 = 'ARIA-128-CFB';
+
+const String LN_aria_128_cfb128 = 'aria-128-cfb';
+
+const int NID_aria_128_cfb128 = 1067;
+
+const int OBJ_aria_128_cfb128 = 1;
+
+const String SN_aria_128_ofb128 = 'ARIA-128-OFB';
+
+const String LN_aria_128_ofb128 = 'aria-128-ofb';
+
+const int NID_aria_128_ofb128 = 1068;
+
+const int OBJ_aria_128_ofb128 = 1;
+
+const String SN_aria_128_ctr = 'ARIA-128-CTR';
+
+const String LN_aria_128_ctr = 'aria-128-ctr';
+
+const int NID_aria_128_ctr = 1069;
+
+const int OBJ_aria_128_ctr = 1;
+
+const String SN_aria_192_ecb = 'ARIA-192-ECB';
+
+const String LN_aria_192_ecb = 'aria-192-ecb';
+
+const int NID_aria_192_ecb = 1070;
+
+const int OBJ_aria_192_ecb = 1;
+
+const String SN_aria_192_cbc = 'ARIA-192-CBC';
+
+const String LN_aria_192_cbc = 'aria-192-cbc';
+
+const int NID_aria_192_cbc = 1071;
+
+const int OBJ_aria_192_cbc = 1;
+
+const String SN_aria_192_cfb128 = 'ARIA-192-CFB';
+
+const String LN_aria_192_cfb128 = 'aria-192-cfb';
+
+const int NID_aria_192_cfb128 = 1072;
+
+const int OBJ_aria_192_cfb128 = 1;
+
+const String SN_aria_192_ofb128 = 'ARIA-192-OFB';
+
+const String LN_aria_192_ofb128 = 'aria-192-ofb';
+
+const int NID_aria_192_ofb128 = 1073;
+
+const int OBJ_aria_192_ofb128 = 1;
+
+const String SN_aria_192_ctr = 'ARIA-192-CTR';
+
+const String LN_aria_192_ctr = 'aria-192-ctr';
+
+const int NID_aria_192_ctr = 1074;
+
+const int OBJ_aria_192_ctr = 1;
+
+const String SN_aria_256_ecb = 'ARIA-256-ECB';
+
+const String LN_aria_256_ecb = 'aria-256-ecb';
+
+const int NID_aria_256_ecb = 1075;
+
+const int OBJ_aria_256_ecb = 1;
+
+const String SN_aria_256_cbc = 'ARIA-256-CBC';
+
+const String LN_aria_256_cbc = 'aria-256-cbc';
+
+const int NID_aria_256_cbc = 1076;
+
+const int OBJ_aria_256_cbc = 1;
+
+const String SN_aria_256_cfb128 = 'ARIA-256-CFB';
+
+const String LN_aria_256_cfb128 = 'aria-256-cfb';
+
+const int NID_aria_256_cfb128 = 1077;
+
+const int OBJ_aria_256_cfb128 = 1;
+
+const String SN_aria_256_ofb128 = 'ARIA-256-OFB';
+
+const String LN_aria_256_ofb128 = 'aria-256-ofb';
+
+const int NID_aria_256_ofb128 = 1078;
+
+const int OBJ_aria_256_ofb128 = 1;
+
+const String SN_aria_256_ctr = 'ARIA-256-CTR';
+
+const String LN_aria_256_ctr = 'aria-256-ctr';
+
+const int NID_aria_256_ctr = 1079;
+
+const int OBJ_aria_256_ctr = 1;
+
+const String SN_aria_128_cfb1 = 'ARIA-128-CFB1';
+
+const String LN_aria_128_cfb1 = 'aria-128-cfb1';
+
+const int NID_aria_128_cfb1 = 1080;
+
+const String SN_aria_192_cfb1 = 'ARIA-192-CFB1';
+
+const String LN_aria_192_cfb1 = 'aria-192-cfb1';
+
+const int NID_aria_192_cfb1 = 1081;
+
+const String SN_aria_256_cfb1 = 'ARIA-256-CFB1';
+
+const String LN_aria_256_cfb1 = 'aria-256-cfb1';
+
+const int NID_aria_256_cfb1 = 1082;
+
+const String SN_aria_128_cfb8 = 'ARIA-128-CFB8';
+
+const String LN_aria_128_cfb8 = 'aria-128-cfb8';
+
+const int NID_aria_128_cfb8 = 1083;
+
+const String SN_aria_192_cfb8 = 'ARIA-192-CFB8';
+
+const String LN_aria_192_cfb8 = 'aria-192-cfb8';
+
+const int NID_aria_192_cfb8 = 1084;
+
+const String SN_aria_256_cfb8 = 'ARIA-256-CFB8';
+
+const String LN_aria_256_cfb8 = 'aria-256-cfb8';
+
+const int NID_aria_256_cfb8 = 1085;
+
+const String SN_aria_128_ccm = 'ARIA-128-CCM';
+
+const String LN_aria_128_ccm = 'aria-128-ccm';
+
+const int NID_aria_128_ccm = 1120;
+
+const int OBJ_aria_128_ccm = 1;
+
+const String SN_aria_192_ccm = 'ARIA-192-CCM';
+
+const String LN_aria_192_ccm = 'aria-192-ccm';
+
+const int NID_aria_192_ccm = 1121;
+
+const int OBJ_aria_192_ccm = 1;
+
+const String SN_aria_256_ccm = 'ARIA-256-CCM';
+
+const String LN_aria_256_ccm = 'aria-256-ccm';
+
+const int NID_aria_256_ccm = 1122;
+
+const int OBJ_aria_256_ccm = 1;
+
+const String SN_aria_128_gcm = 'ARIA-128-GCM';
+
+const String LN_aria_128_gcm = 'aria-128-gcm';
+
+const int NID_aria_128_gcm = 1123;
+
+const int OBJ_aria_128_gcm = 1;
+
+const String SN_aria_192_gcm = 'ARIA-192-GCM';
+
+const String LN_aria_192_gcm = 'aria-192-gcm';
+
+const int NID_aria_192_gcm = 1124;
+
+const int OBJ_aria_192_gcm = 1;
+
+const String SN_aria_256_gcm = 'ARIA-256-GCM';
+
+const String LN_aria_256_gcm = 'aria-256-gcm';
+
+const int NID_aria_256_gcm = 1125;
+
+const int OBJ_aria_256_gcm = 1;
+
+const String SN_kisa = 'KISA';
+
+const String LN_kisa = 'kisa';
+
+const int NID_kisa = 773;
+
+const int OBJ_kisa = 1;
+
+const String SN_seed_ecb = 'SEED-ECB';
+
+const String LN_seed_ecb = 'seed-ecb';
+
+const int NID_seed_ecb = 776;
+
+const int OBJ_seed_ecb = 1;
+
+const String SN_seed_cbc = 'SEED-CBC';
+
+const String LN_seed_cbc = 'seed-cbc';
+
+const int NID_seed_cbc = 777;
+
+const int OBJ_seed_cbc = 1;
+
+const String SN_seed_cfb128 = 'SEED-CFB';
+
+const String LN_seed_cfb128 = 'seed-cfb';
+
+const int NID_seed_cfb128 = 779;
+
+const int OBJ_seed_cfb128 = 1;
+
+const String SN_seed_ofb128 = 'SEED-OFB';
+
+const String LN_seed_ofb128 = 'seed-ofb';
+
+const int NID_seed_ofb128 = 778;
+
+const int OBJ_seed_ofb128 = 1;
+
+const String SN_sm4_ecb = 'SM4-ECB';
+
+const String LN_sm4_ecb = 'sm4-ecb';
+
+const int NID_sm4_ecb = 1133;
+
+const int OBJ_sm4_ecb = 1;
+
+const String SN_sm4_cbc = 'SM4-CBC';
+
+const String LN_sm4_cbc = 'sm4-cbc';
+
+const int NID_sm4_cbc = 1134;
+
+const int OBJ_sm4_cbc = 1;
+
+const String SN_sm4_ofb128 = 'SM4-OFB';
+
+const String LN_sm4_ofb128 = 'sm4-ofb';
+
+const int NID_sm4_ofb128 = 1135;
+
+const int OBJ_sm4_ofb128 = 1;
+
+const String SN_sm4_cfb128 = 'SM4-CFB';
+
+const String LN_sm4_cfb128 = 'sm4-cfb';
+
+const int NID_sm4_cfb128 = 1137;
+
+const int OBJ_sm4_cfb128 = 1;
+
+const String SN_sm4_cfb1 = 'SM4-CFB1';
+
+const String LN_sm4_cfb1 = 'sm4-cfb1';
+
+const int NID_sm4_cfb1 = 1136;
+
+const int OBJ_sm4_cfb1 = 1;
+
+const String SN_sm4_cfb8 = 'SM4-CFB8';
+
+const String LN_sm4_cfb8 = 'sm4-cfb8';
+
+const int NID_sm4_cfb8 = 1138;
+
+const int OBJ_sm4_cfb8 = 1;
+
+const String SN_sm4_ctr = 'SM4-CTR';
+
+const String LN_sm4_ctr = 'sm4-ctr';
+
+const int NID_sm4_ctr = 1139;
+
+const int OBJ_sm4_ctr = 1;
+
+const String SN_hmac = 'HMAC';
+
+const String LN_hmac = 'hmac';
+
+const int NID_hmac = 855;
+
+const String SN_cmac = 'CMAC';
+
+const String LN_cmac = 'cmac';
+
+const int NID_cmac = 894;
+
+const String SN_rc4_hmac_md5 = 'RC4-HMAC-MD5';
+
+const String LN_rc4_hmac_md5 = 'rc4-hmac-md5';
+
+const int NID_rc4_hmac_md5 = 915;
+
+const String SN_aes_128_cbc_hmac_sha1 = 'AES-128-CBC-HMAC-SHA1';
+
+const String LN_aes_128_cbc_hmac_sha1 = 'aes-128-cbc-hmac-sha1';
+
+const int NID_aes_128_cbc_hmac_sha1 = 916;
+
+const String SN_aes_192_cbc_hmac_sha1 = 'AES-192-CBC-HMAC-SHA1';
+
+const String LN_aes_192_cbc_hmac_sha1 = 'aes-192-cbc-hmac-sha1';
+
+const int NID_aes_192_cbc_hmac_sha1 = 917;
+
+const String SN_aes_256_cbc_hmac_sha1 = 'AES-256-CBC-HMAC-SHA1';
+
+const String LN_aes_256_cbc_hmac_sha1 = 'aes-256-cbc-hmac-sha1';
+
+const int NID_aes_256_cbc_hmac_sha1 = 918;
+
+const String SN_aes_128_cbc_hmac_sha256 = 'AES-128-CBC-HMAC-SHA256';
+
+const String LN_aes_128_cbc_hmac_sha256 = 'aes-128-cbc-hmac-sha256';
+
+const int NID_aes_128_cbc_hmac_sha256 = 948;
+
+const String SN_aes_192_cbc_hmac_sha256 = 'AES-192-CBC-HMAC-SHA256';
+
+const String LN_aes_192_cbc_hmac_sha256 = 'aes-192-cbc-hmac-sha256';
+
+const int NID_aes_192_cbc_hmac_sha256 = 949;
+
+const String SN_aes_256_cbc_hmac_sha256 = 'AES-256-CBC-HMAC-SHA256';
+
+const String LN_aes_256_cbc_hmac_sha256 = 'aes-256-cbc-hmac-sha256';
+
+const int NID_aes_256_cbc_hmac_sha256 = 950;
+
+const String SN_chacha20_poly1305 = 'ChaCha20-Poly1305';
+
+const String LN_chacha20_poly1305 = 'chacha20-poly1305';
+
+const int NID_chacha20_poly1305 = 1018;
+
+const String SN_chacha20 = 'ChaCha20';
+
+const String LN_chacha20 = 'chacha20';
+
+const int NID_chacha20 = 1019;
+
+const String SN_dhpublicnumber = 'dhpublicnumber';
+
+const String LN_dhpublicnumber = 'X9.42 DH';
+
+const int NID_dhpublicnumber = 920;
+
+const int OBJ_dhpublicnumber = 1;
+
+const String SN_brainpoolP160r1 = 'brainpoolP160r1';
+
+const int NID_brainpoolP160r1 = 921;
+
+const int OBJ_brainpoolP160r1 = 1;
+
+const String SN_brainpoolP160t1 = 'brainpoolP160t1';
+
+const int NID_brainpoolP160t1 = 922;
+
+const int OBJ_brainpoolP160t1 = 1;
+
+const String SN_brainpoolP192r1 = 'brainpoolP192r1';
+
+const int NID_brainpoolP192r1 = 923;
+
+const int OBJ_brainpoolP192r1 = 1;
+
+const String SN_brainpoolP192t1 = 'brainpoolP192t1';
+
+const int NID_brainpoolP192t1 = 924;
+
+const int OBJ_brainpoolP192t1 = 1;
+
+const String SN_brainpoolP224r1 = 'brainpoolP224r1';
+
+const int NID_brainpoolP224r1 = 925;
+
+const int OBJ_brainpoolP224r1 = 1;
+
+const String SN_brainpoolP224t1 = 'brainpoolP224t1';
+
+const int NID_brainpoolP224t1 = 926;
+
+const int OBJ_brainpoolP224t1 = 1;
+
+const String SN_brainpoolP256r1 = 'brainpoolP256r1';
+
+const int NID_brainpoolP256r1 = 927;
+
+const int OBJ_brainpoolP256r1 = 1;
+
+const String SN_brainpoolP256t1 = 'brainpoolP256t1';
+
+const int NID_brainpoolP256t1 = 928;
+
+const int OBJ_brainpoolP256t1 = 1;
+
+const String SN_brainpoolP320r1 = 'brainpoolP320r1';
+
+const int NID_brainpoolP320r1 = 929;
+
+const int OBJ_brainpoolP320r1 = 1;
+
+const String SN_brainpoolP320t1 = 'brainpoolP320t1';
+
+const int NID_brainpoolP320t1 = 930;
+
+const int OBJ_brainpoolP320t1 = 1;
+
+const String SN_brainpoolP384r1 = 'brainpoolP384r1';
+
+const int NID_brainpoolP384r1 = 931;
+
+const int OBJ_brainpoolP384r1 = 1;
+
+const String SN_brainpoolP384t1 = 'brainpoolP384t1';
+
+const int NID_brainpoolP384t1 = 932;
+
+const int OBJ_brainpoolP384t1 = 1;
+
+const String SN_brainpoolP512r1 = 'brainpoolP512r1';
+
+const int NID_brainpoolP512r1 = 933;
+
+const int OBJ_brainpoolP512r1 = 1;
+
+const String SN_brainpoolP512t1 = 'brainpoolP512t1';
+
+const int NID_brainpoolP512t1 = 934;
+
+const int OBJ_brainpoolP512t1 = 1;
+
+const int OBJ_x9_63_scheme = 1;
+
+const int OBJ_secg_scheme = 1;
+
+const String SN_dhSinglePass_stdDH_sha1kdf_scheme =
+    'dhSinglePass-stdDH-sha1kdf-scheme';
+
+const int NID_dhSinglePass_stdDH_sha1kdf_scheme = 936;
+
+const int OBJ_dhSinglePass_stdDH_sha1kdf_scheme = 1;
+
+const String SN_dhSinglePass_stdDH_sha224kdf_scheme =
+    'dhSinglePass-stdDH-sha224kdf-scheme';
+
+const int NID_dhSinglePass_stdDH_sha224kdf_scheme = 937;
+
+const int OBJ_dhSinglePass_stdDH_sha224kdf_scheme = 1;
+
+const String SN_dhSinglePass_stdDH_sha256kdf_scheme =
+    'dhSinglePass-stdDH-sha256kdf-scheme';
+
+const int NID_dhSinglePass_stdDH_sha256kdf_scheme = 938;
+
+const int OBJ_dhSinglePass_stdDH_sha256kdf_scheme = 1;
+
+const String SN_dhSinglePass_stdDH_sha384kdf_scheme =
+    'dhSinglePass-stdDH-sha384kdf-scheme';
+
+const int NID_dhSinglePass_stdDH_sha384kdf_scheme = 939;
+
+const int OBJ_dhSinglePass_stdDH_sha384kdf_scheme = 1;
+
+const String SN_dhSinglePass_stdDH_sha512kdf_scheme =
+    'dhSinglePass-stdDH-sha512kdf-scheme';
+
+const int NID_dhSinglePass_stdDH_sha512kdf_scheme = 940;
+
+const int OBJ_dhSinglePass_stdDH_sha512kdf_scheme = 1;
+
+const String SN_dhSinglePass_cofactorDH_sha1kdf_scheme =
+    'dhSinglePass-cofactorDH-sha1kdf-scheme';
+
+const int NID_dhSinglePass_cofactorDH_sha1kdf_scheme = 941;
+
+const int OBJ_dhSinglePass_cofactorDH_sha1kdf_scheme = 1;
+
+const String SN_dhSinglePass_cofactorDH_sha224kdf_scheme =
+    'dhSinglePass-cofactorDH-sha224kdf-scheme';
+
+const int NID_dhSinglePass_cofactorDH_sha224kdf_scheme = 942;
+
+const int OBJ_dhSinglePass_cofactorDH_sha224kdf_scheme = 1;
+
+const String SN_dhSinglePass_cofactorDH_sha256kdf_scheme =
+    'dhSinglePass-cofactorDH-sha256kdf-scheme';
+
+const int NID_dhSinglePass_cofactorDH_sha256kdf_scheme = 943;
+
+const int OBJ_dhSinglePass_cofactorDH_sha256kdf_scheme = 1;
+
+const String SN_dhSinglePass_cofactorDH_sha384kdf_scheme =
+    'dhSinglePass-cofactorDH-sha384kdf-scheme';
+
+const int NID_dhSinglePass_cofactorDH_sha384kdf_scheme = 944;
+
+const int OBJ_dhSinglePass_cofactorDH_sha384kdf_scheme = 1;
+
+const String SN_dhSinglePass_cofactorDH_sha512kdf_scheme =
+    'dhSinglePass-cofactorDH-sha512kdf-scheme';
+
+const int NID_dhSinglePass_cofactorDH_sha512kdf_scheme = 945;
+
+const int OBJ_dhSinglePass_cofactorDH_sha512kdf_scheme = 1;
+
+const String SN_dh_std_kdf = 'dh-std-kdf';
+
+const int NID_dh_std_kdf = 946;
+
+const String SN_dh_cofactor_kdf = 'dh-cofactor-kdf';
+
+const int NID_dh_cofactor_kdf = 947;
+
+const String SN_ct_precert_scts = 'ct_precert_scts';
+
+const String LN_ct_precert_scts = 'CT Precertificate SCTs';
+
+const int NID_ct_precert_scts = 951;
+
+const int OBJ_ct_precert_scts = 1;
+
+const String SN_ct_precert_poison = 'ct_precert_poison';
+
+const String LN_ct_precert_poison = 'CT Precertificate Poison';
+
+const int NID_ct_precert_poison = 952;
+
+const int OBJ_ct_precert_poison = 1;
+
+const String SN_ct_precert_signer = 'ct_precert_signer';
+
+const String LN_ct_precert_signer = 'CT Precertificate Signer';
+
+const int NID_ct_precert_signer = 953;
+
+const int OBJ_ct_precert_signer = 1;
+
+const String SN_ct_cert_scts = 'ct_cert_scts';
+
+const String LN_ct_cert_scts = 'CT Certificate SCTs';
+
+const int NID_ct_cert_scts = 954;
+
+const int OBJ_ct_cert_scts = 1;
+
+const String SN_jurisdictionLocalityName = 'jurisdictionL';
+
+const String LN_jurisdictionLocalityName = 'jurisdictionLocalityName';
+
+const int NID_jurisdictionLocalityName = 955;
+
+const int OBJ_jurisdictionLocalityName = 1;
+
+const String SN_jurisdictionStateOrProvinceName = 'jurisdictionST';
+
+const String LN_jurisdictionStateOrProvinceName =
+    'jurisdictionStateOrProvinceName';
+
+const int NID_jurisdictionStateOrProvinceName = 956;
+
+const int OBJ_jurisdictionStateOrProvinceName = 1;
+
+const String SN_jurisdictionCountryName = 'jurisdictionC';
+
+const String LN_jurisdictionCountryName = 'jurisdictionCountryName';
+
+const int NID_jurisdictionCountryName = 957;
+
+const int OBJ_jurisdictionCountryName = 1;
+
+const String SN_id_scrypt = 'id-scrypt';
+
+const String LN_id_scrypt = 'scrypt';
+
+const int NID_id_scrypt = 973;
+
+const int OBJ_id_scrypt = 1;
+
+const String SN_tls1_prf = 'TLS1-PRF';
+
+const String LN_tls1_prf = 'tls1-prf';
+
+const int NID_tls1_prf = 1021;
+
+const String SN_hkdf = 'HKDF';
+
+const String LN_hkdf = 'hkdf';
+
+const int NID_hkdf = 1036;
+
+const String SN_id_pkinit = 'id-pkinit';
+
+const int NID_id_pkinit = 1031;
+
+const int OBJ_id_pkinit = 1;
+
+const String SN_pkInitClientAuth = 'pkInitClientAuth';
+
+const String LN_pkInitClientAuth = 'PKINIT Client Auth';
+
+const int NID_pkInitClientAuth = 1032;
+
+const int OBJ_pkInitClientAuth = 1;
+
+const String SN_pkInitKDC = 'pkInitKDC';
+
+const String LN_pkInitKDC = 'Signing KDC Response';
+
+const int NID_pkInitKDC = 1033;
+
+const int OBJ_pkInitKDC = 1;
+
+const String SN_X25519 = 'X25519';
+
+const int NID_X25519 = 1034;
+
+const int OBJ_X25519 = 1;
+
+const String SN_X448 = 'X448';
+
+const int NID_X448 = 1035;
+
+const int OBJ_X448 = 1;
+
+const String SN_ED25519 = 'ED25519';
+
+const int NID_ED25519 = 1087;
+
+const int OBJ_ED25519 = 1;
+
+const String SN_ED448 = 'ED448';
+
+const int NID_ED448 = 1088;
+
+const int OBJ_ED448 = 1;
+
+const String SN_kx_rsa = 'KxRSA';
+
+const String LN_kx_rsa = 'kx-rsa';
+
+const int NID_kx_rsa = 1037;
+
+const String SN_kx_ecdhe = 'KxECDHE';
+
+const String LN_kx_ecdhe = 'kx-ecdhe';
+
+const int NID_kx_ecdhe = 1038;
+
+const String SN_kx_dhe = 'KxDHE';
+
+const String LN_kx_dhe = 'kx-dhe';
+
+const int NID_kx_dhe = 1039;
+
+const String SN_kx_ecdhe_psk = 'KxECDHE-PSK';
+
+const String LN_kx_ecdhe_psk = 'kx-ecdhe-psk';
+
+const int NID_kx_ecdhe_psk = 1040;
+
+const String SN_kx_dhe_psk = 'KxDHE-PSK';
+
+const String LN_kx_dhe_psk = 'kx-dhe-psk';
+
+const int NID_kx_dhe_psk = 1041;
+
+const String SN_kx_rsa_psk = 'KxRSA_PSK';
+
+const String LN_kx_rsa_psk = 'kx-rsa-psk';
+
+const int NID_kx_rsa_psk = 1042;
+
+const String SN_kx_psk = 'KxPSK';
+
+const String LN_kx_psk = 'kx-psk';
+
+const int NID_kx_psk = 1043;
+
+const String SN_kx_srp = 'KxSRP';
+
+const String LN_kx_srp = 'kx-srp';
+
+const int NID_kx_srp = 1044;
+
+const String SN_kx_gost = 'KxGOST';
+
+const String LN_kx_gost = 'kx-gost';
+
+const int NID_kx_gost = 1045;
+
+const String SN_kx_any = 'KxANY';
+
+const String LN_kx_any = 'kx-any';
+
+const int NID_kx_any = 1063;
+
+const String SN_auth_rsa = 'AuthRSA';
+
+const String LN_auth_rsa = 'auth-rsa';
+
+const int NID_auth_rsa = 1046;
+
+const String SN_auth_ecdsa = 'AuthECDSA';
+
+const String LN_auth_ecdsa = 'auth-ecdsa';
+
+const int NID_auth_ecdsa = 1047;
+
+const String SN_auth_psk = 'AuthPSK';
+
+const String LN_auth_psk = 'auth-psk';
+
+const int NID_auth_psk = 1048;
+
+const String SN_auth_dss = 'AuthDSS';
+
+const String LN_auth_dss = 'auth-dss';
+
+const int NID_auth_dss = 1049;
+
+const String SN_auth_gost01 = 'AuthGOST01';
+
+const String LN_auth_gost01 = 'auth-gost01';
+
+const int NID_auth_gost01 = 1050;
+
+const String SN_auth_gost12 = 'AuthGOST12';
+
+const String LN_auth_gost12 = 'auth-gost12';
+
+const int NID_auth_gost12 = 1051;
+
+const String SN_auth_srp = 'AuthSRP';
+
+const String LN_auth_srp = 'auth-srp';
+
+const int NID_auth_srp = 1052;
+
+const String SN_auth_null = 'AuthNULL';
+
+const String LN_auth_null = 'auth-null';
+
+const int NID_auth_null = 1053;
+
+const String SN_auth_any = 'AuthANY';
+
+const String LN_auth_any = 'auth-any';
+
+const int NID_auth_any = 1064;
+
+const String SN_poly1305 = 'Poly1305';
+
+const String LN_poly1305 = 'poly1305';
+
+const int NID_poly1305 = 1061;
+
+const String SN_siphash = 'SipHash';
+
+const String LN_siphash = 'siphash';
+
+const int NID_siphash = 1062;
+
+const String SN_ffdhe2048 = 'ffdhe2048';
+
+const int NID_ffdhe2048 = 1126;
+
+const String SN_ffdhe3072 = 'ffdhe3072';
+
+const int NID_ffdhe3072 = 1127;
+
+const String SN_ffdhe4096 = 'ffdhe4096';
+
+const int NID_ffdhe4096 = 1128;
+
+const String SN_ffdhe6144 = 'ffdhe6144';
+
+const int NID_ffdhe6144 = 1129;
+
+const String SN_ffdhe8192 = 'ffdhe8192';
+
+const int NID_ffdhe8192 = 1130;
+
+const String SN_ISO_UA = 'ISO-UA';
+
+const int NID_ISO_UA = 1150;
+
+const int OBJ_ISO_UA = 1;
+
+const String SN_ua_pki = 'ua-pki';
+
+const int NID_ua_pki = 1151;
+
+const int OBJ_ua_pki = 1;
+
+const String SN_dstu28147 = 'dstu28147';
+
+const String LN_dstu28147 = 'DSTU Gost 28147-2009';
+
+const int NID_dstu28147 = 1152;
+
+const int OBJ_dstu28147 = 1;
+
+const String SN_dstu28147_ofb = 'dstu28147-ofb';
+
+const String LN_dstu28147_ofb = 'DSTU Gost 28147-2009 OFB mode';
+
+const int NID_dstu28147_ofb = 1153;
+
+const int OBJ_dstu28147_ofb = 1;
+
+const String SN_dstu28147_cfb = 'dstu28147-cfb';
+
+const String LN_dstu28147_cfb = 'DSTU Gost 28147-2009 CFB mode';
+
+const int NID_dstu28147_cfb = 1154;
+
+const int OBJ_dstu28147_cfb = 1;
+
+const String SN_dstu28147_wrap = 'dstu28147-wrap';
+
+const String LN_dstu28147_wrap = 'DSTU Gost 28147-2009 key wrap';
+
+const int NID_dstu28147_wrap = 1155;
+
+const int OBJ_dstu28147_wrap = 1;
+
+const String SN_hmacWithDstu34311 = 'hmacWithDstu34311';
+
+const String LN_hmacWithDstu34311 = 'HMAC DSTU Gost 34311-95';
+
+const int NID_hmacWithDstu34311 = 1156;
+
+const int OBJ_hmacWithDstu34311 = 1;
+
+const String SN_dstu34311 = 'dstu34311';
+
+const String LN_dstu34311 = 'DSTU Gost 34311-95';
+
+const int NID_dstu34311 = 1157;
+
+const int OBJ_dstu34311 = 1;
+
+const String SN_dstu4145le = 'dstu4145le';
+
+const String LN_dstu4145le = 'DSTU 4145-2002 little endian';
+
+const int NID_dstu4145le = 1158;
+
+const int OBJ_dstu4145le = 1;
+
+const String SN_dstu4145be = 'dstu4145be';
+
+const String LN_dstu4145be = 'DSTU 4145-2002 big endian';
+
+const int NID_dstu4145be = 1159;
+
+const int OBJ_dstu4145be = 1;
+
+const String SN_uacurve0 = 'uacurve0';
+
+const String LN_uacurve0 = 'DSTU curve 0';
+
+const int NID_uacurve0 = 1160;
+
+const int OBJ_uacurve0 = 1;
+
+const String SN_uacurve1 = 'uacurve1';
+
+const String LN_uacurve1 = 'DSTU curve 1';
+
+const int NID_uacurve1 = 1161;
+
+const int OBJ_uacurve1 = 1;
+
+const String SN_uacurve2 = 'uacurve2';
+
+const String LN_uacurve2 = 'DSTU curve 2';
+
+const int NID_uacurve2 = 1162;
+
+const int OBJ_uacurve2 = 1;
+
+const String SN_uacurve3 = 'uacurve3';
+
+const String LN_uacurve3 = 'DSTU curve 3';
+
+const int NID_uacurve3 = 1163;
+
+const int OBJ_uacurve3 = 1;
+
+const String SN_uacurve4 = 'uacurve4';
+
+const String LN_uacurve4 = 'DSTU curve 4';
+
+const int NID_uacurve4 = 1164;
+
+const int OBJ_uacurve4 = 1;
+
+const String SN_uacurve5 = 'uacurve5';
+
+const String LN_uacurve5 = 'DSTU curve 5';
+
+const int NID_uacurve5 = 1165;
+
+const int OBJ_uacurve5 = 1;
+
+const String SN_uacurve6 = 'uacurve6';
+
+const String LN_uacurve6 = 'DSTU curve 6';
+
+const int NID_uacurve6 = 1166;
+
+const int OBJ_uacurve6 = 1;
+
+const String SN_uacurve7 = 'uacurve7';
+
+const String LN_uacurve7 = 'DSTU curve 7';
+
+const int NID_uacurve7 = 1167;
+
+const int OBJ_uacurve7 = 1;
+
+const String SN_uacurve8 = 'uacurve8';
+
+const String LN_uacurve8 = 'DSTU curve 8';
+
+const int NID_uacurve8 = 1168;
+
+const int OBJ_uacurve8 = 1;
+
+const String SN_uacurve9 = 'uacurve9';
+
+const String LN_uacurve9 = 'DSTU curve 9';
+
+const int NID_uacurve9 = 1169;
+
+const int OBJ_uacurve9 = 1;
+
+const int ASN1_F_A2D_ASN1_OBJECT = 100;
+
+const int ASN1_F_A2I_ASN1_INTEGER = 102;
+
+const int ASN1_F_A2I_ASN1_STRING = 103;
+
+const int ASN1_F_APPEND_EXP = 176;
+
+const int ASN1_F_ASN1_BIO_INIT = 113;
+
+const int ASN1_F_ASN1_BIT_STRING_SET_BIT = 183;
+
+const int ASN1_F_ASN1_CB = 177;
+
+const int ASN1_F_ASN1_CHECK_TLEN = 104;
+
+const int ASN1_F_ASN1_COLLECT = 106;
+
+const int ASN1_F_ASN1_D2I_EX_PRIMITIVE = 108;
+
+const int ASN1_F_ASN1_D2I_FP = 109;
+
+const int ASN1_F_ASN1_D2I_READ_BIO = 107;
+
+const int ASN1_F_ASN1_DIGEST = 184;
+
+const int ASN1_F_ASN1_DO_ADB = 110;
+
+const int ASN1_F_ASN1_DO_LOCK = 233;
+
+const int ASN1_F_ASN1_DUP = 111;
+
+const int ASN1_F_ASN1_ENC_SAVE = 115;
+
+const int ASN1_F_ASN1_EX_C2I = 204;
+
+const int ASN1_F_ASN1_FIND_END = 190;
+
+const int ASN1_F_ASN1_GENERALIZEDTIME_ADJ = 216;
+
+const int ASN1_F_ASN1_GENERATE_V3 = 178;
+
+const int ASN1_F_ASN1_GET_INT64 = 224;
+
+const int ASN1_F_ASN1_GET_OBJECT = 114;
+
+const int ASN1_F_ASN1_GET_UINT64 = 225;
+
+const int ASN1_F_ASN1_I2D_BIO = 116;
+
+const int ASN1_F_ASN1_I2D_FP = 117;
+
+const int ASN1_F_ASN1_ITEM_D2I_FP = 206;
+
+const int ASN1_F_ASN1_ITEM_DUP = 191;
+
+const int ASN1_F_ASN1_ITEM_EMBED_D2I = 120;
+
+const int ASN1_F_ASN1_ITEM_EMBED_NEW = 121;
+
+const int ASN1_F_ASN1_ITEM_EX_I2D = 144;
+
+const int ASN1_F_ASN1_ITEM_FLAGS_I2D = 118;
+
+const int ASN1_F_ASN1_ITEM_I2D_BIO = 192;
+
+const int ASN1_F_ASN1_ITEM_I2D_FP = 193;
+
+const int ASN1_F_ASN1_ITEM_PACK = 198;
+
+const int ASN1_F_ASN1_ITEM_SIGN = 195;
+
+const int ASN1_F_ASN1_ITEM_SIGN_CTX = 220;
+
+const int ASN1_F_ASN1_ITEM_UNPACK = 199;
+
+const int ASN1_F_ASN1_ITEM_VERIFY = 197;
+
+const int ASN1_F_ASN1_MBSTRING_NCOPY = 122;
+
+const int ASN1_F_ASN1_OBJECT_NEW = 123;
+
+const int ASN1_F_ASN1_OUTPUT_DATA = 214;
+
+const int ASN1_F_ASN1_PCTX_NEW = 205;
+
+const int ASN1_F_ASN1_PRIMITIVE_NEW = 119;
+
+const int ASN1_F_ASN1_SCTX_NEW = 221;
+
+const int ASN1_F_ASN1_SIGN = 128;
+
+const int ASN1_F_ASN1_STR2TYPE = 179;
+
+const int ASN1_F_ASN1_STRING_GET_INT64 = 227;
+
+const int ASN1_F_ASN1_STRING_GET_UINT64 = 230;
+
+const int ASN1_F_ASN1_STRING_SET = 186;
+
+const int ASN1_F_ASN1_STRING_TABLE_ADD = 129;
+
+const int ASN1_F_ASN1_STRING_TO_BN = 228;
+
+const int ASN1_F_ASN1_STRING_TYPE_NEW = 130;
+
+const int ASN1_F_ASN1_TEMPLATE_EX_D2I = 132;
+
+const int ASN1_F_ASN1_TEMPLATE_NEW = 133;
+
+const int ASN1_F_ASN1_TEMPLATE_NOEXP_D2I = 131;
+
+const int ASN1_F_ASN1_TIME_ADJ = 217;
+
+const int ASN1_F_ASN1_TYPE_GET_INT_OCTETSTRING = 134;
+
+const int ASN1_F_ASN1_TYPE_GET_OCTETSTRING = 135;
+
+const int ASN1_F_ASN1_UTCTIME_ADJ = 218;
+
+const int ASN1_F_ASN1_VERIFY = 137;
+
+const int ASN1_F_B64_READ_ASN1 = 209;
+
+const int ASN1_F_B64_WRITE_ASN1 = 210;
+
+const int ASN1_F_BIO_NEW_NDEF = 208;
+
+const int ASN1_F_BITSTR_CB = 180;
+
+const int ASN1_F_BN_TO_ASN1_STRING = 229;
+
+const int ASN1_F_C2I_ASN1_BIT_STRING = 189;
+
+const int ASN1_F_C2I_ASN1_INTEGER = 194;
+
+const int ASN1_F_C2I_ASN1_OBJECT = 196;
+
+const int ASN1_F_C2I_IBUF = 226;
+
+const int ASN1_F_C2I_UINT64_INT = 101;
+
+const int ASN1_F_COLLECT_DATA = 140;
+
+const int ASN1_F_D2I_ASN1_OBJECT = 147;
+
+const int ASN1_F_D2I_ASN1_UINTEGER = 150;
+
+const int ASN1_F_D2I_AUTOPRIVATEKEY = 207;
+
+const int ASN1_F_D2I_PRIVATEKEY = 154;
+
+const int ASN1_F_D2I_PUBLICKEY = 155;
+
+const int ASN1_F_DO_BUF = 142;
+
+const int ASN1_F_DO_CREATE = 124;
+
+const int ASN1_F_DO_DUMP = 125;
+
+const int ASN1_F_DO_TCREATE = 222;
+
+const int ASN1_F_I2A_ASN1_OBJECT = 126;
+
+const int ASN1_F_I2D_ASN1_BIO_STREAM = 211;
+
+const int ASN1_F_I2D_ASN1_OBJECT = 143;
+
+const int ASN1_F_I2D_DSA_PUBKEY = 161;
+
+const int ASN1_F_I2D_EC_PUBKEY = 181;
+
+const int ASN1_F_I2D_PRIVATEKEY = 163;
+
+const int ASN1_F_I2D_PUBLICKEY = 164;
+
+const int ASN1_F_I2D_RSA_PUBKEY = 165;
+
+const int ASN1_F_LONG_C2I = 166;
+
+const int ASN1_F_NDEF_PREFIX = 127;
+
+const int ASN1_F_NDEF_SUFFIX = 136;
+
+const int ASN1_F_OID_MODULE_INIT = 174;
+
+const int ASN1_F_PARSE_TAGGING = 182;
+
+const int ASN1_F_PKCS5_PBE2_SET_IV = 167;
+
+const int ASN1_F_PKCS5_PBE2_SET_SCRYPT = 231;
+
+const int ASN1_F_PKCS5_PBE_SET = 202;
+
+const int ASN1_F_PKCS5_PBE_SET0_ALGOR = 215;
+
+const int ASN1_F_PKCS5_PBKDF2_SET = 219;
+
+const int ASN1_F_PKCS5_SCRYPT_SET = 232;
+
+const int ASN1_F_SMIME_READ_ASN1 = 212;
+
+const int ASN1_F_SMIME_TEXT = 213;
+
+const int ASN1_F_STABLE_GET = 138;
+
+const int ASN1_F_STBL_MODULE_INIT = 223;
+
+const int ASN1_F_UINT32_C2I = 105;
+
+const int ASN1_F_UINT32_NEW = 139;
+
+const int ASN1_F_UINT64_C2I = 112;
+
+const int ASN1_F_UINT64_NEW = 141;
+
+const int ASN1_F_X509_CRL_ADD0_REVOKED = 169;
+
+const int ASN1_F_X509_INFO_NEW = 170;
+
+const int ASN1_F_X509_NAME_ENCODE = 203;
+
+const int ASN1_F_X509_NAME_EX_D2I = 158;
+
+const int ASN1_F_X509_NAME_EX_NEW = 171;
+
+const int ASN1_F_X509_PKEY_NEW = 173;
+
+const int ASN1_R_ADDING_OBJECT = 171;
+
+const int ASN1_R_ASN1_PARSE_ERROR = 203;
+
+const int ASN1_R_ASN1_SIG_PARSE_ERROR = 204;
+
+const int ASN1_R_AUX_ERROR = 100;
+
+const int ASN1_R_BAD_OBJECT_HEADER = 102;
+
+const int ASN1_R_BAD_TEMPLATE = 230;
+
+const int ASN1_R_BMPSTRING_IS_WRONG_LENGTH = 214;
+
+const int ASN1_R_BN_LIB = 105;
+
+const int ASN1_R_BOOLEAN_IS_WRONG_LENGTH = 106;
+
+const int ASN1_R_BUFFER_TOO_SMALL = 107;
+
+const int ASN1_R_CIPHER_HAS_NO_OBJECT_IDENTIFIER = 108;
+
+const int ASN1_R_CONTEXT_NOT_INITIALISED = 217;
+
+const int ASN1_R_DATA_IS_WRONG = 109;
+
+const int ASN1_R_DECODE_ERROR = 110;
+
+const int ASN1_R_DEPTH_EXCEEDED = 174;
+
+const int ASN1_R_DIGEST_AND_KEY_TYPE_NOT_SUPPORTED = 198;
+
+const int ASN1_R_ENCODE_ERROR = 112;
+
+const int ASN1_R_ERROR_GETTING_TIME = 173;
+
+const int ASN1_R_ERROR_LOADING_SECTION = 172;
+
+const int ASN1_R_ERROR_SETTING_CIPHER_PARAMS = 114;
+
+const int ASN1_R_EXPECTING_AN_INTEGER = 115;
+
+const int ASN1_R_EXPECTING_AN_OBJECT = 116;
+
+const int ASN1_R_EXPLICIT_LENGTH_MISMATCH = 119;
+
+const int ASN1_R_EXPLICIT_TAG_NOT_CONSTRUCTED = 120;
+
+const int ASN1_R_FIELD_MISSING = 121;
+
+const int ASN1_R_FIRST_NUM_TOO_LARGE = 122;
+
+const int ASN1_R_HEADER_TOO_LONG = 123;
+
+const int ASN1_R_ILLEGAL_BITSTRING_FORMAT = 175;
+
+const int ASN1_R_ILLEGAL_BOOLEAN = 176;
+
+const int ASN1_R_ILLEGAL_CHARACTERS = 124;
+
+const int ASN1_R_ILLEGAL_FORMAT = 177;
+
+const int ASN1_R_ILLEGAL_HEX = 178;
+
+const int ASN1_R_ILLEGAL_IMPLICIT_TAG = 179;
+
+const int ASN1_R_ILLEGAL_INTEGER = 180;
+
+const int ASN1_R_ILLEGAL_NEGATIVE_VALUE = 226;
+
+const int ASN1_R_ILLEGAL_NESTED_TAGGING = 181;
+
+const int ASN1_R_ILLEGAL_NULL = 125;
+
+const int ASN1_R_ILLEGAL_NULL_VALUE = 182;
+
+const int ASN1_R_ILLEGAL_OBJECT = 183;
+
+const int ASN1_R_ILLEGAL_OPTIONAL_ANY = 126;
+
+const int ASN1_R_ILLEGAL_OPTIONS_ON_ITEM_TEMPLATE = 170;
+
+const int ASN1_R_ILLEGAL_PADDING = 221;
+
+const int ASN1_R_ILLEGAL_TAGGED_ANY = 127;
+
+const int ASN1_R_ILLEGAL_TIME_VALUE = 184;
+
+const int ASN1_R_ILLEGAL_ZERO_CONTENT = 222;
+
+const int ASN1_R_INTEGER_NOT_ASCII_FORMAT = 185;
+
+const int ASN1_R_INTEGER_TOO_LARGE_FOR_LONG = 128;
+
+const int ASN1_R_INVALID_BIT_STRING_BITS_LEFT = 220;
+
+const int ASN1_R_INVALID_BMPSTRING_LENGTH = 129;
+
+const int ASN1_R_INVALID_DIGIT = 130;
+
+const int ASN1_R_INVALID_MIME_TYPE = 205;
+
+const int ASN1_R_INVALID_MODIFIER = 186;
+
+const int ASN1_R_INVALID_NUMBER = 187;
+
+const int ASN1_R_INVALID_OBJECT_ENCODING = 216;
+
+const int ASN1_R_INVALID_SCRYPT_PARAMETERS = 227;
+
+const int ASN1_R_INVALID_SEPARATOR = 131;
+
+const int ASN1_R_INVALID_STRING_TABLE_VALUE = 218;
+
+const int ASN1_R_INVALID_UNIVERSALSTRING_LENGTH = 133;
+
+const int ASN1_R_INVALID_UTF8STRING = 134;
+
+const int ASN1_R_INVALID_VALUE = 219;
+
+const int ASN1_R_LIST_ERROR = 188;
+
+const int ASN1_R_MIME_NO_CONTENT_TYPE = 206;
+
+const int ASN1_R_MIME_PARSE_ERROR = 207;
+
+const int ASN1_R_MIME_SIG_PARSE_ERROR = 208;
+
+const int ASN1_R_MISSING_EOC = 137;
+
+const int ASN1_R_MISSING_SECOND_NUMBER = 138;
+
+const int ASN1_R_MISSING_VALUE = 189;
+
+const int ASN1_R_MSTRING_NOT_UNIVERSAL = 139;
+
+const int ASN1_R_MSTRING_WRONG_TAG = 140;
+
+const int ASN1_R_NESTED_ASN1_STRING = 197;
+
+const int ASN1_R_NESTED_TOO_DEEP = 201;
+
+const int ASN1_R_NON_HEX_CHARACTERS = 141;
+
+const int ASN1_R_NOT_ASCII_FORMAT = 190;
+
+const int ASN1_R_NOT_ENOUGH_DATA = 142;
+
+const int ASN1_R_NO_CONTENT_TYPE = 209;
+
+const int ASN1_R_NO_MATCHING_CHOICE_TYPE = 143;
+
+const int ASN1_R_NO_MULTIPART_BODY_FAILURE = 210;
+
+const int ASN1_R_NO_MULTIPART_BOUNDARY = 211;
+
+const int ASN1_R_NO_SIG_CONTENT_TYPE = 212;
+
+const int ASN1_R_NULL_IS_WRONG_LENGTH = 144;
+
+const int ASN1_R_OBJECT_NOT_ASCII_FORMAT = 191;
+
+const int ASN1_R_ODD_NUMBER_OF_CHARS = 145;
+
+const int ASN1_R_SECOND_NUMBER_TOO_LARGE = 147;
+
+const int ASN1_R_SEQUENCE_LENGTH_MISMATCH = 148;
+
+const int ASN1_R_SEQUENCE_NOT_CONSTRUCTED = 149;
+
+const int ASN1_R_SEQUENCE_OR_SET_NEEDS_CONFIG = 192;
+
+const int ASN1_R_SHORT_LINE = 150;
+
+const int ASN1_R_SIG_INVALID_MIME_TYPE = 213;
+
+const int ASN1_R_STREAMING_NOT_SUPPORTED = 202;
+
+const int ASN1_R_STRING_TOO_LONG = 151;
+
+const int ASN1_R_STRING_TOO_SHORT = 152;
+
+const int ASN1_R_THE_ASN1_OBJECT_IDENTIFIER_IS_NOT_KNOWN_FOR_THIS_MD = 154;
+
+const int ASN1_R_TIME_NOT_ASCII_FORMAT = 193;
+
+const int ASN1_R_TOO_LARGE = 223;
+
+const int ASN1_R_TOO_LONG = 155;
+
+const int ASN1_R_TOO_SMALL = 224;
+
+const int ASN1_R_TYPE_NOT_CONSTRUCTED = 156;
+
+const int ASN1_R_TYPE_NOT_PRIMITIVE = 195;
+
+const int ASN1_R_UNEXPECTED_EOC = 159;
+
+const int ASN1_R_UNIVERSALSTRING_IS_WRONG_LENGTH = 215;
+
+const int ASN1_R_UNKNOWN_FORMAT = 160;
+
+const int ASN1_R_UNKNOWN_MESSAGE_DIGEST_ALGORITHM = 161;
+
+const int ASN1_R_UNKNOWN_OBJECT_TYPE = 162;
+
+const int ASN1_R_UNKNOWN_PUBLIC_KEY_TYPE = 163;
+
+const int ASN1_R_UNKNOWN_SIGNATURE_ALGORITHM = 199;
+
+const int ASN1_R_UNKNOWN_TAG = 194;
+
+const int ASN1_R_UNSUPPORTED_ANY_DEFINED_BY_TYPE = 164;
+
+const int ASN1_R_UNSUPPORTED_CIPHER = 228;
+
+const int ASN1_R_UNSUPPORTED_PUBLIC_KEY_TYPE = 167;
+
+const int ASN1_R_UNSUPPORTED_TYPE = 196;
+
+const int ASN1_R_WRONG_INTEGER_TYPE = 225;
+
+const int ASN1_R_WRONG_PUBLIC_KEY_TYPE = 200;
+
+const int ASN1_R_WRONG_TAG = 168;
+
+const int BN_F_BNRAND = 127;
+
+const int BN_F_BNRAND_RANGE = 138;
+
+const int BN_F_BN_BLINDING_CONVERT_EX = 100;
+
+const int BN_F_BN_BLINDING_CREATE_PARAM = 128;
+
+const int BN_F_BN_BLINDING_INVERT_EX = 101;
+
+const int BN_F_BN_BLINDING_NEW = 102;
+
+const int BN_F_BN_BLINDING_UPDATE = 103;
+
+const int BN_F_BN_BN2DEC = 104;
+
+const int BN_F_BN_BN2HEX = 105;
+
+const int BN_F_BN_COMPUTE_WNAF = 142;
+
+const int BN_F_BN_CTX_GET = 116;
+
+const int BN_F_BN_CTX_NEW = 106;
+
+const int BN_F_BN_CTX_START = 129;
+
+const int BN_F_BN_DIV = 107;
+
+const int BN_F_BN_DIV_RECP = 130;
+
+const int BN_F_BN_EXP = 123;
+
+const int BN_F_BN_EXPAND_INTERNAL = 120;
+
+const int BN_F_BN_GENCB_NEW = 143;
+
+const int BN_F_BN_GENERATE_DSA_NONCE = 140;
+
+const int BN_F_BN_GENERATE_PRIME_EX = 141;
+
+const int BN_F_BN_GF2M_MOD = 131;
+
+const int BN_F_BN_GF2M_MOD_EXP = 132;
+
+const int BN_F_BN_GF2M_MOD_MUL = 133;
+
+const int BN_F_BN_GF2M_MOD_SOLVE_QUAD = 134;
+
+const int BN_F_BN_GF2M_MOD_SOLVE_QUAD_ARR = 135;
+
+const int BN_F_BN_GF2M_MOD_SQR = 136;
+
+const int BN_F_BN_GF2M_MOD_SQRT = 137;
+
+const int BN_F_BN_LSHIFT = 145;
+
+const int BN_F_BN_MOD_EXP2_MONT = 118;
+
+const int BN_F_BN_MOD_EXP_MONT = 109;
+
+const int BN_F_BN_MOD_EXP_MONT_CONSTTIME = 124;
+
+const int BN_F_BN_MOD_EXP_MONT_WORD = 117;
+
+const int BN_F_BN_MOD_EXP_RECP = 125;
+
+const int BN_F_BN_MOD_EXP_SIMPLE = 126;
+
+const int BN_F_BN_MOD_INVERSE = 110;
+
+const int BN_F_BN_MOD_INVERSE_NO_BRANCH = 139;
+
+const int BN_F_BN_MOD_LSHIFT_QUICK = 119;
+
+const int BN_F_BN_MOD_SQRT = 121;
+
+const int BN_F_BN_MONT_CTX_NEW = 149;
+
+const int BN_F_BN_MPI2BN = 112;
+
+const int BN_F_BN_NEW = 113;
+
+const int BN_F_BN_POOL_GET = 147;
+
+const int BN_F_BN_RAND = 114;
+
+const int BN_F_BN_RAND_RANGE = 122;
+
+const int BN_F_BN_RECP_CTX_NEW = 150;
+
+const int BN_F_BN_RSHIFT = 146;
+
+const int BN_F_BN_SET_WORDS = 144;
+
+const int BN_F_BN_STACK_PUSH = 148;
+
+const int BN_F_BN_USUB = 115;
+
+const int BN_R_ARG2_LT_ARG3 = 100;
+
+const int BN_R_BAD_RECIPROCAL = 101;
+
+const int BN_R_BIGNUM_TOO_LONG = 114;
+
+const int BN_R_BITS_TOO_SMALL = 118;
+
+const int BN_R_CALLED_WITH_EVEN_MODULUS = 102;
+
+const int BN_R_DIV_BY_ZERO = 103;
+
+const int BN_R_ENCODING_ERROR = 104;
+
+const int BN_R_EXPAND_ON_STATIC_BIGNUM_DATA = 105;
+
+const int BN_R_INPUT_NOT_REDUCED = 110;
+
+const int BN_R_INVALID_LENGTH = 106;
+
+const int BN_R_INVALID_RANGE = 115;
+
+const int BN_R_INVALID_SHIFT = 119;
+
+const int BN_R_NOT_A_SQUARE = 111;
+
+const int BN_R_NOT_INITIALIZED = 107;
+
+const int BN_R_NO_INVERSE = 108;
+
+const int BN_R_NO_SOLUTION = 116;
+
+const int BN_R_PRIVATE_KEY_TOO_LARGE = 117;
+
+const int BN_R_P_IS_NOT_PRIME = 112;
+
+const int BN_R_TOO_MANY_ITERATIONS = 113;
+
+const int BN_R_TOO_MANY_TEMPORARY_VARIABLES = 109;
+
+const int BN_BYTES = 8;
+
+const int BN_BITS2 = 64;
+
+const int BN_BITS = 128;
+
+const int BN_TBIT = -9223372036854775808;
+
+const int BN_FLG_MALLOCED = 1;
+
+const int BN_FLG_STATIC_DATA = 2;
+
+const int BN_FLG_CONSTTIME = 4;
+
+const int BN_FLG_SECURE = 8;
+
+const int BN_FLG_EXP_CONSTTIME = 4;
+
+const int BN_FLG_FREE = 32768;
+
+const int BN_RAND_TOP_ANY = -1;
+
+const int BN_RAND_TOP_ONE = 0;
+
+const int BN_RAND_TOP_TWO = 1;
+
+const int BN_RAND_BOTTOM_ANY = 0;
+
+const int BN_RAND_BOTTOM_ODD = 1;
+
+const int BN_prime_checks = 0;
+
+const int BN_BLINDING_NO_UPDATE = 1;
+
+const int BN_BLINDING_NO_RECREATE = 2;
+
+const int V_ASN1_UNIVERSAL = 0;
+
+const int V_ASN1_APPLICATION = 64;
+
+const int V_ASN1_CONTEXT_SPECIFIC = 128;
+
+const int V_ASN1_PRIVATE = 192;
+
+const int V_ASN1_CONSTRUCTED = 32;
+
+const int V_ASN1_PRIMITIVE_TAG = 31;
+
+const int V_ASN1_PRIMATIVE_TAG = 31;
+
+const int V_ASN1_APP_CHOOSE = -2;
+
+const int V_ASN1_OTHER = -3;
+
+const int V_ASN1_ANY = -4;
+
+const int V_ASN1_UNDEF = -1;
+
+const int V_ASN1_EOC = 0;
+
+const int V_ASN1_BOOLEAN = 1;
+
+const int V_ASN1_INTEGER = 2;
+
+const int V_ASN1_BIT_STRING = 3;
+
+const int V_ASN1_OCTET_STRING = 4;
+
+const int V_ASN1_NULL = 5;
+
+const int V_ASN1_OBJECT = 6;
+
+const int V_ASN1_OBJECT_DESCRIPTOR = 7;
+
+const int V_ASN1_EXTERNAL = 8;
+
+const int V_ASN1_REAL = 9;
+
+const int V_ASN1_ENUMERATED = 10;
+
+const int V_ASN1_UTF8STRING = 12;
+
+const int V_ASN1_SEQUENCE = 16;
+
+const int V_ASN1_SET = 17;
+
+const int V_ASN1_NUMERICSTRING = 18;
+
+const int V_ASN1_PRINTABLESTRING = 19;
+
+const int V_ASN1_T61STRING = 20;
+
+const int V_ASN1_TELETEXSTRING = 20;
+
+const int V_ASN1_VIDEOTEXSTRING = 21;
+
+const int V_ASN1_IA5STRING = 22;
+
+const int V_ASN1_UTCTIME = 23;
+
+const int V_ASN1_GENERALIZEDTIME = 24;
+
+const int V_ASN1_GRAPHICSTRING = 25;
+
+const int V_ASN1_ISO64STRING = 26;
+
+const int V_ASN1_VISIBLESTRING = 26;
+
+const int V_ASN1_GENERALSTRING = 27;
+
+const int V_ASN1_UNIVERSALSTRING = 28;
+
+const int V_ASN1_BMPSTRING = 30;
+
+const int V_ASN1_NEG = 256;
+
+const int V_ASN1_NEG_INTEGER = 258;
+
+const int V_ASN1_NEG_ENUMERATED = 266;
+
+const int B_ASN1_NUMERICSTRING = 1;
+
+const int B_ASN1_PRINTABLESTRING = 2;
+
+const int B_ASN1_T61STRING = 4;
+
+const int B_ASN1_TELETEXSTRING = 4;
+
+const int B_ASN1_VIDEOTEXSTRING = 8;
+
+const int B_ASN1_IA5STRING = 16;
+
+const int B_ASN1_GRAPHICSTRING = 32;
+
+const int B_ASN1_ISO64STRING = 64;
+
+const int B_ASN1_VISIBLESTRING = 64;
+
+const int B_ASN1_GENERALSTRING = 128;
+
+const int B_ASN1_UNIVERSALSTRING = 256;
+
+const int B_ASN1_OCTET_STRING = 512;
+
+const int B_ASN1_BIT_STRING = 1024;
+
+const int B_ASN1_BMPSTRING = 2048;
+
+const int B_ASN1_UNKNOWN = 4096;
+
+const int B_ASN1_UTF8STRING = 8192;
+
+const int B_ASN1_UTCTIME = 16384;
+
+const int B_ASN1_GENERALIZEDTIME = 32768;
+
+const int B_ASN1_SEQUENCE = 65536;
+
+const int MBSTRING_FLAG = 4096;
+
+const int MBSTRING_UTF8 = 4096;
+
+const int MBSTRING_ASC = 4097;
+
+const int MBSTRING_BMP = 4098;
+
+const int MBSTRING_UNIV = 4100;
+
+const int SMIME_OLDMIME = 1024;
+
+const int SMIME_CRLFEOL = 2048;
+
+const int SMIME_STREAM = 4096;
+
+const int ASN1_STRING_FLAG_BITS_LEFT = 8;
+
+const int ASN1_STRING_FLAG_NDEF = 16;
+
+const int ASN1_STRING_FLAG_CONT = 32;
+
+const int ASN1_STRING_FLAG_MSTRING = 64;
+
+const int ASN1_STRING_FLAG_EMBED = 128;
+
+const int ASN1_STRING_FLAG_X509_TIME = 256;
+
+const int ASN1_LONG_UNDEF = 2147483647;
+
+const int STABLE_FLAGS_MALLOC = 1;
+
+const int STABLE_FLAGS_CLEAR = 1;
+
+const int STABLE_NO_MASK = 2;
+
+const int DIRSTRING_TYPE = 10246;
+
+const int PKCS9STRING_TYPE = 10262;
+
+const int ub_name = 32768;
+
+const int ub_common_name = 64;
+
+const int ub_locality_name = 128;
+
+const int ub_state_name = 128;
+
+const int ub_organization_name = 64;
+
+const int ub_organization_unit_name = 64;
+
+const int ub_title = 64;
+
+const int ub_email_address = 128;
+
+const int ASN1_STRFLGS_ESC_2253 = 1;
+
+const int ASN1_STRFLGS_ESC_CTRL = 2;
+
+const int ASN1_STRFLGS_ESC_MSB = 4;
+
+const int ASN1_STRFLGS_ESC_QUOTE = 8;
+
+const int CHARTYPE_PRINTABLESTRING = 16;
+
+const int CHARTYPE_FIRST_ESC_2253 = 32;
+
+const int CHARTYPE_LAST_ESC_2253 = 64;
+
+const int ASN1_STRFLGS_UTF8_CONVERT = 16;
+
+const int ASN1_STRFLGS_IGNORE_TYPE = 32;
+
+const int ASN1_STRFLGS_SHOW_TYPE = 64;
+
+const int ASN1_STRFLGS_DUMP_ALL = 128;
+
+const int ASN1_STRFLGS_DUMP_UNKNOWN = 256;
+
+const int ASN1_STRFLGS_DUMP_DER = 512;
+
+const int ASN1_STRFLGS_ESC_2254 = 1024;
+
+const int ASN1_STRFLGS_RFC2253 = 791;
+
+const int B_ASN1_TIME = 49152;
+
+const int B_ASN1_PRINTABLE = 81175;
+
+const int B_ASN1_DIRECTORYSTRING = 10502;
+
+const int B_ASN1_DISPLAYTEXT = 10320;
+
+const int ASN1_PCTX_FLAGS_SHOW_ABSENT = 1;
+
+const int ASN1_PCTX_FLAGS_SHOW_SEQUENCE = 2;
+
+const int ASN1_PCTX_FLAGS_SHOW_SSOF = 4;
+
+const int ASN1_PCTX_FLAGS_SHOW_TYPE = 8;
+
+const int ASN1_PCTX_FLAGS_NO_ANY_TYPE = 16;
+
+const int ASN1_PCTX_FLAGS_NO_MSTRING_TYPE = 32;
+
+const int ASN1_PCTX_FLAGS_NO_FIELD_NAME = 64;
+
+const int ASN1_PCTX_FLAGS_SHOW_FIELD_STRUCT_NAME = 128;
+
+const int ASN1_PCTX_FLAGS_NO_STRUCT_NAME = 256;
+
+const int OBJ_F_OBJ_ADD_OBJECT = 105;
+
+const int OBJ_F_OBJ_ADD_SIGID = 107;
+
+const int OBJ_F_OBJ_CREATE = 100;
+
+const int OBJ_F_OBJ_DUP = 101;
+
+const int OBJ_F_OBJ_NAME_NEW_INDEX = 106;
+
+const int OBJ_F_OBJ_NID2LN = 102;
+
+const int OBJ_F_OBJ_NID2OBJ = 103;
+
+const int OBJ_F_OBJ_NID2SN = 104;
+
+const int OBJ_F_OBJ_TXT2OBJ = 108;
+
+const int OBJ_R_OID_EXISTS = 102;
+
+const int OBJ_R_UNKNOWN_NID = 101;
+
+const int OBJ_NAME_TYPE_UNDEF = 0;
+
+const int OBJ_NAME_TYPE_MD_METH = 1;
+
+const int OBJ_NAME_TYPE_CIPHER_METH = 2;
+
+const int OBJ_NAME_TYPE_PKEY_METH = 3;
+
+const int OBJ_NAME_TYPE_COMP_METH = 4;
+
+const int OBJ_NAME_TYPE_NUM = 5;
+
+const int OBJ_NAME_ALIAS = 32768;
+
+const int OBJ_BSEARCH_VALUE_ON_NOMATCH = 1;
+
+const int OBJ_BSEARCH_FIRST_VALUE_ON_MATCH = 2;
+
+const int EVP_PK_RSA = 1;
+
+const int EVP_PK_DSA = 2;
+
+const int EVP_PK_DH = 4;
+
+const int EVP_PK_EC = 8;
+
+const int EVP_PKT_SIGN = 16;
+
+const int EVP_PKT_ENC = 32;
+
+const int EVP_PKT_EXCH = 64;
+
+const int EVP_PKS_RSA = 256;
+
+const int EVP_PKS_DSA = 512;
+
+const int EVP_PKS_EC = 1024;
+
+const int EVP_PKEY_NONE = 0;
+
+const int EVP_PKEY_RSA = 6;
+
+const int EVP_PKEY_RSA2 = 19;
+
+const int EVP_PKEY_RSA_PSS = 912;
+
+const int EVP_PKEY_DSA = 116;
+
+const int EVP_PKEY_DSA1 = 67;
+
+const int EVP_PKEY_DSA2 = 66;
+
+const int EVP_PKEY_DSA3 = 113;
+
+const int EVP_PKEY_DSA4 = 70;
+
+const int EVP_PKEY_DH = 28;
+
+const int EVP_PKEY_DHX = 920;
+
+const int EVP_PKEY_EC = 408;
+
+const int EVP_PKEY_SM2 = 1172;
+
+const int EVP_PKEY_HMAC = 855;
+
+const int EVP_PKEY_CMAC = 894;
+
+const int EVP_PKEY_SCRYPT = 973;
+
+const int EVP_PKEY_TLS1_PRF = 1021;
+
+const int EVP_PKEY_HKDF = 1036;
+
+const int EVP_PKEY_POLY1305 = 1061;
+
+const int EVP_PKEY_SIPHASH = 1062;
+
+const int EVP_PKEY_X25519 = 1034;
+
+const int EVP_PKEY_ED25519 = 1087;
+
+const int EVP_PKEY_X448 = 1035;
+
+const int EVP_PKEY_ED448 = 1088;
+
+const int EVP_PKEY_MO_SIGN = 1;
+
+const int EVP_PKEY_MO_VERIFY = 2;
+
+const int EVP_PKEY_MO_ENCRYPT = 4;
+
+const int EVP_PKEY_MO_DECRYPT = 8;
+
+const int EVP_MD_FLAG_ONESHOT = 1;
+
+const int EVP_MD_FLAG_XOF = 2;
+
+const int EVP_MD_FLAG_DIGALGID_MASK = 24;
+
+const int EVP_MD_FLAG_DIGALGID_NULL = 0;
+
+const int EVP_MD_FLAG_DIGALGID_ABSENT = 8;
+
+const int EVP_MD_FLAG_DIGALGID_CUSTOM = 24;
+
+const int EVP_MD_FLAG_FIPS = 1024;
+
+const int EVP_MD_CTRL_DIGALGID = 1;
+
+const int EVP_MD_CTRL_MICALG = 2;
+
+const int EVP_MD_CTRL_XOF_LEN = 3;
+
+const int EVP_MD_CTRL_ALG_CTRL = 4096;
+
+const int EVP_MD_CTX_FLAG_ONESHOT = 1;
+
+const int EVP_MD_CTX_FLAG_CLEANED = 2;
+
+const int EVP_MD_CTX_FLAG_REUSE = 4;
+
+const int EVP_MD_CTX_FLAG_NON_FIPS_ALLOW = 8;
+
+const int EVP_MD_CTX_FLAG_PAD_MASK = 240;
+
+const int EVP_MD_CTX_FLAG_PAD_PKCS1 = 0;
+
+const int EVP_MD_CTX_FLAG_PAD_X931 = 16;
+
+const int EVP_MD_CTX_FLAG_PAD_PSS = 32;
+
+const int EVP_MD_CTX_FLAG_NO_INIT = 256;
+
+const int EVP_MD_CTX_FLAG_FINALISE = 512;
+
+const int EVP_CIPH_STREAM_CIPHER = 0;
+
+const int EVP_CIPH_ECB_MODE = 1;
+
+const int EVP_CIPH_CBC_MODE = 2;
+
+const int EVP_CIPH_CFB_MODE = 3;
+
+const int EVP_CIPH_OFB_MODE = 4;
+
+const int EVP_CIPH_CTR_MODE = 5;
+
+const int EVP_CIPH_GCM_MODE = 6;
+
+const int EVP_CIPH_CCM_MODE = 7;
+
+const int EVP_CIPH_XTS_MODE = 65537;
+
+const int EVP_CIPH_WRAP_MODE = 65538;
+
+const int EVP_CIPH_OCB_MODE = 65539;
+
+const int EVP_CIPH_MODE = 983047;
+
+const int EVP_CIPH_VARIABLE_LENGTH = 8;
+
+const int EVP_CIPH_CUSTOM_IV = 16;
+
+const int EVP_CIPH_ALWAYS_CALL_INIT = 32;
+
+const int EVP_CIPH_CTRL_INIT = 64;
+
+const int EVP_CIPH_CUSTOM_KEY_LENGTH = 128;
+
+const int EVP_CIPH_NO_PADDING = 256;
+
+const int EVP_CIPH_RAND_KEY = 512;
+
+const int EVP_CIPH_CUSTOM_COPY = 1024;
+
+const int EVP_CIPH_CUSTOM_IV_LENGTH = 2048;
+
+const int EVP_CIPH_FLAG_DEFAULT_ASN1 = 4096;
+
+const int EVP_CIPH_FLAG_LENGTH_BITS = 8192;
+
+const int EVP_CIPH_FLAG_FIPS = 16384;
+
+const int EVP_CIPH_FLAG_NON_FIPS_ALLOW = 32768;
+
+const int EVP_CIPH_FLAG_CUSTOM_CIPHER = 1048576;
+
+const int EVP_CIPH_FLAG_AEAD_CIPHER = 2097152;
+
+const int EVP_CIPH_FLAG_TLS1_1_MULTIBLOCK = 4194304;
+
+const int EVP_CIPH_FLAG_PIPELINE = 8388608;
+
+const int EVP_CIPHER_CTX_FLAG_WRAP_ALLOW = 1;
+
+const int EVP_CTRL_INIT = 0;
+
+const int EVP_CTRL_SET_KEY_LENGTH = 1;
+
+const int EVP_CTRL_GET_RC2_KEY_BITS = 2;
+
+const int EVP_CTRL_SET_RC2_KEY_BITS = 3;
+
+const int EVP_CTRL_GET_RC5_ROUNDS = 4;
+
+const int EVP_CTRL_SET_RC5_ROUNDS = 5;
+
+const int EVP_CTRL_RAND_KEY = 6;
+
+const int EVP_CTRL_PBE_PRF_NID = 7;
+
+const int EVP_CTRL_COPY = 8;
+
+const int EVP_CTRL_AEAD_SET_IVLEN = 9;
+
+const int EVP_CTRL_AEAD_GET_TAG = 16;
+
+const int EVP_CTRL_AEAD_SET_TAG = 17;
+
+const int EVP_CTRL_AEAD_SET_IV_FIXED = 18;
+
+const int EVP_CTRL_GCM_SET_IVLEN = 9;
+
+const int EVP_CTRL_GCM_GET_TAG = 16;
+
+const int EVP_CTRL_GCM_SET_TAG = 17;
+
+const int EVP_CTRL_GCM_SET_IV_FIXED = 18;
+
+const int EVP_CTRL_GCM_IV_GEN = 19;
+
+const int EVP_CTRL_CCM_SET_IVLEN = 9;
+
+const int EVP_CTRL_CCM_GET_TAG = 16;
+
+const int EVP_CTRL_CCM_SET_TAG = 17;
+
+const int EVP_CTRL_CCM_SET_IV_FIXED = 18;
+
+const int EVP_CTRL_CCM_SET_L = 20;
+
+const int EVP_CTRL_CCM_SET_MSGLEN = 21;
+
+const int EVP_CTRL_AEAD_TLS1_AAD = 22;
+
+const int EVP_CTRL_AEAD_SET_MAC_KEY = 23;
+
+const int EVP_CTRL_GCM_SET_IV_INV = 24;
+
+const int EVP_CTRL_TLS1_1_MULTIBLOCK_AAD = 25;
+
+const int EVP_CTRL_TLS1_1_MULTIBLOCK_ENCRYPT = 26;
+
+const int EVP_CTRL_TLS1_1_MULTIBLOCK_DECRYPT = 27;
+
+const int EVP_CTRL_TLS1_1_MULTIBLOCK_MAX_BUFSIZE = 28;
+
+const int EVP_CTRL_SSL3_MASTER_SECRET = 29;
+
+const int EVP_CTRL_SET_SBOX = 30;
+
+const int EVP_CTRL_SBOX_USED = 31;
+
+const int EVP_CTRL_KEY_MESH = 32;
+
+const int EVP_CTRL_BLOCK_PADDING_MODE = 33;
+
+const int EVP_CTRL_SET_PIPELINE_OUTPUT_BUFS = 34;
+
+const int EVP_CTRL_SET_PIPELINE_INPUT_BUFS = 35;
+
+const int EVP_CTRL_SET_PIPELINE_INPUT_LENS = 36;
+
+const int EVP_CTRL_GET_IVLEN = 37;
+
+const int EVP_PADDING_PKCS7 = 1;
+
+const int EVP_PADDING_ISO7816_4 = 2;
+
+const int EVP_PADDING_ANSI923 = 3;
+
+const int EVP_PADDING_ISO10126 = 4;
+
+const int EVP_PADDING_ZERO = 5;
+
+const int EVP_AEAD_TLS1_AAD_LEN = 13;
+
+const int EVP_GCM_TLS_FIXED_IV_LEN = 4;
+
+const int EVP_GCM_TLS_EXPLICIT_IV_LEN = 8;
+
+const int EVP_GCM_TLS_TAG_LEN = 16;
+
+const int EVP_CCM_TLS_FIXED_IV_LEN = 4;
+
+const int EVP_CCM_TLS_EXPLICIT_IV_LEN = 8;
+
+const int EVP_CCM_TLS_IV_LEN = 12;
+
+const int EVP_CCM_TLS_TAG_LEN = 16;
+
+const int EVP_CCM8_TLS_TAG_LEN = 8;
+
+const int EVP_CHACHAPOLY_TLS_TAG_LEN = 16;
+
+const int EVP_PBE_TYPE_OUTER = 0;
+
+const int EVP_PBE_TYPE_PRF = 1;
+
+const int EVP_PBE_TYPE_KDF = 2;
+
+const int ASN1_PKEY_ALIAS = 1;
+
+const int ASN1_PKEY_DYNAMIC = 2;
+
+const int ASN1_PKEY_SIGPARAM_NULL = 4;
+
+const int ASN1_PKEY_CTRL_PKCS7_SIGN = 1;
+
+const int ASN1_PKEY_CTRL_PKCS7_ENCRYPT = 2;
+
+const int ASN1_PKEY_CTRL_DEFAULT_MD_NID = 3;
+
+const int ASN1_PKEY_CTRL_CMS_SIGN = 5;
+
+const int ASN1_PKEY_CTRL_CMS_ENVELOPE = 7;
+
+const int ASN1_PKEY_CTRL_CMS_RI_TYPE = 8;
+
+const int ASN1_PKEY_CTRL_SET1_TLS_ENCPT = 9;
+
+const int ASN1_PKEY_CTRL_GET1_TLS_ENCPT = 10;
+
+const int EVP_PKEY_OP_UNDEFINED = 0;
+
+const int EVP_PKEY_OP_PARAMGEN = 2;
+
+const int EVP_PKEY_OP_KEYGEN = 4;
+
+const int EVP_PKEY_OP_SIGN = 8;
+
+const int EVP_PKEY_OP_VERIFY = 16;
+
+const int EVP_PKEY_OP_VERIFYRECOVER = 32;
+
+const int EVP_PKEY_OP_SIGNCTX = 64;
+
+const int EVP_PKEY_OP_VERIFYCTX = 128;
+
+const int EVP_PKEY_OP_ENCRYPT = 256;
+
+const int EVP_PKEY_OP_DECRYPT = 512;
+
+const int EVP_PKEY_OP_DERIVE = 1024;
+
+const int EVP_PKEY_OP_TYPE_SIG = 248;
+
+const int EVP_PKEY_OP_TYPE_CRYPT = 768;
+
+const int EVP_PKEY_OP_TYPE_NOGEN = 2040;
+
+const int EVP_PKEY_OP_TYPE_GEN = 6;
+
+const int EVP_PKEY_CTRL_MD = 1;
+
+const int EVP_PKEY_CTRL_PEER_KEY = 2;
+
+const int EVP_PKEY_CTRL_PKCS7_ENCRYPT = 3;
+
+const int EVP_PKEY_CTRL_PKCS7_DECRYPT = 4;
+
+const int EVP_PKEY_CTRL_PKCS7_SIGN = 5;
+
+const int EVP_PKEY_CTRL_SET_MAC_KEY = 6;
+
+const int EVP_PKEY_CTRL_DIGESTINIT = 7;
+
+const int EVP_PKEY_CTRL_SET_IV = 8;
+
+const int EVP_PKEY_CTRL_CMS_ENCRYPT = 9;
+
+const int EVP_PKEY_CTRL_CMS_DECRYPT = 10;
+
+const int EVP_PKEY_CTRL_CMS_SIGN = 11;
+
+const int EVP_PKEY_CTRL_CIPHER = 12;
+
+const int EVP_PKEY_CTRL_GET_MD = 13;
+
+const int EVP_PKEY_CTRL_SET_DIGEST_SIZE = 14;
+
+const int EVP_PKEY_ALG_CTRL = 4096;
+
+const int EVP_PKEY_FLAG_AUTOARGLEN = 2;
+
+const int EVP_PKEY_FLAG_SIGCTX_CUSTOM = 4;
