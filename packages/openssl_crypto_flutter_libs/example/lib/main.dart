@@ -27,8 +27,8 @@ class _MyAppState extends State<MyApp> {
         ),
         body: ListView(
           children: [
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Expanded(
                     child: ListTile(
                   title: Text('OpenSSL'),

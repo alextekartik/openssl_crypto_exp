@@ -4,7 +4,7 @@ version: 0.2.0
 publish_to: none
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ^3.4.0
 
 dependencies:
   tekartik_crypto_support:
@@ -12,13 +12,13 @@ dependencies:
 dev_dependencies:
   path:
   pub_semver:
-  dev_test:
+  dev_build:
   process_run:
   pedantic:
   tekartik_lints:
     git:
       url: https://github.com/tekartik/common.dart
-      ref: dart2_3
+      ref: dart3a
       path: packages/lints
     version: '>=0.1.0'
 

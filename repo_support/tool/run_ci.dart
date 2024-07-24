@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dev_test/package.dart';
+import 'package:dev_build/package.dart';
 import 'package:path/path.dart';
 import 'package:tekartik_crypto_support/linux_setup.dart';
 import 'package:tekartik_crypto_support/macos_setup.dart';
