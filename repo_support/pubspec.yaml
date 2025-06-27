@@ -4,16 +4,16 @@ version: 0.2.0
 publish_to: none
 
 environment:
-  sdk: ^3.5.0
+  sdk: ^3.8.0
 
 dependencies:
   tekartik_crypto_support:
     path: ../packages/crypto_support
 dev_dependencies:
-  path:
-  pub_semver:
-  dev_build:
-  process_run:
+  path: ">=1.9.0"
+  pub_semver: ">=2.1.4"
+  dev_build: ">=1.1.2"
+  process_run: ">=1.2.1+1"
   pedantic:
   tekartik_lints:
     git:

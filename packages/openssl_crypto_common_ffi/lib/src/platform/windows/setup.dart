@@ -7,7 +7,8 @@ import 'package:path/path.dart';
 /// Get the dll path from our package path.
 String packageGetCryptoDllPath(String packagePath) {
   var path = normalize(
-      join(packagePath, 'src', 'platform', 'windows', 'libcrypto-1_1-x64.dll'));
+    join(packagePath, 'src', 'platform', 'windows', 'libcrypto-1_1-x64.dll'),
+  );
   return path;
 }
 
@@ -16,7 +17,10 @@ String? findPackageLibPath(String path) {
   var map = pathGetPackageConfigMap(path);
 
   var packagePath = pathPackageConfigMapGetPackagePath(
-      path, map, 'openssl_crypto_common_ffi');
+    path,
+    map,
+    'openssl_crypto_common_ffi',
+  );
   if (packagePath != null) {
     return join(packagePath, 'lib');
   }

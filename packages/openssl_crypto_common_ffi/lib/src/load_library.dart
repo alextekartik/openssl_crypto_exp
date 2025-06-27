@@ -10,14 +10,7 @@ import 'package:openssl_crypto_common_ffi/src/platform/windows/setup.dart';
 /// Signature responsible for loading the dynamic library to use.
 typedef OpenLibrary = DynamicLibrary Function();
 
-enum OperatingSystem {
-  android,
-  linux,
-  iOS,
-  macOS,
-  windows,
-  fuchsia,
-}
+enum OperatingSystem { android, linux, iOS, macOS, windows, fuchsia }
 
 /// The instance managing different approaches to load the [DynamicLibrary]
 /// when needed. See the documentation for [OpenDynamicLibrary] to learn
@@ -70,7 +63,7 @@ DynamicLibrary _defaultOpen() {
         '/usr/local/opt/openssl@3/lib/libcrypto.dylib',
         '/usr/lib/libcrypto.dylib',
         '/usr/local/lib/libcrypto.dylib',
-        '/usr/local/opt/openssl/lib/libcrypto.dylib'
+        '/usr/local/opt/openssl/lib/libcrypto.dylib',
         //'/usr/local/Cellar/openssl@1.1/1.1.1k/lib/libcrypto.dylib'
       ]) {
         // Load pre installed library on MacOS

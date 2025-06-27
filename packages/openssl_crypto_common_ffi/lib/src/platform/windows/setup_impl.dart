@@ -31,8 +31,11 @@ String _toFilePath(String parent, String path, {bool? windows}) {
 
 /// Get a library path, you can get the project dir through its parent
 String? pathPackageConfigMapGetPackagePath(
-    String path, Map packageConfigMap, String package,
-    {bool? windows}) {
+  String path,
+  Map packageConfigMap,
+  String package, {
+  bool? windows,
+}) {
   var packagesList = packageConfigMap['packages'];
   for (var packageMap in packagesList) {
     if (packageMap is Map) {

@@ -14,7 +14,9 @@ Future macosSetup({bool force = false}) async {
       var ok = false;
       try {
         var shell = Shell(
-            verbose: false, commandVerbose: true); //, commandVerbose: true);
+          verbose: false,
+          commandVerbose: true,
+        ); //, commandVerbose: true);
         var lines = (await shell.run('brew list openssl')).outLines;
 
         for (var line in lines) {
