@@ -22,49 +22,47 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
+        appBar: AppBar(title: const Text('Plugin example app')),
         body: ListView(
           children: [
             const Row(
               children: [
-                Expanded(
-                    child: ListTile(
-                  title: Text('OpenSSL'),
-                )),
-                Expanded(
-                    child: ListTile(
-                  title: Text('Reference'),
-                ))
+                Expanded(child: ListTile(title: Text('OpenSSL'))),
+                Expanded(child: ListTile(title: Text('Reference'))),
               ],
             ),
             Row(
               children: [
                 Expanded(
-                    child: ListTile(
-                  title: const Text('md5("test")'),
-                  subtitle: FutureBuilder<String>(
-                    future: () async {
-                      return hex.encode(opensslCrypto
-                          .md5(Uint8List.fromList(utf8.encode('test'))));
-                    }(),
-                    builder: (_, snapshot) => Text(snapshot.data ?? ''),
+                  child: ListTile(
+                    title: const Text('md5("test")'),
+                    subtitle: FutureBuilder<String>(
+                      future: () async {
+                        return hex.encode(
+                          opensslCrypto.md5(
+                            Uint8List.fromList(utf8.encode('test')),
+                          ),
+                        );
+                      }(),
+                      builder: (_, snapshot) => Text(snapshot.data ?? ''),
+                    ),
                   ),
-                )),
+                ),
                 Expanded(
-                    child: ListTile(
-                  title: const Text('md5("test")'),
-                  subtitle: FutureBuilder(
-                    future: () async {
-                      return null;
-                    }(),
-                    builder: (_, snapshot) => Text(
-                        hex.encode(md5.convert(utf8.encode('test')).bytes)),
+                  child: ListTile(
+                    title: const Text('md5("test")'),
+                    subtitle: FutureBuilder(
+                      future: () async {
+                        return null;
+                      }(),
+                      builder: (_, snapshot) => Text(
+                        hex.encode(md5.convert(utf8.encode('test')).bytes),
+                      ),
+                    ),
                   ),
-                ))
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

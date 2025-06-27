@@ -21,8 +21,9 @@ class _OpensslCrypto implements OpensslCrypto {
     // Input buffer
     var input = uint8ListToPointer(bytes);
     // Allocate output buffer
-    var output =
-        allocate.allocate<Uint8>(MD5_DIGEST_LENGTH).cast<UnsignedChar>();
+    var output = allocate
+        .allocate<Uint8>(MD5_DIGEST_LENGTH)
+        .cast<UnsignedChar>();
     // Call MD5 function
     var result = bindings.MD5(input, bytes.length, output);
     // Resulting bytes conversion
@@ -35,8 +36,9 @@ _OpensslCrypto? _opensslCrypto;
 
 /// Provides access to `sqlite3` functions, such as opening new databases.
 OpensslCrypto get opensslCrypto {
-  return _opensslCrypto ??=
-      _OpensslCrypto(OpensslCryptoBindings(open.openOpensslCrypto()));
+  return _opensslCrypto ??= _OpensslCrypto(
+    OpensslCryptoBindings(open.openOpensslCrypto()),
+  );
 }
 
 var _warningDisplayedOnce = false;

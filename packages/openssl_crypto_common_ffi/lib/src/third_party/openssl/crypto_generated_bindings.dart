@@ -14,107 +14,107 @@ import 'dart:ffi' as ffi;
 class OpensslCryptoBindings {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-      _lookup;
+  _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
   OpensslCryptoBindings(ffi.DynamicLibrary dynamicLibrary)
-      : _lookup = dynamicLibrary.lookup;
+    : _lookup = dynamicLibrary.lookup;
 
   /// The symbols are looked up with [lookup].
   OpensslCryptoBindings.fromLookup(
-      ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-          lookup)
-      : _lookup = lookup;
+    ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName) lookup,
+  ) : _lookup = lookup;
 
-  int MD5_Init(
-    ffi.Pointer<MD5_CTX> c,
-  ) {
-    return _MD5_Init(
-      c,
-    );
+  int MD5_Init(ffi.Pointer<MD5_CTX> c) {
+    return _MD5_Init(c);
   }
 
   late final _MD5_InitPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<MD5_CTX>)>>(
-          'MD5_Init');
+        'MD5_Init',
+      );
   late final _MD5_Init =
       _MD5_InitPtr.asFunction<int Function(ffi.Pointer<MD5_CTX>)>();
 
-  int MD5_Update(
-    ffi.Pointer<MD5_CTX> c,
-    ffi.Pointer<ffi.Void> data,
-    int len,
-  ) {
-    return _MD5_Update(
-      c,
-      data,
-      len,
-    );
+  int MD5_Update(ffi.Pointer<MD5_CTX> c, ffi.Pointer<ffi.Void> data, int len) {
+    return _MD5_Update(c, data, len);
   }
 
-  late final _MD5_UpdatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<MD5_CTX>, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('MD5_Update');
-  late final _MD5_Update = _MD5_UpdatePtr.asFunction<
-      int Function(ffi.Pointer<MD5_CTX>, ffi.Pointer<ffi.Void>, int)>();
+  late final _MD5_UpdatePtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(
+            ffi.Pointer<MD5_CTX>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Size,
+          )
+        >
+      >('MD5_Update');
+  late final _MD5_Update =
+      _MD5_UpdatePtr.asFunction<
+        int Function(ffi.Pointer<MD5_CTX>, ffi.Pointer<ffi.Void>, int)
+      >();
 
-  int MD5_Final(
-    ffi.Pointer<ffi.UnsignedChar> md,
-    ffi.Pointer<MD5_CTX> c,
-  ) {
-    return _MD5_Final(
-      md,
-      c,
-    );
+  int MD5_Final(ffi.Pointer<ffi.UnsignedChar> md, ffi.Pointer<MD5_CTX> c) {
+    return _MD5_Final(md, c);
   }
 
-  late final _MD5_FinalPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Pointer<MD5_CTX>)>>('MD5_Final');
-  late final _MD5_Final = _MD5_FinalPtr.asFunction<
-      int Function(ffi.Pointer<ffi.UnsignedChar>, ffi.Pointer<MD5_CTX>)>();
+  late final _MD5_FinalPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.UnsignedChar>, ffi.Pointer<MD5_CTX>)
+        >
+      >('MD5_Final');
+  late final _MD5_Final =
+      _MD5_FinalPtr.asFunction<
+        int Function(ffi.Pointer<ffi.UnsignedChar>, ffi.Pointer<MD5_CTX>)
+      >();
 
   ffi.Pointer<ffi.UnsignedChar> MD5(
     ffi.Pointer<ffi.UnsignedChar> d,
     int n,
     ffi.Pointer<ffi.UnsignedChar> md,
   ) {
-    return _MD5(
-      d,
-      n,
-      md,
-    );
+    return _MD5(d, n, md);
   }
 
-  late final _MD5Ptr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ffi.UnsignedChar> Function(ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Size, ffi.Pointer<ffi.UnsignedChar>)>>('MD5');
-  late final _MD5 = _MD5Ptr.asFunction<
-      ffi.Pointer<ffi.UnsignedChar> Function(
-          ffi.Pointer<ffi.UnsignedChar>, int, ffi.Pointer<ffi.UnsignedChar>)>();
+  late final _MD5Ptr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Pointer<ffi.UnsignedChar> Function(
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Size,
+            ffi.Pointer<ffi.UnsignedChar>,
+          )
+        >
+      >('MD5');
+  late final _MD5 =
+      _MD5Ptr.asFunction<
+        ffi.Pointer<ffi.UnsignedChar> Function(
+          ffi.Pointer<ffi.UnsignedChar>,
+          int,
+          ffi.Pointer<ffi.UnsignedChar>,
+        )
+      >();
 
-  void MD5_Transform(
-    ffi.Pointer<MD5_CTX> c,
-    ffi.Pointer<ffi.UnsignedChar> b,
-  ) {
-    return _MD5_Transform(
-      c,
-      b,
-    );
+  void MD5_Transform(ffi.Pointer<MD5_CTX> c, ffi.Pointer<ffi.UnsignedChar> b) {
+    return _MD5_Transform(c, b);
   }
 
-  late final _MD5_TransformPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(ffi.Pointer<MD5_CTX>,
-              ffi.Pointer<ffi.UnsignedChar>)>>('MD5_Transform');
-  late final _MD5_Transform = _MD5_TransformPtr.asFunction<
-      void Function(ffi.Pointer<MD5_CTX>, ffi.Pointer<ffi.UnsignedChar>)>();
+  late final _MD5_TransformPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<MD5_CTX>, ffi.Pointer<ffi.UnsignedChar>)
+        >
+      >('MD5_Transform');
+  late final _MD5_Transform =
+      _MD5_TransformPtr.asFunction<
+        void Function(ffi.Pointer<MD5_CTX>, ffi.Pointer<ffi.UnsignedChar>)
+      >();
 
-  late final ffi.Pointer<ffi.Pointer<FILE>> _stdin =
-      _lookup<ffi.Pointer<FILE>>('stdin');
+  late final ffi.Pointer<ffi.Pointer<FILE>> _stdin = _lookup<ffi.Pointer<FILE>>(
+    'stdin',
+  );
 
   ffi.Pointer<FILE> get stdin => _stdin.value;
 
@@ -148,8 +148,9 @@ class OpensslCryptoBindings {
 
   set __daylight(int value) => ___daylight.value = value;
 
-  late final ffi.Pointer<ffi.Long> ___timezone =
-      _lookup<ffi.Long>('__timezone');
+  late final ffi.Pointer<ffi.Long> ___timezone = _lookup<ffi.Long>(
+    '__timezone',
+  );
 
   int get __timezone => ___timezone.value;
 
@@ -179,19 +180,23 @@ class OpensslCryptoBindings {
     ffi.Pointer<ffi.Void> in_b,
     int len,
   ) {
-    return _CRYPTO_memcmp(
-      in_a,
-      in_b,
-      len,
-    );
+    return _CRYPTO_memcmp(in_a, in_b, len);
   }
 
-  late final _CRYPTO_memcmpPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('CRYPTO_memcmp');
-  late final _CRYPTO_memcmp = _CRYPTO_memcmpPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
+  late final _CRYPTO_memcmpPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(
+            ffi.Pointer<ffi.Void>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Size,
+          )
+        >
+      >('CRYPTO_memcmp');
+  late final _CRYPTO_memcmp =
+      _CRYPTO_memcmpPtr.asFunction<
+        int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)
+      >();
 
   ffi.Pointer<BIGNUM> BN_value_one() {
     return _BN_value_one();
@@ -199,7 +204,8 @@ class OpensslCryptoBindings {
 
   late final _BN_value_onePtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<BIGNUM> Function()>>(
-          'BN_value_one');
+        'BN_value_one',
+      );
   late final _BN_value_one =
       _BN_value_onePtr.asFunction<ffi.Pointer<BIGNUM> Function()>();
 
@@ -216,127 +222,135 @@ class OpensslCryptoBindings {
     int len,
     ffi.Pointer<BIGNUM> ret,
   ) {
-    return _BN_bin2bn(
-      s,
-      len,
-      ret,
-    );
+    return _BN_bin2bn(s, len, ret);
   }
 
-  late final _BN_bin2bnPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<BIGNUM> Function(ffi.Pointer<ffi.UnsignedChar>, ffi.Int,
-              ffi.Pointer<BIGNUM>)>>('BN_bin2bn');
-  late final _BN_bin2bn = _BN_bin2bnPtr.asFunction<
-      ffi.Pointer<BIGNUM> Function(
-          ffi.Pointer<ffi.UnsignedChar>, int, ffi.Pointer<BIGNUM>)>();
+  late final _BN_bin2bnPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Pointer<BIGNUM> Function(
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Int,
+            ffi.Pointer<BIGNUM>,
+          )
+        >
+      >('BN_bin2bn');
+  late final _BN_bin2bn =
+      _BN_bin2bnPtr.asFunction<
+        ffi.Pointer<BIGNUM> Function(
+          ffi.Pointer<ffi.UnsignedChar>,
+          int,
+          ffi.Pointer<BIGNUM>,
+        )
+      >();
 
   int BN_sub(
     ffi.Pointer<BIGNUM> r,
     ffi.Pointer<BIGNUM> a,
     ffi.Pointer<BIGNUM> b,
   ) {
-    return _BN_sub(
-      r,
-      a,
-      b,
-    );
+    return _BN_sub(r, a, b);
   }
 
-  late final _BN_subPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>,
-              ffi.Pointer<BIGNUM>)>>('BN_sub');
-  late final _BN_sub = _BN_subPtr.asFunction<
-      int Function(
-          ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)>();
+  late final _BN_subPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(
+            ffi.Pointer<BIGNUM>,
+            ffi.Pointer<BIGNUM>,
+            ffi.Pointer<BIGNUM>,
+          )
+        >
+      >('BN_sub');
+  late final _BN_sub =
+      _BN_subPtr.asFunction<
+        int Function(
+          ffi.Pointer<BIGNUM>,
+          ffi.Pointer<BIGNUM>,
+          ffi.Pointer<BIGNUM>,
+        )
+      >();
 
   int BN_add(
     ffi.Pointer<BIGNUM> r,
     ffi.Pointer<BIGNUM> a,
     ffi.Pointer<BIGNUM> b,
   ) {
-    return _BN_add(
-      r,
-      a,
-      b,
-    );
+    return _BN_add(r, a, b);
   }
 
-  late final _BN_addPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>,
-              ffi.Pointer<BIGNUM>)>>('BN_add');
-  late final _BN_add = _BN_addPtr.asFunction<
-      int Function(
-          ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)>();
-
-  int BN_set_word(
-    ffi.Pointer<BIGNUM> a,
-    int w,
-  ) {
-    return _BN_set_word(
-      a,
-      w,
-    );
-  }
-
-  late final _BN_set_wordPtr = _lookup<
-      ffi.NativeFunction<
+  late final _BN_addPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<BIGNUM>, ffi.UnsignedLong)>>('BN_set_word');
+            ffi.Pointer<BIGNUM>,
+            ffi.Pointer<BIGNUM>,
+            ffi.Pointer<BIGNUM>,
+          )
+        >
+      >('BN_add');
+  late final _BN_add =
+      _BN_addPtr.asFunction<
+        int Function(
+          ffi.Pointer<BIGNUM>,
+          ffi.Pointer<BIGNUM>,
+          ffi.Pointer<BIGNUM>,
+        )
+      >();
+
+  int BN_set_word(ffi.Pointer<BIGNUM> a, int w) {
+    return _BN_set_word(a, w);
+  }
+
+  late final _BN_set_wordPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<BIGNUM>, ffi.UnsignedLong)
+        >
+      >('BN_set_word');
   late final _BN_set_word =
       _BN_set_wordPtr.asFunction<int Function(ffi.Pointer<BIGNUM>, int)>();
 
-  int BN_cmp(
-    ffi.Pointer<BIGNUM> a,
-    ffi.Pointer<BIGNUM> b,
-  ) {
-    return _BN_cmp(
-      a,
-      b,
-    );
+  int BN_cmp(ffi.Pointer<BIGNUM> a, ffi.Pointer<BIGNUM> b) {
+    return _BN_cmp(a, b);
   }
 
-  late final _BN_cmpPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)>>('BN_cmp');
-  late final _BN_cmp = _BN_cmpPtr.asFunction<
-      int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)>();
+  late final _BN_cmpPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)
+        >
+      >('BN_cmp');
+  late final _BN_cmp =
+      _BN_cmpPtr.asFunction<
+        int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>)
+      >();
 
-  void BN_free(
-    ffi.Pointer<BIGNUM> a,
-  ) {
-    return _BN_free(
-      a,
-    );
+  void BN_free(ffi.Pointer<BIGNUM> a) {
+    return _BN_free(a);
   }
 
   late final _BN_freePtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<BIGNUM>)>>(
-          'BN_free');
+        'BN_free',
+      );
   late final _BN_free =
       _BN_freePtr.asFunction<void Function(ffi.Pointer<BIGNUM>)>();
 
-  int BN_lshift(
-    ffi.Pointer<BIGNUM> r,
-    ffi.Pointer<BIGNUM> a,
-    int n,
-  ) {
-    return _BN_lshift(
-      r,
-      a,
-      n,
-    );
+  int BN_lshift(ffi.Pointer<BIGNUM> r, ffi.Pointer<BIGNUM> a, int n) {
+    return _BN_lshift(r, a, n);
   }
 
-  late final _BN_lshiftPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, ffi.Int)>>('BN_lshift');
-  late final _BN_lshift = _BN_lshiftPtr.asFunction<
-      int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, int)>();
+  late final _BN_lshiftPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, ffi.Int)
+        >
+      >('BN_lshift');
+  late final _BN_lshift =
+      _BN_lshiftPtr.asFunction<
+        int Function(ffi.Pointer<BIGNUM>, ffi.Pointer<BIGNUM>, int)
+      >();
 
   ffi.Pointer<EVP_MD_CTX> EVP_MD_CTX_new() {
     return _EVP_MD_CTX_new();
@@ -344,21 +358,19 @@ class OpensslCryptoBindings {
 
   late final _EVP_MD_CTX_newPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<EVP_MD_CTX> Function()>>(
-          'EVP_MD_CTX_new');
+        'EVP_MD_CTX_new',
+      );
   late final _EVP_MD_CTX_new =
       _EVP_MD_CTX_newPtr.asFunction<ffi.Pointer<EVP_MD_CTX> Function()>();
 
-  void EVP_MD_CTX_free(
-    ffi.Pointer<EVP_MD_CTX> ctx,
-  ) {
-    return _EVP_MD_CTX_free(
-      ctx,
-    );
+  void EVP_MD_CTX_free(ffi.Pointer<EVP_MD_CTX> ctx) {
+    return _EVP_MD_CTX_free(ctx);
   }
 
   late final _EVP_MD_CTX_freePtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_MD_CTX>)>>(
-          'EVP_MD_CTX_free');
+        'EVP_MD_CTX_free',
+      );
   late final _EVP_MD_CTX_free =
       _EVP_MD_CTX_freePtr.asFunction<void Function(ffi.Pointer<EVP_MD_CTX>)>();
 
@@ -367,58 +379,65 @@ class OpensslCryptoBindings {
     ffi.Pointer<ffi.Void> d,
     int cnt,
   ) {
-    return _EVP_DigestUpdate(
-      ctx,
-      d,
-      cnt,
-    );
+    return _EVP_DigestUpdate(ctx, d, cnt);
   }
 
-  late final _EVP_DigestUpdatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('EVP_DigestUpdate');
-  late final _EVP_DigestUpdate = _EVP_DigestUpdatePtr.asFunction<
-      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>, int)>();
-
-  int EVP_DigestInit(
-    ffi.Pointer<EVP_MD_CTX> ctx,
-    ffi.Pointer<EVP_MD> type,
-  ) {
-    return _EVP_DigestInit(
-      ctx,
-      type,
-    );
-  }
-
-  late final _EVP_DigestInitPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_DigestUpdatePtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<EVP_MD>)>>('EVP_DigestInit');
-  late final _EVP_DigestInit = _EVP_DigestInitPtr.asFunction<
-      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<EVP_MD>)>();
+            ffi.Pointer<EVP_MD_CTX>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Size,
+          )
+        >
+      >('EVP_DigestUpdate');
+  late final _EVP_DigestUpdate =
+      _EVP_DigestUpdatePtr.asFunction<
+        int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>, int)
+      >();
+
+  int EVP_DigestInit(ffi.Pointer<EVP_MD_CTX> ctx, ffi.Pointer<EVP_MD> type) {
+    return _EVP_DigestInit(ctx, type);
+  }
+
+  late final _EVP_DigestInitPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<EVP_MD>)
+        >
+      >('EVP_DigestInit');
+  late final _EVP_DigestInit =
+      _EVP_DigestInitPtr.asFunction<
+        int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<EVP_MD>)
+      >();
 
   int EVP_DigestFinal(
     ffi.Pointer<EVP_MD_CTX> ctx,
     ffi.Pointer<ffi.UnsignedChar> md,
     ffi.Pointer<ffi.UnsignedInt> s,
   ) {
-    return _EVP_DigestFinal(
-      ctx,
-      md,
-      s,
-    );
+    return _EVP_DigestFinal(ctx, md, s);
   }
 
-  late final _EVP_DigestFinalPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_DigestFinalPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_MD_CTX>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Pointer<ffi.UnsignedInt>)>>('EVP_DigestFinal');
-  late final _EVP_DigestFinal = _EVP_DigestFinalPtr.asFunction<
-      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.UnsignedChar>,
-          ffi.Pointer<ffi.UnsignedInt>)>();
+            ffi.Pointer<EVP_MD_CTX>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Pointer<ffi.UnsignedInt>,
+          )
+        >
+      >('EVP_DigestFinal');
+  late final _EVP_DigestFinal =
+      _EVP_DigestFinalPtr.asFunction<
+        int Function(
+          ffi.Pointer<EVP_MD_CTX>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          ffi.Pointer<ffi.UnsignedInt>,
+        )
+      >();
 
   int EVP_CipherInit_ex(
     ffi.Pointer<EVP_CIPHER_CTX> ctx,
@@ -428,33 +447,33 @@ class OpensslCryptoBindings {
     ffi.Pointer<ffi.UnsignedChar> iv,
     int enc,
   ) {
-    return _EVP_CipherInit_ex(
-      ctx,
-      cipher,
-      impl,
-      key,
-      iv,
-      enc,
-    );
+    return _EVP_CipherInit_ex(ctx, cipher, impl, key, iv, enc);
   }
 
-  late final _EVP_CipherInit_exPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_CipherInit_exPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_CIPHER_CTX>,
-              ffi.Pointer<EVP_CIPHER>,
-              ffi.Pointer<ENGINE>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Int)>>('EVP_CipherInit_ex');
-  late final _EVP_CipherInit_ex = _EVP_CipherInit_exPtr.asFunction<
-      int Function(
+            ffi.Pointer<EVP_CIPHER_CTX>,
+            ffi.Pointer<EVP_CIPHER>,
+            ffi.Pointer<ENGINE>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Int,
+          )
+        >
+      >('EVP_CipherInit_ex');
+  late final _EVP_CipherInit_ex =
+      _EVP_CipherInit_exPtr.asFunction<
+        int Function(
           ffi.Pointer<EVP_CIPHER_CTX>,
           ffi.Pointer<EVP_CIPHER>,
           ffi.Pointer<ENGINE>,
           ffi.Pointer<ffi.UnsignedChar>,
           ffi.Pointer<ffi.UnsignedChar>,
-          int)>();
+          int,
+        )
+      >();
 
   int EVP_CipherUpdate(
     ffi.Pointer<EVP_CIPHER_CTX> ctx,
@@ -463,48 +482,58 @@ class OpensslCryptoBindings {
     ffi.Pointer<ffi.UnsignedChar> in1,
     int inl,
   ) {
-    return _EVP_CipherUpdate(
-      ctx,
-      out,
-      outl,
-      in1,
-      inl,
-    );
+    return _EVP_CipherUpdate(ctx, out, outl, in1, inl);
   }
 
-  late final _EVP_CipherUpdatePtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_CipherUpdatePtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_CIPHER_CTX>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Pointer<ffi.Int>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Int)>>('EVP_CipherUpdate');
-  late final _EVP_CipherUpdate = _EVP_CipherUpdatePtr.asFunction<
-      int Function(ffi.Pointer<EVP_CIPHER_CTX>, ffi.Pointer<ffi.UnsignedChar>,
-          ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.UnsignedChar>, int)>();
+            ffi.Pointer<EVP_CIPHER_CTX>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Pointer<ffi.Int>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Int,
+          )
+        >
+      >('EVP_CipherUpdate');
+  late final _EVP_CipherUpdate =
+      _EVP_CipherUpdatePtr.asFunction<
+        int Function(
+          ffi.Pointer<EVP_CIPHER_CTX>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          ffi.Pointer<ffi.Int>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          int,
+        )
+      >();
 
   int EVP_CipherFinal_ex(
     ffi.Pointer<EVP_CIPHER_CTX> ctx,
     ffi.Pointer<ffi.UnsignedChar> outm,
     ffi.Pointer<ffi.Int> outl,
   ) {
-    return _EVP_CipherFinal_ex(
-      ctx,
-      outm,
-      outl,
-    );
+    return _EVP_CipherFinal_ex(ctx, outm, outl);
   }
 
-  late final _EVP_CipherFinal_exPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_CipherFinal_exPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_CIPHER_CTX>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Pointer<ffi.Int>)>>('EVP_CipherFinal_ex');
-  late final _EVP_CipherFinal_ex = _EVP_CipherFinal_exPtr.asFunction<
-      int Function(ffi.Pointer<EVP_CIPHER_CTX>, ffi.Pointer<ffi.UnsignedChar>,
-          ffi.Pointer<ffi.Int>)>();
+            ffi.Pointer<EVP_CIPHER_CTX>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Pointer<ffi.Int>,
+          )
+        >
+      >('EVP_CipherFinal_ex');
+  late final _EVP_CipherFinal_ex =
+      _EVP_CipherFinal_exPtr.asFunction<
+        int Function(
+          ffi.Pointer<EVP_CIPHER_CTX>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          ffi.Pointer<ffi.Int>,
+        )
+      >();
 
   int EVP_DigestSignInit(
     ffi.Pointer<EVP_MD_CTX> ctx,
@@ -513,71 +542,81 @@ class OpensslCryptoBindings {
     ffi.Pointer<ENGINE> e,
     ffi.Pointer<EVP_PKEY> pkey,
   ) {
-    return _EVP_DigestSignInit(
-      ctx,
-      pctx,
-      type,
-      e,
-      pkey,
-    );
+    return _EVP_DigestSignInit(ctx, pctx, type, e, pkey);
   }
 
-  late final _EVP_DigestSignInitPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_DigestSignInitPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_MD_CTX>,
-              ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
-              ffi.Pointer<EVP_MD>,
-              ffi.Pointer<ENGINE>,
-              ffi.Pointer<EVP_PKEY>)>>('EVP_DigestSignInit');
-  late final _EVP_DigestSignInit = _EVP_DigestSignInitPtr.asFunction<
-      int Function(
+            ffi.Pointer<EVP_MD_CTX>,
+            ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
+            ffi.Pointer<EVP_MD>,
+            ffi.Pointer<ENGINE>,
+            ffi.Pointer<EVP_PKEY>,
+          )
+        >
+      >('EVP_DigestSignInit');
+  late final _EVP_DigestSignInit =
+      _EVP_DigestSignInitPtr.asFunction<
+        int Function(
           ffi.Pointer<EVP_MD_CTX>,
           ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
           ffi.Pointer<EVP_MD>,
           ffi.Pointer<ENGINE>,
-          ffi.Pointer<EVP_PKEY>)>();
+          ffi.Pointer<EVP_PKEY>,
+        )
+      >();
 
   int EVP_DigestSignUpdate(
     ffi.Pointer<EVP_MD_CTX> ctx,
     ffi.Pointer<ffi.Void> data,
     int dsize,
   ) {
-    return _EVP_DigestSignUpdate(
-      ctx,
-      data,
-      dsize,
-    );
+    return _EVP_DigestSignUpdate(ctx, data, dsize);
   }
 
-  late final _EVP_DigestSignUpdatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('EVP_DigestSignUpdate');
-  late final _EVP_DigestSignUpdate = _EVP_DigestSignUpdatePtr.asFunction<
-      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>, int)>();
+  late final _EVP_DigestSignUpdatePtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(
+            ffi.Pointer<EVP_MD_CTX>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Size,
+          )
+        >
+      >('EVP_DigestSignUpdate');
+  late final _EVP_DigestSignUpdate =
+      _EVP_DigestSignUpdatePtr.asFunction<
+        int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>, int)
+      >();
 
   int EVP_DigestSignFinal(
     ffi.Pointer<EVP_MD_CTX> ctx,
     ffi.Pointer<ffi.UnsignedChar> sigret,
     ffi.Pointer<ffi.Size> siglen,
   ) {
-    return _EVP_DigestSignFinal(
-      ctx,
-      sigret,
-      siglen,
-    );
+    return _EVP_DigestSignFinal(ctx, sigret, siglen);
   }
 
-  late final _EVP_DigestSignFinalPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_DigestSignFinalPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_MD_CTX>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Pointer<ffi.Size>)>>('EVP_DigestSignFinal');
-  late final _EVP_DigestSignFinal = _EVP_DigestSignFinalPtr.asFunction<
-      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.UnsignedChar>,
-          ffi.Pointer<ffi.Size>)>();
+            ffi.Pointer<EVP_MD_CTX>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Pointer<ffi.Size>,
+          )
+        >
+      >('EVP_DigestSignFinal');
+  late final _EVP_DigestSignFinal =
+      _EVP_DigestSignFinalPtr.asFunction<
+        int Function(
+          ffi.Pointer<EVP_MD_CTX>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          ffi.Pointer<ffi.Size>,
+        )
+      >();
 
   int EVP_DigestVerifyInit(
     ffi.Pointer<EVP_MD_CTX> ctx,
@@ -586,71 +625,81 @@ class OpensslCryptoBindings {
     ffi.Pointer<ENGINE> e,
     ffi.Pointer<EVP_PKEY> pkey,
   ) {
-    return _EVP_DigestVerifyInit(
-      ctx,
-      pctx,
-      type,
-      e,
-      pkey,
-    );
+    return _EVP_DigestVerifyInit(ctx, pctx, type, e, pkey);
   }
 
-  late final _EVP_DigestVerifyInitPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_DigestVerifyInitPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_MD_CTX>,
-              ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
-              ffi.Pointer<EVP_MD>,
-              ffi.Pointer<ENGINE>,
-              ffi.Pointer<EVP_PKEY>)>>('EVP_DigestVerifyInit');
-  late final _EVP_DigestVerifyInit = _EVP_DigestVerifyInitPtr.asFunction<
-      int Function(
+            ffi.Pointer<EVP_MD_CTX>,
+            ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
+            ffi.Pointer<EVP_MD>,
+            ffi.Pointer<ENGINE>,
+            ffi.Pointer<EVP_PKEY>,
+          )
+        >
+      >('EVP_DigestVerifyInit');
+  late final _EVP_DigestVerifyInit =
+      _EVP_DigestVerifyInitPtr.asFunction<
+        int Function(
           ffi.Pointer<EVP_MD_CTX>,
           ffi.Pointer<ffi.Pointer<EVP_PKEY_CTX>>,
           ffi.Pointer<EVP_MD>,
           ffi.Pointer<ENGINE>,
-          ffi.Pointer<EVP_PKEY>)>();
+          ffi.Pointer<EVP_PKEY>,
+        )
+      >();
 
   int EVP_DigestVerifyUpdate(
     ffi.Pointer<EVP_MD_CTX> ctx,
     ffi.Pointer<ffi.Void> data,
     int dsize,
   ) {
-    return _EVP_DigestVerifyUpdate(
-      ctx,
-      data,
-      dsize,
-    );
+    return _EVP_DigestVerifyUpdate(ctx, data, dsize);
   }
 
-  late final _EVP_DigestVerifyUpdatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('EVP_DigestVerifyUpdate');
-  late final _EVP_DigestVerifyUpdate = _EVP_DigestVerifyUpdatePtr.asFunction<
-      int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>, int)>();
+  late final _EVP_DigestVerifyUpdatePtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(
+            ffi.Pointer<EVP_MD_CTX>,
+            ffi.Pointer<ffi.Void>,
+            ffi.Size,
+          )
+        >
+      >('EVP_DigestVerifyUpdate');
+  late final _EVP_DigestVerifyUpdate =
+      _EVP_DigestVerifyUpdatePtr.asFunction<
+        int Function(ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.Void>, int)
+      >();
 
   int EVP_DigestVerifyFinal(
     ffi.Pointer<EVP_MD_CTX> ctx,
     ffi.Pointer<ffi.UnsignedChar> sig,
     int siglen,
   ) {
-    return _EVP_DigestVerifyFinal(
-      ctx,
-      sig,
-      siglen,
-    );
+    return _EVP_DigestVerifyFinal(ctx, sig, siglen);
   }
 
-  late final _EVP_DigestVerifyFinalPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_DigestVerifyFinalPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_MD_CTX>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Size)>>('EVP_DigestVerifyFinal');
-  late final _EVP_DigestVerifyFinal = _EVP_DigestVerifyFinalPtr.asFunction<
-      int Function(
-          ffi.Pointer<EVP_MD_CTX>, ffi.Pointer<ffi.UnsignedChar>, int)>();
+            ffi.Pointer<EVP_MD_CTX>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Size,
+          )
+        >
+      >('EVP_DigestVerifyFinal');
+  late final _EVP_DigestVerifyFinal =
+      _EVP_DigestVerifyFinalPtr.asFunction<
+        int Function(
+          ffi.Pointer<EVP_MD_CTX>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          int,
+        )
+      >();
 
   ffi.Pointer<EVP_CIPHER_CTX> EVP_CIPHER_CTX_new() {
     return _EVP_CIPHER_CTX_new();
@@ -658,23 +707,25 @@ class OpensslCryptoBindings {
 
   late final _EVP_CIPHER_CTX_newPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER_CTX> Function()>>(
-          'EVP_CIPHER_CTX_new');
-  late final _EVP_CIPHER_CTX_new = _EVP_CIPHER_CTX_newPtr.asFunction<
-      ffi.Pointer<EVP_CIPHER_CTX> Function()>();
+        'EVP_CIPHER_CTX_new',
+      );
+  late final _EVP_CIPHER_CTX_new =
+      _EVP_CIPHER_CTX_newPtr.asFunction<
+        ffi.Pointer<EVP_CIPHER_CTX> Function()
+      >();
 
-  void EVP_CIPHER_CTX_free(
-    ffi.Pointer<EVP_CIPHER_CTX> c,
-  ) {
-    return _EVP_CIPHER_CTX_free(
-      c,
-    );
+  void EVP_CIPHER_CTX_free(ffi.Pointer<EVP_CIPHER_CTX> c) {
+    return _EVP_CIPHER_CTX_free(c);
   }
 
-  late final _EVP_CIPHER_CTX_freePtr = _lookup<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_CIPHER_CTX>)>>(
-      'EVP_CIPHER_CTX_free');
-  late final _EVP_CIPHER_CTX_free = _EVP_CIPHER_CTX_freePtr.asFunction<
-      void Function(ffi.Pointer<EVP_CIPHER_CTX>)>();
+  late final _EVP_CIPHER_CTX_freePtr =
+      _lookup<
+        ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_CIPHER_CTX>)>
+      >('EVP_CIPHER_CTX_free');
+  late final _EVP_CIPHER_CTX_free =
+      _EVP_CIPHER_CTX_freePtr.asFunction<
+        void Function(ffi.Pointer<EVP_CIPHER_CTX>)
+      >();
 
   ffi.Pointer<EVP_MD> EVP_sha1() {
     return _EVP_sha1();
@@ -718,7 +769,8 @@ class OpensslCryptoBindings {
 
   late final _EVP_aes_128_cbcPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER> Function()>>(
-          'EVP_aes_128_cbc');
+        'EVP_aes_128_cbc',
+      );
   late final _EVP_aes_128_cbc =
       _EVP_aes_128_cbcPtr.asFunction<ffi.Pointer<EVP_CIPHER> Function()>();
 
@@ -728,7 +780,8 @@ class OpensslCryptoBindings {
 
   late final _EVP_aes_128_ctrPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER> Function()>>(
-          'EVP_aes_128_ctr');
+        'EVP_aes_128_ctr',
+      );
   late final _EVP_aes_128_ctr =
       _EVP_aes_128_ctrPtr.asFunction<ffi.Pointer<EVP_CIPHER> Function()>();
 
@@ -738,7 +791,8 @@ class OpensslCryptoBindings {
 
   late final _EVP_aes_256_cbcPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER> Function()>>(
-          'EVP_aes_256_cbc');
+        'EVP_aes_256_cbc',
+      );
   late final _EVP_aes_256_cbc =
       _EVP_aes_256_cbcPtr.asFunction<ffi.Pointer<EVP_CIPHER> Function()>();
 
@@ -748,89 +802,84 @@ class OpensslCryptoBindings {
 
   late final _EVP_aes_256_ctrPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<EVP_CIPHER> Function()>>(
-          'EVP_aes_256_ctr');
+        'EVP_aes_256_ctr',
+      );
   late final _EVP_aes_256_ctr =
       _EVP_aes_256_ctrPtr.asFunction<ffi.Pointer<EVP_CIPHER> Function()>();
 
-  int EVP_PKEY_set_type(
-    ffi.Pointer<EVP_PKEY> pkey,
-    int type,
-  ) {
-    return _EVP_PKEY_set_type(
-      pkey,
-      type,
-    );
+  int EVP_PKEY_set_type(ffi.Pointer<EVP_PKEY> pkey, int type) {
+    return _EVP_PKEY_set_type(pkey, type);
   }
 
-  late final _EVP_PKEY_set_typePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<EVP_PKEY>, ffi.Int)>>(
-      'EVP_PKEY_set_type');
-  late final _EVP_PKEY_set_type = _EVP_PKEY_set_typePtr.asFunction<
-      int Function(ffi.Pointer<EVP_PKEY>, int)>();
+  late final _EVP_PKEY_set_typePtr =
+      _lookup<
+        ffi.NativeFunction<ffi.Int Function(ffi.Pointer<EVP_PKEY>, ffi.Int)>
+      >('EVP_PKEY_set_type');
+  late final _EVP_PKEY_set_type =
+      _EVP_PKEY_set_typePtr.asFunction<
+        int Function(ffi.Pointer<EVP_PKEY>, int)
+      >();
 
-  int EVP_PKEY_set1_RSA(
-    ffi.Pointer<EVP_PKEY> pkey,
-    ffi.Pointer<rsa_st> key,
-  ) {
-    return _EVP_PKEY_set1_RSA(
-      pkey,
-      key,
-    );
+  int EVP_PKEY_set1_RSA(ffi.Pointer<EVP_PKEY> pkey, ffi.Pointer<rsa_st> key) {
+    return _EVP_PKEY_set1_RSA(pkey, key);
   }
 
-  late final _EVP_PKEY_set1_RSAPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<EVP_PKEY>,
-              ffi.Pointer<rsa_st>)>>('EVP_PKEY_set1_RSA');
-  late final _EVP_PKEY_set1_RSA = _EVP_PKEY_set1_RSAPtr.asFunction<
-      int Function(ffi.Pointer<EVP_PKEY>, ffi.Pointer<rsa_st>)>();
+  late final _EVP_PKEY_set1_RSAPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<EVP_PKEY>, ffi.Pointer<rsa_st>)
+        >
+      >('EVP_PKEY_set1_RSA');
+  late final _EVP_PKEY_set1_RSA =
+      _EVP_PKEY_set1_RSAPtr.asFunction<
+        int Function(ffi.Pointer<EVP_PKEY>, ffi.Pointer<rsa_st>)
+      >();
 
-  ffi.Pointer<rsa_st> EVP_PKEY_get1_RSA(
-    ffi.Pointer<EVP_PKEY> pkey,
-  ) {
-    return _EVP_PKEY_get1_RSA(
-      pkey,
-    );
+  ffi.Pointer<rsa_st> EVP_PKEY_get1_RSA(ffi.Pointer<EVP_PKEY> pkey) {
+    return _EVP_PKEY_get1_RSA(pkey);
   }
 
-  late final _EVP_PKEY_get1_RSAPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Pointer<rsa_st> Function(ffi.Pointer<EVP_PKEY>)>>(
-      'EVP_PKEY_get1_RSA');
-  late final _EVP_PKEY_get1_RSA = _EVP_PKEY_get1_RSAPtr.asFunction<
-      ffi.Pointer<rsa_st> Function(ffi.Pointer<EVP_PKEY>)>();
+  late final _EVP_PKEY_get1_RSAPtr =
+      _lookup<
+        ffi.NativeFunction<ffi.Pointer<rsa_st> Function(ffi.Pointer<EVP_PKEY>)>
+      >('EVP_PKEY_get1_RSA');
+  late final _EVP_PKEY_get1_RSA =
+      _EVP_PKEY_get1_RSAPtr.asFunction<
+        ffi.Pointer<rsa_st> Function(ffi.Pointer<EVP_PKEY>)
+      >();
 
   int EVP_PKEY_set1_EC_KEY(
     ffi.Pointer<EVP_PKEY> pkey,
     ffi.Pointer<ec_key_st> key,
   ) {
-    return _EVP_PKEY_set1_EC_KEY(
-      pkey,
-      key,
-    );
+    return _EVP_PKEY_set1_EC_KEY(pkey, key);
   }
 
-  late final _EVP_PKEY_set1_EC_KEYPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<EVP_PKEY>,
-              ffi.Pointer<ec_key_st>)>>('EVP_PKEY_set1_EC_KEY');
-  late final _EVP_PKEY_set1_EC_KEY = _EVP_PKEY_set1_EC_KEYPtr.asFunction<
-      int Function(ffi.Pointer<EVP_PKEY>, ffi.Pointer<ec_key_st>)>();
+  late final _EVP_PKEY_set1_EC_KEYPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<EVP_PKEY>, ffi.Pointer<ec_key_st>)
+        >
+      >('EVP_PKEY_set1_EC_KEY');
+  late final _EVP_PKEY_set1_EC_KEY =
+      _EVP_PKEY_set1_EC_KEYPtr.asFunction<
+        int Function(ffi.Pointer<EVP_PKEY>, ffi.Pointer<ec_key_st>)
+      >();
 
-  ffi.Pointer<ec_key_st> EVP_PKEY_get1_EC_KEY(
-    ffi.Pointer<EVP_PKEY> pkey,
-  ) {
-    return _EVP_PKEY_get1_EC_KEY(
-      pkey,
-    );
+  ffi.Pointer<ec_key_st> EVP_PKEY_get1_EC_KEY(ffi.Pointer<EVP_PKEY> pkey) {
+    return _EVP_PKEY_get1_EC_KEY(pkey);
   }
 
-  late final _EVP_PKEY_get1_EC_KEYPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Pointer<ec_key_st> Function(
-              ffi.Pointer<EVP_PKEY>)>>('EVP_PKEY_get1_EC_KEY');
-  late final _EVP_PKEY_get1_EC_KEY = _EVP_PKEY_get1_EC_KEYPtr.asFunction<
-      ffi.Pointer<ec_key_st> Function(ffi.Pointer<EVP_PKEY>)>();
+  late final _EVP_PKEY_get1_EC_KEYPtr =
+      _lookup<
+        ffi.NativeFunction<
+          ffi.Pointer<ec_key_st> Function(ffi.Pointer<EVP_PKEY>)
+        >
+      >('EVP_PKEY_get1_EC_KEY');
+  late final _EVP_PKEY_get1_EC_KEY =
+      _EVP_PKEY_get1_EC_KEYPtr.asFunction<
+        ffi.Pointer<ec_key_st> Function(ffi.Pointer<EVP_PKEY>)
+      >();
 
   ffi.Pointer<EVP_PKEY> EVP_PKEY_new() {
     return _EVP_PKEY_new();
@@ -838,21 +887,19 @@ class OpensslCryptoBindings {
 
   late final _EVP_PKEY_newPtr =
       _lookup<ffi.NativeFunction<ffi.Pointer<EVP_PKEY> Function()>>(
-          'EVP_PKEY_new');
+        'EVP_PKEY_new',
+      );
   late final _EVP_PKEY_new =
       _EVP_PKEY_newPtr.asFunction<ffi.Pointer<EVP_PKEY> Function()>();
 
-  void EVP_PKEY_free(
-    ffi.Pointer<EVP_PKEY> pkey,
-  ) {
-    return _EVP_PKEY_free(
-      pkey,
-    );
+  void EVP_PKEY_free(ffi.Pointer<EVP_PKEY> pkey) {
+    return _EVP_PKEY_free(pkey);
   }
 
   late final _EVP_PKEY_freePtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_PKEY>)>>(
-          'EVP_PKEY_free');
+        'EVP_PKEY_free',
+      );
   late final _EVP_PKEY_free =
       _EVP_PKEY_freePtr.asFunction<void Function(ffi.Pointer<EVP_PKEY>)>();
 
@@ -878,66 +925,84 @@ class OpensslCryptoBindings {
     );
   }
 
-  late final _PKCS5_PBKDF2_HMACPtr = _lookup<
-      ffi.NativeFunction<
+  late final _PKCS5_PBKDF2_HMACPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<ffi.Char>,
-              ffi.Int,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Int,
-              ffi.Int,
-              ffi.Pointer<EVP_MD>,
-              ffi.Int,
-              ffi.Pointer<ffi.UnsignedChar>)>>('PKCS5_PBKDF2_HMAC');
-  late final _PKCS5_PBKDF2_HMAC = _PKCS5_PBKDF2_HMACPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.UnsignedChar>,
-          int, int, ffi.Pointer<EVP_MD>, int, ffi.Pointer<ffi.UnsignedChar>)>();
+            ffi.Pointer<ffi.Char>,
+            ffi.Int,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Int,
+            ffi.Int,
+            ffi.Pointer<EVP_MD>,
+            ffi.Int,
+            ffi.Pointer<ffi.UnsignedChar>,
+          )
+        >
+      >('PKCS5_PBKDF2_HMAC');
+  late final _PKCS5_PBKDF2_HMAC =
+      _PKCS5_PBKDF2_HMACPtr.asFunction<
+        int Function(
+          ffi.Pointer<ffi.Char>,
+          int,
+          ffi.Pointer<ffi.UnsignedChar>,
+          int,
+          int,
+          ffi.Pointer<EVP_MD>,
+          int,
+          ffi.Pointer<ffi.UnsignedChar>,
+        )
+      >();
 
   ffi.Pointer<EVP_PKEY_CTX> EVP_PKEY_CTX_new(
     ffi.Pointer<EVP_PKEY> pkey,
     ffi.Pointer<ENGINE> e,
   ) {
-    return _EVP_PKEY_CTX_new(
-      pkey,
-      e,
-    );
+    return _EVP_PKEY_CTX_new(pkey, e);
   }
 
-  late final _EVP_PKEY_CTX_newPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_PKEY_CTX_newPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Pointer<EVP_PKEY_CTX> Function(
-              ffi.Pointer<EVP_PKEY>, ffi.Pointer<ENGINE>)>>('EVP_PKEY_CTX_new');
-  late final _EVP_PKEY_CTX_new = _EVP_PKEY_CTX_newPtr.asFunction<
-      ffi.Pointer<EVP_PKEY_CTX> Function(
-          ffi.Pointer<EVP_PKEY>, ffi.Pointer<ENGINE>)>();
+            ffi.Pointer<EVP_PKEY>,
+            ffi.Pointer<ENGINE>,
+          )
+        >
+      >('EVP_PKEY_CTX_new');
+  late final _EVP_PKEY_CTX_new =
+      _EVP_PKEY_CTX_newPtr.asFunction<
+        ffi.Pointer<EVP_PKEY_CTX> Function(
+          ffi.Pointer<EVP_PKEY>,
+          ffi.Pointer<ENGINE>,
+        )
+      >();
 
-  void EVP_PKEY_CTX_free(
-    ffi.Pointer<EVP_PKEY_CTX> ctx,
-  ) {
-    return _EVP_PKEY_CTX_free(
-      ctx,
-    );
+  void EVP_PKEY_CTX_free(ffi.Pointer<EVP_PKEY_CTX> ctx) {
+    return _EVP_PKEY_CTX_free(ctx);
   }
 
   late final _EVP_PKEY_CTX_freePtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<EVP_PKEY_CTX>)>>(
-          'EVP_PKEY_CTX_free');
-  late final _EVP_PKEY_CTX_free = _EVP_PKEY_CTX_freePtr.asFunction<
-      void Function(ffi.Pointer<EVP_PKEY_CTX>)>();
+        'EVP_PKEY_CTX_free',
+      );
+  late final _EVP_PKEY_CTX_free =
+      _EVP_PKEY_CTX_freePtr.asFunction<
+        void Function(ffi.Pointer<EVP_PKEY_CTX>)
+      >();
 
-  int EVP_PKEY_encrypt_init(
-    ffi.Pointer<EVP_PKEY_CTX> ctx,
-  ) {
-    return _EVP_PKEY_encrypt_init(
-      ctx,
-    );
+  int EVP_PKEY_encrypt_init(ffi.Pointer<EVP_PKEY_CTX> ctx) {
+    return _EVP_PKEY_encrypt_init(ctx);
   }
 
   late final _EVP_PKEY_encrypt_initPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<EVP_PKEY_CTX>)>>(
-          'EVP_PKEY_encrypt_init');
-  late final _EVP_PKEY_encrypt_init = _EVP_PKEY_encrypt_initPtr.asFunction<
-      int Function(ffi.Pointer<EVP_PKEY_CTX>)>();
+        'EVP_PKEY_encrypt_init',
+      );
+  late final _EVP_PKEY_encrypt_init =
+      _EVP_PKEY_encrypt_initPtr.asFunction<
+        int Function(ffi.Pointer<EVP_PKEY_CTX>)
+      >();
 
   int EVP_PKEY_encrypt(
     ffi.Pointer<EVP_PKEY_CTX> ctx,
@@ -946,40 +1011,44 @@ class OpensslCryptoBindings {
     ffi.Pointer<ffi.UnsignedChar> in1,
     int inlen,
   ) {
-    return _EVP_PKEY_encrypt(
-      ctx,
-      out,
-      outlen,
-      in1,
-      inlen,
-    );
+    return _EVP_PKEY_encrypt(ctx, out, outlen, in1, inlen);
   }
 
-  late final _EVP_PKEY_encryptPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_PKEY_encryptPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_PKEY_CTX>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Pointer<ffi.Size>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Size)>>('EVP_PKEY_encrypt');
-  late final _EVP_PKEY_encrypt = _EVP_PKEY_encryptPtr.asFunction<
-      int Function(ffi.Pointer<EVP_PKEY_CTX>, ffi.Pointer<ffi.UnsignedChar>,
-          ffi.Pointer<ffi.Size>, ffi.Pointer<ffi.UnsignedChar>, int)>();
+            ffi.Pointer<EVP_PKEY_CTX>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Pointer<ffi.Size>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Size,
+          )
+        >
+      >('EVP_PKEY_encrypt');
+  late final _EVP_PKEY_encrypt =
+      _EVP_PKEY_encryptPtr.asFunction<
+        int Function(
+          ffi.Pointer<EVP_PKEY_CTX>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          ffi.Pointer<ffi.Size>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          int,
+        )
+      >();
 
-  int EVP_PKEY_decrypt_init(
-    ffi.Pointer<EVP_PKEY_CTX> ctx,
-  ) {
-    return _EVP_PKEY_decrypt_init(
-      ctx,
-    );
+  int EVP_PKEY_decrypt_init(ffi.Pointer<EVP_PKEY_CTX> ctx) {
+    return _EVP_PKEY_decrypt_init(ctx);
   }
 
   late final _EVP_PKEY_decrypt_initPtr =
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<EVP_PKEY_CTX>)>>(
-          'EVP_PKEY_decrypt_init');
-  late final _EVP_PKEY_decrypt_init = _EVP_PKEY_decrypt_initPtr.asFunction<
-      int Function(ffi.Pointer<EVP_PKEY_CTX>)>();
+        'EVP_PKEY_decrypt_init',
+      );
+  late final _EVP_PKEY_decrypt_init =
+      _EVP_PKEY_decrypt_initPtr.asFunction<
+        int Function(ffi.Pointer<EVP_PKEY_CTX>)
+      >();
 
   int EVP_PKEY_decrypt(
     ffi.Pointer<EVP_PKEY_CTX> ctx,
@@ -988,26 +1057,31 @@ class OpensslCryptoBindings {
     ffi.Pointer<ffi.UnsignedChar> in1,
     int inlen,
   ) {
-    return _EVP_PKEY_decrypt(
-      ctx,
-      out,
-      outlen,
-      in1,
-      inlen,
-    );
+    return _EVP_PKEY_decrypt(ctx, out, outlen, in1, inlen);
   }
 
-  late final _EVP_PKEY_decryptPtr = _lookup<
-      ffi.NativeFunction<
+  late final _EVP_PKEY_decryptPtr =
+      _lookup<
+        ffi.NativeFunction<
           ffi.Int Function(
-              ffi.Pointer<EVP_PKEY_CTX>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Pointer<ffi.Size>,
-              ffi.Pointer<ffi.UnsignedChar>,
-              ffi.Size)>>('EVP_PKEY_decrypt');
-  late final _EVP_PKEY_decrypt = _EVP_PKEY_decryptPtr.asFunction<
-      int Function(ffi.Pointer<EVP_PKEY_CTX>, ffi.Pointer<ffi.UnsignedChar>,
-          ffi.Pointer<ffi.Size>, ffi.Pointer<ffi.UnsignedChar>, int)>();
+            ffi.Pointer<EVP_PKEY_CTX>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Pointer<ffi.Size>,
+            ffi.Pointer<ffi.UnsignedChar>,
+            ffi.Size,
+          )
+        >
+      >('EVP_PKEY_decrypt');
+  late final _EVP_PKEY_decrypt =
+      _EVP_PKEY_decryptPtr.asFunction<
+        int Function(
+          ffi.Pointer<EVP_PKEY_CTX>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          ffi.Pointer<ffi.Size>,
+          ffi.Pointer<ffi.UnsignedChar>,
+          int,
+        )
+      >();
 }
 
 final class __fsid_t extends ffi.Struct {
@@ -1921,9 +1995,10 @@ final class __jmp_buf_tag extends ffi.Struct {
 }
 
 final class _pthread_cleanup_buffer extends ffi.Struct {
-  external ffi
-      .Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
-      __routine;
+  external ffi.Pointer<
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>
+  >
+  __routine;
 
   external ffi.Pointer<ffi.Void> __arg;
 
@@ -1950,9 +2025,10 @@ final class __pthread_unwind_buf_t extends ffi.Struct {
 }
 
 final class __pthread_cleanup_frame extends ffi.Struct {
-  external ffi
-      .Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>
-      __cancel_routine;
+  external ffi.Pointer<
+    ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>
+  >
+  __cancel_routine;
 
   external ffi.Pointer<ffi.Void> __cancel_arg;
 
@@ -1979,11 +2055,12 @@ enum BIO_hostserv_priorities {
   const BIO_hostserv_priorities(this.value);
 
   static BIO_hostserv_priorities fromValue(int value) => switch (value) {
-        0 => BIO_PARSE_PRIO_HOST,
-        1 => BIO_PARSE_PRIO_SERV,
-        _ => throw ArgumentError(
-            "Unknown value for BIO_hostserv_priorities: $value"),
-      };
+    0 => BIO_PARSE_PRIO_HOST,
+    1 => BIO_PARSE_PRIO_SERV,
+    _ => throw ArgumentError(
+      "Unknown value for BIO_hostserv_priorities: $value",
+    ),
+  };
 }
 
 enum BIO_lookup_type {
@@ -1994,10 +2071,10 @@ enum BIO_lookup_type {
   const BIO_lookup_type(this.value);
 
   static BIO_lookup_type fromValue(int value) => switch (value) {
-        0 => BIO_LOOKUP_CLIENT,
-        1 => BIO_LOOKUP_SERVER,
-        _ => throw ArgumentError("Unknown value for BIO_lookup_type: $value"),
-      };
+    0 => BIO_LOOKUP_CLIENT,
+    1 => BIO_LOOKUP_SERVER,
+    _ => throw ArgumentError("Unknown value for BIO_lookup_type: $value"),
+  };
 }
 
 final class hostent extends ffi.Opaque {}
@@ -2015,10 +2092,9 @@ enum BIO_sock_info_type {
   const BIO_sock_info_type(this.value);
 
   static BIO_sock_info_type fromValue(int value) => switch (value) {
-        0 => BIO_SOCK_INFO_ADDRESS,
-        _ =>
-          throw ArgumentError("Unknown value for BIO_sock_info_type: $value"),
-      };
+    0 => BIO_SOCK_INFO_ADDRESS,
+    _ => throw ArgumentError("Unknown value for BIO_sock_info_type: $value"),
+  };
 }
 
 typedef BIGNUM = bignum_st;

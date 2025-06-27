@@ -7,8 +7,16 @@ import 'package:process_run/shell.dart';
 /// You can delete .dart_tool and jniLib folder to restart the step
 Future<void> main() async {
   var workDir = Directory(join('.dart_tool', 'work', 'download_crypto'));
-  var packJniLibs = Directory(join('..', 'openssl_crypto_flutter_libs',
-      'android', 'src', 'main', 'jniLibs'));
+  var packJniLibs = Directory(
+    join(
+      '..',
+      'openssl_crypto_flutter_libs',
+      'android',
+      'src',
+      'main',
+      'jniLibs',
+    ),
+  );
   await workDir.create(recursive: true);
   await packJniLibs.create(recursive: true);
 
@@ -17,8 +25,9 @@ Future<void> main() async {
   if (!gitDir.existsSync()) {
     var url = 'https://github.com/PurpleI2P/OpenSSL-for-Android-Prebuilt';
 
-    await Shell()
-        .run('git clone ${shellArgument(url)} ${shellArgument(gitDir.path)}');
+    await Shell().run(
+      'git clone ${shellArgument(url)} ${shellArgument(gitDir.path)}',
+    );
   }
 
   var src = Directory(join(gitDir.path, 'openssl-1.1.1k-clang'));
