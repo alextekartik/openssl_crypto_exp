@@ -21,7 +21,6 @@ dependencies:
     git:
       url: https://github.com/alextekartik/openssl_crypto_exp
       path: packages/openssl_crypto_common_ffi
-      ref: dart3a
     version: '>=0.1.0'
 ```
 
