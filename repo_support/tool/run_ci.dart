@@ -14,7 +14,7 @@ Future main() async {
       await macosSetup();
     }
   } catch (e) {
-    print(e);
+    stderr.writeln(e);
   }
 
   // Install libcrypto support
