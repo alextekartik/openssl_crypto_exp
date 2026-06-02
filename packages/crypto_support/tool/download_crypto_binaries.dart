@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:path/path.dart';
 import 'package:process_run/shell.dart';
+
 // https://developer.android.com/studio/projects/gradle-external-native-builds#jniLibs
 
 /// You can delete .dart_tool and jniLib folder to restart the step
